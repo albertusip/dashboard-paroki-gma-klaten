@@ -6,14 +6,14 @@ use App\Models\Umat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UmatController extends Controller 
+class StatusPerkawinanController extends Controller
 {
     /**
      * Umat model.
      * 
      * @var Umat
      */
-    private $umat;
+    private $statusPerkawinan;
 
     public function __construct(Umat $umat) {
         $this->umat = $umat;
@@ -26,9 +26,9 @@ class UmatController extends Controller
      */
     public function index(Request $request)
     {
-        $dataUmat = $this->umat->where('id_wilayah', $request->id)->get();
+        $dataPerkawinan = $this->umat->where('id_wilayah', $request->id)->get();
         return response()->json([
-            'response'=> $dataUmat
+            'response'=> $dataPerkawinan
         ]);
     }
 
@@ -56,10 +56,10 @@ class UmatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Umat  $umat
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Umat $umat)
+    public function show($id)
     {
         //
     }
@@ -67,10 +67,10 @@ class UmatController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Umat  $umat
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Umat $umat)
+    public function edit($id)
     {
         //
     }
@@ -79,10 +79,10 @@ class UmatController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Umat  $umat
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Umat $umat)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,10 +90,10 @@ class UmatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Umat  $umat
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Umat $umat)
+    public function destroy($id)
     {
         //
     }
@@ -101,20 +101,20 @@ class UmatController extends Controller
     public function ajax(Request $request)
     { 
         switch ($request->mode) {
-            case 'ekonomi':
+            case 'perkawinan':
                 return [
-                    'yearly_chart' => $this->umat->getEconomyChartByYear($request->id_wilayah),
-                    'monthly_chart' => $this->umat->getCurrentYearChart($request->id_wilayah)
+                    'yearly_chart' => $this->umat->getPerkawinanChartByYear($request->id_wilayah),
+                    'monthly_chart' => $this->umat->getPerkawinanCurrentYearChart($request->id_wilayah),
                 ];
                 break;
         }
     }
 
-    public function currentEconomyGraph(Request $request){
-        return $this->umat->getCurrentEconomyChart($request->id_wilayah);
+    public function currentPerkawinanGraph(Request $request){
+        return $this->umat->getCurrentPerkawinanChart($request->id_wilayah);
     }
 
-    public function card(Request $request){
-        return $this->umat->getCard($request);
-    }
+    // public function card(Request $request){
+    //     return $this->umat->getCard($request);
+    // }
 }

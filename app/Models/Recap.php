@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Models;
+use DB;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ekonomi extends Model
+class Recap extends Model
 {
-    protected $table = 'ekonomi';
+    //
 }

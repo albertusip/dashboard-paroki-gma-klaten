@@ -9,7 +9,7 @@ import VueSwal from 'vue-swal'
 import 'vuetify/dist/vuetify.min.css'
 
 window.axios = axios.create({
-    timeout: 10000,
+    timeout: 3000,
 })
 
 Vue.use(Vuetify, {
