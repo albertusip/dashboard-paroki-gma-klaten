@@ -31501,7 +31501,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _AppEkonomiCharts_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppEkonomiCharts.vue */ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue");
 /* harmony import */ var _AppPerkawinanCharts_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue");
-/* harmony import */ var _AppPendidikanCharts_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppPendidikanCharts.vue */ "./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue");
+/* harmony import */ var _AppKesehatanCharts_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppKesehatanCharts.vue */ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue");
 /* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-apexcharts */ "./node_modules/vue-apexcharts/dist/vue-apexcharts.js");
 /* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_apexcharts__WEBPACK_IMPORTED_MODULE_4__);
 
@@ -31635,8 +31635,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 
 
@@ -31645,7 +31643,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     ekonomicharts: _AppEkonomiCharts_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     perkawinancharts: _AppPerkawinanCharts_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    pendidikancharts: _AppPendidikanCharts_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    kesehatancharts: _AppKesehatanCharts_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     apexchart: vue_apexcharts__WEBPACK_IMPORTED_MODULE_4___default.a
   },
   data: function data() {
@@ -31657,14 +31655,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: 'Status Perkawinan',
         icon: 'wc'
       }, {
-        name: 'Status Pendidikan',
-        icon: 'school'
+        name: 'Status Kehidupan',
+        icon: 'local_hospital'
       }],
-      activeTab: 1,
+      activeTab: 2,
       labelPiePerkawinan: [],
       dataCard: {},
       selected: '01',
       wilayah: [],
+      selectedNameWilayah: '',
       seriesPendidikanPerBulan: [{
         name: "1",
         data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
@@ -31807,12 +31806,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.init();
   },
   methods: {
-    changeTab: function changeTab() {},
     init: function () {
       var _init = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var dataWilayah, resCard;
+        var dataWilayah, resCard, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -31829,80 +31827,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
                 resCard = _context.sent;
-                this.dataCard = resCard.data.data; // let dataPieEkonomi = this.dataCharts.pie_prosentase_ekonomi
-                // let res = await this.fetchDashboard();
-                // this.dataCharts = res.data.items
-                // let umatEkonomi = this.dataCharts.pie_prosentase_ekonomi
-                // let umatPerkawinan  = this.dataCharts.pie_prosentase_perkawinan
-                // let umatPendidikan  = this.dataCharts.pie_prosentase_pendidikan
-                // let temp
-                // this.seriesProsentasePieEkonomi.push(umatEkonomi)
-                // this.seriesProsentasePiePerkawinan.push(umatPerkawinan)
-                // this.seriesProsentasePiePendidikan.push(umatPendidikan)
-                // this.seriesProsentasePieEkonomi = [umatEkonomi[0].bisa_membantu, umatEkonomi[0].biasa, umatEkonomi[0].perlu_dibantu]
-                // this.seriesProsentasePieEkonomiWilayah = [umatEkonomi[0].total_semua_wilayah_bisa_membantu, umatEkonomi[0].total_semua_wilayah_biasa, umatEkonomi[0].total_semua_wilayah_perlu_dibantu]
-                // this.seriesProsentasePiePerkawinan =    [umatPerkawinan[0].belum_nikah,
-                //                                         umatPerkawinan[0].ditinggal_pasangannya,
-                //                                         umatPerkawinan[0].hidup_bersama_tanpa_ikatan,
-                //                                         umatPerkawinan[0].janda_atau_duda_mati,
-                //                                         umatPerkawinan[0].krisis_berkepanjangan,
-                //                                         umatPerkawinan[0].nikah_adat,
-                //                                         umatPerkawinan[0].nikah_diluar_gereja,
-                //                                         umatPerkawinan[0].rm_br_sr_bekerja_di_paroki,
-                //                                         umatPerkawinan[0].rm_br_sr_dari_paroki,
-                //                                         umatPerkawinan[0].sah_beda_agama,
-                //                                         umatPerkawinan[0].sah_beda_gereja,
-                //                                         umatPerkawinan[0].sah_katolik]
-                // this.seriesProsentasePiePendidikan =    [umatPendidikan[0].belum_sekolah,
-                //                                         umatPendidikan[0].tamat_sd,
-                //                                         umatPendidikan[0].tamat_sltp,
-                //                                         umatPendidikan[0].tamat_slta,
-                //                                         umatPendidikan[0].tamat_d1_d2_d3,
-                //                                         umatPendidikan[0].tamat_s1_d4,
-                //                                         umatPendidikan[0].tamat_s2_akta_5,
-                //                                         umatPendidikan[0].tamat_s3,
-                //                                         umatPendidikan[0].masih_di_sd_katolik,
-                //                                         umatPendidikan[0].masih_di_sltp_katolik,
-                //                                         umatPendidikan[0].masih_di_slta_katolik,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_d,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_s1,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_s2,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_s3,
-                //                                         umatPendidikan[0].masih_di_sd_non_katolik,
-                //                                         umatPendidikan[0].masih_di_sltp_non_katolik,
-                //                                         umatPendidikan[0].masih_di_slta_non_katolik,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_d,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_s1,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_s2,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_s3,
-                //                                         umatPendidikan[0].usia_7_sampai_12_tidak_sekolah,
-                //                                         umatPendidikan[0].usia_13_sampai_15_tidak_sekolah,
-                //                                         umatPendidikan[0].buta_aksara]
-                // this.seriesProsentasePiePerkawinan.splice(0)
-                // umatPerkawinan[0].status.forEach(item =>
-                //     this.seriesProsentasePiePerkawinan.push(item.jumlah_status)
-                // );
-                // this.chartOptionsProsentasePiePerkawinan.labels.splice(0)
-                // umatPerkawinan[0].status.forEach(item =>
-                //     this.chartOptionsProsentasePiePerkawinan.labels.push(item.status.deskripsi_sts_kawin)
-                // );
-                // this.labelPiePerkawinan = umatPerkawinan[0].status.map((item) => item.status);
-                // this.chartOptionsProsentasePiePerkawinan.labels = this.labelPiePerkawinan;
+                this.dataCard = resCard.data.data;
 
-                _context.next = 14;
+                for (i = 0; i < this.wilayah.length; i++) {
+                  if (this.wilayah[i].id_wilayah == this.selected) {
+                    this.selectedNameWilayah = this.wilayah[i].nama_wilayah;
+                  }
+                }
+
+                _context.next = 15;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 11]]);
+        }, _callee, this, [[0, 12]]);
       }));
 
       function init() {
@@ -31911,21 +31857,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return init;
     }(),
-    // fetchDashboard() {
-    //     return new Promise((resolve, reject) => {
-    //         axios.get('/api/dashboard', {
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-type': 'application/json'
-    //             },
-    //             params: {
-    //                 'id_wilayah': this.selected
-    //             }
-    //         })
-    //         .then(res => resolve(res))
-    //         .catch(error => reject(error))
-    //     })
-    // },
     fetchWilayah: function fetchWilayah() {
       return new Promise(function (resolve, reject) {
         axios.get('/api/wilayah', {
@@ -32026,6 +31957,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -32037,6 +31987,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       "default": '01',
       required: true
     },
+    selectedNameWilayah: {
+      type: String,
+      "default": '',
+      required: true
+    },
     activeTab: {
       type: Number,
       "default": 0,
@@ -32045,9 +32000,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      statusPieEkonomiCurrentWilayah: true,
+      statusPieEkonomiAllWilayah: true,
       dataPieEkonomi: [],
       dataMonthlyEkonomi: [],
       dataYearlyEkonomi: [],
+      tempDataYearlyEkonomi: [{
+        data: [] // BisaMembantu
+
+      }, {
+        data: [] // Biasa
+
+      }, {
+        data: [] // PerluDibantu
+
+      }],
+      tempDataMonthlyEkonomi: [{
+        data: [] // BisaMembantu
+
+      }, {
+        data: [] // Biasa
+
+      }, {
+        data: [] // PerluDibantu
+
+      }],
       seriesEkonomiPerBulan: [{
         name: "Bisa Membantu",
         data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
@@ -32077,7 +32054,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           breakpoint: 2400,
           options: {
             chart: {
-              width: 400
+              width: 400,
+              height: 450,
+              left: 400
             },
             legend: {
               position: 'bottom'
@@ -32091,7 +32070,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           breakpoint: 2400,
           options: {
             chart: {
-              width: 400
+              width: 400,
+              height: 450,
+              left: 400
             },
             legend: {
               position: 'bottom'
@@ -32139,40 +32120,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       chartOptionsEkonomiPerTahun: {
         chart: {
-          type: 'line',
+          stacked: true,
           toolbar: {
             show: true
           },
-          shadow: {
-            enabled: false,
-            color: '#bbb',
-            top: 3,
-            left: 2,
-            blur: 3,
-            opacity: 1
+          zoom: {
+            enabled: true
           }
         },
-        stroke: {
-          width: 3,
-          curve: 'smooth'
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
         },
         xaxis: {
-          categories: []
+          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
         },
-        markers: {
-          size: 4,
-          opacity: 0.9,
-          colors: ["#FFA41B"],
-          strokeColor: "#fff",
-          strokeWidth: 2,
-          hover: {
-            size: 7
-          }
+        legend: {
+          position: 'bottom'
         },
-        yaxis: {
-          title: {
-            text: 'Jumlah'
-          }
+        fill: {
+          opacity: 1
         }
       }
     };
@@ -32182,7 +32160,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _init = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var resDataPieEkonomi, resDataGraphEkonomi, tempXaxisMonthlyEkonomi, tempMonthlyEkonomiBisaMembantu, tempMonthlyEkonomiBiasa, tempMonthlyEkonomiPerluDibantu, tempXaxisYearlyEkonomi, tempYearlyEkonomiBisaMembantu, tempYearlyEkonomiBiasa, tempYearlyEkonomiPerluDibantu;
+        var _this = this;
+
+        var resDataPieEkonomi, resDataGraphEkonomi, tempXaxisMonthlyEkonomi, tempXaxisYearlyEkonomi, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -32200,77 +32180,79 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 resDataGraphEkonomi = _context.sent;
                 this.dataMonthlyEkonomi = resDataGraphEkonomi.data.monthly_chart;
                 this.dataYearlyEkonomi = resDataGraphEkonomi.data.yearly_chart;
-                console.log('ekonomi');
+
+                if (resDataPieEkonomi.data.current_wilayah.length != 0) {
+                  this.statusPieEkonomiCurrentWilayah = true;
+                  this.seriesProsentasePieEkonomiWilayah = [resDataPieEkonomi.data.current_wilayah.bisa_membantu, resDataPieEkonomi.data.current_wilayah.biasa, resDataPieEkonomi.data.current_wilayah.perlu_dibantu];
+                } else {
+                  this.statusPieEkonomiCurrentWilayah = false;
+                }
+
+                if (resDataPieEkonomi.data.all_wilayah.length != 0) {
+                  this.statusPieEkonomiAllWilayah = true;
+                  this.seriesProsentasePieEkonomiKeseluruhanWilayah = [resDataPieEkonomi.data.all_wilayah.bisa_membantu, resDataPieEkonomi.data.all_wilayah.biasa, resDataPieEkonomi.data.all_wilayah.perlu_dibantu];
+                } else {
+                  this.statusPieEkonomiAllWilayah = false;
+                }
+
                 tempXaxisMonthlyEkonomi = [];
-                tempMonthlyEkonomiBisaMembantu = [];
-                tempMonthlyEkonomiBiasa = [];
-                tempMonthlyEkonomiPerluDibantu = [];
+                tempXaxisYearlyEkonomi = [];
+                this.clearGraph();
+                this.chartOptionsEkonomiPerBulan.xaxis.categories = [];
+                this.chartOptionsEkonomiPerTahun.xaxis.categories = [];
+                this.dataYearlyEkonomi.map(function (item, index) {
+                  tempXaxisYearlyEkonomi.push(item.year);
+
+                  _this.tempDataYearlyEkonomi[0].data.push(item.data.bisa_membantu);
+
+                  _this.tempDataYearlyEkonomi[1].data.push(item.data.biasa);
+
+                  _this.tempDataYearlyEkonomi[2].data.push(item.data.perlu_dibantu);
+                });
+                console.log(this.dataMonthlyEkonomi);
                 this.dataMonthlyEkonomi.map(function (item, index) {
                   tempXaxisMonthlyEkonomi.push(item.month);
-                  tempMonthlyEkonomiBisaMembantu.push(item.data.bisa_membantu);
-                  tempMonthlyEkonomiBiasa.push(item.data.biasa);
-                  tempMonthlyEkonomiPerluDibantu.push(item.data.perlu_dibantu);
+
+                  _this.tempDataMonthlyEkonomi[0].data.push(item.data.bisa_membantu);
+
+                  _this.tempDataMonthlyEkonomi[1].data.push(item.data.biasa);
+
+                  _this.tempDataMonthlyEkonomi[2].data.push(item.data.perlu_dibantu);
                 });
-                this.seriesEkonomiPerBulan[0] = _objectSpread({}, this.seriesEkonomiPerBulan[0], {}, {
-                  name: "Bisa Membantu",
-                  data: tempMonthlyEkonomiBisaMembantu
-                });
-                this.seriesEkonomiPerBulan[1] = _objectSpread({}, this.seriesEkonomiPerBulan[0], {}, {
-                  name: "Biasa",
-                  data: tempMonthlyEkonomiBiasa
-                });
-                this.seriesEkonomiPerBulan[2] = _objectSpread({}, this.seriesEkonomiPerBulan[0], {}, {
-                  name: 'Perlu Dibantu',
-                  data: tempMonthlyEkonomiPerluDibantu
-                });
+
+                for (i = 0; i < 3; i++) {
+                  this.seriesEkonomiPerTahun[i] = _objectSpread({}, this.seriesEkonomiPerTahun[i], {}, {
+                    data: this.tempDataYearlyEkonomi[i].data
+                  });
+                  this.seriesEkonomiPerBulan[i] = _objectSpread({}, this.seriesEkonomiPerBulan[i], {}, {
+                    data: this.tempDataMonthlyEkonomi[i].data
+                  });
+                }
+
                 this.chartOptionsEkonomiPerBulan = _objectSpread({}, this.chartOptionsEkonomiPerBulan, {}, {
                   xaxis: {
                     categories: tempXaxisMonthlyEkonomi
                   }
                 });
-                tempXaxisYearlyEkonomi = [];
-                tempYearlyEkonomiBisaMembantu = [];
-                tempYearlyEkonomiBiasa = [];
-                tempYearlyEkonomiPerluDibantu = [];
-                this.dataYearlyEkonomi.map(function (item, index) {
-                  tempXaxisYearlyEkonomi.push(item.year);
-                  tempYearlyEkonomiBisaMembantu.push(item.data.bisa_membantu);
-                  tempYearlyEkonomiBiasa.push(item.data.biasa);
-                  tempYearlyEkonomiPerluDibantu.push(item.data.perlu_dibantu);
-                });
-                this.seriesEkonomiPerTahun[0].data = tempYearlyEkonomiBisaMembantu;
-                this.seriesEkonomiPerTahun[1].data = tempYearlyEkonomiBiasa;
-                this.seriesEkonomiPerTahun[2].data = tempYearlyEkonomiPerluDibantu;
                 this.chartOptionsEkonomiPerTahun = _objectSpread({}, this.chartOptionsEkonomiPerTahun, {}, {
                   xaxis: {
                     categories: tempXaxisYearlyEkonomi
                   }
                 });
-                this.seriesEkonomiPerTahun[0] = _objectSpread({}, this.seriesEkonomiPerTahun[0], {}, {
-                  data: tempYearlyEkonomiBisaMembantu
-                });
-                this.seriesEkonomiPerTahun[1] = _objectSpread({}, this.seriesEkonomiPerTahun[0], {}, {
-                  data: tempYearlyEkonomiBiasa
-                });
-                this.seriesEkonomiPerTahun[2] = _objectSpread({}, this.seriesEkonomiPerTahun[0], {}, {
-                  data: tempYearlyEkonomiPerluDibantu
-                });
-                this.seriesProsentasePieEkonomiWilayah = [resDataPieEkonomi.data.data.bisa_membantu, resDataPieEkonomi.data.data.biasa, resDataPieEkonomi.data.data.perlu_dibantu];
-                this.seriesProsentasePieEkonomiKeseluruhanWilayah = [resDataPieEkonomi.data.data.total_semua_wilayah_bisa_membantu, resDataPieEkonomi.data.data.total_semua_wilayah_biasa, resDataPieEkonomi.data.data.total_semua_wilayah_perlu_dibantu];
-                _context.next = 38;
+                _context.next = 27;
                 break;
 
-              case 35:
-                _context.prev = 35;
+              case 24:
+                _context.prev = 24;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 38:
+              case 27:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 35]]);
+        }, _callee, this, [[0, 24]]);
       }));
 
       function init() {
@@ -32279,8 +32261,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return init;
     }(),
+    clearGraph: function clearGraph() {
+      this.tempDataYearlyEkonomi[0].data = [];
+      this.tempDataMonthlyEkonomi[0].data = [];
+      this.tempDataYearlyEkonomi[1].data = [];
+      this.tempDataMonthlyEkonomi[1].data = [];
+      this.tempDataYearlyEkonomi[2].data = [];
+      this.tempDataMonthlyEkonomi[2].data = [];
+    },
     fetchGraphEkonomi: function fetchGraphEkonomi() {
-      return axios.get('/api/ekonomi?mode=ekonomi', {
+      return axios.get('/api/ekonomi?mode=graphEkonomi', {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
@@ -32291,7 +32281,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     fetchPieEkonomi: function fetchPieEkonomi() {
-      return axios.get('/api/current-ekonomi', {
+      return axios.get('/api/ekonomi?mode=pieEkonomi', {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
@@ -32318,17 +32308,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-apexcharts */ "./node_modules/vue-apexcharts/dist/vue-apexcharts.js");
-/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_apexcharts__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-apexcharts */ "./node_modules/vue-apexcharts/dist/vue-apexcharts.js");
+/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_apexcharts__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -32365,52 +32391,313 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    apexchart: vue_apexcharts__WEBPACK_IMPORTED_MODULE_0___default.a
+    apexchart: vue_apexcharts__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   props: {
-    seriesPendidikanPerBulan: {
-      type: Array,
-      "default": [],
+    selectedWilayah: {
+      type: String,
+      "default": '01',
       required: true
     },
-    seriesProsentasePiePendidikan: {
-      type: Array,
-      "default": [],
+    selectedNameWilayah: {
+      type: String,
+      "default": '',
       required: true
     },
-    seriesProsentasePiePendidikanWilayah: {
-      type: Array,
-      "default": [],
-      required: true
-    },
-    seriesPendidikan: {
-      type: Array,
-      "default": [],
-      required: true
-    },
-    chartOptionsProsentasePiePendidikan: {
-      type: Object,
-      "default": {},
-      required: true
-    },
-    chartOptionsProsentasePiePendidikanWilayah: {
-      type: Object,
-      "default": {},
-      required: true
-    },
-    chartOptionsPendidikanPerBulan: {
-      type: Object,
-      "default": {},
-      required: true
-    },
-    chartOptionsPendidikan: {
-      type: Object,
-      "default": {},
+    activeTab: {
+      type: Number,
+      "default": 0,
       required: true
     }
   },
   data: function data() {
-    return {};
+    return {
+      statusPieKehidupanCurrentWilayah: true,
+      statusPieKehidupanAllWilayah: true,
+      dataPieKehidupan: [],
+      dataMonthlyKehidupan: [],
+      dataYearlyKehidupan: [],
+      tempDataYearlyKehidupan: [{
+        data: [] // Hidup
+
+      }, {
+        data: [] // RIP
+
+      }],
+      tempDataMonthlyKehidupan: [{
+        data: [] // Hidup
+
+      }, {
+        data: [] // RIP
+
+      }],
+      seriesKehidupanPerBulan: [{
+        name: "Hidup",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "RIP",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }],
+      seriesKehidupanPerTahun: [{
+        name: "Hidup",
+        data: [1]
+      }, {
+        name: "RIP",
+        data: [1]
+      }],
+      seriesProsentasePieKehidupanWilayah: [1, 1],
+      seriesProsentasePieKehidupanKeseluruhanWilayah: [1, 1],
+      chartOptionsProsentasePieKehidupanWilayah: {
+        labels: ['Hidup', 'RIP'],
+        decimalsInFloat: 4,
+        responsive: [{
+          breakpoint: 2400,
+          options: {
+            chart: {
+              width: 400,
+              height: 450,
+              left: 400
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      },
+      chartOptionsProsentasePieKehidupanKeseluruhanWilayah: {
+        labels: ['Hidup', 'RIP'],
+        responsive: [{
+          breakpoint: 2400,
+          options: {
+            chart: {
+              width: 400,
+              height: 450,
+              left: 400
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      },
+      chartOptionsKehidupanPerBulan: {
+        chart: {
+          type: 'line',
+          toolbar: {
+            show: true
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        xaxis: {
+          categories: []
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
+          }
+        },
+        yaxis: {
+          title: {
+            text: 'Jumlah'
+          }
+        }
+      },
+      chartOptionsKehidupanPerTahun: {
+        chart: {
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        xaxis: {
+          categories: [1100]
+        },
+        legend: {
+          position: 'bottom'
+        },
+        fill: {
+          opacity: 1
+        }
+      }
+    };
+  },
+  methods: {
+    init: function () {
+      var _init = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        var resDataPieKehidupan, resDataGraphKehidupan, tempXaxisMonthlyKehidupan, tempXaxisYearlyKehidupan, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return this.fetchPieKehidupan();
+
+              case 3:
+                resDataPieKehidupan = _context.sent;
+                _context.next = 6;
+                return this.fetchGraphKehidupan();
+
+              case 6:
+                resDataGraphKehidupan = _context.sent;
+                this.dataMonthlyKehidupan = resDataGraphKehidupan.data.monthly_chart;
+                this.dataYearlyKehidupan = resDataGraphKehidupan.data.yearly_chart;
+                console.log(this.dataMonthlyKehidupan);
+
+                if (resDataPieKehidupan.data.current_wilayah.length != 0) {
+                  this.statusPieKehidupanCurrentWilayah = true;
+                  this.seriesProsentasePieKehidupanWilayah = [resDataPieKehidupan.data.current_wilayah.status_hidup, resDataPieKehidupan.data.current_wilayah.status_mati];
+                } else {
+                  this.statusPieKehidupanCurrentWilayah = false;
+                }
+
+                if (resDataPieKehidupan.data.all_wilayah.length != 0) {
+                  this.statusPieKehidupanAllWilayah = true;
+                  this.seriesProsentasePieKehidupanKeseluruhanWilayah = [resDataPieKehidupan.data.all_wilayah.status_hidup, resDataPieKehidupan.data.all_wilayah.status_mati];
+                } else {
+                  this.statusPieKehidupanAllWilayah = false;
+                }
+
+                tempXaxisMonthlyKehidupan = [];
+                tempXaxisYearlyKehidupan = [];
+                this.clearGraph();
+                this.chartOptionsKehidupanPerBulan.xaxis.categories = [];
+                this.chartOptionsKehidupanPerTahun.xaxis.categories = [];
+                this.dataYearlyKehidupan.map(function (item, index) {
+                  tempXaxisYearlyKehidupan.push(item.year);
+
+                  _this.tempDataYearlyKehidupan[0].data.push(item.data.status_hidup);
+
+                  _this.tempDataYearlyKehidupan[1].data.push(item.data.status_mati);
+                });
+                console.log(this.dataMonthlyKehidupan);
+                this.dataMonthlyKehidupan.map(function (item, index) {
+                  tempXaxisMonthlyKehidupan.push(item.month);
+
+                  _this.tempDataMonthlyKehidupan[0].data.push(item.data.status_hidup);
+
+                  _this.tempDataMonthlyKehidupan[1].data.push(item.data.status_mati);
+                });
+
+                for (i = 0; i < 2; i++) {
+                  this.seriesKehidupanPerTahun[i] = _objectSpread({}, this.seriesKehidupanPerTahun[i], {}, {
+                    data: this.tempDataYearlyKehidupan[i].data
+                  });
+                  this.seriesKehidupanPerBulan[i] = _objectSpread({}, this.seriesKehidupanPerBulan[i], {}, {
+                    data: this.tempDataMonthlyKehidupan[i].data
+                  });
+                }
+
+                this.chartOptionsKehidupanPerBulan = _objectSpread({}, this.chartOptionsKehidupanPerBulan, {}, {
+                  xaxis: {
+                    categories: tempXaxisMonthlyKehidupan
+                  }
+                });
+                this.chartOptionsKehidupanPerTahun = _objectSpread({}, this.chartOptionsKehidupanPerTahun, {}, {
+                  xaxis: {
+                    categories: tempXaxisYearlyKehidupan
+                  }
+                });
+                _context.next = 28;
+                break;
+
+              case 25:
+                _context.prev = 25;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 28:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 25]]);
+      }));
+
+      function init() {
+        return _init.apply(this, arguments);
+      }
+
+      return init;
+    }(),
+    clearGraph: function clearGraph() {
+      this.tempDataYearlyKehidupan[0].data = [];
+      this.tempDataMonthlyKehidupan[0].data = [];
+      this.tempDataYearlyKehidupan[1].data = [];
+      this.tempDataMonthlyKehidupan[1].data = [];
+    },
+    fetchGraphKehidupan: function fetchGraphKehidupan() {
+      return axios.get('/api/kesehatan?mode=graphUmatHidup', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'id_wilayah': this.selectedWilayah
+        }
+      });
+    },
+    fetchPieKehidupan: function fetchPieKehidupan() {
+      return axios.get('/api/kesehatan?mode=pieUmatHidup', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'id_wilayah': this.selectedWilayah
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    if (this.activeTab == 2) {
+      this.init();
+    }
+  },
+  watch: {
+    selectedWilayah: function selectedWilayah() {
+      if (this.activeTab == 2) {
+        this.init();
+      }
+    }
   }
 });
 
@@ -32477,6 +32764,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -32488,6 +32792,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       "default": '01',
       required: true
     },
+    selectedNameWilayah: {
+      type: String,
+      "default": '',
+      required: true
+    },
     activeTab: {
       type: Number,
       "default": 1,
@@ -32496,13 +32805,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      statusPiePerkawinanCurrentWilayah: true,
+      statusPiePerkawinanAllWilayah: true,
       dataPiePerkawinan: [],
       dataMonthlyPerkawinan: [],
       dataYearlyPerkawinan: [],
       tempDataYearlyPerkawinan: [{
-        data: [] // BelumNikah
-
-      }, {
         data: [] // SahKatolik
 
       }, {
@@ -32510,36 +32818,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       }, {
         data: [] // SahBedaGereja
-
-      }, {
-        data: [] // NikahDiLuarGreja
-
-      }, {
-        data: [] // DitinggalPasangannya
-
-      }, {
-        data: [] // KrisisBerkepanjangan
-
-      }, {
-        data: [] // JandaAtauDudaMati
-
-      }, {
-        data: [] // RmBrSrDariParoki
-
-      }, {
-        data: [] // RmBrSrBekerjaDiParoki
-
-      }, {
-        data: [] // HidupBersamaTanpaIkatan
-
-      }, {
-        data: [] // NikahAdat
 
       }],
       tempDataMonthlyPerkawinan: [{
-        data: [] // BelumNikah
-
-      }, {
         data: [] // SahKatolik
 
       }, {
@@ -32548,118 +32829,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         data: [] // SahBedaGereja
 
-      }, {
-        data: [] // NikahDiLuarGreja
-
-      }, {
-        data: [] // DitinggalPasangannya
-
-      }, {
-        data: [] // KrisisBerkepanjangan
-
-      }, {
-        data: [] // JandaAtauDudaMati
-
-      }, {
-        data: [] // RmBrSrDariParoki
-
-      }, {
-        data: [] // RmBrSrBekerjaDiParoki
-
-      }, {
-        data: [] // HidupBersamaTanpaIkatan
-
-      }, {
-        data: [] // NikahAdat
-
       }],
       seriesPerkawinanPerBulan: [{
-        name: "Belum Nikah",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
         name: 'Sah Katolik',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1]
       }, {
         name: 'Sah Beda Agama',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1]
       }, {
         name: 'Sah Beda Greja',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: 'Nikah diluar Greja',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Ditinggal Pasangannya",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Krisis Berkepanjangan",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Janda / Duda Mati",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Rm/Br/Sr dari Paroki",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Rm/Br/Sr bekerja di Paroki",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Hidup Bersama Tanpa Ikatan",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: 'Nikah Adat',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1, 1, 1, 1]
       }],
       seriesPerkawinanPerTahun: [{
-        name: "Belum Nikah",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
         name: 'Sah Katolik',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1]
       }, {
         name: 'Sah Beda Agama',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1]
       }, {
         name: 'Sah Beda Greja',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: 'Nikah diluar Greja',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Ditinggal Pasangannya",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Krisis Berkepanjangan",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Janda / Duda Mati",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Rm/Br/Sr dari Paroki",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Rm/Br/Sr bekerja di Paroki",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: "Hidup Bersama Tanpa Ikatan",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }, {
-        name: 'Nikah Adat',
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1]
       }],
-      seriesProsentasePiePerkawinanWilayah: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      seriesProsentasePiePerkawinanKeseluruhanWilayah: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      seriesProsentasePiePerkawinanWilayah: [1, 1, 1],
+      seriesProsentasePiePerkawinanKeseluruhanWilayah: [1, 1, 1],
       chartOptionsProsentasePiePerkawinanWilayah: {
-        labels: ['Belum Nikah', 'Sah Katolik', 'Sah Beda Agama', 'Sah Beda Gereja', 'Nikah di Luar Gereja', 'Ditinggal pasangannya', 'Krisis berkepanjangan', 'Janda Duda Mati', 'Rm Br Sr dari Paroki', 'Rm Br Sr bekerja di Paroki', 'Hidup Bersama Tanpa Ikatan', 'Nikah Adat'],
+        labels: ['Sah Katolik', 'Sah Beda Agama', 'Sah Beda Gereja'],
         responsive: [{
           breakpoint: 2400,
           options: {
             chart: {
-              width: 500,
-              height: 500,
+              width: 400,
+              height: 450,
               left: 400
             },
-            colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
             legend: {
               position: 'bottom'
             }
@@ -32667,16 +32869,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }]
       },
       chartOptionsProsentasePiePerkawinanKeseluruhanWilayah: {
-        labels: ['Belum Nikah', 'Sah Katolik', 'Sah Beda Agama', 'Sah Beda Gereja', 'Nikah di Luar Gereja', 'Ditinggal pasangannya', 'Krisis berkepanjangan', 'Janda Duda Mati', 'Rm Br Sr dari Paroki', 'Rm Br Sr bekerja di Paroki', 'Hidup Bersama Tanpa Ikatan', 'Nikah Adat'],
+        labels: ['Sah Katolik', 'Sah Beda Agama', 'Sah Beda Gereja'],
         responsive: [{
           breakpoint: 2400,
           options: {
             chart: {
-              width: 500,
-              height: 500,
+              width: 400,
+              height: 450,
               left: 400
             },
-            colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
             legend: {
               position: 'bottom'
             }
@@ -32699,7 +32900,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           width: 3,
           curve: 'smooth'
         },
-        colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
         xaxis: {
           categories: ['Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
         },
@@ -32726,45 +32926,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       chartOptionsPerkawinanPerTahun: {
         chart: {
-          type: 'line',
-          shadow: {
-            enabled: false,
-            color: '#bbb',
-            top: 3,
-            left: 2,
-            blur: 3,
-            opacity: 1
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
           }
         },
-        colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
-        stroke: {
-          width: 3,
-          curve: 'smooth'
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
         },
         xaxis: {
           categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
         },
-        markers: {
-          size: 4,
-          opacity: 0.9,
-          strokeColor: "#fff",
-          strokeWidth: 2,
-          hover: {
-            size: 7
-          }
-        },
-        yaxis: {
-          title: {
-            text: 'Jumlah'
-          }
-        },
         legend: {
-          labels: {
-            useSeriesColors: true
-          },
-          show: true,
-          showForNullSeries: false,
-          showForZeroSeries: false
+          position: 'bottom'
+        },
+        fill: {
+          opacity: 1
         }
       }
     };
@@ -32791,74 +32983,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
                 resDataPiePerkawinan = _context.sent;
-                console.log(resDataPiePerkawinan);
-                this.seriesProsentasePiePerkawinanWilayah = [resDataPiePerkawinan.data.data.belum_nikah, resDataPiePerkawinan.data.data.sah_katolik, resDataPiePerkawinan.data.data.sah_beda_agama, resDataPiePerkawinan.data.data.sah_beda_gereja, resDataPiePerkawinan.data.data.nikah_di_luar_gereja, resDataPiePerkawinan.data.data.ditinggal_pasangannya, resDataPiePerkawinan.data.data.krisis_berkepanjangan, resDataPiePerkawinan.data.data.janda_duda_mati, resDataPiePerkawinan.data.data.rm_br_sr_dari_paroki, resDataPiePerkawinan.data.data.rm_br_sr_bekerja_di_paroki, resDataPiePerkawinan.data.data.hidup_bersama_tanpa_ikatan, resDataPiePerkawinan.data.data.nikah_adat];
-                this.seriesProsentasePiePerkawinanKeseluruhanWilayah = [resDataPiePerkawinan.data.data.total_semua_wilayah_belum_nikah, resDataPiePerkawinan.data.data.total_semua_wilayah_sah_katolik, resDataPiePerkawinan.data.data.total_semua_wilayah_sah_beda_agama, resDataPiePerkawinan.data.data.total_semua_wilayah_sah_beda_gereja, resDataPiePerkawinan.data.data.total_semua_wilayah_nikah_di_luar_gereja, resDataPiePerkawinan.data.data.total_semua_wilayah_ditinggal_pasangannya, resDataPiePerkawinan.data.data.total_semua_wilayah_krisis_berkepanjangan, resDataPiePerkawinan.data.data.total_semua_wilayah_janda_duda_mati, resDataPiePerkawinan.data.data.total_semua_wilayah_rm_br_sr_dari_paroki, resDataPiePerkawinan.data.data.total_semua_wilayah_rm_br_sr_bekerja_di_paroki, resDataPiePerkawinan.data.data.total_semua_wilayah_hidup_bersama_tanpa_ikatan, resDataPiePerkawinan.data.data.total_semua_wilayah_nikah_adat];
+
+                if (resDataPiePerkawinan.data.current_wilayah.length != 0) {
+                  this.statusPiePerkawinanCurrentWilayah = true;
+                  this.seriesProsentasePiePerkawinanWilayah = [resDataPiePerkawinan.data.current_wilayah.sah_katolik, resDataPiePerkawinan.data.current_wilayah.sah_beda_agama, resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja];
+                } else {
+                  this.statusPiePerkawinanCurrentWilayah = false;
+                }
+
+                if (resDataPiePerkawinan.data.all_wilayah.length != 0) {
+                  this.statusPiePerkawinanAllWilayah = true;
+                  this.seriesProsentasePiePerkawinanKeseluruhanWilayah = [resDataPiePerkawinan.data.all_wilayah.sah_katolik, resDataPiePerkawinan.data.all_wilayah.sah_beda_agama, resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja];
+                } else {
+                  this.statusPiePerkawinanAllWilayah = false;
+                }
+
                 this.dataYearlyPerkawinan = resDataGraphPerkawinan.data.yearly_chart;
                 this.dataMonthlyPerkawinan = resDataGraphPerkawinan.data.monthly_chart;
                 tempXaxisYearlyPerkawinan = [];
                 tempXaxisMonthlyPerkawinan = [];
+                this.clearGraph();
                 this.dataYearlyPerkawinan.map(function (item, index) {
                   tempXaxisYearlyPerkawinan.push(item.year);
 
-                  _this.tempDataYearlyPerkawinan[0].data.push(item.data.belum_nikah);
+                  _this.tempDataYearlyPerkawinan[0].data.push(item.data.sah_katolik);
 
-                  _this.tempDataYearlyPerkawinan[1].data.push(item.data.sah_katolik);
+                  _this.tempDataYearlyPerkawinan[1].data.push(item.data.sah_beda_agama);
 
-                  _this.tempDataYearlyPerkawinan[2].data.push(item.data.sah_beda_agama);
-
-                  _this.tempDataYearlyPerkawinan[3].data.push(item.data.sah_beda_gereja);
-
-                  _this.tempDataYearlyPerkawinan[4].data.push(item.data.nikah_di_luar_gereja);
-
-                  _this.tempDataYearlyPerkawinan[5].data.push(item.data.ditinggal_pasangannya);
-
-                  _this.tempDataYearlyPerkawinan[6].data.push(item.data.krisis_berkepanjangan);
-
-                  _this.tempDataYearlyPerkawinan[7].data.push(item.data.janda_duda_mati);
-
-                  _this.tempDataYearlyPerkawinan[8].data.push(item.data.rm_br_sr_dari_paroki);
-
-                  _this.tempDataYearlyPerkawinan[9].data.push(item.data.rm_br_sr_bekerja_di_paroki);
-
-                  _this.tempDataYearlyPerkawinan[10].data.push(item.data.hidup_bersama_tanpa_ikatan);
-
-                  _this.tempDataYearlyPerkawinan[11].data.push(item.data.nikah_adat);
+                  _this.tempDataYearlyPerkawinan[2].data.push(item.data.sah_beda_gereja);
                 });
                 this.dataMonthlyPerkawinan.map(function (item, index) {
                   tempXaxisMonthlyPerkawinan.push(item.month);
 
-                  _this.tempDataMonthlyPerkawinan[0].data.push(item.data.belum_nikah);
+                  _this.tempDataMonthlyPerkawinan[0].data.push(item.data.sah_katolik);
 
-                  _this.tempDataMonthlyPerkawinan[1].data.push(item.data.sah_katolik);
+                  _this.tempDataMonthlyPerkawinan[1].data.push(item.data.sah_beda_agama);
 
-                  _this.tempDataMonthlyPerkawinan[2].data.push(item.data.sah_beda_agama);
-
-                  _this.tempDataMonthlyPerkawinan[3].data.push(item.data.sah_beda_gereja);
-
-                  _this.tempDataMonthlyPerkawinan[4].data.push(item.data.nikah_di_luar_gereja);
-
-                  _this.tempDataMonthlyPerkawinan[5].data.push(item.data.ditinggal_pasangannya);
-
-                  _this.tempDataMonthlyPerkawinan[6].data.push(item.data.krisis_berkepanjangan);
-
-                  _this.tempDataMonthlyPerkawinan[7].data.push(item.data.janda_duda_mati);
-
-                  _this.tempDataMonthlyPerkawinan[8].data.push(item.data.rm_br_sr_dari_paroki);
-
-                  _this.tempDataMonthlyPerkawinan[9].data.push(item.data.rm_br_sr_bekerja_di_paroki);
-
-                  _this.tempDataMonthlyPerkawinan[10].data.push(item.data.hidup_bersama_tanpa_ikatan);
-
-                  _this.tempDataMonthlyPerkawinan[11].data.push(item.data.nikah_adat);
+                  _this.tempDataMonthlyPerkawinan[2].data.push(item.data.sah_beda_gereja);
                 });
-                console.log(resDataGraphPerkawinan);
 
-                for (i = 0; i < 12; i++) {
+                for (i = 0; i < 3; i++) {
                   this.seriesPerkawinanPerTahun[i] = _objectSpread({}, this.seriesPerkawinanPerTahun[i], {}, {
                     data: this.tempDataYearlyPerkawinan[i].data
                   });
-                  this.seriesPerkawinanPerBulan[i] = _objectSpread({}, this.seriesPerkawinanPerTahun[i], {}, {
+                  this.seriesPerkawinanPerBulan[i] = _objectSpread({}, this.seriesPerkawinanPerBulan[i], {}, {
                     data: this.tempDataMonthlyPerkawinan[i].data
                   });
                 }
@@ -32874,7 +33042,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 19:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -32888,8 +33056,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return init;
     }(),
+    clearGraph: function clearGraph() {
+      this.tempDataYearlyPerkawinan[0].data = [];
+      this.tempDataYearlyPerkawinan[1].data = [];
+      this.tempDataYearlyPerkawinan[2].data = [];
+      this.tempDataMonthlyPerkawinan[0].data = [];
+      this.tempDataMonthlyPerkawinan[1].data = [];
+      this.tempDataMonthlyPerkawinan[2].data = [];
+    },
     fetchGraphPerkawinan: function fetchGraphPerkawinan() {
-      return axios.get('/api/perkawinan?mode=perkawinan', {
+      return axios.get('/api/perkawinan?mode=graphPerkawinan', {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
@@ -32900,7 +33076,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     fetchPiePerkawinan: function fetchPiePerkawinan() {
-      return axios.get('/api/current-perkawinan', {
+      return axios.get('/api/perkawinan?mode=piePerkawinan', {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
@@ -32914,7 +33090,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     if (this.activeTab == 1) {
       this.init();
-      console.log(this.activeTab);
     }
   },
   watch: {
@@ -33097,6 +33272,63 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n.apexcharts-toolbar{\r\n    z-index: 1!important;\n}\n.application a{\r\n    text-decoration: none!important;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.v-icon[data-v-0fde026b] {\n    font-size: 100px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.v-icon[data-v-55a1dfbe] {\n    font-size: 100px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.v-icon[data-v-7f89898b] {\n    font-size: 100px;\n}\n", ""]);
 
 // exports
 
@@ -33745,6 +33977,96 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppDashboard.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppDashboard.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -35146,6 +35468,7 @@ var render = function() {
                                 key: _vm.activeTab,
                                 attrs: {
                                   selectedWilayah: _vm.selected,
+                                  selectedNameWilayah: _vm.selectedNameWilayah,
                                   activeTab: _vm.activeTab
                                 }
                               })
@@ -35160,6 +35483,7 @@ var render = function() {
                                 key: _vm.activeTab,
                                 attrs: {
                                   selectedWilayah: _vm.selected,
+                                  selectedNameWilayah: _vm.selectedNameWilayah,
                                   activeTab: _vm.activeTab
                                 }
                               })
@@ -35170,23 +35494,12 @@ var render = function() {
                           _c(
                             "v-tab-item",
                             [
-                              _c("pendidikancharts", {
+                              _c("kesehatancharts", {
+                                key: _vm.activeTab,
                                 attrs: {
-                                  seriesPendidikanPerBulan:
-                                    _vm.seriesPendidikanPerBulan,
-                                  seriesPendidikan: _vm.seriesPendidikan,
-                                  seriesProsentasePiePendidikan:
-                                    _vm.seriesProsentasePiePendidikan,
-                                  seriesProsentasePiePendidikanWilayah:
-                                    _vm.seriesProsentasePiePendidikanWilayah,
-                                  chartOptionsProsentasePiePendidikan:
-                                    _vm.chartOptionsProsentasePiePendidikan,
-                                  chartOptionsPendidikan:
-                                    _vm.chartOptionsPendidikan,
-                                  chartOptionsProsentasePiePendidikanWilayah:
-                                    _vm.chartOptionsProsentasePiePendidikanWilayah,
-                                  chartOptionsPendidikanPerBulan:
-                                    _vm.chartOptionsPendidikanPerBulan
+                                  selectedWilayah: _vm.selected,
+                                  selectedNameWilayah: _vm.selectedNameWilayah,
+                                  activeTab: _vm.activeTab
                                 }
                               })
                             ],
@@ -35218,10 +35531,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -35237,43 +35550,86 @@ var render = function() {
     "v-layout",
     { attrs: { row: "", wrap: "" } },
     [
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", md6: "" } },
-        [
-          _c("div", { staticClass: "title mt-2" }, [
-            _vm._v("Prosentase Ekonomi Wilayah")
+      _vm.statusPieEkonomiCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "", md6: "" } },
+            [
+              _c("div", { staticClass: "title mt-2" }, [
+                _vm._v("Prosentase Ekonomi Wilayah")
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "pie",
+                  options: _vm.chartOptionsProsentasePieEkonomiWilayah,
+                  series: _vm.seriesProsentasePieEkonomiWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+            _c("div", { staticClass: "title mt-2" }, [
+              _vm._v("Prosentase Ekonomi Wilayah")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text" },
+              [
+                _c("v-icon", { staticClass: "orange--text mt-5" }, [
+                  _vm._v("report")
+                ]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(" " + _vm._s(this.selectedNameWilayah))])
+              ],
+              1
+            )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "pie",
-              options: _vm.chartOptionsProsentasePieEkonomiWilayah,
-              series: _vm.seriesProsentasePieEkonomiWilayah
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", md6: "" } },
-        [
-          _c("div", { staticClass: "title mt-2" }, [
-            _vm._v("Prosentase Ekonomi Keseluruhan Wilayah")
+      _vm.statusPieEkonomiAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "", md6: "" } },
+            [
+              _c("div", { staticClass: "title mt-2" }, [
+                _vm._v("Prosentase Ekonomi Keseluruhan Wilayah")
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "pie",
+                  options:
+                    _vm.chartOptionsProsentasePieEkonomiKeseluruhanWilayah,
+                  series: _vm.seriesProsentasePieEkonomiKeseluruhanWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+            _c("div", { staticClass: "title mt-2" }, [
+              _vm._v("Prosentase Ekonomi Wilayah")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text" },
+              [
+                _c("v-icon", { staticClass: "orange--text mt-5" }, [
+                  _vm._v("report")
+                ]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(" Keseluruhan Wilayah")])
+              ],
+              1
+            )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "pie",
-              options: _vm.chartOptionsProsentasePieEkonomiKeseluruhanWilayah,
-              series: _vm.seriesProsentasePieEkonomiKeseluruhanWilayah
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
       _c(
         "v-flex",
@@ -35305,7 +35661,7 @@ var render = function() {
           _vm._v(" "),
           _c("apexchart", {
             attrs: {
-              type: "line",
+              type: "bar",
               height: "350px",
               options: _vm.chartOptionsEkonomiPerTahun,
               series: _vm.seriesEkonomiPerTahun
@@ -35325,10 +35681,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=template&id=634c30ac&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=template&id=634c30ac& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -35344,20 +35700,101 @@ var render = function() {
     "v-layout",
     { attrs: { row: "", wrap: "" } },
     [
+      _vm.statusPieKehidupanCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "", md6: "" } },
+            [
+              _c("div", { staticClass: "title mt-2" }, [
+                _vm._v("Prosentase Kehidupan Wilayah")
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "pie",
+                  options: _vm.chartOptionsProsentasePieKehidupanWilayah,
+                  series: _vm.seriesProsentasePieKehidupanWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+            _c("div", { staticClass: "title mt-2" }, [
+              _vm._v("Prosentase Kehidupan Wilayah")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text" },
+              [
+                _c("v-icon", { staticClass: "orange--text mt-5" }, [
+                  _vm._v("report")
+                ]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(" " + _vm._s(this.selectedNameWilayah))])
+              ],
+              1
+            )
+          ]),
+      _vm._v(" "),
+      _vm.statusPieKehidupanAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "", md6: "" } },
+            [
+              _c("div", { staticClass: "title mt-2" }, [
+                _vm._v("Prosentase Kehidupan Keseluruhan Wilayah")
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "pie",
+                  options:
+                    _vm.chartOptionsProsentasePieKehidupanKeseluruhanWilayah,
+                  series: _vm.seriesProsentasePieKehidupanKeseluruhanWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+            _c("div", { staticClass: "title mt-2" }, [
+              _vm._v("Prosentase Kehidupan Wilayah")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text" },
+              [
+                _c("v-icon", { staticClass: "orange--text mt-5" }, [
+                  _vm._v("report")
+                ]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(" Keseluruhan Wilayah")])
+              ],
+              1
+            )
+          ]),
+      _vm._v(" "),
       _c(
         "v-flex",
         { attrs: { xs12: "" } },
         [
           _c("div", { staticClass: "title mt-2" }, [
-            _vm._v("Pendidikan Wilayah")
+            _vm._v("Kehidupan per Bulan")
           ]),
           _vm._v(" "),
           _c("apexchart", {
             attrs: {
               type: "line",
-              height: "350",
-              options: _vm.chartOptionsPendidikan,
-              series: _vm.seriesPendidikan
+              height: "350px",
+              options: _vm.chartOptionsKehidupanPerBulan,
+              series: _vm.seriesKehidupanPerBulan
             }
           })
         ],
@@ -35369,15 +35806,15 @@ var render = function() {
         { attrs: { xs12: "" } },
         [
           _c("div", { staticClass: "title mt-2" }, [
-            _vm._v("Pendidikan per Tahun")
+            _vm._v("Kehidupan per Tahun")
           ]),
           _vm._v(" "),
           _c("apexchart", {
             attrs: {
-              type: "line",
-              height: "350",
-              options: _vm.chartOptionsPendidikanPerBulan,
-              series: _vm.seriesPendidikanPerBulan
+              type: "bar",
+              height: "350px",
+              options: _vm.chartOptionsKehidupanPerTahun,
+              series: _vm.seriesKehidupanPerTahun
             }
           })
         ],
@@ -35394,10 +35831,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -35413,44 +35850,86 @@ var render = function() {
     "v-layout",
     { attrs: { row: "", wrap: "" } },
     [
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", md6: "" } },
-        [
-          _c("div", { staticClass: "title mt-2" }, [
-            _vm._v("Prosentase Perkawinan Wilayah")
+      _vm.statusPiePerkawinanCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "", md6: "" } },
+            [
+              _c("div", { staticClass: "title mt-2" }, [
+                _vm._v("Prosentase Perkawinan Wilayah")
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "pie",
+                  options: _vm.chartOptionsProsentasePiePerkawinanWilayah,
+                  series: _vm.seriesProsentasePiePerkawinanWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+            _c("div", { staticClass: "title mt-2" }, [
+              _vm._v("Prosentase Perkawinan Wilayah")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text" },
+              [
+                _c("v-icon", { staticClass: "orange--text mt-5" }, [
+                  _vm._v("report")
+                ]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(" " + _vm._s(this.selectedNameWilayah))])
+              ],
+              1
+            )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "pie",
-              options: _vm.chartOptionsProsentasePiePerkawinanWilayah,
-              series: _vm.seriesProsentasePiePerkawinanWilayah
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", md6: "" } },
-        [
-          _c("div", { staticClass: "title mt-2" }, [
-            _vm._v("Prosentase Perkawinan Keseluruhan Wilayah")
+      _vm.statusPiePerkawinanAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "", md6: "" } },
+            [
+              _c("div", { staticClass: "title mt-2" }, [
+                _vm._v("Prosentase Perkawinan Keseluruhan Wilayah")
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "pie",
+                  options:
+                    _vm.chartOptionsProsentasePiePerkawinanKeseluruhanWilayah,
+                  series: _vm.seriesProsentasePiePerkawinanKeseluruhanWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+            _c("div", { staticClass: "title mt-2" }, [
+              _vm._v("Prosentase Perkawinan Wilayah")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text" },
+              [
+                _c("v-icon", { staticClass: "orange--text mt-5" }, [
+                  _vm._v("report")
+                ]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(" Keseluruhan Wilayah")])
+              ],
+              1
+            )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "pie",
-              options:
-                _vm.chartOptionsProsentasePiePerkawinanKeseluruhanWilayah,
-              series: _vm.seriesProsentasePiePerkawinanKeseluruhanWilayah
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
       _c(
         "v-flex",
@@ -35482,7 +35961,7 @@ var render = function() {
           _vm._v(" "),
           _c("apexchart", {
             attrs: {
-              type: "line",
+              type: "bar",
               height: "350",
               options: _vm.chartOptionsPerkawinanPerTahun,
               series: _vm.seriesPerkawinanPerTahun
@@ -77515,9 +77994,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppEkonomiCharts_vue_vue_type_template_id_0fde026b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppEkonomiCharts.vue?vue&type=template&id=0fde026b& */ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&");
+/* harmony import */ var _AppEkonomiCharts_vue_vue_type_template_id_0fde026b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true& */ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true&");
 /* harmony import */ var _AppEkonomiCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppEkonomiCharts.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _AppEkonomiCharts_vue_vue_type_style_index_0_id_0fde026b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css& */ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -77525,13 +78006,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _AppEkonomiCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AppEkonomiCharts_vue_vue_type_template_id_0fde026b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AppEkonomiCharts_vue_vue_type_template_id_0fde026b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AppEkonomiCharts_vue_vue_type_template_id_0fde026b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppEkonomiCharts_vue_vue_type_template_id_0fde026b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "0fde026b",
   null
   
 )
@@ -77557,36 +78038,54 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b& ***!
-  \*****************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_style_index_0_id_0fde026b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=style&index=0&id=0fde026b&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_style_index_0_id_0fde026b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_style_index_0_id_0fde026b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_style_index_0_id_0fde026b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_style_index_0_id_0fde026b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_style_index_0_id_0fde026b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true& ***!
+  \*****************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_template_id_0fde026b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppEkonomiCharts.vue?vue&type=template&id=0fde026b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_template_id_0fde026b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_template_id_0fde026b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppEkonomiCharts.vue?vue&type=template&id=0fde026b&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_template_id_0fde026b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_template_id_0fde026b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppEkonomiCharts_vue_vue_type_template_id_0fde026b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppPendidikanCharts_vue_vue_type_template_id_634c30ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppPendidikanCharts.vue?vue&type=template&id=634c30ac& */ "./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=template&id=634c30ac&");
-/* harmony import */ var _AppPendidikanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppPendidikanCharts.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _AppKesehatanCharts_vue_vue_type_template_id_55a1dfbe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true& */ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true&");
+/* harmony import */ var _AppKesehatanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppKesehatanCharts.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _AppKesehatanCharts_vue_vue_type_style_index_0_id_55a1dfbe_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css& */ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -77594,51 +78093,67 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AppPendidikanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AppPendidikanCharts_vue_vue_type_template_id_634c30ac___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AppPendidikanCharts_vue_vue_type_template_id_634c30ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _AppKesehatanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AppKesehatanCharts_vue_vue_type_template_id_55a1dfbe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppKesehatanCharts_vue_vue_type_template_id_55a1dfbe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "55a1dfbe",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue"
+component.options.__file = "resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPendidikanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPendidikanCharts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPendidikanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKesehatanCharts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=template&id=634c30ac&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=template&id=634c30ac& ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_style_index_0_id_55a1dfbe_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=style&index=0&id=55a1dfbe&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_style_index_0_id_55a1dfbe_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_style_index_0_id_55a1dfbe_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_style_index_0_id_55a1dfbe_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_style_index_0_id_55a1dfbe_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_style_index_0_id_55a1dfbe_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true& ***!
+  \*******************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPendidikanCharts_vue_vue_type_template_id_634c30ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPendidikanCharts.vue?vue&type=template&id=634c30ac& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPendidikanCharts.vue?vue&type=template&id=634c30ac&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPendidikanCharts_vue_vue_type_template_id_634c30ac___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_template_id_55a1dfbe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKesehatanCharts.vue?vue&type=template&id=55a1dfbe&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_template_id_55a1dfbe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPendidikanCharts_vue_vue_type_template_id_634c30ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKesehatanCharts_vue_vue_type_template_id_55a1dfbe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -77653,9 +78168,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&");
+/* harmony import */ var _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&");
 /* harmony import */ var _AppPerkawinanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -77663,13 +78180,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _AppPerkawinanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "7f89898b",
   null
   
 )
@@ -77695,19 +78212,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& ***!
+  \********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

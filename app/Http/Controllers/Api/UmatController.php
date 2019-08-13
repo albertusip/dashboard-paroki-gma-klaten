@@ -101,10 +101,16 @@ class UmatController extends Controller
     public function ajax(Request $request)
     { 
         switch ($request->mode) {
-            case 'ekonomi':
+            case 'graphEkonomi':
                 return [
-                    'yearly_chart' => $this->umat->getEconomyChartByYear($request->id_wilayah),
-                    'monthly_chart' => $this->umat->getCurrentYearChart($request->id_wilayah)
+                    'yearly_chart' => $this->umat->getEkonomiChartByYear($request->id_wilayah),
+                    'monthly_chart' => $this->umat->getCurrentYearEkonomiChart($request->id_wilayah)
+                ];
+                break;
+            case 'pieEkonomi':
+                return [
+                    'current_wilayah' => $this->umat->getCurrentWilayahEkonomiChart($request->id_wilayah),
+                    'all_wilayah' => $this->umat->getAllWilayahEkonomiChart($request->id_wilayah)
                 ];
                 break;
         }

@@ -1,15 +1,14 @@
 <template>
     <v-layout row wrap>
-
-        <v-flex xs12 md6 v-if="statusPieEkonomiCurrentWilayah">
-            <div class="title mt-2">Prosentase Ekonomi Wilayah</div>
+        <v-flex xs12 md6 v-if="statusPieKehidupanCurrentWilayah">
+            <div class="title mt-2">Prosentase Kehidupan Wilayah</div>
             <apexchart 
             type=pie 
-            :options="chartOptionsProsentasePieEkonomiWilayah" 
-            :series="seriesProsentasePieEkonomiWilayah" />
+            :options="chartOptionsProsentasePieKehidupanWilayah" 
+            :series="seriesProsentasePieKehidupanWilayah" />
         </v-flex>
         <v-flex xs12 md6 v-else>
-            <div class="title mt-2">Prosentase Ekonomi Wilayah</div>
+            <div class="title mt-2">Prosentase Kehidupan Wilayah</div>
             <div class="text-xs-center orange--text">
                 <v-icon class="orange--text mt-5">report</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
@@ -17,15 +16,15 @@
             </div>
         </v-flex>
 
-        <v-flex xs12 md6 v-if="statusPieEkonomiAllWilayah">
-            <div class="title mt-2">Prosentase Ekonomi Keseluruhan Wilayah</div>
+        <v-flex xs12 md6 v-if="statusPieKehidupanAllWilayah">
+            <div class="title mt-2">Prosentase Kehidupan Keseluruhan Wilayah</div>
             <apexchart 
             type=pie
-            :options="chartOptionsProsentasePieEkonomiKeseluruhanWilayah" 
-            :series="seriesProsentasePieEkonomiKeseluruhanWilayah" />
+            :options="chartOptionsProsentasePieKehidupanKeseluruhanWilayah" 
+            :series="seriesProsentasePieKehidupanKeseluruhanWilayah" />
         </v-flex>
         <v-flex xs12 md6 v-else>
-            <div class="title mt-2">Prosentase Ekonomi Wilayah</div>
+            <div class="title mt-2">Prosentase Kehidupan Wilayah</div>
             <div class="text-xs-center orange--text">
                 <v-icon class="orange--text mt-5">report</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
@@ -34,21 +33,21 @@
         </v-flex>
 
         <v-flex xs12>
-            <div class="title mt-2">Ekonomi per Bulan</div>
+            <div class="title mt-2">Kehidupan per Bulan</div>
             <apexchart
             type=line
             height= "350px"
-            :options="chartOptionsEkonomiPerBulan"
-            :series="seriesEkonomiPerBulan"
+            :options="chartOptionsKehidupanPerBulan"
+            :series="seriesKehidupanPerBulan"
             />
         </v-flex>
         <v-flex xs12>
-            <div class="title mt-2">Ekonomi per Tahun</div>
+            <div class="title mt-2">Kehidupan per Tahun</div>
             <apexchart
             type=bar
             height= "350px"
-            :options="chartOptionsEkonomiPerTahun"
-            :series="seriesEkonomiPerTahun"
+            :options="chartOptionsKehidupanPerTahun"
+            :series="seriesKehidupanPerTahun"
             />
         </v-flex>
     </v-layout>
@@ -80,49 +79,39 @@ export default {
     },
     data() {
         return {
-            statusPieEkonomiCurrentWilayah: true,
-            statusPieEkonomiAllWilayah: true,
-            dataPieEkonomi: [],
-            dataMonthlyEkonomi: [],
-            dataYearlyEkonomi: [],
-            tempDataYearlyEkonomi: [{
-                    data: [], // BisaMembantu
+            statusPieKehidupanCurrentWilayah: true,
+            statusPieKehidupanAllWilayah: true,
+            dataPieKehidupan: [],
+            dataMonthlyKehidupan: [],
+            dataYearlyKehidupan: [],
+            tempDataYearlyKehidupan: [{
+                    data: [], // Hidup
                 },{
-                    data: [], // Biasa
-                },{
-                    data: [], // PerluDibantu
+                    data: [], // RIP
                 }],
-            tempDataMonthlyEkonomi: [{
-                    data: [], // BisaMembantu
+            tempDataMonthlyKehidupan: [{
+                    data: [], // Hidup
                 },{
-                    data: [], // Biasa
-                },{
-                    data: [], // PerluDibantu
+                    data: [], // RIP
                 }],
-            seriesEkonomiPerBulan: [{
-                name: "Bisa Membantu",
-                data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
+            seriesKehidupanPerBulan: [{
+                name: "Hidup",
+                data: [1,1,1,1,1,1,1,1,1,1,1,1]
                 },{
-                name: "Biasa",
-                data: [61, 57, 63, 55, 58, 54, 55, 61, 65]
-                },{
-                name: 'Perlu Dibantu',
-                data: [15, 17, 14, 14, 13, 20, 18, 15, 14]
+                name: "RIP",
+                data: [1,1,1,1,1,1,1,1,1,1,1,1]
             }],
-            seriesEkonomiPerTahun: [{
-                name: "Bisa Membantu",
-                data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
+            seriesKehidupanPerTahun: [{
+                name: "Hidup",
+                data: [1]
                 },{
-                name: "Biasa",
-                data: [61, 57, 63, 55, 58, 54, 55, 61, 65]
-                },{
-                name: 'Perlu Dibantu',
-                data: [15, 17, 14, 14, 13, 20, 18, 15, 14]
+                name: "RIP",
+                data: [1]
             }],
-            seriesProsentasePieEkonomiWilayah: [1,1,1],
-            seriesProsentasePieEkonomiKeseluruhanWilayah: [1,1,1],
-            chartOptionsProsentasePieEkonomiWilayah: {
-                labels: ['Bisa Membantu', 'Biasa', 'Perlu Dibantu'],
+            seriesProsentasePieKehidupanWilayah: [1,1],
+            seriesProsentasePieKehidupanKeseluruhanWilayah: [1,1],
+            chartOptionsProsentasePieKehidupanWilayah: {
+                labels: ['Hidup', 'RIP'],
                 decimalsInFloat: 4,
                 responsive: [{
                     breakpoint: 2400,
@@ -138,8 +127,8 @@ export default {
                     }
                 }]
             },
-            chartOptionsProsentasePieEkonomiKeseluruhanWilayah: {
-                labels: ['Bisa Membantu', 'Biasa', 'Perlu Dibantu'],
+            chartOptionsProsentasePieKehidupanKeseluruhanWilayah: {
+                labels: ['Hidup', 'RIP'],
                 responsive: [{
                     breakpoint: 2400,
                     options: {
@@ -154,7 +143,7 @@ export default {
                     }
                 }]
             },
-            chartOptionsEkonomiPerBulan: {
+            chartOptionsKehidupanPerBulan: {
                 chart: {
                     type: 'line',
                     toolbar: {
@@ -196,7 +185,7 @@ export default {
                     },
                 }
             },
-            chartOptionsEkonomiPerTahun: {
+            chartOptionsKehidupanPerTahun: {
                 chart: {
                     stacked: true,
                     toolbar: {
@@ -223,7 +212,7 @@ export default {
                 },
 
                 xaxis: {
-                    categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018],
+                    categories: [1100],
                 },
                 legend: {
                     position: 'bottom',
@@ -237,77 +226,74 @@ export default {
     methods: {
         async init() {
             try {
-                let resDataPieEkonomi = await this.fetchPieEkonomi();
-                let resDataGraphEkonomi = await this.fetchGraphEkonomi();
-                this.dataMonthlyEkonomi = resDataGraphEkonomi.data.monthly_chart
-                this.dataYearlyEkonomi = resDataGraphEkonomi.data.yearly_chart
+                let resDataPieKehidupan = await this.fetchPieKehidupan();
+                let resDataGraphKehidupan = await this.fetchGraphKehidupan();
+                this.dataMonthlyKehidupan = resDataGraphKehidupan.data.monthly_chart
+                this.dataYearlyKehidupan = resDataGraphKehidupan.data.yearly_chart
+                console.log(this.dataMonthlyKehidupan);
                 
-                if (resDataPieEkonomi.data.current_wilayah.length != 0) {
-                    this.statusPieEkonomiCurrentWilayah = true
+                if (resDataPieKehidupan.data.current_wilayah.length != 0) {
+                    this.statusPieKehidupanCurrentWilayah = true
 
-                    this.seriesProsentasePieEkonomiWilayah = [
-                        resDataPieEkonomi.data.current_wilayah.bisa_membantu, 
-                        resDataPieEkonomi.data.current_wilayah.biasa, 
-                        resDataPieEkonomi.data.current_wilayah.perlu_dibantu
+                    this.seriesProsentasePieKehidupanWilayah = [
+                        resDataPieKehidupan.data.current_wilayah.status_hidup, 
+                        resDataPieKehidupan.data.current_wilayah.status_mati
                     ]
                 } else {
-                    this.statusPieEkonomiCurrentWilayah = false
+                    this.statusPieKehidupanCurrentWilayah = false
                 }
 
-                if (resDataPieEkonomi.data.all_wilayah.length != 0) {
-                    this.statusPieEkonomiAllWilayah = true
+                if (resDataPieKehidupan.data.all_wilayah.length != 0) {
+                    this.statusPieKehidupanAllWilayah = true
 
-                    this.seriesProsentasePieEkonomiKeseluruhanWilayah = [
-                        resDataPieEkonomi.data.all_wilayah.bisa_membantu, 
-                        resDataPieEkonomi.data.all_wilayah.biasa, 
-                        resDataPieEkonomi.data.all_wilayah.perlu_dibantu
+                    this.seriesProsentasePieKehidupanKeseluruhanWilayah = [
+                        resDataPieKehidupan.data.all_wilayah.status_hidup, 
+                        resDataPieKehidupan.data.all_wilayah.status_mati
                     ]
                 } else {
-                    this.statusPieEkonomiAllWilayah = false
+                    this.statusPieKehidupanAllWilayah = false
                 }
                 
-                let tempXaxisMonthlyEkonomi = []
-                let tempXaxisYearlyEkonomi = []
+                let tempXaxisMonthlyKehidupan = []
+                let tempXaxisYearlyKehidupan = []
                 this.clearGraph()
 
-                this.chartOptionsEkonomiPerBulan.xaxis.categories = []
-                this.chartOptionsEkonomiPerTahun.xaxis.categories = []
+                this.chartOptionsKehidupanPerBulan.xaxis.categories = []
+                this.chartOptionsKehidupanPerTahun.xaxis.categories = []
                 
-                this.dataYearlyEkonomi.map((item, index) => {
-                    tempXaxisYearlyEkonomi.push(item.year)
-                    this.tempDataYearlyEkonomi[0].data.push(item.data.bisa_membantu)
-                    this.tempDataYearlyEkonomi[1].data.push(item.data.biasa)
-                    this.tempDataYearlyEkonomi[2].data.push(item.data.perlu_dibantu)
+                this.dataYearlyKehidupan.map((item, index) => {
+                    tempXaxisYearlyKehidupan.push(item.year)
+                    this.tempDataYearlyKehidupan[0].data.push(item.data.status_hidup)
+                    this.tempDataYearlyKehidupan[1].data.push(item.data.status_mati)
                 });
 
-                console.log(this.dataMonthlyEkonomi);
+                console.log(this.dataMonthlyKehidupan);
                 
 
-                this.dataMonthlyEkonomi.map((item, index) => {
-                    tempXaxisMonthlyEkonomi.push(item.month)
-                    this.tempDataMonthlyEkonomi[0].data.push(item.data.bisa_membantu)
-                    this.tempDataMonthlyEkonomi[1].data.push(item.data.biasa)
-                    this.tempDataMonthlyEkonomi[2].data.push(item.data.perlu_dibantu)
+                this.dataMonthlyKehidupan.map((item, index) => {
+                    tempXaxisMonthlyKehidupan.push(item.month)
+                    this.tempDataMonthlyKehidupan[0].data.push(item.data.status_hidup)
+                    this.tempDataMonthlyKehidupan[1].data.push(item.data.status_mati)
                 });
 
-                for (let i = 0; i < 3; i++) {
-                    this.seriesEkonomiPerTahun[i] = {...this.seriesEkonomiPerTahun[i], ...{
-                                                            data: this.tempDataYearlyEkonomi[i].data
+                for (let i = 0; i < 2; i++) {
+                    this.seriesKehidupanPerTahun[i] = {...this.seriesKehidupanPerTahun[i], ...{
+                                                            data: this.tempDataYearlyKehidupan[i].data
                                                         }}
-                    this.seriesEkonomiPerBulan[i] = {...this.seriesEkonomiPerBulan[i], ...{
-                                                            data: this.tempDataMonthlyEkonomi[i].data
+                    this.seriesKehidupanPerBulan[i] = {...this.seriesKehidupanPerBulan[i], ...{
+                                                            data: this.tempDataMonthlyKehidupan[i].data
                                                         }}
                 }
                 
-                this.chartOptionsEkonomiPerBulan = {...this.chartOptionsEkonomiPerBulan, ...{
+                this.chartOptionsKehidupanPerBulan = {...this.chartOptionsKehidupanPerBulan, ...{
                                                         xaxis: {
-                                                            categories: tempXaxisMonthlyEkonomi
+                                                            categories: tempXaxisMonthlyKehidupan
                                                         }
                                                     }}
                 
-                this.chartOptionsEkonomiPerTahun = {...this.chartOptionsEkonomiPerTahun, ...{
+                this.chartOptionsKehidupanPerTahun = {...this.chartOptionsKehidupanPerTahun, ...{
                                                         xaxis: {
-                                                            categories: tempXaxisYearlyEkonomi
+                                                            categories: tempXaxisYearlyKehidupan
                                                         }
                                                     }}
                                                     
@@ -316,15 +302,13 @@ export default {
             }
         },
         clearGraph() {
-            this.tempDataYearlyEkonomi[0].data = []
-            this.tempDataMonthlyEkonomi[0].data = []
-            this.tempDataYearlyEkonomi[1].data = []
-            this.tempDataMonthlyEkonomi[1].data = []
-            this.tempDataYearlyEkonomi[2].data = []
-            this.tempDataMonthlyEkonomi[2].data = []
+            this.tempDataYearlyKehidupan[0].data = []
+            this.tempDataMonthlyKehidupan[0].data = []
+            this.tempDataYearlyKehidupan[1].data = []
+            this.tempDataMonthlyKehidupan[1].data = []
         },
-        fetchGraphEkonomi() {
-            return axios.get('/api/ekonomi?mode=graphEkonomi', {
+        fetchGraphKehidupan() {
+            return axios.get('/api/kesehatan?mode=graphUmatHidup', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
@@ -334,8 +318,8 @@ export default {
                     }
                 })
         },
-        fetchPieEkonomi() {
-            return axios.get('/api/ekonomi?mode=pieEkonomi', {
+        fetchPieKehidupan() {
+            return axios.get('/api/kesehatan?mode=pieUmatHidup', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
@@ -347,13 +331,13 @@ export default {
         },
     },
     mounted() {
-        if (this.activeTab == 0) {
+        if (this.activeTab == 2) {
             this.init();
         }
     },
     watch: {
         selectedWilayah() {
-            if (this.activeTab == 0) {
+            if (this.activeTab == 2) {
             this.init();
             }
         }

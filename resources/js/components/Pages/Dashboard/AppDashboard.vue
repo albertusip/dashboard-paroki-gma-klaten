@@ -91,6 +91,7 @@
                                 <v-tab-item>
                                     <ekonomicharts
                                         :selectedWilayah = 'selected'
+                                        :selectedNameWilayah = 'selectedNameWilayah'
                                         :activeTab = 'activeTab'
                                         :key = 'activeTab'
                                     ></ekonomicharts>
@@ -99,22 +100,19 @@
                                 <v-tab-item>
                                     <perkawinancharts
                                         :selectedWilayah = 'selected'
+                                        :selectedNameWilayah = 'selectedNameWilayah'
                                         :activeTab = 'activeTab'
                                         :key = 'activeTab'
                                     ></perkawinancharts>
                                 </v-tab-item>
                                 
                                 <v-tab-item>
-                                    <pendidikancharts
-                                        :seriesPendidikanPerBulan = 'seriesPendidikanPerBulan'
-                                        :seriesPendidikan = 'seriesPendidikan'
-                                        :seriesProsentasePiePendidikan = 'seriesProsentasePiePendidikan'
-                                        :seriesProsentasePiePendidikanWilayah = 'seriesProsentasePiePendidikanWilayah'
-                                        :chartOptionsProsentasePiePendidikan = 'chartOptionsProsentasePiePendidikan'
-                                        :chartOptionsPendidikan = 'chartOptionsPendidikan'
-                                        :chartOptionsProsentasePiePendidikanWilayah = 'chartOptionsProsentasePiePendidikanWilayah'
-                                        :chartOptionsPendidikanPerBulan = 'chartOptionsPendidikanPerBulan'
-                                    ></pendidikancharts>
+                                    <kesehatancharts
+                                        :selectedWilayah = 'selected'
+                                        :selectedNameWilayah = 'selectedNameWilayah'
+                                        :activeTab = 'activeTab'
+                                        :key = 'activeTab'
+                                    ></kesehatancharts>
                                 </v-tab-item>
                                 
                             </v-tabs>
@@ -128,14 +126,14 @@
 <script>
 import EkonomiCharts from './AppEkonomiCharts.vue'
 import PerkawinanCharts from './AppPerkawinanCharts.vue'
-import PendidikanCharts from './AppPendidikanCharts.vue'
+import KesehatanCharts from './AppKesehatanCharts.vue'
 import VueApexCharts from 'vue-apexcharts'
 
 export default {
     components: {
         ekonomicharts: EkonomiCharts,
         perkawinancharts: PerkawinanCharts,
-        pendidikancharts: PendidikanCharts,
+        kesehatancharts: KesehatanCharts,
         apexchart: VueApexCharts,
     },
     data() {
@@ -150,16 +148,16 @@ export default {
                     icon: 'wc'
                 },
                 {
-                    name: 'Status Pendidikan',
-                    icon: 'school'
+                    name: 'Status Kehidupan',
+                    icon: 'local_hospital'
                 }
                 ],
-            activeTab: 1,
+            activeTab: 2,
             labelPiePerkawinan: [],
             dataCard:{},
             selected: '01',
             wilayah: [],
-            
+            selectedNameWilayah: '',
             seriesPendidikanPerBulan: [{
                 name: "1",
                 data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
@@ -308,9 +306,6 @@ export default {
         this.init();
     },
     methods: {
-        changeTab() {
-
-        },
         async init() {
             try {
                 let dataWilayah = await this.fetchWilayah();
@@ -319,101 +314,17 @@ export default {
 
                 let resCard = await this.fetchCard();
                 this.dataCard = resCard.data.data;
-
-
-
-                // let dataPieEkonomi = this.dataCharts.pie_prosentase_ekonomi
-
                 
-                
-                // let res = await this.fetchDashboard();
-                // this.dataCharts = res.data.items
+                for(var i=0; i < this.wilayah.length; i++){
+                    if( this.wilayah[i].id_wilayah == this.selected){
+                        this.selectedNameWilayah = this.wilayah[i].nama_wilayah
+                    }
+                }
 
-                
-                    
-
-                // let umatEkonomi = this.dataCharts.pie_prosentase_ekonomi
-                // let umatPerkawinan  = this.dataCharts.pie_prosentase_perkawinan
-                // let umatPendidikan  = this.dataCharts.pie_prosentase_pendidikan
-
-                // let temp
-                
-                
-                // this.seriesProsentasePieEkonomi.push(umatEkonomi)
-                // this.seriesProsentasePiePerkawinan.push(umatPerkawinan)
-                // this.seriesProsentasePiePendidikan.push(umatPendidikan)
-
-                
-                // this.seriesProsentasePieEkonomi = [umatEkonomi[0].bisa_membantu, umatEkonomi[0].biasa, umatEkonomi[0].perlu_dibantu]
-                // this.seriesProsentasePieEkonomiWilayah = [umatEkonomi[0].total_semua_wilayah_bisa_membantu, umatEkonomi[0].total_semua_wilayah_biasa, umatEkonomi[0].total_semua_wilayah_perlu_dibantu]
-                // this.seriesProsentasePiePerkawinan =    [umatPerkawinan[0].belum_nikah,
-                //                                         umatPerkawinan[0].ditinggal_pasangannya,
-                //                                         umatPerkawinan[0].hidup_bersama_tanpa_ikatan,
-                //                                         umatPerkawinan[0].janda_atau_duda_mati,
-                //                                         umatPerkawinan[0].krisis_berkepanjangan,
-                //                                         umatPerkawinan[0].nikah_adat,
-                //                                         umatPerkawinan[0].nikah_diluar_gereja,
-                //                                         umatPerkawinan[0].rm_br_sr_bekerja_di_paroki,
-                //                                         umatPerkawinan[0].rm_br_sr_dari_paroki,
-                //                                         umatPerkawinan[0].sah_beda_agama,
-                //                                         umatPerkawinan[0].sah_beda_gereja,
-                //                                         umatPerkawinan[0].sah_katolik]
-                // this.seriesProsentasePiePendidikan =    [umatPendidikan[0].belum_sekolah,
-                //                                         umatPendidikan[0].tamat_sd,
-                //                                         umatPendidikan[0].tamat_sltp,
-                //                                         umatPendidikan[0].tamat_slta,
-                //                                         umatPendidikan[0].tamat_d1_d2_d3,
-                //                                         umatPendidikan[0].tamat_s1_d4,
-                //                                         umatPendidikan[0].tamat_s2_akta_5,
-                //                                         umatPendidikan[0].tamat_s3,
-                //                                         umatPendidikan[0].masih_di_sd_katolik,
-                //                                         umatPendidikan[0].masih_di_sltp_katolik,
-                //                                         umatPendidikan[0].masih_di_slta_katolik,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_d,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_s1,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_s2,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_katolik_s3,
-                //                                         umatPendidikan[0].masih_di_sd_non_katolik,
-                //                                         umatPendidikan[0].masih_di_sltp_non_katolik,
-                //                                         umatPendidikan[0].masih_di_slta_non_katolik,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_d,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_s1,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_s2,
-                //                                         umatPendidikan[0].masih_di_perguruan_tinggi_non_katolik_s3,
-                //                                         umatPendidikan[0].usia_7_sampai_12_tidak_sekolah,
-                //                                         umatPendidikan[0].usia_13_sampai_15_tidak_sekolah,
-                //                                         umatPendidikan[0].buta_aksara]
-
-                // this.seriesProsentasePiePerkawinan.splice(0)
-                // umatPerkawinan[0].status.forEach(item =>
-                //     this.seriesProsentasePiePerkawinan.push(item.jumlah_status)
-                // );
-                
-                // this.chartOptionsProsentasePiePerkawinan.labels.splice(0)
-                // umatPerkawinan[0].status.forEach(item =>
-                //     this.chartOptionsProsentasePiePerkawinan.labels.push(item.status.deskripsi_sts_kawin)
-                // );
-                // this.labelPiePerkawinan = umatPerkawinan[0].status.map((item) => item.status);
-                // this.chartOptionsProsentasePiePerkawinan.labels = this.labelPiePerkawinan;
             } catch (error) {
                 console.log(error);
             }
         },
-        // fetchDashboard() {
-        //     return new Promise((resolve, reject) => {
-        //         axios.get('/api/dashboard', {
-        //             headers: {
-        //                 'Accept': 'application/json',
-        //                 'Content-type': 'application/json'
-        //             },
-        //             params: {
-        //                 'id_wilayah': this.selected
-        //             }
-        //         })
-        //         .then(res => resolve(res))
-        //         .catch(error => reject(error))
-        //     })
-        // },
         fetchWilayah() {
             return new Promise((resolve, reject) => {
                 axios.get('/api/wilayah', {

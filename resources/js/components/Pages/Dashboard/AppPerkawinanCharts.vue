@@ -1,20 +1,37 @@
 <template>
         <v-layout row wrap>
-            <v-flex xs12 md6>
+            <v-flex xs12 md6 v-if="statusPiePerkawinanCurrentWilayah">
                 <div class="title mt-2">Prosentase Perkawinan Wilayah</div>
                 <apexchart 
                 type=pie 
                 :options="chartOptionsProsentasePiePerkawinanWilayah" 
                 :series="seriesProsentasePiePerkawinanWilayah" />
             </v-flex>
+            <v-flex xs12 md6 v-else>
+                <div class="title mt-2">Prosentase Perkawinan Wilayah</div>
+                <div class="text-xs-center orange--text">
+                    <v-icon class="orange--text mt-5">report</v-icon>
+                    <h2 class="">Tidak ada data pada</h2>
+                    <h2 class=""> {{ this.selectedNameWilayah }}</h2>
+                </div>
+            </v-flex>
             
-            <v-flex xs12 md6>
+            <v-flex xs12 md6 v-if="statusPiePerkawinanAllWilayah">
                 <div class="title mt-2">Prosentase Perkawinan Keseluruhan Wilayah</div>
                 <apexchart 
                 type=pie
                 :options="chartOptionsProsentasePiePerkawinanKeseluruhanWilayah" 
                 :series="seriesProsentasePiePerkawinanKeseluruhanWilayah" />
             </v-flex>
+            <v-flex xs12 md6 v-else>
+                <div class="title mt-2">Prosentase Perkawinan Wilayah</div>
+                <div class="text-xs-center orange--text">
+                    <v-icon class="orange--text mt-5">report</v-icon>
+                    <h2 class="">Tidak ada data pada</h2>
+                    <h2 class=""> Keseluruhan Wilayah</h2>
+                </div>
+            </v-flex>
+
             <v-flex xs12>
                 <div class="title mt-2">Perkawinan per Bulan</div>
                 <apexchart 
@@ -26,7 +43,7 @@
             <v-flex xs12>
                 <div class="title mt-2">Perkawinan per Tahun</div>
                 <apexchart 
-                type=line 
+                type=bar 
                 height=350 
                 :options="chartOptionsPerkawinanPerTahun" 
                 :series="seriesPerkawinanPerTahun" />
@@ -47,6 +64,11 @@ export default {
             default: '01',
             required: true,
         },
+        selectedNameWilayah: {
+            type: String,
+            default: '',
+            required: true,
+        },
         activeTab: {
             type: Number,
             default: 1,
@@ -55,158 +77,60 @@ export default {
     },
     data() {
         return {
+            statusPiePerkawinanCurrentWilayah: true,
+            statusPiePerkawinanAllWilayah: true,
             dataPiePerkawinan: [],
             dataMonthlyPerkawinan: [],
             dataYearlyPerkawinan: [],
             tempDataYearlyPerkawinan: [{
-                    data: [], // BelumNikah
-                },{
                     data: [], // SahKatolik
                 },{
                     data: [], // SahBedaAgama
                 },{
                     data: [], // SahBedaGereja
-                },{
-                    data: [], // NikahDiLuarGreja
-                },{
-                    data: [], // DitinggalPasangannya
-                },{
-                    data: [], // KrisisBerkepanjangan
-                },{
-                    data: [], // JandaAtauDudaMati
-                },{
-                    data: [], // RmBrSrDariParoki
-                },{
-                    data: [], // RmBrSrBekerjaDiParoki
-                },{
-                    data: [], // HidupBersamaTanpaIkatan
-                },{
-                    data: [], // NikahAdat
-            }],
+                }],
             tempDataMonthlyPerkawinan: [{
-                    data: [], // BelumNikah
-                },{
                     data: [], // SahKatolik
                 },{
                     data: [], // SahBedaAgama
                 },{
                     data: [], // SahBedaGereja
-                },{
-                    data: [], // NikahDiLuarGreja
-                },{
-                    data: [], // DitinggalPasangannya
-                },{
-                    data: [], // KrisisBerkepanjangan
-                },{
-                    data: [], // JandaAtauDudaMati
-                },{
-                    data: [], // RmBrSrDariParoki
-                },{
-                    data: [], // RmBrSrBekerjaDiParoki
-                },{
-                    data: [], // HidupBersamaTanpaIkatan
-                },{
-                    data: [], // NikahAdat
-            }],
+                }],
             seriesPerkawinanPerBulan: [{
-                name: "Belum Nikah",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
                 name: 'Sah Katolik',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+                data: [1, 1, 1]
                 },{
                 name: 'Sah Beda Agama',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+                data: [1, 1, 1]
                 },{
                 name: 'Sah Beda Greja',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: 'Nikah diluar Greja',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: "Ditinggal Pasangannya",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: "Krisis Berkepanjangan",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: "Janda / Duda Mati",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: "Rm/Br/Sr dari Paroki",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: "Rm/Br/Sr bekerja di Paroki",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: "Hidup Bersama Tanpa Ikatan",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
-                },{
-                name: 'Nikah Adat',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+                data: [1, 1, 1, 1, 1, 1, ]
             }],
             seriesPerkawinanPerTahun: [{
-                name: "Belum Nikah",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
                 name: 'Sah Katolik',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                data: [1, 1, 1],
                 },{
                 name: 'Sah Beda Agama',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                data: [1, 1, 1],
                 },{
                 name: 'Sah Beda Greja',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: 'Nikah diluar Greja',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: "Ditinggal Pasangannya",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: "Krisis Berkepanjangan",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: "Janda / Duda Mati",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: "Rm/Br/Sr dari Paroki",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: "Rm/Br/Sr bekerja di Paroki",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: "Hidup Bersama Tanpa Ikatan",
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                },{
-                name: 'Nikah Adat',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+                data: [1, 1, 1],
             }],
-            seriesProsentasePiePerkawinanWilayah: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            seriesProsentasePiePerkawinanKeseluruhanWilayah: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            seriesProsentasePiePerkawinanWilayah: [1, 1, 1],
+            seriesProsentasePiePerkawinanKeseluruhanWilayah: [1, 1, 1],
             chartOptionsProsentasePiePerkawinanWilayah: {
-                labels: ['Belum Nikah', 
-                        'Sah Katolik', 
+                labels: ['Sah Katolik', 
                         'Sah Beda Agama', 
-                        'Sah Beda Gereja', 
-                        'Nikah di Luar Gereja', 
-                        'Ditinggal pasangannya',
-                        'Krisis berkepanjangan',
-                        'Janda Duda Mati',
-                        'Rm Br Sr dari Paroki',
-                        'Rm Br Sr bekerja di Paroki',
-                        'Hidup Bersama Tanpa Ikatan',
-                        'Nikah Adat'
+                        'Sah Beda Gereja',
                         ],
                 responsive: [{
                     breakpoint: 2400,
                     options: {
                     chart: {
-                        width: 500,
-                        height: 500,
+                        width: 400,
+                        height: 450,
                         left: 400
                     },
-                    colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
                     legend: {
                         position: 'bottom'
                     }
@@ -214,28 +138,18 @@ export default {
                 }]
             },
             chartOptionsProsentasePiePerkawinanKeseluruhanWilayah: {
-                labels: ['Belum Nikah', 
-                        'Sah Katolik', 
+                labels: ['Sah Katolik', 
                         'Sah Beda Agama', 
-                        'Sah Beda Gereja', 
-                        'Nikah di Luar Gereja', 
-                        'Ditinggal pasangannya',
-                        'Krisis berkepanjangan',
-                        'Janda Duda Mati',
-                        'Rm Br Sr dari Paroki',
-                        'Rm Br Sr bekerja di Paroki',
-                        'Hidup Bersama Tanpa Ikatan',
-                        'Nikah Adat'
+                        'Sah Beda Gereja'
                         ],
                 responsive: [{
                     breakpoint: 2400,
                     options: {
                     chart: {
-                        width: 500,
-                        height: 500,
+                        width: 400,
+                        height: 450,
                         left: 400
                     },
-                    colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
                     legend: {
                         position: 'bottom'
                     }
@@ -258,7 +172,6 @@ export default {
                     width: 3,
                     curve: 'smooth'
                 },
-                colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
                 xaxis: {
                     categories: ['Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
                     ],
@@ -287,136 +200,102 @@ export default {
             },
             chartOptionsPerkawinanPerTahun: {
                 chart: {
-                    type: 'line',
-                    shadow: {
-                    enabled: false,
-                    color: '#bbb',
-                    top: 3,
-                    left: 2,
-                    blur: 3,
-                    opacity: 1
+                    stacked: true,
+                    toolbar: {
+                        show: true
+                    },
+                    zoom: {
+                        enabled: true
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        legend: {
+                            position: 'bottom',
+                            offsetX: -10,
+                            offsetY: 0
+                        }
+                    }
+                }],
+                plotOptions: {
+                    bar: {
+                    horizontal: false,
                     },
                 },
-                colors: ['#FFA41B', '#008FFB', '#00E396', '#FF4560', '#775DD0', '#A300D6', '#5A2A27', '#011638', '#B0001F', '#024942', '#2B908F', '#2E294E'],
-                stroke: {
-                    width: 3,
-                    curve: 'smooth',
-                },
+
                 xaxis: {
                     categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018],
                 },
-                markers: {
-                    size: 4,
-                    opacity: 0.9,
-                    strokeColor: "#fff",
-                    strokeWidth: 2,
-                    hover: {
-                    size: 7,
-                    }
-                },
-                yaxis: {
-                    title: {
-                    text: 'Jumlah',
-                    },
-                },
                 legend: {
-                    labels: {
-                        useSeriesColors: true,
-                    },
-                    show: true,
-                    showForNullSeries: false,
-                    showForZeroSeries: false,
+                    position: 'bottom',
+                },
+                fill: {
+                    opacity: 1
                 }
-            },
+            }
         }
     },
     methods: {
         async init() {
-            
-            
             let resDataGraphPerkawinan = await this.fetchGraphPerkawinan();
             let resDataPiePerkawinan = await this.fetchPiePerkawinan();
-            console.log(resDataPiePerkawinan);
             
-            this.seriesProsentasePiePerkawinanWilayah = [
-                resDataPiePerkawinan.data.data.belum_nikah,
-                resDataPiePerkawinan.data.data.sah_katolik,
-                resDataPiePerkawinan.data.data.sah_beda_agama,
-                resDataPiePerkawinan.data.data.sah_beda_gereja,
-                resDataPiePerkawinan.data.data.nikah_di_luar_gereja,
-                resDataPiePerkawinan.data.data.ditinggal_pasangannya,
-                resDataPiePerkawinan.data.data.krisis_berkepanjangan,
-                resDataPiePerkawinan.data.data.janda_duda_mati,
-                resDataPiePerkawinan.data.data.rm_br_sr_dari_paroki,
-                resDataPiePerkawinan.data.data.rm_br_sr_bekerja_di_paroki,
-                resDataPiePerkawinan.data.data.hidup_bersama_tanpa_ikatan,
-                resDataPiePerkawinan.data.data.nikah_adat,
-            ]
+            if (resDataPiePerkawinan.data.current_wilayah.length != 0) {
+                this.statusPiePerkawinanCurrentWilayah = true
 
-            this.seriesProsentasePiePerkawinanKeseluruhanWilayah = [
-                resDataPiePerkawinan.data.data.total_semua_wilayah_belum_nikah,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_sah_katolik,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_sah_beda_agama,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_sah_beda_gereja,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_nikah_di_luar_gereja,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_ditinggal_pasangannya,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_krisis_berkepanjangan,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_janda_duda_mati,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_rm_br_sr_dari_paroki,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_rm_br_sr_bekerja_di_paroki,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_hidup_bersama_tanpa_ikatan,
-                resDataPiePerkawinan.data.data.total_semua_wilayah_nikah_adat,
-            ]
+                this.seriesProsentasePiePerkawinanWilayah = [
+                resDataPiePerkawinan.data.current_wilayah.sah_katolik,
+                resDataPiePerkawinan.data.current_wilayah.sah_beda_agama,
+                resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja,
+                ]
+            } else {
+                this.statusPiePerkawinanCurrentWilayah = false
+            }
+
+            if (resDataPiePerkawinan.data.all_wilayah.length != 0) {
+                this.statusPiePerkawinanAllWilayah = true
+
+                this.seriesProsentasePiePerkawinanKeseluruhanWilayah = [
+                resDataPiePerkawinan.data.all_wilayah.sah_katolik,
+                resDataPiePerkawinan.data.all_wilayah.sah_beda_agama,
+                resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja,
+                ]
+            } else {
+                this.statusPiePerkawinanAllWilayah = false
+            }
 
             this.dataYearlyPerkawinan = resDataGraphPerkawinan.data.yearly_chart
             this.dataMonthlyPerkawinan = resDataGraphPerkawinan.data.monthly_chart
 
             let tempXaxisYearlyPerkawinan = []
             let tempXaxisMonthlyPerkawinan = []
+            this.clearGraph()
             
             this.dataYearlyPerkawinan.map((item, index) => {
                 tempXaxisYearlyPerkawinan.push(item.year)
-                this.tempDataYearlyPerkawinan[0].data.push(item.data.belum_nikah)
-                this.tempDataYearlyPerkawinan[1].data.push(item.data.sah_katolik)
-                this.tempDataYearlyPerkawinan[2].data.push(item.data.sah_beda_agama)
-                this.tempDataYearlyPerkawinan[3].data.push(item.data.sah_beda_gereja)
-                this.tempDataYearlyPerkawinan[4].data.push(item.data.nikah_di_luar_gereja)
-                this.tempDataYearlyPerkawinan[5].data.push(item.data.ditinggal_pasangannya)
-                this.tempDataYearlyPerkawinan[6].data.push(item.data.krisis_berkepanjangan)
-                this.tempDataYearlyPerkawinan[7].data.push(item.data.janda_duda_mati)
-                this.tempDataYearlyPerkawinan[8].data.push(item.data.rm_br_sr_dari_paroki)
-                this.tempDataYearlyPerkawinan[9].data.push(item.data.rm_br_sr_bekerja_di_paroki)
-                this.tempDataYearlyPerkawinan[10].data.push(item.data.hidup_bersama_tanpa_ikatan)
-                this.tempDataYearlyPerkawinan[11].data.push(item.data.nikah_adat)
+                this.tempDataYearlyPerkawinan[0].data.push(item.data.sah_katolik)
+                this.tempDataYearlyPerkawinan[1].data.push(item.data.sah_beda_agama)
+                this.tempDataYearlyPerkawinan[2].data.push(item.data.sah_beda_gereja)
             })
 
             this.dataMonthlyPerkawinan.map((item, index) => {
                 tempXaxisMonthlyPerkawinan.push(item.month)
-                this.tempDataMonthlyPerkawinan[0].data.push(item.data.belum_nikah)
-                this.tempDataMonthlyPerkawinan[1].data.push(item.data.sah_katolik)
-                this.tempDataMonthlyPerkawinan[2].data.push(item.data.sah_beda_agama)
-                this.tempDataMonthlyPerkawinan[3].data.push(item.data.sah_beda_gereja)
-                this.tempDataMonthlyPerkawinan[4].data.push(item.data.nikah_di_luar_gereja)
-                this.tempDataMonthlyPerkawinan[5].data.push(item.data.ditinggal_pasangannya)
-                this.tempDataMonthlyPerkawinan[6].data.push(item.data.krisis_berkepanjangan)
-                this.tempDataMonthlyPerkawinan[7].data.push(item.data.janda_duda_mati)
-                this.tempDataMonthlyPerkawinan[8].data.push(item.data.rm_br_sr_dari_paroki)
-                this.tempDataMonthlyPerkawinan[9].data.push(item.data.rm_br_sr_bekerja_di_paroki)
-                this.tempDataMonthlyPerkawinan[10].data.push(item.data.hidup_bersama_tanpa_ikatan)
-                this.tempDataMonthlyPerkawinan[11].data.push(item.data.nikah_adat)
+                this.tempDataMonthlyPerkawinan[0].data.push(item.data.sah_katolik)
+                this.tempDataMonthlyPerkawinan[1].data.push(item.data.sah_beda_agama)
+                this.tempDataMonthlyPerkawinan[2].data.push(item.data.sah_beda_gereja)
             })
-
-            console.log(resDataGraphPerkawinan);
             
 
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 3; i++) {
                 this.seriesPerkawinanPerTahun[i] = {...this.seriesPerkawinanPerTahun[i], ...{
                                                         data: this.tempDataYearlyPerkawinan[i].data
                                                     }}
-                this.seriesPerkawinanPerBulan[i] = {...this.seriesPerkawinanPerTahun[i], ...{
+                this.seriesPerkawinanPerBulan[i] = {...this.seriesPerkawinanPerBulan[i], ...{
                                                         data: this.tempDataMonthlyPerkawinan[i].data
                                                     }}
             }
+
             this.chartOptionsPerkawinanPerTahun = {...this.chartOptionsPerkawinanPerTahun, ...{
                                                     xaxis: {
                                                         categories: tempXaxisYearlyPerkawinan
@@ -428,8 +307,16 @@ export default {
                                                     }
                                                 }}
         },
+        clearGraph() {
+            this.tempDataYearlyPerkawinan[0].data = []
+            this.tempDataYearlyPerkawinan[1].data = []
+            this.tempDataYearlyPerkawinan[2].data = []
+            this.tempDataMonthlyPerkawinan[0].data = []
+            this.tempDataMonthlyPerkawinan[1].data = []
+            this.tempDataMonthlyPerkawinan[2].data = []
+        },
         fetchGraphPerkawinan() {
-            return axios.get('/api/perkawinan?mode=perkawinan', {
+            return axios.get('/api/perkawinan?mode=graphPerkawinan', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
@@ -440,7 +327,7 @@ export default {
                 })
         },
         fetchPiePerkawinan() {
-            return axios.get('/api/current-perkawinan', {
+            return axios.get('/api/perkawinan?mode=piePerkawinan', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
@@ -454,7 +341,6 @@ export default {
     mounted() {
         if (this.activeTab == 1) {
             this.init();
-            console.log(this.activeTab);
         }
     },
     watch: {
@@ -466,3 +352,9 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+    .v-icon {
+        font-size: 100px;
+    }
+</style>
