@@ -1,31 +1,35 @@
 <template>
     <v-layout row wrap>
 
-        <v-flex xs12 md6 v-if="statusPieEkonomiCurrentWilayah">
-            <div class="title mt-2">Prosentase Ekonomi Wilayah</div>
+        <v-flex xs12 md6 v-if="statusPieEkonomiCurrentWilayah" class="text-center">
+            <div class="headline my-3">Prosentase Ekonomi</div>
+            <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
             <apexchart 
             type=pie 
             :options="chartOptionsProsentasePieEkonomiWilayah" 
             :series="seriesProsentasePieEkonomiWilayah" />
         </v-flex>
-        <v-flex xs12 md6 v-else>
-            <div class="title mt-2">Prosentase Ekonomi Wilayah</div>
+        <v-flex xs12 md6 class="text-center" v-else>
+            <div class="headline my-3">Prosentase Ekonomi Wilayah</div>
+            <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
             <div class="text-xs-center orange--text">
                 <v-icon class="orange--text mt-5">report</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
-                <h2 class=""> {{ this.selectedNameWilayah }}</h2>
+                <h2 class=""> {{ this.selectedNameWilayah }} </h2>
             </div>
         </v-flex>
 
-        <v-flex xs12 md6 v-if="statusPieEkonomiAllWilayah">
-            <div class="title mt-2">Prosentase Ekonomi Keseluruhan Wilayah</div>
+        <v-flex xs12 md6 class="text-center" v-if="statusPieEkonomiAllWilayah">
+            <div class="headline my-3">Prosentase Ekonomi</div>
+            <div class="title my-3">Keseluruhan Wilayah</div>
             <apexchart 
             type=pie
             :options="chartOptionsProsentasePieEkonomiKeseluruhanWilayah" 
             :series="seriesProsentasePieEkonomiKeseluruhanWilayah" />
         </v-flex>
-        <v-flex xs12 md6 v-else>
-            <div class="title mt-2">Prosentase Ekonomi Wilayah</div>
+        <v-flex xs12 md6 class="text-center" v-else>
+            <div class="headline my-3">Prosentase Ekonomi</div>
+            <div class="title my-3">Keseluruhan Wilayah</div>
             <div class="text-xs-center orange--text">
                 <v-icon class="orange--text mt-5">report</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
@@ -34,7 +38,7 @@
         </v-flex>
 
         <v-flex xs12>
-            <div class="title mt-2">Ekonomi per Bulan</div>
+            <div class="headline my-3">Ekonomi per Bulan {{ this.selectedNameWilayah }} </div>
             <apexchart
             type=line
             height= "350px"
@@ -43,7 +47,7 @@
             />
         </v-flex>
         <v-flex xs12>
-            <div class="title mt-2">Ekonomi per Tahun</div>
+            <div class="headline my-3">Ekonomi per Tahun {{ this.selectedNameWilayah }} </div>
             <apexchart
             type=bar
             height= "350px"
@@ -361,8 +365,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .v-icon {
         font-size: 100px;
+    }
+
+    .apexcharts-canvas {
+        width: 100%!important;
     }
 </style>

@@ -6,14 +6,14 @@ use App\Models\Umat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class StatusKesehatanController extends Controller
+class StatusKelahiranController extends Controller
 {
     /**
      * Umat model.
      * 
      * @var Umat
      */
-    private $statusKesehatan;
+    private $statusKelahiran;
 
     public function __construct(Umat $umat) {
         $this->umat = $umat;
@@ -24,11 +24,11 @@ class StatusKesehatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dataKesehatan = $this->umat->where('id_wilayah', $request->id)->get();
+        $dataKelahiran = $this->umat->where('id_wilayah', $request->id)->get();
         return response()->json([
-            'response'=> $dataKesehatan
+            'response'=> $dataKelahiran
         ]);
     }
 
@@ -56,7 +56,7 @@ class StatusKesehatanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\UmatHidup  $umatHidup
+     * @param  \App\StatusKelahiran  $statusKelahiran
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +67,7 @@ class StatusKesehatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UmatHidup  $umatHidup
+     * @param  \App\StatusKelahiran  $statusKelahiran
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -79,7 +79,7 @@ class StatusKesehatanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UmatHidup  $umatHidup
+     * @param  \App\StatusKelahiran  $statusKelahiran
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -90,7 +90,7 @@ class StatusKesehatanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UmatHidup  $umatHidup
+     * @param  \App\StatusKelahiran  $statusKelahiran
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -101,21 +101,10 @@ class StatusKesehatanController extends Controller
     public function ajax(Request $request)
     { 
         switch ($request->mode) {
-            case 'graphUmatHidup':
+            case 'graphKelahiran':
                 return [
-                    'yearly_chart' => $this->umat->getKesehatanChartByYear($request->id_wilayah),
-                    'monthly_chart' => $this->umat->getCurrentYearKesehatanChart($request->id_wilayah),
-                ];
-                break;
-            case 'pieUmatHidup':
-                return [
-                    'current_wilayah' => $this->umat->getCurrentWilayahKesehatanChart($request->id_wilayah),
-                    'all_wilayah' => $this->umat->getAllWilayahKesehatanChart($request->id_wilayah),
-                ];
-                break;
-            case 'allDataKesehatan':
-                return [
-                    'yearly_chart' => $this->umat->getAllDataKesehatanChartByYear($request->id_wilayah),
+                    'current_wilayah_chart' => $this->umat->getKelahiranChartWilayahByYear($request->id_wilayah),
+                    'all_wilayah_chart' => $this->umat->getKelahiranChartAllWilayahByYear($request->id_wilayah),
                 ];
                 break;
         }

@@ -1,15 +1,15 @@
 <template>
     <v-layout row wrap>
-        <v-flex xs12 md6 v-if="statusPieKehidupanCurrentWilayah" class="text-center">
-            <div class="headline my-3">Prosentase Kehidupan</div>
+        <v-flex xs12 md6 v-if="statusPieBaptisCurrentWilayah" class="text-center">
+            <div class="headline my-3">Prosentase Baptis</div>
             <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
             <apexchart 
             type=pie 
-            :options="chartOptionsProsentasePieKehidupanWilayah" 
-            :series="seriesProsentasePieKehidupanWilayah" />
+            :options="chartOptionsProsentasePieBaptisWilayah" 
+            :series="seriesProsentasePieBaptisWilayah" />
         </v-flex>
         <v-flex xs12 md6 v-else class="text-center">
-            <div class="headline my-3">Prosentase Kehidupan</div>
+            <div class="headline my-3">Prosentase Baptis</div>
             <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
             <div class="text-xs-center orange--text">
                 <v-icon class="orange--text mt-5">report</v-icon>
@@ -18,16 +18,16 @@
             </div>
         </v-flex>
 
-        <v-flex xs12 md6 v-if="statusPieKehidupanAllWilayah" class="text-center">
-            <div class="headline my-3">Prosentase Kehidupan</div>
+        <v-flex xs12 md6 v-if="statusPieBaptisAllWilayah" class="text-center">
+            <div class="headline my-3">Prosentase Baptis</div>
             <div class="title my-3">Keseluruhan Wilayah</div>
             <apexchart 
             type=pie
-            :options="chartOptionsProsentasePieKehidupanKeseluruhanWilayah" 
-            :series="seriesProsentasePieKehidupanKeseluruhanWilayah" />
+            :options="chartOptionsProsentasePieBaptisKeseluruhanWilayah" 
+            :series="seriesProsentasePieBaptisKeseluruhanWilayah" />
         </v-flex>
         <v-flex xs12 md6 v-else class="text-center">
-            <div class="headline my-3">Prosentase Kehidupan Wilayah</div>
+            <div class="headline my-3">Prosentase Baptis Wilayah</div>
             <div class="title my-3">Keseluruhan Wilayah</div>
             <div class="text-xs-center orange--text">
                 <v-icon class="orange--text mt-5">report</v-icon>
@@ -37,21 +37,21 @@
         </v-flex>
 
         <v-flex xs12>
-            <div class="headline my-3">Kehidupan per Bulan {{ this.selectedNameWilayah }}</div>
+            <div class="headline my-3">Baptis per Bulan {{ this.selectedNameWilayah }}</div>
             <apexchart
             type=line
             height= "350px"
-            :options="chartOptionsKehidupanPerBulan"
-            :series="seriesKehidupanPerBulan"
+            :options="chartOptionsBaptisPerBulan"
+            :series="seriesBaptisPerBulan"
             />
         </v-flex>
         <v-flex xs12>
-            <div class="headline my-3">Kehidupan per Tahun {{ this.selectedNameWilayah }}</div>
+            <div class="headline my-3">Baptis per Tahun {{ this.selectedNameWilayah }}</div>
             <apexchart
             type=bar
             height= "350px"
-            :options="chartOptionsKehidupanPerTahun"
-            :series="seriesKehidupanPerTahun"
+            :options="chartOptionsBaptisPerTahun"
+            :series="seriesBaptisPerTahun"
             />
         </v-flex>
     </v-layout>
@@ -83,39 +83,49 @@ export default {
     },
     data() {
         return {
-            statusPieKehidupanCurrentWilayah: true,
-            statusPieKehidupanAllWilayah: true,
-            dataPieKehidupan: [],
-            dataMonthlyKehidupan: [],
-            dataYearlyKehidupan: [],
-            tempDataYearlyKehidupan: [{
-                    data: [], // Hidup
+            statusPieBaptisCurrentWilayah: true,
+            statusPieBaptisAllWilayah: true,
+            dataPieBaptis: [],
+            dataMonthlyBaptis: [],
+            dataYearlyBaptis: [],
+            tempDataYearlyBaptis: [{
+                    data: [], // Baptis Bayi
                 },{
-                    data: [], // RIP
-                }],
-            tempDataMonthlyKehidupan: [{
-                    data: [], // Hidup
+                    data: [], // Baptis Dewasa
                 },{
-                    data: [], // RIP
+                    data: [], // Belum Baptis
                 }],
-            seriesKehidupanPerBulan: [{
-                name: "Hidup",
+            tempDataMonthlyBaptis: [{
+                    data: [], // Baptis Bayi
+                },{
+                    data: [], // Baptis Dewasa
+                },{
+                    data: [], // Belum Baptis
+                }],
+            seriesBaptisPerBulan: [{
+                name: "Baptis Bayi",
                 data: [1,1,1,1,1,1,1,1,1,1,1,1]
                 },{
-                name: "RIP",
+                name: "Baptis Dewasa",
+                data: [1,1,1,1,1,1,1,1,1,1,1,1]
+                },{
+                name: "Belum Baptis",
                 data: [1,1,1,1,1,1,1,1,1,1,1,1]
             }],
-            seriesKehidupanPerTahun: [{
-                name: "Hidup",
+            seriesBaptisPerTahun: [{
+                name: "Baptis Bayi",
                 data: [1]
                 },{
-                name: "RIP",
+                name: "Baptis Dewasa",
+                data: [1]
+                },{
+                name: "Belum Baptis",
                 data: [1]
             }],
-            seriesProsentasePieKehidupanWilayah: [1,1],
-            seriesProsentasePieKehidupanKeseluruhanWilayah: [1,1],
-            chartOptionsProsentasePieKehidupanWilayah: {
-                labels: ['Hidup', 'RIP'],
+            seriesProsentasePieBaptisWilayah: [1,1],
+            seriesProsentasePieBaptisKeseluruhanWilayah: [1,1],
+            chartOptionsProsentasePieBaptisWilayah: {
+                labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
                 decimalsInFloat: 4,
                 responsive: [{
                     breakpoint: 2400,
@@ -131,8 +141,8 @@ export default {
                     }
                 }]
             },
-            chartOptionsProsentasePieKehidupanKeseluruhanWilayah: {
-                labels: ['Hidup', 'RIP'],
+            chartOptionsProsentasePieBaptisKeseluruhanWilayah: {
+                labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
                 responsive: [{
                     breakpoint: 2400,
                     options: {
@@ -147,7 +157,7 @@ export default {
                     }
                 }]
             },
-            chartOptionsKehidupanPerBulan: {
+            chartOptionsBaptisPerBulan: {
                 chart: {
                     type: 'line',
                     toolbar: {
@@ -189,7 +199,7 @@ export default {
                     },
                 }
             },
-            chartOptionsKehidupanPerTahun: {
+            chartOptionsBaptisPerTahun: {
                 chart: {
                     stacked: true,
                     toolbar: {
@@ -230,74 +240,75 @@ export default {
     methods: {
         async init() {
             try {
-                let resDataPieKehidupan = await this.fetchPieKehidupan();
-                let resDataGraphKehidupan = await this.fetchGraphKehidupan();
-                this.dataMonthlyKehidupan = resDataGraphKehidupan.data.monthly_chart
-                this.dataYearlyKehidupan = resDataGraphKehidupan.data.yearly_chart
-                console.log(this.dataMonthlyKehidupan);
+                let resDataPieBaptis = await this.fetchPieBaptis();
+                let resDataGraphBaptis = await this.fetchGraphBaptis();
+                this.dataMonthlyBaptis = resDataGraphBaptis.data.monthly_chart
+                this.dataYearlyBaptis = resDataGraphBaptis.data.yearly_chart
+                console.log(this.dataMonthlyBaptis);
                 
-                if (resDataPieKehidupan.data.current_wilayah.length != 0) {
-                    this.statusPieKehidupanCurrentWilayah = true
+                if (resDataPieBaptis.data.current_wilayah.length != 0) {
+                    this.statusPieBaptisCurrentWilayah = true
 
-                    this.seriesProsentasePieKehidupanWilayah = [
-                        resDataPieKehidupan.data.current_wilayah.status_hidup, 
-                        resDataPieKehidupan.data.current_wilayah.status_mati
+                    this.seriesProsentasePieBaptisWilayah = [
+                        resDataPieBaptis.data.current_wilayah.baptis_bayi, 
+                        resDataPieBaptis.data.current_wilayah.baptis_dewasa,
+                        resDataPieBaptis.data.current_wilayah.belum_baptis,
                     ]
                 } else {
-                    this.statusPieKehidupanCurrentWilayah = false
+                    this.statusPieBaptisCurrentWilayah = false
                 }
 
-                if (resDataPieKehidupan.data.all_wilayah.length != 0) {
-                    this.statusPieKehidupanAllWilayah = true
+                if (resDataPieBaptis.data.all_wilayah.length != 0) {
+                    this.statusPieBaptisAllWilayah = true
 
-                    this.seriesProsentasePieKehidupanKeseluruhanWilayah = [
-                        resDataPieKehidupan.data.all_wilayah.status_hidup, 
-                        resDataPieKehidupan.data.all_wilayah.status_mati
+                    this.seriesProsentasePieBaptisKeseluruhanWilayah = [
+                        resDataPieBaptis.data.all_wilayah.baptis_bayi, 
+                        resDataPieBaptis.data.all_wilayah.baptis_dewasa,
+                        resDataPieBaptis.data.all_wilayah.belum_baptis,
                     ]
                 } else {
-                    this.statusPieKehidupanAllWilayah = false
+                    this.statusPieBaptisAllWilayah = false
                 }
                 
-                let tempXaxisMonthlyKehidupan = []
-                let tempXaxisYearlyKehidupan = []
+                let tempXaxisMonthlyBaptis = []
+                let tempXaxisYearlyBaptis = []
                 this.clearGraph()
 
-                this.chartOptionsKehidupanPerBulan.xaxis.categories = []
-                this.chartOptionsKehidupanPerTahun.xaxis.categories = []
+                this.chartOptionsBaptisPerBulan.xaxis.categories = []
+                this.chartOptionsBaptisPerTahun.xaxis.categories = []
                 
-                this.dataYearlyKehidupan.map((item, index) => {
-                    tempXaxisYearlyKehidupan.push(item.year)
-                    this.tempDataYearlyKehidupan[0].data.push(item.data.status_hidup)
-                    this.tempDataYearlyKehidupan[1].data.push(item.data.status_mati)
+                this.dataYearlyBaptis.map((item, index) => {
+                    tempXaxisYearlyBaptis.push(item.year)
+                    this.tempDataYearlyBaptis[0].data.push(item.data.baptis_bayi)
+                    this.tempDataYearlyBaptis[1].data.push(item.data.baptis_dewasa)
+                    this.tempDataYearlyBaptis[2].data.push(item.data.belum_baptis)
                 });
 
-                console.log(this.dataMonthlyKehidupan);
-                
-
-                this.dataMonthlyKehidupan.map((item, index) => {
-                    tempXaxisMonthlyKehidupan.push(item.month)
-                    this.tempDataMonthlyKehidupan[0].data.push(item.data.status_hidup)
-                    this.tempDataMonthlyKehidupan[1].data.push(item.data.status_mati)
+                this.dataMonthlyBaptis.map((item, index) => {
+                    tempXaxisMonthlyBaptis.push(item.month)
+                    this.tempDataMonthlyBaptis[0].data.push(item.data.baptis_bayi)
+                    this.tempDataMonthlyBaptis[1].data.push(item.data.baptis_dewasa)
+                    this.tempDataMonthlyBaptis[2].data.push(item.data.belum_baptis)
                 });
 
-                for (let i = 0; i < 2; i++) {
-                    this.seriesKehidupanPerTahun[i] = {...this.seriesKehidupanPerTahun[i], ...{
-                                                            data: this.tempDataYearlyKehidupan[i].data
+                for (let i = 0; i < 3; i++) {
+                    this.seriesBaptisPerTahun[i] = {...this.seriesBaptisPerTahun[i], ...{
+                                                            data: this.tempDataYearlyBaptis[i].data
                                                         }}
-                    this.seriesKehidupanPerBulan[i] = {...this.seriesKehidupanPerBulan[i], ...{
-                                                            data: this.tempDataMonthlyKehidupan[i].data
+                    this.seriesBaptisPerBulan[i] = {...this.seriesBaptisPerBulan[i], ...{
+                                                            data: this.tempDataMonthlyBaptis[i].data
                                                         }}
                 }
                 
-                this.chartOptionsKehidupanPerBulan = {...this.chartOptionsKehidupanPerBulan, ...{
+                this.chartOptionsBaptisPerBulan = {...this.chartOptionsBaptisPerBulan, ...{
                                                         xaxis: {
-                                                            categories: tempXaxisMonthlyKehidupan
+                                                            categories: tempXaxisMonthlyBaptis
                                                         }
                                                     }}
                 
-                this.chartOptionsKehidupanPerTahun = {...this.chartOptionsKehidupanPerTahun, ...{
+                this.chartOptionsBaptisPerTahun = {...this.chartOptionsBaptisPerTahun, ...{
                                                         xaxis: {
-                                                            categories: tempXaxisYearlyKehidupan
+                                                            categories: tempXaxisYearlyBaptis
                                                         }
                                                     }}
                                                     
@@ -306,13 +317,15 @@ export default {
             }
         },
         clearGraph() {
-            this.tempDataYearlyKehidupan[0].data = []
-            this.tempDataMonthlyKehidupan[0].data = []
-            this.tempDataYearlyKehidupan[1].data = []
-            this.tempDataMonthlyKehidupan[1].data = []
+            this.tempDataYearlyBaptis[0].data = []
+            this.tempDataMonthlyBaptis[0].data = []
+            this.tempDataYearlyBaptis[1].data = []
+            this.tempDataMonthlyBaptis[1].data = []
+            this.tempDataYearlyBaptis[2].data = []
+            this.tempDataMonthlyBaptis[2].data = []
         },
-        fetchGraphKehidupan() {
-            return axios.get('/api/kesehatan?mode=graphUmatHidup', {
+        fetchGraphBaptis() {
+            return axios.get('/api/baptis?mode=graphBaptis', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
@@ -322,8 +335,8 @@ export default {
                     }
                 })
         },
-        fetchPieKehidupan() {
-            return axios.get('/api/kesehatan?mode=pieUmatHidup', {
+        fetchPieBaptis() {
+            return axios.get('/api/baptis?mode=pieBaptis', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
@@ -335,13 +348,13 @@ export default {
         },
     },
     mounted() {
-        if (this.activeTab == 2) {
+        if (this.activeTab == 3) {
             this.init();
         }
     },
     watch: {
         selectedWilayah() {
-            if (this.activeTab == 2) {
+            if (this.activeTab == 3) {
             this.init();
             }
         }

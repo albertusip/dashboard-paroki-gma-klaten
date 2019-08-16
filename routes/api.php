@@ -24,4 +24,8 @@ Route::get('current-perkawinan', 'Api\StatusPerkawinanController@currentPerkawin
 
 Route::get('kesehatan', 'Api\StatusKesehatanController@ajax');
 
+Route::get('baptis', 'Api\StatusBaptisController@ajax');
+
+Route::get('kelahiran', 'Api\StatusKelahiranController@ajax');
+
 Route::get('current-card', 'Api\UmatController@card');

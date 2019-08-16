@@ -115,6 +115,23 @@
                                     ></kesehatancharts>
                                 </v-tab-item>
                                 
+                                <v-tab-item>
+                                    <baptischarts
+                                        :selectedWilayah = 'selected'
+                                        :selectedNameWilayah = 'selectedNameWilayah'
+                                        :activeTab = 'activeTab'
+                                        :key = 'activeTab'
+                                    ></baptischarts>
+                                </v-tab-item>
+
+                                <v-tab-item>
+                                    <kelahirancharts
+                                        :selectedWilayah = 'selected'
+                                        :selectedNameWilayah = 'selectedNameWilayah'
+                                        :activeTab = 'activeTab'
+                                        :key = 'activeTab'
+                                    ></kelahirancharts>
+                                </v-tab-item>
                             </v-tabs>
                     </v-flex>
                 </v-layout>
@@ -127,6 +144,8 @@
 import EkonomiCharts from './AppEkonomiCharts.vue'
 import PerkawinanCharts from './AppPerkawinanCharts.vue'
 import KesehatanCharts from './AppKesehatanCharts.vue'
+import BaptisCharts from './AppBaptisCharts.vue'
+import KelahiranCharts from './AppKelahiranCharts.vue'
 import VueApexCharts from 'vue-apexcharts'
 
 export default {
@@ -134,6 +153,8 @@ export default {
         ekonomicharts: EkonomiCharts,
         perkawinancharts: PerkawinanCharts,
         kesehatancharts: KesehatanCharts,
+        baptischarts: BaptisCharts,
+        kelahirancharts: KelahiranCharts,
         apexchart: VueApexCharts,
     },
     data() {
@@ -150,14 +171,22 @@ export default {
                 {
                     name: 'Status Kehidupan',
                     icon: 'local_hospital'
-                }
+                },
+                {
+                    name: 'Status Baptis',
+                    icon: 'pool'
+                },
+                {
+                    name: 'Status Kelahiran',
+                    icon: 'pregnant_woman'
+                },
                 ],
-            activeTab: 2,
+            activeTab: 0,
             labelPiePerkawinan: [],
             dataCard:{},
             selected: '01',
             wilayah: [],
-            selectedNameWilayah: '',
+            selectedNameWilayah: 'Wilayah Santa Maria Assumpta Klaten',
             seriesPendidikanPerBulan: [{
                 name: "1",
                 data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
@@ -316,8 +345,19 @@ export default {
                 this.dataCard = resCard.data.data;
                 
                 for(var i=0; i < this.wilayah.length; i++){
+
+                     /**
+                     * Capitalize First Letter Of Each Word In A String
+                     *
+                     * var splitStr : lowercase string Wilayah and split by white space
+                     * 
+                     */
                     if( this.wilayah[i].id_wilayah == this.selected){
-                        this.selectedNameWilayah = this.wilayah[i].nama_wilayah
+                        var splitStr = this.wilayah[i].nama_wilayah.toLowerCase().split(' ');
+                        for (var i = 0; i < splitStr.length; i++) {
+                            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+                        }
+                        this.selectedNameWilayah = splitStr.join(' ')
                     }
                 }
 

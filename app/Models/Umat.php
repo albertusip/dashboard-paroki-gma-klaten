@@ -61,14 +61,18 @@ class Umat extends Model
         'tgl_update'
     ];
 
+    public function wilayah () {
+        return $this->belongsTo(Wilayah::class,'id_wilayah', 'id_wilayah');
+    }
+
     public function getCard() {
-        $krisma = $this->with('ekonomi')
+        $krisma = $this->with('wilayah')
                             ->where(function($query){
                                 $query->where('status_krisma', '=', 'SDH');
                             })
                             ->get()->count();
-        $baptis = $this->with('ekonomi')
-                        ->whereHas('ekonomi')
+        $baptis = $this->with('wilayah')
+                        ->whereHas('wilayah')
                             ->where(function($query){
                                 $query->where('id_wkt_baptis', '!=', '09')
                                 ->where('id_wkt_baptis', '!=','10');
@@ -96,6 +100,7 @@ class Umat extends Model
                         ->whereHas('ekonomi')
                         ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', '>=', date('Y') - 10)
+                        ->whereYear('tgl_update', '<=', date('Y'))
                         ->where('id_wilayah', $id_wilayah)
                         ->groupBy('year', 'id_ekonomi')
                         ->get();
@@ -265,6 +270,7 @@ class Umat extends Model
                         ->whereHas('statusPerkawinan')
                         ->select('id_sts_kawin', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', '>=', date('Y') - 10)
+                        ->whereYear('tgl_update', '<=', date('Y'))
                         ->where('id_wilayah', $id_wilayah)
                         ->groupBy('year', 'id_sts_kawin')
                         ->get();
@@ -465,6 +471,7 @@ class Umat extends Model
                         ->whereHas('kesehatan')
                         ->select('id_sts_sehat', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', '>=', date('Y') - 10)
+                        ->whereYear('tgl_update', '<=', date('Y'))
                         ->where('id_wilayah', $id_wilayah)
                         ->groupBy('year', 'id_sts_sehat')
                         ->get();
@@ -571,7 +578,7 @@ class Umat extends Model
                 'data' => $temp
             ];
         }
-        
+
         return $response;
     }
 
@@ -683,5 +690,449 @@ class Umat extends Model
         return $response;
     }
 
-    
+    public function getAllDataKesehatanChartByYear($id_wilayah){
+        $results = $this->with('kesehatan')
+                        ->whereHas('kesehatan')
+                        ->select('id_sts_sehat', 'id_wilayah', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
+                        ->whereYear('tgl_update', '>=', date('Y') - 10)
+                        ->whereYear('tgl_update', '<=', date('Y'))
+                        ->groupBy('year', 'id_sts_sehat', 'id_wilayah')
+                        ->get();
+                        
+        $dataKesehatan = [];
+        foreach ($results as $key => $value) {
+            
+            if ($value->id_sts_sehat != '99') {
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['id'] = $value->id_sts_sehat;
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['wilayah'] = $value->id_wilayah;
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['status_hidup'] = str_replace('/',' ', $value->kesehatan->deskripsi_sts_sehat);
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['total'] = $value->total;
+            } else {
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['id'] = $value->id_sts_sehat;
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['wilayah'] = $value->id_wilayah;
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['status_mati'] = str_replace('/',' ', $value->kesehatan->deskripsi_sts_sehat);
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['total'] = $value->total;
+            }
+                
+        }
+        
+        $filteredData = [];
+        $statusKesehatan = ['status_hidup'];
+        foreach ($dataKesehatan as $key => $value) {
+            $temp = [];
+            $tempTotalHidup = 0;
+            $tempTotalMati = 0;
+            
+            foreach ($value as $item) {
+                if ($item['id'] != '99') {
+                    $tempTotalHidup += $item['total'];
+                } else {
+                    $tempTotalMati += $item['total'];
+                }
+
+                $temp['status_hidup'] = $tempTotalHidup;
+                $temp['status_mati'] = $tempTotalMati;
+                $temp['wilayah'] = $item['wilayah'];
+            }
+
+            foreach ($statusKesehatan as $status) {
+                if(empty($temp[snake_case($status)])) {
+                    $temp[snake_case($status)] = 0;
+                }
+            }
+            $filteredData[] = [
+                'year' => $key,
+                'data' => $temp
+            ];
+            
+        }
+        
+        return $filteredData;
+    }
+
+    public function baptis () {
+        return $this->belongsTo(StatusBaptis::class,'id_wkt_baptis', 'id_wkt_baptis');
+    }
+
+    public function getBaptisChartByYear($id_wilayah){
+        $results = $this->with('baptis')
+                        ->whereHas('baptis')
+                        ->select('id_wkt_baptis', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
+                        ->whereYear('tgl_update', '>=', date('Y') - 10)
+                        ->whereYear('tgl_update', '<=', date('Y'))
+                        ->where('id_wilayah', $id_wilayah)
+                        ->groupBy('year', 'id_wkt_baptis')
+                        ->get();
+                        
+        $dataBaptis = [];
+        foreach ($results as $key => $value) {
+            
+            if ($value->id_wkt_baptis == '01') {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['baptis_bayi'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            } else if ($value->id_wkt_baptis != '01' && $value->id_wkt_baptis != '09' && $value->id_wkt_baptis != '10') {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['baptis_dewasa'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            } else {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['belum_baptis'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            }
+                
+        }
+        
+        $filteredData = [];
+        $statusBaptis = [
+                        'baptis_bayi',
+                        'baptis_dewasa',
+                        'belum_baptis'
+                    ];
+        foreach ($dataBaptis as $key => $value) {
+            $temp = [];
+            $tempTotalBaptisBayi = 0;
+            $tempTotalBaptisDewasa = 0;
+            $tempTotalBelumBaptis = 0;
+            
+            foreach ($value as $item) {
+                if ($item['id'] == '01') {
+                    $tempTotalBaptisBayi += $item['total'];
+                } else if ($item['id'] != '01' && $item['id'] != '09' && $item['id'] != '10') {
+                    $tempTotalBaptisDewasa += $item['total'];
+                } else {
+                    $tempTotalBelumBaptis += $item['total'];
+                }
+
+                $temp['baptis_bayi'] = $tempTotalBaptisBayi;
+                $temp['baptis_dewasa'] = $tempTotalBaptisDewasa;
+                $temp['belum_baptis'] = $tempTotalBelumBaptis;
+            }
+
+            foreach ($statusBaptis as $status) {
+                if(empty($temp[snake_case($status)])) {
+                    $temp[snake_case($status)] = 0;
+                }
+            }
+            $filteredData[] = [
+                'year' => $key,
+                'data' => $temp
+            ];
+            
+        }
+            
+        return $filteredData;
+    }
+
+    public function getCurrentYearBaptisChart($id_wilayah){
+        $results = $this->with('baptis')
+                        ->whereHas('baptis')
+                        ->select('id_wkt_baptis', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
+                        ->where('id_wilayah', $id_wilayah)
+                        ->whereYear('tgl_update', '2018')
+                        ->orderBy('tgl_update', 'asc')
+                        ->groupBy('month', 'id_wkt_baptis')
+                        ->get();
+        
+        $dataBaptis = [];
+        
+        foreach($results as $value){
+            
+            if ($value->id_wkt_baptis == '01') {
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['baptis_bayi'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['total'] = $value->total;
+            } else if ($value->id_wkt_baptis != '01' && $value->id_wkt_baptis != '09' && $value->id_wkt_baptis != '10') {
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['baptis_dewasa'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['total'] = $value->total;
+            } else {
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['belum_baptis'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->month][$value->id_wkt_baptis]['total'] = $value->total;
+            }
+        } 
+        
+        $response = [];
+        $statusBaptis = [
+                        'baptis_bayi',
+                        'baptis_dewasa',
+                        'belum_baptis'
+                    ];
+        foreach ($dataBaptis as $key => $value) {
+            $temp = [];
+            $tempTotalBaptisBayi = 0;
+            $tempTotalBaptisDewasa = 0;
+            $tempTotalBelumBaptis = 0;
+            
+            foreach ($value as $item) {
+                if ($item['id'] == '01') {
+                    $tempTotalBaptisBayi += $item['total'];
+                } else if ($item['id'] != '01' && $item['id'] != '09' && $item['id'] != '10') {
+                    $tempTotalBaptisDewasa += $item['total'];
+                } else {
+                    $tempTotalBelumBaptis += $item['total'];
+                }
+
+                $temp['baptis_bayi'] = $tempTotalBaptisBayi;
+                $temp['baptis_dewasa'] = $tempTotalBaptisDewasa;
+                $temp['belum_baptis'] = $tempTotalBelumBaptis;
+            }
+
+            foreach ($statusBaptis as $status) {
+                if(empty($temp[snake_case($status)])) {
+                    $temp[snake_case($status)] = 0;
+                }
+            }
+
+            $response[] = [
+                'month' => $key,
+                'data' => $temp
+            ];
+        }
+        
+        return $response;
+    }
+
+    public function getCurrentWilayahBaptisChart($id_wilayah){
+        $results = $this->with('baptis')
+                        ->whereHas('baptis')
+                        ->select('id_wkt_baptis', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
+                        ->where('id_wilayah', $id_wilayah)
+                        // ->whereYear('tgl_update', date('Y'))
+                        ->whereYear('tgl_update', '2018')
+                        ->groupBy('year', 'id_wkt_baptis')
+                        ->get();
+        $dataBaptis = [];
+        
+        foreach($results as $value){
+
+            if ($value->id_wkt_baptis == '01') {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['baptis_bayi'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            } else if ($value->id_wkt_baptis != '01' && $value->id_wkt_baptis != '09' && $value->id_wkt_baptis != '10') {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['baptis_dewasa'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            } else {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['belum_baptis'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            }
+            
+        } 
+        
+        $response = [];
+        $statusBaptis = [
+                        'baptis_bayi',
+                        'baptis_dewasa',
+                        'belum_baptis'
+                    ];
+        
+        foreach ($dataBaptis as $key => $value) {
+            $temp = [];
+            $tempTotalBaptisBayi = 0;
+            $tempTotalBaptisDewasa = 0;
+            $tempTotalBelumBaptis = 0;
+            
+            foreach ($value as $item) {
+                if ($item['id'] == '01') {
+                    $tempTotalBaptisBayi += $item['total'];
+                } else if ($item['id'] != '01' && $item['id'] != '09' && $item['id'] != '10') {
+                    $tempTotalBaptisDewasa += $item['total'];
+                } else {
+                    $tempTotalBelumBaptis += $item['total'];
+                }
+
+                $temp['baptis_bayi'] = $tempTotalBaptisBayi;
+                $temp['baptis_dewasa'] = $tempTotalBaptisDewasa;
+                $temp['belum_baptis'] = $tempTotalBelumBaptis;
+            }
+
+            foreach ($statusBaptis as $status) {
+                if(empty($temp[snake_case($status)])) {
+                    $temp[snake_case($status)] = 0;
+                }
+            }
+            
+            $response = $temp;
+        }
+        
+        return $response;
+    }
+
+    public function getAllWilayahBaptisChart($id_wilayah){
+        $results = $this->with('baptis')
+                        ->whereHas('baptis')
+                        ->select('id_wkt_baptis', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
+                        // ->whereYear('tgl_update', date('Y'))
+                        ->whereYear('tgl_update', '2018')
+                        ->groupBy('year', 'id_wkt_baptis')
+                        ->get();
+        $dataBaptis = [];
+        
+        foreach($results as $value){
+            if ($value->id_wkt_baptis == '01') {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['baptis_bayi'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            } else if ($value->id_wkt_baptis != '01' && $value->id_wkt_baptis != '09' && $value->id_wkt_baptis != '10') {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['baptis_dewasa'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            } else {
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['id'] = $value->id_wkt_baptis;
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['belum_baptis'] = str_replace('/',' ', $value->baptis->deskripsi_wkt_baptis);
+                $dataBaptis[$value->year][$value->id_wkt_baptis]['total'] = $value->total;
+            }
+        } 
+
+        $response = [];
+        $statusBaptis = [
+                        'baptis_bayi',
+                        'baptis_dewasa',
+                        'belum_baptis'
+                    ];
+        foreach ($dataBaptis as $key => $value) {
+            $temp = [];
+            $tempTotalBaptisBayi = 0;
+            $tempTotalBaptisDewasa = 0;
+            $tempTotalBelumBaptis = 0;
+            
+            foreach ($value as $item) {
+                if ($item['id'] == '01') {
+                    $tempTotalBaptisBayi += $item['total'];
+                } else if ($item['id'] != '01' && $item['id'] != '09' && $item['id'] != '10') {
+                    $tempTotalBaptisDewasa += $item['total'];
+                } else {
+                    $tempTotalBelumBaptis += $item['total'];
+                }
+
+                $temp['baptis_bayi'] = $tempTotalBaptisBayi;
+                $temp['baptis_dewasa'] = $tempTotalBaptisDewasa;
+                $temp['belum_baptis'] = $tempTotalBelumBaptis;
+            }
+
+            foreach ($statusBaptis as $status) {
+                if(empty($temp[snake_case($status)])) {
+                    $temp[snake_case($status)] = 0;
+                }
+            }
+            
+            $response = $temp;
+        }
+        
+        return $response;
+    }
+
+    public function getKelahiranChartWilayahByYear($id_wilayah){
+        $results = $this->with('wilayah')
+                        ->whereHas('wilayah')
+                        ->select('jen_kel', DB::raw("DATE_FORMAT(tgl_lahir, '%Y') yearBase"),DB::raw("DATE_FORMAT(tgl_lahir, '%Y') year"), DB::raw('count(*) as total'))
+                        ->whereYear('tgl_lahir', '>=', date('Y') - 10)
+                        ->whereYear('tgl_lahir', '<=', date('Y'))
+                        ->where('id_wilayah', $id_wilayah)
+                        ->groupBy('year', 'yearBase', 'jen_kel')
+                        ->get();
+                        
+        $dataKelahiran = [];
+        foreach ($results as $key => $value) {
+            
+            if ($value->jen_kel == 1) {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'laki_laki';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            } else if ($value->jen_kel == 2) {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'perempuan';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            } else {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'lain_lain';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            }
+                
+        }
+        
+        $filteredData = [];
+        $jenisKelamin = [
+                        'laki_laki',
+                        'perempuan',
+                        'lain_lain'
+                    ];
+        foreach ($dataKelahiran as $key => $value) {
+            $temp = [];
+
+            foreach ($value as $item) {
+                $temp[snake_case($item['jen_kel'])] = $item['total'];
+                
+            }
+
+            foreach ($jenisKelamin as $jk) {
+                if(empty($temp[snake_case($jk)])) {
+                    $temp[snake_case($jk)] = 0;
+                }
+            }
+
+            $filteredData[] = [
+                'year' => $key,
+                'data' => $temp
+            ];
+            
+        }
+        return $filteredData;
+    }
+
+    public function getKelahiranChartAllWilayahByYear($id_wilayah){
+        $results = $this->with('wilayah')
+                        ->whereHas('wilayah')
+                        ->select('jen_kel', DB::raw("DATE_FORMAT(tgl_lahir, '%Y') yearBase"),DB::raw("DATE_FORMAT(tgl_lahir, '%Y') year"), DB::raw('count(*) as total'))
+                        ->whereYear('tgl_lahir', '>=', date('Y') - 10)
+                        ->whereYear('tgl_lahir', '<=', date('Y'))
+                        ->groupBy('year', 'yearBase', 'jen_kel')
+                        ->get();
+                        
+        $dataKelahiran = [];
+        foreach ($results as $key => $value) {
+            
+            if ($value->jen_kel == 1) {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'laki_laki';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            } else if ($value->jen_kel == 2) {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'perempuan';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            } else {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'lain_lain';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            }
+                
+        }
+        
+        $filteredData = [];
+        $jenisKelamin = [
+                        'laki_laki',
+                        'perempuan',
+                        'lain_lain'
+                    ];
+        foreach ($dataKelahiran as $key => $value) {
+            $temp = [];
+
+            foreach ($value as $item) {
+                $temp[snake_case($item['jen_kel'])] = $item['total'];
+                
+            }
+
+            foreach ($jenisKelamin as $jk) {
+                if(empty($temp[snake_case($jk)])) {
+                    $temp[snake_case($jk)] = 0;
+                }
+            }
+
+            $filteredData[] = [
+                'year' => $key,
+                'data' => $temp
+            ];
+            
+        }
+        
+        return $filteredData;
+    }
 }

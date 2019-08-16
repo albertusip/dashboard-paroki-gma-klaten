@@ -1,14 +1,16 @@
 <template>
         <v-layout row wrap>
-            <v-flex xs12 md6 v-if="statusPiePerkawinanCurrentWilayah">
-                <div class="title mt-2">Prosentase Perkawinan Wilayah</div>
+            <v-flex xs12 md6 v-if="statusPiePerkawinanCurrentWilayah" class="text-center">
+                <div class="headline my-3">Prosentase Perkawinan</div>
+                <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
                 <apexchart 
                 type=pie 
                 :options="chartOptionsProsentasePiePerkawinanWilayah" 
                 :series="seriesProsentasePiePerkawinanWilayah" />
             </v-flex>
-            <v-flex xs12 md6 v-else>
-                <div class="title mt-2">Prosentase Perkawinan Wilayah</div>
+            <v-flex xs12 md6 v-else class="text-center">
+                <div class="headline my-3">Prosentase Perkawinan</div>
+                <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
                 <div class="text-xs-center orange--text">
                     <v-icon class="orange--text mt-5">report</v-icon>
                     <h2 class="">Tidak ada data pada</h2>
@@ -16,15 +18,17 @@
                 </div>
             </v-flex>
             
-            <v-flex xs12 md6 v-if="statusPiePerkawinanAllWilayah">
-                <div class="title mt-2">Prosentase Perkawinan Keseluruhan Wilayah</div>
+            <v-flex xs12 md6 v-if="statusPiePerkawinanAllWilayah" class="text-center">
+                <div class="headline my-3">Prosentase Perkawinan</div>
+                <div class="title my-3">Keseluruhan Wilayah</div>
                 <apexchart 
                 type=pie
                 :options="chartOptionsProsentasePiePerkawinanKeseluruhanWilayah" 
                 :series="seriesProsentasePiePerkawinanKeseluruhanWilayah" />
             </v-flex>
-            <v-flex xs12 md6 v-else>
-                <div class="title mt-2">Prosentase Perkawinan Wilayah</div>
+            <v-flex xs12 md6 v-else class="text-center">
+                <div class="headline my-3">Prosentase Perkawinan Wilayah</div>
+                <div class="title my-3">Keseluruhan Wilayah</div>
                 <div class="text-xs-center orange--text">
                     <v-icon class="orange--text mt-5">report</v-icon>
                     <h2 class="">Tidak ada data pada</h2>
@@ -33,7 +37,7 @@
             </v-flex>
 
             <v-flex xs12>
-                <div class="title mt-2">Perkawinan per Bulan</div>
+                <div class="headline my-3">Perkawinan per Bulan {{ this.selectedNameWilayah }}</div>
                 <apexchart 
                 type=line 
                 height=350 
@@ -41,7 +45,7 @@
                 :series="seriesPerkawinanPerBulan" />
             </v-flex>
             <v-flex xs12>
-                <div class="title mt-2">Perkawinan per Tahun</div>
+                <div class="headline my-3">Perkawinan per Tahun {{ this.selectedNameWilayah }}</div>
                 <apexchart 
                 type=bar 
                 height=350 

@@ -1,20 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\StatusBaptis;
+use App\Models\Umat;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class StatusBaptisController extends Controller
 {
+    /**
+     * Umat model.
+     * 
+     * @var Umat
+     */
+    private $statusBaptis;
+
+    public function __construct(Umat $umat) {
+        $this->umat = $umat;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $dataBaptis = $this->umat->where('id_wilayah', $request->id)->get();
+        return response()->json([
+            'response'=> $dataBaptis
+        ]);
     }
 
     /**
@@ -44,7 +59,7 @@ class StatusBaptisController extends Controller
      * @param  \App\StatusBaptis  $statusBaptis
      * @return \Illuminate\Http\Response
      */
-    public function show(StatusBaptis $statusBaptis)
+    public function show($id)
     {
         //
     }
@@ -55,7 +70,7 @@ class StatusBaptisController extends Controller
      * @param  \App\StatusBaptis  $statusBaptis
      * @return \Illuminate\Http\Response
      */
-    public function edit(StatusBaptis $statusBaptis)
+    public function edit($id)
     {
         //
     }
@@ -67,7 +82,7 @@ class StatusBaptisController extends Controller
      * @param  \App\StatusBaptis  $statusBaptis
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StatusBaptis $statusBaptis)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,8 +93,26 @@ class StatusBaptisController extends Controller
      * @param  \App\StatusBaptis  $statusBaptis
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StatusBaptis $statusBaptis)
+    public function destroy($id)
     {
         //
+    }
+
+    public function ajax(Request $request)
+    { 
+        switch ($request->mode) {
+            case 'graphBaptis':
+                return [
+                    'yearly_chart' => $this->umat->getBaptisChartByYear($request->id_wilayah),
+                    'monthly_chart' => $this->umat->getCurrentYearBaptisChart($request->id_wilayah),
+                ];
+                break;
+            case 'pieBaptis':
+                return [
+                    'current_wilayah' => $this->umat->getCurrentWilayahBaptisChart($request->id_wilayah),
+                    'all_wilayah' => $this->umat->getAllWilayahBaptisChart($request->id_wilayah),
+                ];
+                break;
+        }
     }
 }
