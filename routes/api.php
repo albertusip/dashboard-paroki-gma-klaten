@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 
 */
+
+/**
+ * Authentication Routes.
+ */
+Route::group(['middleware' => 'api', 'prefix' => 'auth', 'namespace' => 'Auth'], function () {
+    Route::post('login', 'JWTAuthController@login');
+    Route::post('logout', 'JWTAuthController@logout');
+
+    Route::patch('/update-password', 'JWTAuthController@updatePassword');
+});
+
 Route::resource('umat', 'Api\UmatController');
 Route::get('dashboard', 'Api\DashboardController@index');
 Route::get('wilayah', 'Api\DashboardController@getWilayah');
