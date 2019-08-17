@@ -53,27 +53,27 @@ class JWTAuthController extends Controller
      * @param ValidatePassword $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updatePassword(ValidatePassword $request)
-    {
-        $validated = $request->validated();
-
-        $this->user = auth()->user();
-
-        $credential = [
-            'email' => $this->user->email,
-            'password' => $validated['old_password']
-        ];
-
-        if (auth()->validate($credential)) {
-            $this->user->update([
-                'password' => bcrypt($validated['new_password'])
-            ]);
-
-            return $this->sendUpdatePasswordResponse();
-        } else {
-            return $this->sendFailedLoginResponse();
-        }
-    }
+//    public function updatePassword(ValidatePassword $request)
+//    {
+//        $validated = $request->validated();
+//
+//        $this->user = auth()->user();
+//
+//        $credential = [
+//            'email' => $this->user->email,
+//            'password' => $validated['old_password']
+//        ];
+//
+//        if (auth()->validate($credential)) {
+//            $this->user->update([
+//                'password' => bcrypt($validated['new_password'])
+//            ]);
+//
+//            return $this->sendUpdatePasswordResponse();
+//        } else {
+//            return $this->sendFailedLoginResponse();
+//        }
+//    }
 
     /**
      * Log the user out (Invalidate the token).

@@ -21,7 +21,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth', 'namespace' => 'Auth'],
     Route::post('login', 'JWTAuthController@login');
     Route::post('logout', 'JWTAuthController@logout');
 
-    Route::patch('/update-password', 'JWTAuthController@updatePassword');
+//    Route::patch('/update-password', 'JWTAuthController@updatePassword');
 });
 
 Route::resource('umat', 'Api\UmatController');
