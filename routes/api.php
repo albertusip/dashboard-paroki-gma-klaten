@@ -38,3 +38,4 @@ Route::get('baptis', 'Api\StatusBaptisController@ajax');
 Route::get('kelahiran', 'Api\StatusKelahiranController@ajax');
 
 Route::get('current-card', 'Api\UmatController@card');
+Route::get('recap', 'Api\RecapController@index');

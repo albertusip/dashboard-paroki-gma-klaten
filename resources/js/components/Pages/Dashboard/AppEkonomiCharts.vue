@@ -84,7 +84,7 @@ export default {
     },
     data() {
         return {
-            statusPieEkonomiCurrentWilayah: true,
+            statusPieEkonomiCurrentWilayah: false,
             statusPieEkonomiAllWilayah: true,
             dataPieEkonomi: [],
             dataMonthlyEkonomi: [],
