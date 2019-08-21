@@ -11,13 +11,15 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    protected $table = 'account';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'password', 'role',
     ];
 
     /**
@@ -36,7 +38,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function output()
     {
-        return $this->only('name', 'email');
+        return $this->only('username');
     }
 
     /**

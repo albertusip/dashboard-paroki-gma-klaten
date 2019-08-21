@@ -36,6 +36,7 @@ class JWTAuthController extends Controller
      */
     public function login(ValidateCredentials $request)
     {
+        
         $credentials = $request->validated();
 
         if (!$token = auth()->attempt($credentials)) {
@@ -85,6 +86,7 @@ class JWTAuthController extends Controller
         auth()->logout();
 
         return response()->json([
+            'authenticate' => true,
             'message' => 'Successfully Logged Out'
         ], 200);
     }
@@ -112,8 +114,9 @@ class JWTAuthController extends Controller
     protected function sendLoginResponse($token, User $user)
     {
         return response()->json([
+            'authenticate' => true,
             'access_token' => $token,
-            'user' => $user->output()
+            'user' => $user->output(),
         ], 200);
     }
 
