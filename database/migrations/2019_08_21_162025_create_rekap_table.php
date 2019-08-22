@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUmatHidupsTable extends Migration
+class CreateRekapTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateUmatHidupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('umat_hidups', function (Blueprint $table) {
+        Schema::create('rekap', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('id_wilayah');
+            $table->string('kategori');
+            $table->string('jumlah');
+            $table->string('tahun');
         });
     }
 
@@ -26,6 +29,6 @@ class CreateUmatHidupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('umat_hidups');
+        Schema::dropIfExists('rekap');
     }
 }

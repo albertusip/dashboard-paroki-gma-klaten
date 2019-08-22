@@ -32943,7 +32943,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      statusPieEkonomiCurrentWilayah: true,
+      statusPieEkonomiCurrentWilayah: false,
       statusPieEkonomiAllWilayah: true,
       dataPieEkonomi: [],
       dataMonthlyEkonomi: [],

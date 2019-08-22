@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataTahunan extends Model
 {
+    protected $table = 'rekap';
+    
     protected $fillable = [
-        'bisa_membantu'
+        'id_wilayah',
+        'kategori',
+        'jumlah',
+        'tahun'
     ];
 }
