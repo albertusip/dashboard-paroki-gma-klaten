@@ -60,7 +60,6 @@ class User {
     //             axios.get('/api/user', {
     //                 params: {
     //                     token: AppStorage.getToken(),
-    //                     ot: AppStorage.getUser().outlets[0].id
     //                 }
     //             }, {
     //                     headers: {

@@ -28,7 +28,7 @@ const routes = [
             { path: '/dashboard', component: AppDashboard },
             { path: '/daftar-umat', component: AppUmat },
             { path: '/logout', component: AppLogout, },
-            // { path: '*', redirect: '/', },
+            { path: '*', redirect: '/', },
         ],
         meta: { requiresAuth: true }
     },
@@ -40,6 +40,7 @@ const router = new VueRouter({
     },
     routes,
     hashbang: false,
+    mode: 'history'
 })
 
 import User from '../helpers/User'

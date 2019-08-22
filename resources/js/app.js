@@ -4,7 +4,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Vuetify from 'vuetify'
 import router from './routers/router.js'
 import axios from 'axios'
-import User from './helpers/User'
+import User from './helpers/User.js'
 import VueSwal from 'vue-swal'
 
 import 'vuetify/dist/vuetify.min.css'

@@ -58,14 +58,14 @@ export default {
             wrongCredentials: false,
             form: {
                 username: {
-                    value: '',
+                    value: 'albert',
                     rules: [
                         v => !!v || 'Username harus diisi',
                     ],
                 },
                 password: {
                     show: false,
-                    value: '',
+                    value: 'albert',
                     rules: [
                         v => !!v || 'Password harus diisi',
                     ]
@@ -79,17 +79,22 @@ export default {
                 this.isSubmitted = true;
                 const request = {
                     username: this.form.username.value,
-                    password: this.form.password.value
+                    password: this.form.password.value,
                 }
                 try {
                     
                     const res1 = await this.$user.login(request)
                     
-                    if(res1.data.authenticate) {
-                        console.log(res1.data);
+                    
+                    if(res1.data.authenticate == true) {
+                        // console.log(this.$user.storeSession(res1.data));
+                        // this.$router.replace("/dashboard");
                         
                         await this.$user.storeSession(res1.data)
-                        this.$router.replace("/");
+                        .then(() => this.$router.replace('/'))
+                        
+                        
+                        
                     } else {
                         this.wrongCredentials = true
                         setTimeout(() => {
@@ -103,7 +108,7 @@ export default {
                 }
                 this.isSubmitted = false;
             }
-        },
+        },  
     },
 }
 </script>

@@ -31446,14 +31446,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       wrongCredentials: false,
       form: {
         username: {
-          value: '',
+          value: 'albert',
           rules: [function (v) {
             return !!v || 'Username harus diisi';
           }]
         },
         password: {
           show: false,
-          value: '',
+          value: 'albert',
           rules: [function (v) {
             return !!v || 'Password harus diisi';
           }]
@@ -31474,7 +31474,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!this.$refs.form.validate()) {
-                  _context.next = 22;
+                  _context.next = 20;
                   break;
                 }
 
@@ -31490,44 +31490,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 res1 = _context.sent;
 
-                if (!res1.data.authenticate) {
-                  _context.next = 14;
+                if (!(res1.data.authenticate == true)) {
+                  _context.next = 12;
                   break;
                 }
 
-                console.log(res1.data);
-                _context.next = 11;
-                return this.$user.storeSession(res1.data);
+                _context.next = 10;
+                return this.$user.storeSession(res1.data).then(function () {
+                  return _this.$router.replace('/');
+                });
 
-              case 11:
-                this.$router.replace("/");
-                _context.next = 16;
+              case 10:
+                _context.next = 14;
                 break;
 
-              case 14:
+              case 12:
                 this.wrongCredentials = true;
                 setTimeout(function () {
                   _this.wrongCredentials = false;
                 }, 3000);
 
-              case 16:
-                _context.next = 21;
+              case 14:
+                _context.next = 19;
                 break;
 
-              case 18:
-                _context.prev = 18;
+              case 16:
+                _context.prev = 16;
                 _context.t0 = _context["catch"](3);
                 console.log(_context.t0);
 
-              case 21:
+              case 19:
                 this.isSubmitted = false;
 
-              case 22:
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 18]]);
+        }, _callee, this, [[3, 16]]);
       }));
 
       function login() {
@@ -31617,6 +31617,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ErrorDialogs_DialogSystemError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ErrorDialogs/DialogSystemError */ "./resources/js/components/ErrorDialogs/DialogSystemError.vue");
 /* harmony import */ var _ErrorDialogs_DialogLoginError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ErrorDialogs/DialogLoginError */ "./resources/js/components/ErrorDialogs/DialogLoginError.vue");
 /* harmony import */ var _ErrorDialogs_DialogNotFoundError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ErrorDialogs/DialogNotFoundError */ "./resources/js/components/ErrorDialogs/DialogNotFoundError.vue");
+//
+//
+//
 //
 //
 //
@@ -36522,79 +36525,85 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-app",
+    "div",
     [
       _c("router-view"),
       _vm._v(" "),
       _c(
-        "v-dialog",
-        {
-          attrs: { "max-width": "500", persistent: "" },
-          model: {
-            value: _vm.dialogInternalErr,
-            callback: function($$v) {
-              _vm.dialogInternalErr = $$v
-            },
-            expression: "dialogInternalErr"
-          }
-        },
+        "v-app",
         [
-          _c("dialog-system-error", {
-            attrs: { persistent: "" },
-            on: {
-              close: function($event) {
-                _vm.dialogInternalErr = false
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "500", persistent: "" },
+              model: {
+                value: _vm.dialogInternalErr,
+                callback: function($$v) {
+                  _vm.dialogInternalErr = $$v
+                },
+                expression: "dialogInternalErr"
               }
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          attrs: { "max-width": "500", persistent: "" },
-          model: {
-            value: _vm.dialogLoginErr,
-            callback: function($$v) {
-              _vm.dialogLoginErr = $$v
             },
-            expression: "dialogLoginErr"
-          }
-        },
-        [
-          _c("dialog-login-error", {
-            on: {
-              close: function($event) {
-                _vm.dialogLoginErr = false
+            [
+              _c("dialog-system-error", {
+                attrs: { persistent: "" },
+                on: {
+                  close: function($event) {
+                    _vm.dialogInternalErr = false
+                  }
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "500", persistent: "" },
+              model: {
+                value: _vm.dialogLoginErr,
+                callback: function($$v) {
+                  _vm.dialogLoginErr = $$v
+                },
+                expression: "dialogLoginErr"
               }
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          attrs: { "max-width": "500", persistent: "" },
-          model: {
-            value: _vm.dialogNotFoundError,
-            callback: function($$v) {
-              _vm.dialogNotFoundError = $$v
             },
-            expression: "dialogNotFoundError"
-          }
-        },
-        [
-          _c("dialog-not-found-error", {
-            on: {
-              close: function($event) {
-                _vm.dialogNotFoundError = false
+            [
+              _c("dialog-login-error", {
+                on: {
+                  close: function($event) {
+                    _vm.dialogLoginErr = false
+                  }
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "500", persistent: "" },
+              model: {
+                value: _vm.dialogNotFoundError,
+                callback: function($$v) {
+                  _vm.dialogNotFoundError = $$v
+                },
+                expression: "dialogNotFoundError"
               }
-            }
-          })
+            },
+            [
+              _c("dialog-not-found-error", {
+                on: {
+                  close: function($event) {
+                    _vm.dialogNotFoundError = false
+                  }
+                }
+              })
+            ],
+            1
+          )
         ],
         1
       )
@@ -80015,7 +80024,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routers_router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routers/router.js */ "./resources/js/routers/router.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helpers_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/User */ "./resources/js/helpers/User.js");
+/* harmony import */ var _helpers_User_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/User.js */ "./resources/js/helpers/User.js");
 /* harmony import */ var vue_swal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-swal */ "./node_modules/vue-swal/dist/vue-swal.js");
 /* harmony import */ var vue_swal__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_swal__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var vuetify_dist_vuetify_min_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/dist/vuetify.min.css */ "./node_modules/vuetify/dist/vuetify.min.css");
@@ -80036,7 +80045,7 @@ window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a.create({
 window.axios.interceptors.response.use(function (res) {
   if (!!res.data.error) {
     if (!!res.data.not_authenticated) {
-      if (_helpers_User__WEBPACK_IMPORTED_MODULE_4__["default"].loggedIn()) {
+      if (_helpers_User_js__WEBPACK_IMPORTED_MODULE_4__["default"].loggedIn()) {
         EventBus.$emit('notlogin_error');
       }
     } else {
@@ -80066,7 +80075,7 @@ window.axios.interceptors.response.use(function (res) {
 
   return Promise.reject(error);
 });
-Vue.prototype.$user = _helpers_User__WEBPACK_IMPORTED_MODULE_4__["default"];
+Vue.prototype.$user = _helpers_User_js__WEBPACK_IMPORTED_MODULE_4__["default"];
 Vue.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a, {
   iconfont: 'md',
   // override colors
@@ -81406,7 +81415,6 @@ function () {
     //             axios.get('/api/user', {
     //                 params: {
     //                     token: AppStorage.getToken(),
-    //                     ot: AppStorage.getUser().outlets[0].id
     //                 }
     //             }, {
     //                     headers: {
@@ -81499,6 +81507,9 @@ var routes = [{
   }, {
     path: '/logout',
     component: _components_Auth_AppLogout__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }, {
+    path: '*',
+    redirect: '/'
   }],
   meta: {
     requiresAuth: true
@@ -81512,7 +81523,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
     };
   },
   routes: routes,
-  hashbang: false
+  hashbang: false,
+  mode: 'history'
 });
 
 router.beforeEach(
@@ -81564,26 +81576,9 @@ function () {
             return _context.abrupt("return");
 
           case 13:
-            if (!(to.path === '/login')) {
-              _context.next = 17;
-              break;
-            }
-
-            if (!_helpers_User__WEBPACK_IMPORTED_MODULE_9__["default"].loggedIn()) {
-              _context.next = 17;
-              break;
-            }
-
-            next({
-              path: '/',
-              replace: true
-            });
-            return _context.abrupt("return");
-
-          case 17:
             next();
 
-          case 18:
+          case 14:
           case "end":
             return _context.stop();
         }
