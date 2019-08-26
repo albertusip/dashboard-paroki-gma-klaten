@@ -32061,6 +32061,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -37670,7 +37671,8 @@ var render = function() {
                             centered: "",
                             color: "cyan",
                             dark: "",
-                            "icons-and-text": ""
+                            "icons-and-text": "",
+                            "show-arrows": ""
                           },
                           model: {
                             value: _vm.activeTab,

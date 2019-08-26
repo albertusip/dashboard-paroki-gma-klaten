@@ -96,6 +96,7 @@
                                 dark
                                 icons-and-text
                                 v-model="activeTab"
+                                show-arrows
                             >
                                 <v-tabs-slider color="yellow"></v-tabs-slider>
                                 
