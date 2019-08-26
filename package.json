@@ -27,6 +27,7 @@
     "dependencies": {
         "apexcharts": "^3.8.3",
         "vue-apexcharts": "^1.4.0",
+        "vue-loading-overlay": "^3.2.0",
         "vue-router": "^3.0.7",
         "vue-swal": "^1.0.0",
         "vue-typeahead": "^2.3.2",

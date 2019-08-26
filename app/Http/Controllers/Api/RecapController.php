@@ -27,6 +27,7 @@ class RecapController extends Controller
             $this->statusPerkawinan($idWilayah);
             $this->statusKehidupan($idWilayah);
             $this->statusBaptis($idWilayah);
+            $this->statusKelahiran($idWilayah);
         }
     }
 
@@ -249,6 +250,62 @@ class RecapController extends Controller
             
         }
             
+        $this->insertData($filteredData, $idWilayah);
+    }
+
+    public function statusKelahiran($idWilayah)
+    {
+        $results = Umat::with('wilayah')
+                        ->whereHas('wilayah')
+                        ->select('jen_kel', DB::raw("DATE_FORMAT(tgl_lahir, '%Y') yearBase"),DB::raw("DATE_FORMAT(tgl_lahir, '%Y') year"), DB::raw('count(*) as total'))
+                        ->whereYear('tgl_lahir', '>=', date('Y') - 10)
+                        ->whereYear('tgl_lahir', '<=', date('Y'))
+                        ->where('id_wilayah', $idWilayah)
+                        ->groupBy('year', 'yearBase', 'jen_kel')
+                        ->get();
+                        
+        $dataKelahiran = [];
+        foreach ($results as $key => $value) {
+            
+            if ($value->jen_kel == 1) {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'laki_laki';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            } else if ($value->jen_kel == 2) {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'perempuan';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            } else {
+                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'lain_lain';
+                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            }
+                
+        }
+        
+        $filteredData = [];
+        $jenisKelamin = [
+                        'laki_laki',
+                        'perempuan',
+                        'lain_lain'
+                    ];
+        foreach ($dataKelahiran as $key => $value) {
+            $temp = [];
+
+            foreach ($value as $item) {
+                $temp[snake_case($item['jen_kel'])] = $item['total'];
+                
+            }
+
+            foreach ($jenisKelamin as $jk) {
+                if(empty($temp[snake_case($jk)])) {
+                    $temp[snake_case($jk)] = 0;
+                }
+            }
+
+            $filteredData[] = [
+                'year' => $key,
+                'data' => $temp
+            ];
+            
+        }
         $this->insertData($filteredData, $idWilayah);
     }
 

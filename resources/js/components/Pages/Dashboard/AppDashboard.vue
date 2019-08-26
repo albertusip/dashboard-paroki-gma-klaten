@@ -61,13 +61,32 @@
                         </v-card>
                     </v-flex>
 
-                    <v-flex xs12>
+                    <v-flex xs6>
                         <v-select
                             v-model="selected"
                             :items="wilayah"
                             item-text="nama_wilayah"
                             item-value="id_wilayah"
                         ></v-select>
+                    </v-flex>
+
+                    <v-flex xs6>
+                        <div class="text-right">
+                            
+                        </div>
+                        <div class="vld-parent text-right">
+                            <loading 
+                            :active.sync="isLoading" 
+                            :can-cancel="false"
+                            :is-full-page="fullPage"></loading>
+                            <v-btn 
+                            color="warning"
+                            @click.prevent="syncData"
+                            >
+                                <v-icon>sync</v-icon>    
+                                Sinkronasi Data
+                            </v-btn>
+                        </div>
                     </v-flex>
 
                     <v-flex xs12>
@@ -141,6 +160,11 @@
 </template>
 
 <script>
+// Import component
+import VueLoading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 import EkonomiCharts from './AppEkonomiCharts.vue'
 import PerkawinanCharts from './AppPerkawinanCharts.vue'
 import KesehatanCharts from './AppKesehatanCharts.vue'
@@ -150,6 +174,7 @@ import VueApexCharts from 'vue-apexcharts'
 
 export default {
     components: {
+        loading: VueLoading,
         ekonomicharts: EkonomiCharts,
         perkawinancharts: PerkawinanCharts,
         kesehatancharts: KesehatanCharts,
@@ -159,6 +184,8 @@ export default {
     },
     data() {
         return {
+            isLoading: false,
+            fullPage: true,
             dataTabs: [
                 {
                     name: 'Ekonomi Umat',
@@ -389,6 +416,31 @@ export default {
                 .catch(error => reject(error))
             })
         },
+        syncData() {
+            console.log('loading');
+            this.isLoading = true
+            return axios.get('/api/recap', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-type': 'application/json'
+                    },
+                    params: {
+                        'id_wilayah': this.selected
+                    }
+                })
+                .then(res => {
+                    if (res.status == 200) {
+                        this.isLoading = false
+                        swal({
+                            title: "Berhasil Sinkronisasi Data!",
+                            icon: "success",
+                            button: "Tutup",
+                        });
+                    }
+                }
+                )
+            
+        }
     },
     watch: {
         selected() {

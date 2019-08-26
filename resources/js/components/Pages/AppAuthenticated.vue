@@ -6,7 +6,13 @@
             ></v-toolbar-side-icon>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-            <v-btn flat>Logout</v-btn>
+            <v-btn 
+                flat
+                router
+                :to="'/logout'"
+            > 
+                Logout 
+            </v-btn>
             </v-toolbar-items>
         </v-toolbar>
         
@@ -60,33 +66,13 @@ export default {
                 },
                 
             ],
-            // toolbarMenu: [
-            //     { 
-            //         icon: "account_circle",
-            //         title: "Account",
-            //         route: "/account"
-            //     },
-            //     {
-            //         icon: "store",
-            //         title: "My Outlets",
-            //         route: "/myoutlets"
-            //     },
-            //     {
-            //         icon: "contact_support",
-            //         title: "Support",
-            //         route: "/support"
-            //     },
-            //     {
-            //         icon: "feedback",
-            //         title: "Feedback",
-            //         route: "/feedback"
-            //     },
-            //     {
-            //         icon: "exit_to_app",
-            //         title: "Logout",
-            //         route: "/logout"
-            //     }
-            // ]
+            toolbarMenu: [
+                {
+                    icon: "exit_to_app",
+                    title: "Logout",
+                    route: "/logout"
+                }
+            ]
         }
     },
     methods: {
