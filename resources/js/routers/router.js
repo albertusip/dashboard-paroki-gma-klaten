@@ -47,14 +47,15 @@ import User from '../helpers/User'
 router.beforeEach(async (to, from, next) => {
     // check if the route requires authentication and user is not logged in
     if (to.matched.some(route => route.meta.requiresAuth)) {
+        
         try {
             if (!User.loggedIn()) {
                 next({ path: '/login', replace: true })
                 return
             }
-            if (to.path !== '/logout') {
-                await User.updateInfo()
-            }
+            // if (to.path !== '/logout') {
+            //     await User.updateInfo()
+            // }
         } catch (err) {
             return
         }

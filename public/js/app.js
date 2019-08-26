@@ -31474,7 +31474,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!this.$refs.form.validate()) {
-                  _context.next = 20;
+                  _context.next = 21;
                   break;
                 }
 
@@ -31489,45 +31489,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 res1 = _context.sent;
+                console.log(res1);
 
                 if (!(res1.data.authenticate == true)) {
-                  _context.next = 12;
+                  _context.next = 13;
                   break;
                 }
 
-                _context.next = 10;
+                _context.next = 11;
                 return this.$user.storeSession(res1.data).then(function () {
                   return _this.$router.replace('/');
                 });
 
-              case 10:
-                _context.next = 14;
+              case 11:
+                _context.next = 15;
                 break;
 
-              case 12:
+              case 13:
                 this.wrongCredentials = true;
                 setTimeout(function () {
                   _this.wrongCredentials = false;
                 }, 3000);
 
-              case 14:
-                _context.next = 19;
+              case 15:
+                _context.next = 20;
                 break;
 
-              case 16:
-                _context.prev = 16;
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](3);
                 console.log(_context.t0);
 
-              case 19:
+              case 20:
                 this.isSubmitted = false;
 
-              case 20:
+              case 21:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 16]]);
+        }, _callee, this, [[3, 17]]);
       }));
 
       function login() {
@@ -81540,7 +81541,7 @@ function () {
             if (!to.matched.some(function (route) {
               return route.meta.requiresAuth;
             })) {
-              _context.next = 13;
+              _context.next = 10;
               break;
             }
 
@@ -81558,32 +81559,23 @@ function () {
             return _context.abrupt("return");
 
           case 5:
-            if (!(to.path !== '/logout')) {
-              _context.next = 8;
-              break;
-            }
-
-            _context.next = 8;
-            return _helpers_User__WEBPACK_IMPORTED_MODULE_9__["default"].updateInfo();
-
-          case 8:
-            _context.next = 13;
+            _context.next = 10;
             break;
 
-          case 10:
-            _context.prev = 10;
+          case 7:
+            _context.prev = 7;
             _context.t0 = _context["catch"](1);
             return _context.abrupt("return");
 
-          case 13:
+          case 10:
             next();
 
-          case 14:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 10]]);
+    }, _callee, null, [[1, 7]]);
   }));
 
   return function (_x, _x2, _x3) {

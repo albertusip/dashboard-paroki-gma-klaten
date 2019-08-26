@@ -85,7 +85,9 @@ export default {
                     
                     const res1 = await this.$user.login(request)
                     
+                    console.log(res1);
                     
+
                     if(res1.data.authenticate == true) {
                         // console.log(this.$user.storeSession(res1.data));
                         // this.$router.replace("/dashboard");
