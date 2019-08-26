@@ -1,30 +1,27 @@
 <template>
-    <div>
+    <v-app>
         <router-view></router-view>
-        <v-app>
-            
-            <v-dialog
-                v-model="dialogInternalErr"
-                max-width="500" persistent
-            >
-                <dialog-system-error @close="dialogInternalErr = false" persistent></dialog-system-error>
-            </v-dialog>
+        <v-dialog
+            v-model="dialogInternalErr"
+            max-width="500" persistent
+        >
+            <dialog-system-error @close="dialogInternalErr = false" persistent></dialog-system-error>
+        </v-dialog>
 
-            <v-dialog
-                v-model="dialogLoginErr"
-                max-width="500" persistent
-            >
-                <dialog-login-error @close="dialogLoginErr = false"></dialog-login-error>
-            </v-dialog>
+        <v-dialog
+            v-model="dialogLoginErr"
+            max-width="500" persistent
+        >
+            <dialog-login-error @close="dialogLoginErr = false"></dialog-login-error>
+        </v-dialog>
 
-            <v-dialog
-                v-model="dialogNotFoundError"
-                max-width="500" persistent
-            >
-                <dialog-not-found-error @close="dialogNotFoundError = false"></dialog-not-found-error>
-            </v-dialog>
-        </v-app>
-    </div>
+        <v-dialog
+            v-model="dialogNotFoundError"
+            max-width="500" persistent
+        >
+            <dialog-not-found-error @close="dialogNotFoundError = false"></dialog-not-found-error>
+        </v-dialog>
+    </v-app>
 </template>
 
 <script>

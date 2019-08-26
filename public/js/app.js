@@ -31644,9 +31644,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -36526,85 +36523,79 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-app",
     [
       _c("router-view"),
       _vm._v(" "),
       _c(
-        "v-app",
+        "v-dialog",
+        {
+          attrs: { "max-width": "500", persistent: "" },
+          model: {
+            value: _vm.dialogInternalErr,
+            callback: function($$v) {
+              _vm.dialogInternalErr = $$v
+            },
+            expression: "dialogInternalErr"
+          }
+        },
         [
-          _c(
-            "v-dialog",
-            {
-              attrs: { "max-width": "500", persistent: "" },
-              model: {
-                value: _vm.dialogInternalErr,
-                callback: function($$v) {
-                  _vm.dialogInternalErr = $$v
-                },
-                expression: "dialogInternalErr"
+          _c("dialog-system-error", {
+            attrs: { persistent: "" },
+            on: {
+              close: function($event) {
+                _vm.dialogInternalErr = false
               }
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "500", persistent: "" },
+          model: {
+            value: _vm.dialogLoginErr,
+            callback: function($$v) {
+              _vm.dialogLoginErr = $$v
             },
-            [
-              _c("dialog-system-error", {
-                attrs: { persistent: "" },
-                on: {
-                  close: function($event) {
-                    _vm.dialogInternalErr = false
-                  }
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-dialog",
-            {
-              attrs: { "max-width": "500", persistent: "" },
-              model: {
-                value: _vm.dialogLoginErr,
-                callback: function($$v) {
-                  _vm.dialogLoginErr = $$v
-                },
-                expression: "dialogLoginErr"
+            expression: "dialogLoginErr"
+          }
+        },
+        [
+          _c("dialog-login-error", {
+            on: {
+              close: function($event) {
+                _vm.dialogLoginErr = false
               }
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "500", persistent: "" },
+          model: {
+            value: _vm.dialogNotFoundError,
+            callback: function($$v) {
+              _vm.dialogNotFoundError = $$v
             },
-            [
-              _c("dialog-login-error", {
-                on: {
-                  close: function($event) {
-                    _vm.dialogLoginErr = false
-                  }
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-dialog",
-            {
-              attrs: { "max-width": "500", persistent: "" },
-              model: {
-                value: _vm.dialogNotFoundError,
-                callback: function($$v) {
-                  _vm.dialogNotFoundError = $$v
-                },
-                expression: "dialogNotFoundError"
+            expression: "dialogNotFoundError"
+          }
+        },
+        [
+          _c("dialog-not-found-error", {
+            on: {
+              close: function($event) {
+                _vm.dialogNotFoundError = false
               }
-            },
-            [
-              _c("dialog-not-found-error", {
-                on: {
-                  close: function($event) {
-                    _vm.dialogNotFoundError = false
-                  }
-                }
-              })
-            ],
-            1
-          )
+            }
+          })
         ],
         1
       )
