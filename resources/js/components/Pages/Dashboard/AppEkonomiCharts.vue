@@ -48,6 +48,10 @@
         </v-flex>
         <v-flex xs12>
             <div class="headline my-3">Ekonomi per Tahun {{ this.selectedNameWilayah }} </div>
+            <div>
+                Range Tahun
+                
+            </div>
             <apexchart
             type=bar
             height= "350px"

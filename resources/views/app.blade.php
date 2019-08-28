@@ -10,7 +10,7 @@
     <link rel="stylesheet" sizes="192x192" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div id="app tess">
+    <div id="app">
         <dashboard-app></dashboard-app>
     </div>
   <script src="{{ asset('js/app.js') }}"></script>

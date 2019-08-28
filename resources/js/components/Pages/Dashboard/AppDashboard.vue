@@ -160,6 +160,7 @@
     </v-container>
 </template>
 
+
 <script>
 // Import component
 import VueLoading from 'vue-loading-overlay';
@@ -173,6 +174,8 @@ import BaptisCharts from './AppBaptisCharts.vue'
 import KelahiranCharts from './AppKelahiranCharts.vue'
 import VueApexCharts from 'vue-apexcharts'
 
+// Status kematian digabung dengan status kelahiran. hanya menampilkan RIP
+// Status kehidupan diganti status kesehatan dan berisi semua recor di tabl kesehatan
 export default {
     components: {
         loading: VueLoading,
@@ -205,7 +208,7 @@ export default {
                     icon: 'pool'
                 },
                 {
-                    name: 'Status Kelahiran',
+                    name: 'Natalitas / Mortalitas',
                     icon: 'pregnant_woman'
                 },
                 ],

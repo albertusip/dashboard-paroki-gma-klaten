@@ -2,7 +2,7 @@
     <v-layout row wrap>
 
         <v-flex xs12>
-            <div class="headline my-3">Kelahiran per Tahun Wilayah {{ this.selectedNameWilayah }}</div>
+            <div class="headline my-3">Kelahiran per Tahun {{ this.selectedNameWilayah }}</div>
             <apexchart
             type=bar
             height= "350px"
@@ -11,12 +11,30 @@
             />
         </v-flex>
         <v-flex xs12>
-            <div class="headline my-3">Kelahiran per 10 Tahun Keseluruhan Wilayah {{ this.selectedNameWilayah }}</div>
+            <div class="headline my-3">Kelahiran per 10 Tahun Keseluruhan Wilayah</div>
             <apexchart
             type=bar
             height= "350px"
             :options="chartOptionsKelahiranPerTahunKeseluruhanWilayah"
             :series="seriesKelahiranPerTahunKeseluruhanWilayah"
+            />
+        </v-flex>
+        <v-flex xs12>
+            <div class="headline my-3">Kematian per Tahun {{ this.selectedNameWilayah }}</div>
+            <apexchart
+            type=bar
+            height= "350px"
+            :options="chartOptionsKematianPerTahunWilayah"
+            :series="seriesKematianPerTahunWilayah"
+            />
+        </v-flex>
+        <v-flex xs12>
+            <div class="headline my-3">Kematian per 10 Tahun Keseluruhan Wilayah</div>
+            <apexchart
+            type=bar
+            height= "350px"
+            :options="chartOptionsKematianPerTahunKeseluruhanWilayah"
+            :series="seriesKematianPerTahunKeseluruhanWilayah"
             />
         </v-flex>
     </v-layout>
@@ -48,25 +66,38 @@ export default {
     },
     data() {
         return {
-            statusPieKelahiranCurrentWilayah: true,
-            statusPieKelahiranAllWilayah: true,
-            dataPieKelahiran: [],
             dataKelahiranChartCurrentWilayahByYear: [],
             dataKelahiranChartAllWilayahByYear: [],
+            dataKematianChartCurrentWilayahByYear: [],
+            dataKematianChartAllWilayahByYear: [],
             tempDataKelahiranChartAllWilayahByYear: [{
                     data: [], // Laki - Laki
                 },{
                     data: [], // Perempuan
                 },{
                     data: [], // Lain - Lain
-                }],
+            }],
             tempDataKelahiranChartCurrentWilayahByYear: [{
                     data: [], // Laki - Laki
                 },{
                     data: [], // Perempuan
                 },{
                     data: [], // Lain - Lain
-                }],
+            }],
+             tempDataKematianChartAllWilayahByYear: [{
+                    data: [], // Laki - Laki
+                },{
+                    data: [], // Perempuan
+                },{
+                    data: [], // Lain - Lain
+            }],
+            tempDataKematianChartCurrentWilayahByYear: [{
+                    data: [], // Laki - Laki
+                },{
+                    data: [], // Perempuan
+                },{
+                    data: [], // Lain - Lain
+            }],
             seriesKelahiranPerTahunWilayah: [{
                     name: "Laki - Laki",
                     data: [1]
@@ -124,6 +155,98 @@ export default {
                 }
             },
             chartOptionsKelahiranPerTahunKeseluruhanWilayah: {
+                chart: {
+                    stacked: true,
+                    toolbar: {
+                        show: true
+                    },
+                    zoom: {
+                        enabled: true
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        legend: {
+                            position: 'bottom',
+                            offsetX: -10,
+                            offsetY: 0
+                        }
+                    }
+                }],
+                plotOptions: {
+                    bar: {
+                    horizontal: false,
+                    },
+                },
+
+                xaxis: {
+                    categories: [1100],
+                },
+                legend: {
+                    position: 'bottom',
+                },
+                fill: {
+                    opacity: 1
+                }
+            },
+            seriesKematianPerTahunWilayah: [{
+                    name: "Laki - Laki",
+                    data: [1]
+                },{
+                    name: "Perempuan",
+                    data: [1]
+                },{
+                    name: "Lain - Lain",
+                    data: [1]
+            }],
+            seriesKematianPerTahunKeseluruhanWilayah: [{
+                    name: "Laki-Laki",
+                    data: [1]
+                },{
+                    name: "Perempuan",
+                    data: [1]
+                },{
+                    name: "Lain - Lain",
+                    data: [1]
+            }],
+            chartOptionsKematianPerTahunWilayah: {
+                chart: {
+                    stacked: true,
+                    toolbar: {
+                        show: true
+                    },
+                    zoom: {
+                        enabled: true
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        legend: {
+                            position: 'bottom',
+                            offsetX: -10,
+                            offsetY: 0
+                        }
+                    }
+                }],
+                plotOptions: {
+                    bar: {
+                    horizontal: false,
+                    },
+                },
+
+                xaxis: {
+                    categories: [1100],
+                },
+                legend: {
+                    position: 'bottom',
+                },
+                fill: {
+                    opacity: 1
+                }
+            },
+            chartOptionsKematianPerTahunKeseluruhanWilayah: {
                 chart: {
                     stacked: true,
                     toolbar: {

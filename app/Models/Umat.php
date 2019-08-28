@@ -475,7 +475,7 @@ class Umat extends Model
                         ->where('id_wilayah', $id_wilayah)
                         ->groupBy('year', 'id_sts_sehat')
                         ->get();
-                        
+        
         $dataKesehatan = [];
         foreach ($results as $key => $value) {
             

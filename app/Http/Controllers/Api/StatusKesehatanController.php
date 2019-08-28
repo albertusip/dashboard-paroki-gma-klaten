@@ -113,11 +113,6 @@ class StatusKesehatanController extends Controller
                     'all_wilayah' => $this->umat->getAllWilayahKesehatanChart($request->id_wilayah),
                 ];
                 break;
-            case 'allDataKesehatan':
-                return [
-                    'yearly_chart' => $this->umat->getAllDataKesehatanChartByYear($request->id_wilayah),
-                ];
-                break;
         }
     }
 }

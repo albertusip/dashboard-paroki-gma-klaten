@@ -31675,6 +31675,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // Status kematian digabung dengan status kelahiran. hanya menampilkan RIP
+// Status kehidupan diganti status kesehatan dan berisi semua recor di tabl kesehatan
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -32002,6 +32004,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -32564,6 +32567,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -32597,7 +32604,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: 'Status Baptis',
         icon: 'pool'
       }, {
-        name: 'Status Kelahiran',
+        name: 'Natalitas / Mortalitas',
         icon: 'pregnant_woman'
       }],
       activeTab: 0,
@@ -32958,6 +32965,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -33127,6 +33152,96 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         },
         xaxis: {
           categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
+        },
+        legend: {
+          position: 'bottom'
+        },
+        fill: {
+          opacity: 1
+        }
+      },
+      seriesKematianPerTahunWilayah: [{
+        name: "Laki - Laki",
+        data: [1]
+      }, {
+        name: "Perempuan",
+        data: [1]
+      }, {
+        name: "Lain - Lain",
+        data: [1]
+      }],
+      seriesKematianPerTahunKeseluruhanWilayah: [{
+        name: "Laki-Laki",
+        data: [1]
+      }, {
+        name: "Perempuan",
+        data: [1]
+      }, {
+        name: "Lain - Lain",
+        data: [1]
+      }],
+      chartOptionsKematianPerTahunWilayah: {
+        chart: {
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        xaxis: {
+          categories: [1100]
+        },
+        legend: {
+          position: 'bottom'
+        },
+        fill: {
+          opacity: 1
+        }
+      },
+      chartOptionsKematianPerTahunKeseluruhanWilayah: {
+        chart: {
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        xaxis: {
+          categories: [1100]
         },
         legend: {
           position: 'bottom'
@@ -33363,11 +33478,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      statusPieKelahiranCurrentWilayah: true,
-      statusPieKelahiranAllWilayah: true,
-      dataPieKelahiran: [],
       dataKelahiranChartCurrentWilayahByYear: [],
       dataKelahiranChartAllWilayahByYear: [],
+      dataKematianChartCurrentWilayahByYear: [],
+      dataKematianChartAllWilayahByYear: [],
       tempDataKelahiranChartAllWilayahByYear: [{
         data: [] // Laki - Laki
 
@@ -33379,6 +33493,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       }],
       tempDataKelahiranChartCurrentWilayahByYear: [{
+        data: [] // Laki - Laki
+
+      }, {
+        data: [] // Perempuan
+
+      }, {
+        data: [] // Lain - Lain
+
+      }],
+      tempDataKematianChartAllWilayahByYear: [{
+        data: [] // Laki - Laki
+
+      }, {
+        data: [] // Perempuan
+
+      }, {
+        data: [] // Lain - Lain
+
+      }],
+      tempDataKematianChartCurrentWilayahByYear: [{
         data: [] // Laki - Laki
 
       }, {
@@ -37235,6 +37369,46 @@ var render = function() {
           })
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs12: "" } },
+        [
+          _c("div", { staticClass: "headline my-3" }, [
+            _vm._v("Kematian per Tahun " + _vm._s(this.selectedNameWilayah))
+          ]),
+          _vm._v(" "),
+          _c("apexchart", {
+            attrs: {
+              type: "bar",
+              height: "350px",
+              options: _vm.chartOptionsKematianPerTahunWilayah,
+              series: _vm.seriesKematianPerTahunWilayah
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs12: "" } },
+        [
+          _c("div", { staticClass: "headline my-3" }, [
+            _vm._v("Kematian per 10 Tahun Keseluruhan Wilayah")
+          ]),
+          _vm._v(" "),
+          _c("apexchart", {
+            attrs: {
+              type: "bar",
+              height: "350px",
+              options: _vm.chartOptionsKematianPerTahunKeseluruhanWilayah,
+              series: _vm.seriesKematianPerTahunKeseluruhanWilayah
+            }
+          })
+        ],
+        1
       )
     ],
     1
@@ -37959,6 +38133,10 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
+          _c("div", [
+            _vm._v("\n            Range Tahun\n            \n        ")
+          ]),
+          _vm._v(" "),
           _c("apexchart", {
             attrs: {
               type: "bar",
@@ -38005,9 +38183,7 @@ var render = function() {
         { attrs: { xs12: "" } },
         [
           _c("div", { staticClass: "headline my-3" }, [
-            _vm._v(
-              "Kelahiran per Tahun Wilayah " + _vm._s(this.selectedNameWilayah)
-            )
+            _vm._v("Kelahiran per Tahun " + _vm._s(this.selectedNameWilayah))
           ]),
           _vm._v(" "),
           _c("apexchart", {
@@ -38027,10 +38203,7 @@ var render = function() {
         { attrs: { xs12: "" } },
         [
           _c("div", { staticClass: "headline my-3" }, [
-            _vm._v(
-              "Kelahiran per 10 Tahun Keseluruhan Wilayah " +
-                _vm._s(this.selectedNameWilayah)
-            )
+            _vm._v("Kelahiran per 10 Tahun Keseluruhan Wilayah")
           ]),
           _vm._v(" "),
           _c("apexchart", {
