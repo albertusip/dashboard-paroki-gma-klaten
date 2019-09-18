@@ -31439,12 +31439,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -31479,62 +31473,69 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                console.log('if 0');
+
                 if (!this.$refs.form.validate()) {
-                  _context.next = 21;
+                  _context.next = 26;
                   break;
                 }
 
+                console.log('if 1');
                 this.isSubmitted = true;
                 request = {
                   username: this.form.username.value,
                   password: this.form.password.value
                 };
-                _context.prev = 3;
-                _context.next = 6;
+                _context.prev = 5;
+                _context.next = 8;
                 return this.$user.login(request);
 
-              case 6:
+              case 8:
                 res1 = _context.sent;
-                console.log(res1);
+                console.log('if 3');
 
                 if (!(res1.data.authenticate == true)) {
-                  _context.next = 13;
+                  _context.next = 17;
                   break;
                 }
 
-                _context.next = 11;
+                console.log(res1.data.authenticate); // this.$router.replace("/dashboard");
+
+                console.log('if 4');
+                _context.next = 15;
                 return this.$user.storeSession(res1.data).then(function () {
                   return _this.$router.replace('/');
                 });
-
-              case 11:
-                _context.next = 15;
-                break;
-
-              case 13:
-                this.wrongCredentials = true;
-                setTimeout(function () {
-                  _this.wrongCredentials = false;
-                }, 3000);
 
               case 15:
                 _context.next = 20;
                 break;
 
               case 17:
-                _context.prev = 17;
-                _context.t0 = _context["catch"](3);
-                console.log(_context.t0);
+                this.wrongCredentials = true;
+                console.log('if 5');
+                setTimeout(function () {
+                  _this.wrongCredentials = false;
+                }, 3000);
 
               case 20:
+                _context.next = 25;
+                break;
+
+              case 22:
+                _context.prev = 22;
+                _context.t0 = _context["catch"](5);
+                console.log(_context.t0);
+
+              case 25:
                 this.isSubmitted = false;
 
-              case 21:
+              case 26:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 17]]);
+        }, _callee, this, [[5, 22]]);
       }));
 
       function login() {
@@ -31585,7 +31586,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 3:
               res = _context.sent;
               this.$user.clearStorage();
-              this.$router.replace('/');
+              this.$router.replace('/login');
               _context.next = 11;
               break;
 
@@ -31650,33 +31651,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// Import component
- // Import stylesheet
 
 
-
-
- // Status kematian digabung dengan status kelahiran. hanya menampilkan RIP
-// Status kehidupan diganti status kesehatan dan berisi semua recor di tabl kesehatan
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -31934,6 +31910,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -32065,6 +32047,95 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -32089,12 +32160,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      itemsTahunCurrentWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      itemsTahunAllWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      selectedTahunCurrentWilayah: '10 Tahun',
+      selectedTahunAllWilayah: '10 Tahun',
+      dataSelectedTahunCurrentWilayah: [10, ''],
+      dataSelectedTahunAllWilayah: [10, ''],
+      statusGraphByMonth: true,
+      statusGraphByYearCurrentWilayah: true,
+      statusGraphByYearAllWilayah: true,
       statusPieBaptisCurrentWilayah: true,
       statusPieBaptisAllWilayah: true,
-      dataPieBaptis: [],
       dataMonthlyBaptis: [],
-      dataYearlyBaptis: [],
-      tempDataYearlyBaptis: [{
+      dataYearlyBaptisCurrentWilayah: [],
+      dataYearlyBaptisAllWilayah: [],
+      tempDataYearlyBaptisCurrentWilayah: [{
+        data: [] // Baptis Bayi
+
+      }, {
+        data: [] // Baptis Dewasa
+
+      }, {
+        data: [] // Belum Baptis
+
+      }],
+      tempDataYearlyBaptisAllWilayah: [{
         data: [] // Baptis Bayi
 
       }, {
@@ -32116,15 +32206,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }],
       seriesBaptisPerBulan: [{
         name: "Baptis Bayi",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }, {
         name: "Baptis Dewasa",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }, {
         name: "Belum Baptis",
-        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }],
-      seriesBaptisPerTahun: [{
+      seriesBaptisPerTahunCurrentWilayah: [{
         name: "Baptis Bayi",
         data: [1]
       }, {
@@ -32134,9 +32224,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: "Belum Baptis",
         data: [1]
       }],
-      seriesProsentasePieBaptisWilayah: [1, 1],
-      seriesProsentasePieBaptisKeseluruhanWilayah: [1, 1],
-      chartOptionsProsentasePieBaptisWilayah: {
+      seriesBaptisPerTahunAllWilayah: [{
+        name: "Baptis Bayi",
+        data: [1]
+      }, {
+        name: "Baptis Dewasa",
+        data: [1]
+      }, {
+        name: "Belum Baptis",
+        data: [1]
+      }],
+      seriesPersentasePieBaptisWilayah: [1, 1],
+      seriesPersentasePieBaptisKeseluruhanWilayah: [1, 1],
+      chartOptionsPersentasePieBaptisWilayah: {
         labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
         decimalsInFloat: 4,
         responsive: [{
@@ -32153,7 +32253,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }]
       },
-      chartOptionsProsentasePieBaptisKeseluruhanWilayah: {
+      chartOptionsPersentasePieBaptisKeseluruhanWilayah: {
         labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
         responsive: [{
           breakpoint: 2400,
@@ -32173,7 +32273,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         chart: {
           type: 'line',
           toolbar: {
-            show: true
+            show: false
           },
           shadow: {
             enabled: false,
@@ -32207,14 +32307,93 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }
       },
-      chartOptionsBaptisPerTahun: {
+      chartOptionsBaptisPerTahunCurrentWilayah: {
         chart: {
-          stacked: true,
+          type: 'line',
           toolbar: {
-            show: true
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
           },
           zoom: {
-            enabled: true
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        xaxis: {
+          categories: [1100]
+        },
+        legend: {
+          position: 'bottom'
+        },
+        fill: {
+          opacity: 1
+        }
+      },
+      chartOptionsBaptisPerTahunAllWilayah: {
+        chart: {
+          type: 'line',
+          toolbar: {
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
           }
         },
         responsive: [{
@@ -32245,120 +32424,343 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    init: function () {
-      var _init = _asyncToGenerator(
+    initAll: function () {
+      var _initAll = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        var resDataPieBaptis, resDataGraphBaptis, tempXaxisMonthlyBaptis, tempXaxisYearlyBaptis, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
+                try {
+                  this.selectedTahunCurrentWilayah = this.itemsTahunCurrentWilayah[this.itemsTahunCurrentWilayah.length - 1];
+                  this.selectedTahunAllWilayah = this.itemsTahunAllWilayah[this.itemsTahunAllWilayah.length - 1];
+                } catch (error) {
+                  console.log(error);
+                }
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function initAll() {
+        return _initAll.apply(this, arguments);
+      }
+
+      return initAll;
+    }(),
+    initPie: function () {
+      var _initPie = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var resDataPieBaptis;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
                 return this.fetchPieBaptis();
 
               case 3:
-                resDataPieBaptis = _context.sent;
-                _context.next = 6;
-                return this.fetchGraphBaptis();
-
-              case 6:
-                resDataGraphBaptis = _context.sent;
-                this.dataMonthlyBaptis = resDataGraphBaptis.data.monthly_chart;
-                this.dataYearlyBaptis = resDataGraphBaptis.data.yearly_chart;
-                console.log(this.dataMonthlyBaptis);
+                resDataPieBaptis = _context2.sent;
 
                 if (resDataPieBaptis.data.current_wilayah.length != 0) {
                   this.statusPieBaptisCurrentWilayah = true;
-                  this.seriesProsentasePieBaptisWilayah = [resDataPieBaptis.data.current_wilayah.baptis_bayi, resDataPieBaptis.data.current_wilayah.baptis_dewasa, resDataPieBaptis.data.current_wilayah.belum_baptis];
+                  this.seriesPersentasePieBaptisWilayah = [resDataPieBaptis.data.current_wilayah.baptis_bayi, resDataPieBaptis.data.current_wilayah.baptis_dewasa, resDataPieBaptis.data.current_wilayah.belum_baptis];
                 } else {
                   this.statusPieBaptisCurrentWilayah = false;
                 }
 
                 if (resDataPieBaptis.data.all_wilayah.length != 0) {
                   this.statusPieBaptisAllWilayah = true;
-                  this.seriesProsentasePieBaptisKeseluruhanWilayah = [resDataPieBaptis.data.all_wilayah.baptis_bayi, resDataPieBaptis.data.all_wilayah.baptis_dewasa, resDataPieBaptis.data.all_wilayah.belum_baptis];
+                  this.seriesPersentasePieBaptisKeseluruhanWilayah = [resDataPieBaptis.data.all_wilayah.baptis_bayi, resDataPieBaptis.data.all_wilayah.baptis_dewasa, resDataPieBaptis.data.all_wilayah.belum_baptis];
                 } else {
                   this.statusPieBaptisAllWilayah = false;
                 }
 
-                tempXaxisMonthlyBaptis = [];
-                tempXaxisYearlyBaptis = [];
-                this.clearGraph();
-                this.chartOptionsBaptisPerBulan.xaxis.categories = [];
-                this.chartOptionsBaptisPerTahun.xaxis.categories = [];
-                this.dataYearlyBaptis.map(function (item, index) {
-                  tempXaxisYearlyBaptis.push(item.year);
-
-                  _this.tempDataYearlyBaptis[0].data.push(item.data.baptis_bayi);
-
-                  _this.tempDataYearlyBaptis[1].data.push(item.data.baptis_dewasa);
-
-                  _this.tempDataYearlyBaptis[2].data.push(item.data.belum_baptis);
-                });
-                this.dataMonthlyBaptis.map(function (item, index) {
-                  tempXaxisMonthlyBaptis.push(item.month);
-
-                  _this.tempDataMonthlyBaptis[0].data.push(item.data.baptis_bayi);
-
-                  _this.tempDataMonthlyBaptis[1].data.push(item.data.baptis_dewasa);
-
-                  _this.tempDataMonthlyBaptis[2].data.push(item.data.belum_baptis);
-                });
-
-                for (i = 0; i < 3; i++) {
-                  this.seriesBaptisPerTahun[i] = _objectSpread({}, this.seriesBaptisPerTahun[i], {}, {
-                    data: this.tempDataYearlyBaptis[i].data
-                  });
-                  this.seriesBaptisPerBulan[i] = _objectSpread({}, this.seriesBaptisPerBulan[i], {}, {
-                    data: this.tempDataMonthlyBaptis[i].data
-                  });
-                }
-
-                this.chartOptionsBaptisPerBulan = _objectSpread({}, this.chartOptionsBaptisPerBulan, {}, {
-                  xaxis: {
-                    categories: tempXaxisMonthlyBaptis
-                  }
-                });
-                this.chartOptionsBaptisPerTahun = _objectSpread({}, this.chartOptionsBaptisPerTahun, {}, {
-                  xaxis: {
-                    categories: tempXaxisYearlyBaptis
-                  }
-                });
-                _context.next = 27;
+                _context2.next = 11;
                 break;
 
-              case 24:
-                _context.prev = 24;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
 
-              case 27:
+              case 11:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this, [[0, 24]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
-      function init() {
-        return _init.apply(this, arguments);
+      function initPie() {
+        return _initPie.apply(this, arguments);
       }
 
-      return init;
+      return initPie;
     }(),
-    clearGraph: function clearGraph() {
-      this.tempDataYearlyBaptis[0].data = [];
+    initGraphByYearCurrentWilayah: function () {
+      var _initGraphByYearCurrentWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this = this;
+
+        var resDataGraphBaptisByYearCurrentWilayah, tempXaxisYearlyBaptis, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                this.dataSelectedTahunCurrentWilayah = this.selectedTahunCurrentWilayah.split(" ");
+                _context3.next = 4;
+                return this.fetchGraphBaptisByYearCurrentWilayah();
+
+              case 4:
+                resDataGraphBaptisByYearCurrentWilayah = _context3.sent;
+                this.dataYearlyBaptisCurrentWilayah = resDataGraphBaptisByYearCurrentWilayah.data.yearly_chart;
+
+                if (this.dataYearlyBaptisCurrentWilayah.length > 0) {
+                  this.statusGraphByYearCurrentWilayah = true;
+                  tempXaxisYearlyBaptis = [];
+                  this.clearGraphYearlyCurrentWilayah();
+                  this.chartOptionsBaptisPerTahunCurrentWilayah.xaxis.categories = [];
+                  this.dataYearlyBaptisCurrentWilayah.map(function (item, index) {
+                    tempXaxisYearlyBaptis.push(item.year);
+
+                    _this.tempDataYearlyBaptisCurrentWilayah[0].data.push(item.data.baptis_bayi);
+
+                    _this.tempDataYearlyBaptisCurrentWilayah[1].data.push(item.data.baptis_dewasa);
+
+                    _this.tempDataYearlyBaptisCurrentWilayah[2].data.push(item.data.belum_baptis);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesBaptisPerTahunCurrentWilayah[i] = _objectSpread({}, this.seriesBaptisPerTahunCurrentWilayah[i], {}, {
+                      data: this.tempDataYearlyBaptisCurrentWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsBaptisPerTahunCurrentWilayah = _objectSpread({}, this.chartOptionsBaptisPerTahunCurrentWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyBaptis
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearCurrentWilayah = false;
+                  this.selectedTahunCurrentWilayah = '1 Tahun';
+                }
+
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearCurrentWilayah() {
+        return _initGraphByYearCurrentWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearCurrentWilayah;
+    }(),
+    initGraphByYearAllWilayah: function () {
+      var _initGraphByYearAllWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this2 = this;
+
+        var resDataGraphBaptisByYearAllCurrentWilayah, tempXaxisYearlyBaptis, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                this.dataSelectedTahunAllWilayah = this.selectedTahunAllWilayah.split(" ");
+                _context4.next = 4;
+                return this.fetchGraphBaptisByYearAllWilayah();
+
+              case 4:
+                resDataGraphBaptisByYearAllCurrentWilayah = _context4.sent;
+                this.dataYearlyBaptisAllWilayah = resDataGraphBaptisByYearAllCurrentWilayah.data.yearly_chart;
+
+                if (this.dataYearlyBaptisAllWilayah.length > 0) {
+                  this.statusGraphByYearAllWilayah = true;
+                  tempXaxisYearlyBaptis = [];
+                  this.clearGraphYearlyAllWilayah();
+                  this.chartOptionsBaptisPerTahunAllWilayah.xaxis.categories = [];
+                  this.dataYearlyBaptisAllWilayah.map(function (item, index) {
+                    tempXaxisYearlyBaptis.push(item.year);
+
+                    _this2.tempDataYearlyBaptisAllWilayah[0].data.push(item.data.baptis_bayi);
+
+                    _this2.tempDataYearlyBaptisAllWilayah[1].data.push(item.data.baptis_dewasa);
+
+                    _this2.tempDataYearlyBaptisAllWilayah[2].data.push(item.data.belum_baptis);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesBaptisPerTahunAllWilayah[i] = _objectSpread({}, this.seriesBaptisPerTahunAllWilayah[i], {}, {
+                      data: this.tempDataYearlyBaptisAllWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsBaptisPerTahunAllWilayah = _objectSpread({}, this.chartOptionsBaptisPerTahunAllWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyBaptis
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearAllWilayah = false;
+                  this.selectedTahunAllWilayah = '1 Tahun';
+                }
+
+                _context4.next = 12;
+                break;
+
+              case 9:
+                _context4.prev = 9;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 12:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearAllWilayah() {
+        return _initGraphByYearAllWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearAllWilayah;
+    }(),
+    initGrapByMonth: function () {
+      var _initGrapByMonth = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var _this3 = this;
+
+        var resDataGraphBaptisByMonth, tempXaxisMonthlyBaptis, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return this.fetchGraphBaptisByMonth();
+
+              case 3:
+                resDataGraphBaptisByMonth = _context5.sent;
+                this.dataMonthlyBaptis = resDataGraphBaptisByMonth.data.monthly_chart;
+
+                if (this.dataMonthlyBaptis.length > 0) {
+                  this.statusGraphByMonth = true;
+                  tempXaxisMonthlyBaptis = [];
+                  this.clearGraphMonthly();
+                  this.chartOptionsBaptisPerBulan.xaxis.categories = [];
+                  this.dataMonthlyBaptis.map(function (item, index) {
+                    tempXaxisMonthlyBaptis.push(item.month);
+
+                    _this3.tempDataMonthlyBaptis[0].data.push(item.data.baptis_bayi);
+
+                    _this3.tempDataMonthlyBaptis[1].data.push(item.data.baptis_dewasa);
+
+                    _this3.tempDataMonthlyBaptis[2].data.push(item.data.belum_baptis);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesBaptisPerBulan[i] = _objectSpread({}, this.seriesBaptisPerBulan[i], {}, {
+                      data: this.tempDataMonthlyBaptis[i].data
+                    });
+                  }
+
+                  this.chartOptionsBaptisPerBulan = _objectSpread({}, this.chartOptionsBaptisPerBulan, {}, {
+                    xaxis: {
+                      categories: tempXaxisMonthlyBaptis
+                    }
+                  });
+                } else {
+                  this.statusGraphByMonth = false;
+                }
+
+                _context5.next = 11;
+                break;
+
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[0, 8]]);
+      }));
+
+      function initGrapByMonth() {
+        return _initGrapByMonth.apply(this, arguments);
+      }
+
+      return initGrapByMonth;
+    }(),
+    clearGraphMonthly: function clearGraphMonthly() {
       this.tempDataMonthlyBaptis[0].data = [];
-      this.tempDataYearlyBaptis[1].data = [];
       this.tempDataMonthlyBaptis[1].data = [];
-      this.tempDataYearlyBaptis[2].data = [];
       this.tempDataMonthlyBaptis[2].data = [];
     },
-    fetchGraphBaptis: function fetchGraphBaptis() {
+    clearGraphYearlyAllWilayah: function clearGraphYearlyAllWilayah() {
+      this.tempDataYearlyBaptisAllWilayah[0].data = [];
+      this.tempDataYearlyBaptisAllWilayah[1].data = [];
+      this.tempDataYearlyBaptisAllWilayah[2].data = [];
+    },
+    clearGraphYearlyCurrentWilayah: function clearGraphYearlyCurrentWilayah() {
+      this.tempDataYearlyBaptisCurrentWilayah[0].data = [];
+      this.tempDataYearlyBaptisCurrentWilayah[1].data = [];
+      this.tempDataYearlyBaptisCurrentWilayah[2].data = [];
+    },
+    fetchGraphBaptisByYearCurrentWilayah: function fetchGraphBaptisByYearCurrentWilayah() {
+      return axios.get('/api/yearly-data?mode=graphBaptisByYearCurrentWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'id_wilayah': this.selectedWilayah,
+          'range_tahun': this.dataSelectedTahunCurrentWilayah[0]
+        }
+      });
+    },
+    fetchGraphBaptisByYearAllWilayah: function fetchGraphBaptisByYearAllWilayah() {
+      return axios.get('/api/yearly-data?mode=graphBaptisByYearAllWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'range_tahun': this.dataSelectedTahunAllWilayah[0]
+        }
+      });
+    },
+    fetchGraphBaptisByMonth: function fetchGraphBaptisByMonth() {
       return axios.get('/api/baptis?mode=graphBaptis', {
         headers: {
           'Accept': 'application/json',
@@ -32383,14 +32785,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     if (this.activeTab == 3) {
-      this.init();
+      this.initAll();
+      this.initPie();
+      this.initGraphByYearCurrentWilayah();
+      this.initGraphByYearAllWilayah();
+      this.initGrapByMonth();
     }
   },
   watch: {
     selectedWilayah: function selectedWilayah() {
       if (this.activeTab == 3) {
-        this.init();
+        this.initPie();
+        this.initGraphByYearCurrentWilayah();
+        this.initGraphByYearAllWilayah();
+        this.initGrapByMonth();
       }
+    },
+    selectedTahunCurrentWilayah: function selectedTahunCurrentWilayah() {
+      this.initGraphByYearCurrentWilayah();
+    },
+    selectedTahunAllWilayah: function selectedTahunAllWilayah() {
+      this.initGraphByYearAllWilayah();
     }
   }
 });
@@ -32571,11 +32986,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// Import component
+ // Import stylesheet
 
 
 
 
 
+
+
+ // Status kematian digabung dengan status kelahiran. hanya menampilkan RIP
+// Status kehidupan diganti status kesehatan dan berisi semua recor di tabl kesehatan
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -32598,7 +33042,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: 'Status Perkawinan',
         icon: 'wc'
       }, {
-        name: 'Status Kehidupan',
+        name: 'Status Kesehatan',
         icon: 'local_hospital'
       }, {
         name: 'Status Baptis',
@@ -32608,215 +33052,111 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         icon: 'pregnant_woman'
       }],
       activeTab: 0,
+      isSync: 0,
       labelPiePerkawinan: [],
       dataCard: {},
       selected: '01',
       wilayah: [],
-      selectedNameWilayah: 'Wilayah Santa Maria Assumpta Klaten',
-      seriesPendidikanPerBulan: [{
-        name: "1",
-        data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
-      }, {
-        name: "2",
-        data: [35, 41, 62, 42, 13, 18, 29, 37, 36]
-      }, {
-        name: '3',
-        data: [87, 57, 74, 99, 75, 38, 62, 47, 82]
-      }],
-      seriesPendidikan: [{
-        name: "1",
-        data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
-      }, {
-        name: "2",
-        data: [35, 41, 62, 42, 13, 18, 29, 37, 36]
-      }, {
-        name: '3',
-        data: [87, 57, 74, 99, 75, 38, 62, 47, 82]
-      }],
-      seriesProsentasePiePendidikan: [44, 55, 13],
-      seriesProsentasePiePendidikanWilayah: [44, 55, 13, 43, 22],
-      chartOptionsProsentasePiePendidikan: {
-        labels: ['1', '2', '3'],
-        title: {
-          text: 'Prosentase Pendidikan Keseluruhan',
-          align: 'left',
-          style: {
-            fontSize: "16px",
-            color: '#666'
-          }
-        },
-        responsive: [{
-          breakpoint: 2400,
-          options: {
-            chart: {
-              width: 400
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-      },
-      chartOptionsProsentasePiePendidikanWilayah: {
-        labels: ['1', '2', '3', '4', '5'],
-        title: {
-          text: 'Prosentase Pendidikan Berdasarkan Wilayah',
-          align: 'left',
-          style: {
-            fontSize: "16px",
-            color: '#666'
-          }
-        },
-        responsive: [{
-          breakpoint: 2400,
-          options: {
-            chart: {
-              width: 400
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-      },
-      chartOptionsPendidikanPerBulan: {
-        chart: {
-          type: 'line',
-          shadow: {
-            enabled: false,
-            color: '#bbb',
-            top: 3,
-            left: 2,
-            blur: 3,
-            opacity: 1
-          }
-        },
-        stroke: {
-          width: 7,
-          curve: 'smooth'
-        },
-        xaxis: {
-          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
-        },
-        markers: {
-          size: 4,
-          opacity: 0.9,
-          colors: ["#FFA41B"],
-          strokeColor: "#fff",
-          strokeWidth: 2,
-          hover: {
-            size: 7
-          }
-        },
-        yaxis: {
-          title: {
-            text: 'Jumlah'
-          }
-        }
-      },
-      chartOptionsPendidikan: {
-        chart: {
-          type: 'line',
-          shadow: {
-            enabled: false,
-            color: '#bbb',
-            top: 3,
-            left: 2,
-            blur: 3,
-            opacity: 1
-          }
-        },
-        stroke: {
-          width: 7,
-          curve: 'smooth'
-        },
-        xaxis: {
-          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
-        },
-        markers: {
-          size: 4,
-          opacity: 0.9,
-          colors: ["#FFA41B"],
-          strokeColor: "#fff",
-          strokeWidth: 2,
-          hover: {
-            size: 7
-          }
-        },
-        yaxis: {
-          title: {
-            text: 'Jumlah'
-          }
-        }
-      }
+      selectedNameWilayah: 'Wilayah Santa Maria Assumpta Klaten'
     };
   },
   mounted: function mounted() {
-    this.init();
+    this.initCard();
+    this.initWilayah();
   },
   methods: {
-    init: function () {
-      var _init = _asyncToGenerator(
+    initCard: function () {
+      var _initCard = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var dataWilayah, resCard, i, splitStr;
+        var resCard;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return this.fetchWilayah();
-
-              case 3:
-                dataWilayah = _context.sent;
-                this.wilayah = dataWilayah.data.items;
-                _context.next = 7;
                 return this.fetchCard();
 
-              case 7:
+              case 3:
                 resCard = _context.sent;
                 this.dataCard = resCard.data.data;
+                _context.next = 10;
+                break;
 
-                for (i = 0; i < this.wilayah.length; i++) {
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 7]]);
+      }));
+
+      function initCard() {
+        return _initCard.apply(this, arguments);
+      }
+
+      return initCard;
+    }(),
+    initWilayah: function () {
+      var _initWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var self, dataWilayah;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                self = this;
+                _context2.next = 4;
+                return this.fetchWilayah();
+
+              case 4:
+                dataWilayah = _context2.sent;
+                this.wilayah = dataWilayah.data.items;
+                this.wilayah.find(function (value) {
                   /**
                   * Capitalize First Letter Of Each Word In A String
                   *
                   * var splitStr : lowercase string Wilayah and split by white space
                   * 
                   */
-                  if (this.wilayah[i].id_wilayah == this.selected) {
-                    splitStr = this.wilayah[i].nama_wilayah.toLowerCase().split(' ');
-
-                    for (i = 0; i < splitStr.length; i++) {
-                      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-                    }
-
-                    this.selectedNameWilayah = splitStr.join(' ');
+                  if (value.id_wilayah == self.selected) {
+                    var splitStr = value.nama_wilayah.toLowerCase().split(' ');
+                    var temp = [];
+                    var upperCase = splitStr.map(function (item, index) {
+                      temp[index] = item.charAt(0).toUpperCase() + item.substring(1);
+                    });
+                    self.selectedNameWilayah = temp.join(' ');
                   }
-                }
-
-                _context.next = 15;
+                });
+                _context2.next = 12;
                 break;
 
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
 
-              case 15:
+              case 12:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this, [[0, 12]]);
+        }, _callee2, this, [[0, 9]]);
       }));
 
-      function init() {
-        return _init.apply(this, arguments);
+      function initWilayah() {
+        return _initWilayah.apply(this, arguments);
       }
 
-      return init;
+      return initWilayah;
     }(),
     fetchWilayah: function fetchWilayah() {
       return new Promise(function (resolve, reject) {
@@ -32834,7 +33174,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     fetchCard: function fetchCard() {
       return new Promise(function (resolve, reject) {
-        axios.get('/api/current-card', {
+        axios.get('/api/card-total-info', {
           headers: {
             'Accept': 'application/json',
             'Content-type': 'application/json'
@@ -32849,7 +33189,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     syncData: function syncData() {
       var _this = this;
 
-      console.log('loading');
       this.isLoading = true;
       return axios.get('/api/recap', {
         headers: {
@@ -32866,6 +33205,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             title: "Berhasil Sinkronisasi Data!",
             icon: "success",
             button: "Tutup"
+          }).then(function (value) {
+            _this.isSync = 1;
+            location.reload();
           });
         }
       });
@@ -32873,7 +33215,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   watch: {
     selected: function selected() {
-      this.init();
+      this.initCard();
+      this.initWilayah();
     }
   }
 });
@@ -32983,6 +33326,79 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -33003,16 +33419,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       type: Number,
       "default": 0,
       required: true
+    },
+    isSync: {
+      type: Number,
+      "default": 0,
+      required: true
     }
   },
   data: function data() {
     return {
-      statusPieEkonomiCurrentWilayah: false,
+      itemsTahunCurrentWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      itemsTahunAllWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      selectedTahunCurrentWilayah: '10 Tahun',
+      selectedTahunAllWilayah: '10 Tahun',
+      nameWilayah: [],
+      dataSelectedTahunCurrentWilayah: [10, ''],
+      dataSelectedTahunAllWilayah: [10, ''],
+      statusGraphByMonth: true,
+      statusGraphByYearCurrentWilayah: true,
+      statusGraphByYearAllWilayah: true,
+      statusPieEkonomiCurrentWilayah: true,
       statusPieEkonomiAllWilayah: true,
-      dataPieEkonomi: [],
       dataMonthlyEkonomi: [],
-      dataYearlyEkonomi: [],
-      tempDataYearlyEkonomi: [{
+      dataYearlyEkonomiCurrentWilayah: [],
+      dataYearlyEkonomiAllWilayah: [],
+      tempDataYearlyEkonomiCurrentWilayah: [{
+        data: [] // BisaMembantu
+
+      }, {
+        data: [] // Biasa
+
+      }, {
+        data: [] // PerluDibantu
+
+      }],
+      tempDataYearlyEkonomiAllWilayah: [{
         data: [] // BisaMembantu
 
       }, {
@@ -33042,7 +33483,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: 'Perlu Dibantu',
         data: [15, 17, 14, 14, 13, 20, 18, 15, 14]
       }],
-      seriesEkonomiPerTahun: [{
+      seriesEkonomiPerTahunCurrentWilayah: [{
         name: "Bisa Membantu",
         data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
       }, {
@@ -33052,9 +33493,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: 'Perlu Dibantu',
         data: [15, 17, 14, 14, 13, 20, 18, 15, 14]
       }],
-      seriesProsentasePieEkonomiWilayah: [1, 1, 1],
-      seriesProsentasePieEkonomiKeseluruhanWilayah: [1, 1, 1],
-      chartOptionsProsentasePieEkonomiWilayah: {
+      seriesEkonomiPerTahunAllWilayah: [{
+        name: "Bisa Membantu",
+        data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
+      }, {
+        name: "Biasa",
+        data: [61, 57, 63, 55, 58, 54, 55, 61, 65]
+      }, {
+        name: 'Perlu Dibantu',
+        data: [15, 17, 14, 14, 13, 20, 18, 15, 14]
+      }],
+      seriesPersentasePieEkonomiWilayah: [1, 1, 1],
+      seriesPersentasePieEkonomiKeseluruhanWilayah: [1, 1, 1],
+      chartOptionsPersentasePieEkonomiWilayah: {
         labels: ['Bisa Membantu', 'Biasa', 'Perlu Dibantu'],
         decimalsInFloat: 4,
         responsive: [{
@@ -33071,7 +33522,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }]
       },
-      chartOptionsProsentasePieEkonomiKeseluruhanWilayah: {
+      chartOptionsPersentasePieEkonomiKeseluruhanWilayah: {
         labels: ['Bisa Membantu', 'Biasa', 'Perlu Dibantu'],
         responsive: [{
           breakpoint: 2400,
@@ -33091,7 +33542,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         chart: {
           type: 'line',
           toolbar: {
-            show: true
+            show: false
           },
           shadow: {
             enabled: false,
@@ -33125,14 +33576,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }
       },
-      chartOptionsEkonomiPerTahun: {
+      chartOptionsEkonomiPerTahunCurrentWilayah: {
         chart: {
-          stacked: true,
+          type: 'line',
           toolbar: {
-            show: true
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
           },
           zoom: {
-            enabled: true
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
           }
         },
         responsive: [{
@@ -33151,7 +33624,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         },
         xaxis: {
-          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
+          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
         },
         legend: {
           position: 'bottom'
@@ -33160,34 +33633,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           opacity: 1
         }
       },
-      seriesKematianPerTahunWilayah: [{
-        name: "Laki - Laki",
-        data: [1]
-      }, {
-        name: "Perempuan",
-        data: [1]
-      }, {
-        name: "Lain - Lain",
-        data: [1]
-      }],
-      seriesKematianPerTahunKeseluruhanWilayah: [{
-        name: "Laki-Laki",
-        data: [1]
-      }, {
-        name: "Perempuan",
-        data: [1]
-      }, {
-        name: "Lain - Lain",
-        data: [1]
-      }],
-      chartOptionsKematianPerTahunWilayah: {
+      chartOptionsEkonomiPerTahunAllWilayah: {
         chart: {
-          stacked: true,
+          type: 'line',
           toolbar: {
-            show: true
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
           },
           zoom: {
-            enabled: true
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
           }
         },
         responsive: [{
@@ -33206,42 +33681,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         },
         xaxis: {
-          categories: [1100]
-        },
-        legend: {
-          position: 'bottom'
-        },
-        fill: {
-          opacity: 1
-        }
-      },
-      chartOptionsKematianPerTahunKeseluruhanWilayah: {
-        chart: {
-          stacked: true,
-          toolbar: {
-            show: true
-          },
-          zoom: {
-            enabled: true
-          }
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            legend: {
-              position: 'bottom',
-              offsetX: -10,
-              offsetY: 0
-            }
-          }
-        }],
-        plotOptions: {
-          bar: {
-            horizontal: false
-          }
-        },
-        xaxis: {
-          categories: [1100]
+          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
         },
         legend: {
           position: 'bottom'
@@ -33253,13 +33693,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    init: function () {
-      var _init = _asyncToGenerator(
+    initAll: function initAll() {
+      this.selectedTahunCurrentWilayah = this.itemsTahunCurrentWilayah[this.itemsTahunCurrentWilayah.length - 1];
+      this.selectedTahunAllWilayah = this.itemsTahunAllWilayah[this.itemsTahunAllWilayah.length - 1];
+    },
+    initPie: function () {
+      var _initPie = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        var resDataPieEkonomi, resDataGraphEkonomi, tempXaxisMonthlyEkonomi, tempXaxisYearlyEkonomi, i;
+        var resDataPieEkonomi;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -33270,103 +33712,299 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 resDataPieEkonomi = _context.sent;
-                _context.next = 6;
-                return this.fetchGraphEkonomi();
-
-              case 6:
-                resDataGraphEkonomi = _context.sent;
-                this.dataMonthlyEkonomi = resDataGraphEkonomi.data.monthly_chart;
-                this.dataYearlyEkonomi = resDataGraphEkonomi.data.yearly_chart;
 
                 if (resDataPieEkonomi.data.current_wilayah.length != 0) {
                   this.statusPieEkonomiCurrentWilayah = true;
-                  this.seriesProsentasePieEkonomiWilayah = [resDataPieEkonomi.data.current_wilayah.bisa_membantu, resDataPieEkonomi.data.current_wilayah.biasa, resDataPieEkonomi.data.current_wilayah.perlu_dibantu];
+                  this.seriesPersentasePieEkonomiWilayah = [resDataPieEkonomi.data.current_wilayah.bisa_membantu, resDataPieEkonomi.data.current_wilayah.biasa, resDataPieEkonomi.data.current_wilayah.perlu_dibantu];
                 } else {
                   this.statusPieEkonomiCurrentWilayah = false;
                 }
 
                 if (resDataPieEkonomi.data.all_wilayah.length != 0) {
                   this.statusPieEkonomiAllWilayah = true;
-                  this.seriesProsentasePieEkonomiKeseluruhanWilayah = [resDataPieEkonomi.data.all_wilayah.bisa_membantu, resDataPieEkonomi.data.all_wilayah.biasa, resDataPieEkonomi.data.all_wilayah.perlu_dibantu];
+                  this.seriesPersentasePieEkonomiKeseluruhanWilayah = [resDataPieEkonomi.data.all_wilayah.bisa_membantu, resDataPieEkonomi.data.all_wilayah.biasa, resDataPieEkonomi.data.all_wilayah.perlu_dibantu];
                 } else {
                   this.statusPieEkonomiAllWilayah = false;
                 }
 
-                tempXaxisMonthlyEkonomi = [];
-                tempXaxisYearlyEkonomi = [];
-                this.clearGraph();
-                this.chartOptionsEkonomiPerBulan.xaxis.categories = [];
-                this.chartOptionsEkonomiPerTahun.xaxis.categories = [];
-                this.dataYearlyEkonomi.map(function (item, index) {
-                  tempXaxisYearlyEkonomi.push(item.year);
-
-                  _this.tempDataYearlyEkonomi[0].data.push(item.data.bisa_membantu);
-
-                  _this.tempDataYearlyEkonomi[1].data.push(item.data.biasa);
-
-                  _this.tempDataYearlyEkonomi[2].data.push(item.data.perlu_dibantu);
-                });
-                console.log(this.dataMonthlyEkonomi);
-                this.dataMonthlyEkonomi.map(function (item, index) {
-                  tempXaxisMonthlyEkonomi.push(item.month);
-
-                  _this.tempDataMonthlyEkonomi[0].data.push(item.data.bisa_membantu);
-
-                  _this.tempDataMonthlyEkonomi[1].data.push(item.data.biasa);
-
-                  _this.tempDataMonthlyEkonomi[2].data.push(item.data.perlu_dibantu);
-                });
-
-                for (i = 0; i < 3; i++) {
-                  this.seriesEkonomiPerTahun[i] = _objectSpread({}, this.seriesEkonomiPerTahun[i], {}, {
-                    data: this.tempDataYearlyEkonomi[i].data
-                  });
-                  this.seriesEkonomiPerBulan[i] = _objectSpread({}, this.seriesEkonomiPerBulan[i], {}, {
-                    data: this.tempDataMonthlyEkonomi[i].data
-                  });
-                }
-
-                this.chartOptionsEkonomiPerBulan = _objectSpread({}, this.chartOptionsEkonomiPerBulan, {}, {
-                  xaxis: {
-                    categories: tempXaxisMonthlyEkonomi
-                  }
-                });
-                this.chartOptionsEkonomiPerTahun = _objectSpread({}, this.chartOptionsEkonomiPerTahun, {}, {
-                  xaxis: {
-                    categories: tempXaxisYearlyEkonomi
-                  }
-                });
-                _context.next = 27;
+                _context.next = 11;
                 break;
 
-              case 24:
-                _context.prev = 24;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 27:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 24]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
-      function init() {
-        return _init.apply(this, arguments);
+      function initPie() {
+        return _initPie.apply(this, arguments);
       }
 
-      return init;
+      return initPie;
     }(),
-    clearGraph: function clearGraph() {
-      this.tempDataYearlyEkonomi[0].data = [];
+    initGraphByYearCurrentWilayah: function () {
+      var _initGraphByYearCurrentWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this = this;
+
+        var resDataGraphEkonomiByYearCurrentWilayah, tempXaxisYearlyEkonomi, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                this.dataSelectedTahunCurrentWilayah = this.selectedTahunCurrentWilayah.split(" ");
+                _context2.next = 4;
+                return this.fetchGraphEkonomiByYearCurrentWilayah();
+
+              case 4:
+                resDataGraphEkonomiByYearCurrentWilayah = _context2.sent;
+                this.dataYearlyEkonomiCurrentWilayah = resDataGraphEkonomiByYearCurrentWilayah.data.yearly_chart;
+
+                if (this.dataYearlyEkonomiCurrentWilayah.length > 0) {
+                  this.statusGraphByYearCurrentWilayah = true;
+                  tempXaxisYearlyEkonomi = [];
+                  this.clearGraphYearlyCurrentWilayah();
+                  this.chartOptionsEkonomiPerTahunCurrentWilayah.xaxis.categories = [];
+                  this.dataYearlyEkonomiCurrentWilayah.map(function (item, index) {
+                    tempXaxisYearlyEkonomi.push(item.year);
+
+                    _this.tempDataYearlyEkonomiCurrentWilayah[0].data.push(item.data.bisa_membantu);
+
+                    _this.tempDataYearlyEkonomiCurrentWilayah[1].data.push(item.data.biasa);
+
+                    _this.tempDataYearlyEkonomiCurrentWilayah[2].data.push(item.data.perlu_dibantu);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesEkonomiPerTahunCurrentWilayah[i] = _objectSpread({}, this.seriesEkonomiPerTahunCurrentWilayah[i], {}, {
+                      data: this.tempDataYearlyEkonomiCurrentWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsEkonomiPerTahunCurrentWilayah = _objectSpread({}, this.chartOptionsEkonomiPerTahunCurrentWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyEkonomi
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearCurrentWilayah = false;
+                  this.selectedTahunCurrentWilayah = '1 Tahun';
+                }
+
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearCurrentWilayah() {
+        return _initGraphByYearCurrentWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearCurrentWilayah;
+    }(),
+    initGraphByYearAllWilayah: function () {
+      var _initGraphByYearAllWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this2 = this;
+
+        var resDataGraphEkonomiByYearAllCurrentWilayah, tempXaxisYearlyEkonomi, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                this.dataSelectedTahunAllWilayah = this.selectedTahunAllWilayah.split(" ");
+                _context3.next = 4;
+                return this.fetchGraphEkonomiByYearAllWilayah();
+
+              case 4:
+                resDataGraphEkonomiByYearAllCurrentWilayah = _context3.sent;
+                this.dataYearlyEkonomiAllWilayah = resDataGraphEkonomiByYearAllCurrentWilayah.data.yearly_chart;
+
+                if (this.dataYearlyEkonomiAllWilayah.length > 0) {
+                  this.statusGraphByYearAllWilayah = true;
+                  tempXaxisYearlyEkonomi = [];
+                  this.clearGraphYearlyAllWilayah();
+                  this.chartOptionsEkonomiPerTahunAllWilayah.xaxis.categories = [];
+                  this.dataYearlyEkonomiAllWilayah.map(function (item, index) {
+                    tempXaxisYearlyEkonomi.push(item.year);
+
+                    _this2.tempDataYearlyEkonomiAllWilayah[0].data.push(item.data.bisa_membantu);
+
+                    _this2.tempDataYearlyEkonomiAllWilayah[1].data.push(item.data.biasa);
+
+                    _this2.tempDataYearlyEkonomiAllWilayah[2].data.push(item.data.perlu_dibantu);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesEkonomiPerTahunAllWilayah[i] = _objectSpread({}, this.seriesEkonomiPerTahunAllWilayah[i], {}, {
+                      data: this.tempDataYearlyEkonomiAllWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsEkonomiPerTahunAllWilayah = _objectSpread({}, this.chartOptionsEkonomiPerTahunAllWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyEkonomi
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearAllWilayah = false;
+                  this.selectedTahunAllWilayah = '1 Tahun';
+                }
+
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearAllWilayah() {
+        return _initGraphByYearAllWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearAllWilayah;
+    }(),
+    initGrapByMonth: function () {
+      var _initGrapByMonth = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this3 = this;
+
+        var resDataGraphEkonomiByMonth, tempXaxisMonthlyEkonomi, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return this.fetchGraphEkonomiByMonth();
+
+              case 3:
+                resDataGraphEkonomiByMonth = _context4.sent;
+                this.dataMonthlyEkonomi = resDataGraphEkonomiByMonth.data.monthly_chart;
+
+                if (this.dataMonthlyEkonomi.length > 0) {
+                  this.statusGraphByMonth = true;
+                  tempXaxisMonthlyEkonomi = [];
+                  this.clearGraphMonthly();
+                  this.chartOptionsEkonomiPerBulan.xaxis.categories = [];
+                  this.dataMonthlyEkonomi.map(function (item, index) {
+                    tempXaxisMonthlyEkonomi.push(item.month);
+
+                    _this3.tempDataMonthlyEkonomi[0].data.push(item.data.bisa_membantu);
+
+                    _this3.tempDataMonthlyEkonomi[1].data.push(item.data.biasa);
+
+                    _this3.tempDataMonthlyEkonomi[2].data.push(item.data.perlu_dibantu);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesEkonomiPerBulan[i] = _objectSpread({}, this.seriesEkonomiPerBulan[i], {}, {
+                      data: this.tempDataMonthlyEkonomi[i].data
+                    });
+                  }
+
+                  this.chartOptionsEkonomiPerBulan = _objectSpread({}, this.chartOptionsEkonomiPerBulan, {}, {
+                    xaxis: {
+                      categories: tempXaxisMonthlyEkonomi
+                    }
+                  });
+                } else {
+                  this.statusGraphByMonth = false;
+                }
+
+                _context4.next = 11;
+                break;
+
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 8]]);
+      }));
+
+      function initGrapByMonth() {
+        return _initGrapByMonth.apply(this, arguments);
+      }
+
+      return initGrapByMonth;
+    }(),
+    clearGraphMonthly: function clearGraphMonthly() {
       this.tempDataMonthlyEkonomi[0].data = [];
-      this.tempDataYearlyEkonomi[1].data = [];
       this.tempDataMonthlyEkonomi[1].data = [];
-      this.tempDataYearlyEkonomi[2].data = [];
       this.tempDataMonthlyEkonomi[2].data = [];
     },
-    fetchGraphEkonomi: function fetchGraphEkonomi() {
+    clearGraphYearlyCurrentWilayah: function clearGraphYearlyCurrentWilayah() {
+      this.tempDataYearlyEkonomiCurrentWilayah[0].data = [];
+      this.tempDataYearlyEkonomiCurrentWilayah[1].data = [];
+      this.tempDataYearlyEkonomiCurrentWilayah[2].data = [];
+    },
+    clearGraphYearlyAllWilayah: function clearGraphYearlyAllWilayah() {
+      this.tempDataYearlyEkonomiAllWilayah[0].data = [];
+      this.tempDataYearlyEkonomiAllWilayah[1].data = [];
+      this.tempDataYearlyEkonomiAllWilayah[2].data = [];
+    },
+    fetchGraphEkonomiByYearCurrentWilayah: function fetchGraphEkonomiByYearCurrentWilayah() {
+      return axios.get('/api/yearly-data?mode=graphEkonomiByYearCurrentWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'id_wilayah': this.selectedWilayah,
+          'range_tahun': this.dataSelectedTahunCurrentWilayah[0]
+        }
+      });
+    },
+    fetchGraphEkonomiByYearAllWilayah: function fetchGraphEkonomiByYearAllWilayah() {
+      return axios.get('/api/yearly-data?mode=graphEkonomiByYearAllWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'range_tahun': this.dataSelectedTahunAllWilayah[0]
+        }
+      });
+    },
+    fetchGraphEkonomiByMonth: function fetchGraphEkonomiByMonth() {
       return axios.get('/api/ekonomi?mode=graphEkonomi', {
         headers: {
           'Accept': 'application/json',
@@ -33391,14 +34029,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     if (this.activeTab == 0) {
-      this.init();
+      this.initAll();
+      this.initPie();
+      this.initGraphByYearCurrentWilayah();
+      this.initGraphByYearAllWilayah();
+      this.initGrapByMonth();
     }
   },
   watch: {
+    // isSync() {
+    //     if (this.isSync == 1 && this.activeTab == 0) {
+    //         this.initPie();
+    //         this.initGraphByYearCurrentWilayah();
+    //         this.initGraphByYearAllWilayah()
+    //         this.initGrapByMonth();
+    //         console.log('notSync');
+    //         console.log(this.isSync);
+    //         this.$emit('isSync', 0)
+    //         console.log(this.isSync);
+    //         console.log('Sync');
+    //     }
+    // },
     selectedWilayah: function selectedWilayah() {
       if (this.activeTab == 0) {
-        this.init();
+        this.initPie();
+        this.initGraphByYearCurrentWilayah();
+        this.initGraphByYearAllWilayah();
+        this.initGrapByMonth();
       }
+    },
+    selectedTahunCurrentWilayah: function selectedTahunCurrentWilayah() {
+      this.initGraphByYearCurrentWilayah();
+      this.initGraphByYearAllWilayah();
+    },
+    selectedTahunAllWilayah: function selectedTahunAllWilayah() {
+      this.initGraphByYearAllWilayah();
+      this.initGraphByYearAllWilayah();
+    }
+  },
+  computed: {
+    toUpperCase: function toUpperCase() {
+      return this.nameWilayah.join(' ');
     }
   }
 });
@@ -33454,6 +34125,79 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -33478,78 +34222,74 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      dataKelahiranChartCurrentWilayahByYear: [],
-      dataKelahiranChartAllWilayahByYear: [],
-      dataKematianChartCurrentWilayahByYear: [],
-      dataKematianChartAllWilayahByYear: [],
-      tempDataKelahiranChartAllWilayahByYear: [{
-        data: [] // Laki - Laki
+      itemsTahunNatalitasMortalitasCurrentWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      itemsTahunNatalitasMortalitasAllWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      selectedTahunNatalitasMortalitasCurrentWilayah: '10 Tahun',
+      selectedTahunNatalitasMortalitasAllWilayah: '10 Tahun',
+      dataSelectedTahunNatalitasMortalitasCurrentWilayah: [10, ''],
+      dataSelectedTahunNatalitasMortalitasAllWilayah: [10, ''],
+      statusGraphNatalitasMortalitasCurrentWilayah: true,
+      statusGraphNatalitasMortalitasAllWilayah: true,
+      dataNatalitasMortalitasCurrentWilayah: [],
+      dataNatalitasMortalitasAllWilayah: [],
+      tempDataNatalitasMortalitasCurrentWilayah: [{
+        data: [] // BisaMembantu
 
       }, {
-        data: [] // Perempuan
-
-      }, {
-        data: [] // Lain - Lain
-
-      }],
-      tempDataKelahiranChartCurrentWilayahByYear: [{
-        data: [] // Laki - Laki
-
-      }, {
-        data: [] // Perempuan
-
-      }, {
-        data: [] // Lain - Lain
+        data: [] // Biasa
 
       }],
-      tempDataKematianChartAllWilayahByYear: [{
-        data: [] // Laki - Laki
+      tempDataNatalitasMortalitasAllWilayah: [{
+        data: [] // BisaMembantu
 
       }, {
-        data: [] // Perempuan
-
-      }, {
-        data: [] // Lain - Lain
+        data: [] // Biasa
 
       }],
-      tempDataKematianChartCurrentWilayahByYear: [{
-        data: [] // Laki - Laki
-
+      seriesNatalitasMortalitasCurrentWilayah: [{
+        name: "Kelahiran",
+        data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
       }, {
-        data: [] // Perempuan
-
-      }, {
-        data: [] // Lain - Lain
-
+        name: "Kematian",
+        data: [61, 57, 63, 55, 58, 54, 55, 61, 65]
       }],
-      seriesKelahiranPerTahunWilayah: [{
-        name: "Laki - Laki",
-        data: [1]
+      seriesNatalitasMortalitasAllWilayah: [{
+        name: "Kelahiran",
+        data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
       }, {
-        name: "Perempuan",
-        data: [1]
-      }, {
-        name: "Lain - Lain",
-        data: [1]
+        name: "Kematian",
+        data: [61, 57, 63, 55, 58, 54, 55, 61, 65]
       }],
-      seriesKelahiranPerTahunKeseluruhanWilayah: [{
-        name: "Laki-Laki",
-        data: [1]
-      }, {
-        name: "Perempuan",
-        data: [1]
-      }, {
-        name: "Lain - Lain",
-        data: [1]
-      }],
-      chartOptionsKelahiranPerTahunWilayah: {
+      chartOptionsNatalitasMortalitasCurrentWilayah: {
         chart: {
-          stacked: true,
+          type: 'line',
           toolbar: {
-            show: true
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
           },
           zoom: {
-            enabled: true
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
           }
         },
         responsive: [{
@@ -33568,7 +34308,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         },
         xaxis: {
-          categories: [1100]
+          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
         },
         legend: {
           position: 'bottom'
@@ -33577,14 +34317,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           opacity: 1
         }
       },
-      chartOptionsKelahiranPerTahunKeseluruhanWilayah: {
+      chartOptionsNatalitasMortalitasAllWilayah: {
         chart: {
-          stacked: true,
+          type: 'line',
           toolbar: {
-            show: true
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
           },
           zoom: {
-            enabled: true
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
           }
         },
         responsive: [{
@@ -33603,7 +34365,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         },
         xaxis: {
-          categories: [1100]
+          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
         },
         legend: {
           position: 'bottom'
@@ -33615,121 +34377,228 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    init: function () {
-      var _init = _asyncToGenerator(
+    initAll: function () {
+      var _initAll = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        var resDataGraphKelahiran, tempXaxisKelahiranChartCurrentWilayahByYear, tempXaxisKelahiranChartAllWilayahByYear, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return this.fetchGraphKelahiran();
-
-              case 3:
-                resDataGraphKelahiran = _context.sent;
-                this.dataKelahiranChartCurrentWilayahByYear = resDataGraphKelahiran.data.current_wilayah_chart;
-                this.dataKelahiranChartAllWilayahByYear = resDataGraphKelahiran.data.all_wilayah_chart;
-                console.log(resDataGraphKelahiran);
-                tempXaxisKelahiranChartCurrentWilayahByYear = [];
-                tempXaxisKelahiranChartAllWilayahByYear = [];
-                this.clearGraph();
-                this.chartOptionsKelahiranPerTahunWilayah.xaxis.categories = [];
-                this.chartOptionsKelahiranPerTahunKeseluruhanWilayah.xaxis.categories = [];
-                this.dataKelahiranChartCurrentWilayahByYear.map(function (item, index) {
-                  tempXaxisKelahiranChartCurrentWilayahByYear.push(item.year);
-
-                  _this.tempDataKelahiranChartCurrentWilayahByYear[0].data.push(item.data.laki_laki);
-
-                  _this.tempDataKelahiranChartCurrentWilayahByYear[1].data.push(item.data.perempuan);
-
-                  _this.tempDataKelahiranChartCurrentWilayahByYear[2].data.push(item.data.lain_lain);
-                });
-                this.dataKelahiranChartAllWilayahByYear.map(function (item, index) {
-                  tempXaxisKelahiranChartAllWilayahByYear.push(item.year);
-
-                  _this.tempDataKelahiranChartAllWilayahByYear[0].data.push(item.data.laki_laki);
-
-                  _this.tempDataKelahiranChartAllWilayahByYear[1].data.push(item.data.perempuan);
-
-                  _this.tempDataKelahiranChartAllWilayahByYear[2].data.push(item.data.lain_lain);
-                });
-
-                for (i = 0; i < 3; i++) {
-                  this.seriesKelahiranPerTahunKeseluruhanWilayah[i] = _objectSpread({}, this.seriesKelahiranPerTahunKeseluruhanWilayah[i], {}, {
-                    data: this.tempDataKelahiranChartAllWilayahByYear[i].data
-                  });
-                  this.seriesKelahiranPerTahunWilayah[i] = _objectSpread({}, this.seriesKelahiranPerTahunWilayah[i], {}, {
-                    data: this.tempDataKelahiranChartCurrentWilayahByYear[i].data
-                  });
+                try {
+                  this.selectedTahunNatalitasMortalitasCurrentWilayah = this.itemsTahunNatalitasMortalitasCurrentWilayah[this.itemsTahunNatalitasMortalitasCurrentWilayah.length - 1];
+                  this.selectedTahunNatalitasMortalitasAllWilayah = this.itemsTahunNatalitasMortalitasAllWilayah[this.itemsTahunNatalitasMortalitasAllWilayah.length - 1];
+                } catch (error) {
+                  console.log(error);
                 }
 
-                this.chartOptionsKelahiranPerTahunWilayah = _objectSpread({}, this.chartOptionsKelahiranPerTahunWilayah, {}, {
-                  xaxis: {
-                    categories: tempXaxisKelahiranChartCurrentWilayahByYear
-                  }
-                });
-                this.chartOptionsKelahiranPerTahunKeseluruhanWilayah = _objectSpread({}, this.chartOptionsKelahiranPerTahunKeseluruhanWilayah, {}, {
-                  xaxis: {
-                    categories: tempXaxisKelahiranChartAllWilayahByYear
-                  }
-                });
-                _context.next = 22;
-                break;
-
-              case 19:
-                _context.prev = 19;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
-
-              case 22:
+              case 1:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 19]]);
+        }, _callee, this);
       }));
 
-      function init() {
-        return _init.apply(this, arguments);
+      function initAll() {
+        return _initAll.apply(this, arguments);
       }
 
-      return init;
+      return initAll;
     }(),
-    clearGraph: function clearGraph() {
-      this.tempDataKelahiranChartAllWilayahByYear[0].data = [];
-      this.tempDataKelahiranChartCurrentWilayahByYear[0].data = [];
-      this.tempDataKelahiranChartAllWilayahByYear[1].data = [];
-      this.tempDataKelahiranChartCurrentWilayahByYear[1].data = [];
-      this.tempDataKelahiranChartAllWilayahByYear[2].data = [];
-      this.tempDataKelahiranChartCurrentWilayahByYear[2].data = [];
+    initGraphNatalitasMortalitasCurrentWilayah: function () {
+      var _initGraphNatalitasMortalitasCurrentWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this = this;
+
+        var resDataGraphNatalitasMortalitasCurrentWilayah, tempXaxisNatalitasMortalitasCurrentWilayah, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                this.dataSelectedTahunNatalitasMortalitasCurrentWilayah = this.selectedTahunNatalitasMortalitasCurrentWilayah.split(" ");
+                _context2.next = 4;
+                return this.fetchGraphNatalitasMortalitasCurrentWilayah();
+
+              case 4:
+                resDataGraphNatalitasMortalitasCurrentWilayah = _context2.sent;
+                this.dataNatalitasMortalitasCurrentWilayah = resDataGraphNatalitasMortalitasCurrentWilayah.data.yearly_chart;
+
+                if (this.dataNatalitasMortalitasCurrentWilayah.length > 0) {
+                  this.statusGraphNatalitasMortalitasCurrentWilayah = true;
+                  tempXaxisNatalitasMortalitasCurrentWilayah = [];
+                  this.clearGraphNatalitasMortalitasCurrentWilayah();
+                  this.chartOptionsNatalitasMortalitasCurrentWilayah.xaxis.categories = [];
+                  this.dataNatalitasMortalitasCurrentWilayah.map(function (item, index) {
+                    tempXaxisNatalitasMortalitasCurrentWilayah.push(item.year);
+
+                    _this.tempDataNatalitasMortalitasCurrentWilayah[0].data.push(item.data.total_lahir);
+
+                    _this.tempDataNatalitasMortalitasCurrentWilayah[1].data.push(item.data.total_mati);
+                  });
+
+                  for (i = 0; i < 2; i++) {
+                    this.seriesNatalitasMortalitasCurrentWilayah[i] = _objectSpread({}, this.seriesNatalitasMortalitasCurrentWilayah[i], {}, {
+                      data: this.tempDataNatalitasMortalitasCurrentWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsNatalitasMortalitasCurrentWilayah = _objectSpread({}, this.chartOptionsNatalitasMortalitasCurrentWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisNatalitasMortalitasCurrentWilayah
+                    }
+                  });
+                } else {
+                  this.statusGraphNatalitasMortalitasCurrentWilayah = false;
+                  this.selectedTahunNatalitasMortalitasCurrentWilayah = '1 Tahun';
+                }
+
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 9]]);
+      }));
+
+      function initGraphNatalitasMortalitasCurrentWilayah() {
+        return _initGraphNatalitasMortalitasCurrentWilayah.apply(this, arguments);
+      }
+
+      return initGraphNatalitasMortalitasCurrentWilayah;
+    }(),
+    initGraphNatalitasMortalitasAllWilayah: function () {
+      var _initGraphNatalitasMortalitasAllWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this2 = this;
+
+        var resDataGraphNatalitasMortalitasAllWilayah, tempXaxisNatalitasMortalitasAllWilayah, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                this.dataSelectedTahunNatalitasMortalitasAllWilayah = this.selectedTahunNatalitasMortalitasAllWilayah.split(" ");
+                _context3.next = 4;
+                return this.fetchGraphNatalitasMortalitasAllWilayah();
+
+              case 4:
+                resDataGraphNatalitasMortalitasAllWilayah = _context3.sent;
+                this.dataNatalitasMortalitasAllWilayah = resDataGraphNatalitasMortalitasAllWilayah.data.yearly_chart;
+
+                if (this.dataNatalitasMortalitasAllWilayah.length > 0) {
+                  this.statusGraphNatalitasMortalitasAllWilayah = true;
+                  tempXaxisNatalitasMortalitasAllWilayah = [];
+                  this.clearGraphNatalitasMortalitasAllWilayah();
+                  this.chartOptionsNatalitasMortalitasAllWilayah.xaxis.categories = [];
+                  this.dataNatalitasMortalitasAllWilayah.map(function (item, index) {
+                    tempXaxisNatalitasMortalitasAllWilayah.push(item.year);
+
+                    _this2.tempDataNatalitasMortalitasAllWilayah[0].data.push(item.data.total_lahir);
+
+                    _this2.tempDataNatalitasMortalitasAllWilayah[1].data.push(item.data.total_mati);
+                  });
+
+                  for (i = 0; i < 2; i++) {
+                    this.seriesNatalitasMortalitasAllWilayah[i] = _objectSpread({}, this.seriesNatalitasMortalitasAllWilayah[i], {}, {
+                      data: this.tempDataNatalitasMortalitasAllWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsNatalitasMortalitasAllWilayah = _objectSpread({}, this.chartOptionsNatalitasMortalitasAllWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisNatalitasMortalitasAllWilayah
+                    }
+                  });
+                } else {
+                  this.statusGraphNatalitasMortalitasAllWilayah = false;
+                  this.selectedTahunNatalitasMortalitasAllWilayah = '1 Tahun';
+                }
+
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 9]]);
+      }));
+
+      function initGraphNatalitasMortalitasAllWilayah() {
+        return _initGraphNatalitasMortalitasAllWilayah.apply(this, arguments);
+      }
+
+      return initGraphNatalitasMortalitasAllWilayah;
+    }(),
+    clearGraphNatalitasMortalitasAllWilayah: function clearGraphNatalitasMortalitasAllWilayah() {
+      this.tempDataNatalitasMortalitasAllWilayah[0].data = [];
+      this.tempDataNatalitasMortalitasAllWilayah[1].data = [];
     },
-    fetchGraphKelahiran: function fetchGraphKelahiran() {
-      return axios.get('/api/kelahiran?mode=graphKelahiran', {
+    clearGraphNatalitasMortalitasCurrentWilayah: function clearGraphNatalitasMortalitasCurrentWilayah() {
+      this.tempDataNatalitasMortalitasCurrentWilayah[0].data = [];
+      this.tempDataNatalitasMortalitasCurrentWilayah[1].data = [];
+    },
+    fetchGraphNatalitasMortalitasCurrentWilayah: function fetchGraphNatalitasMortalitasCurrentWilayah() {
+      return axios.get('/api/yearly-data?mode=graphNatalitasMortalitasByYearCurrentWilayah', {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
         },
         params: {
-          'id_wilayah': this.selectedWilayah
+          'id_wilayah': this.selectedWilayah,
+          'range_tahun': this.dataSelectedTahunNatalitasMortalitasCurrentWilayah[0]
+        }
+      });
+    },
+    fetchGraphNatalitasMortalitasAllWilayah: function fetchGraphNatalitasMortalitasAllWilayah() {
+      return axios.get('/api/yearly-data?mode=graphNatalitasMortalitasByYearAllWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'range_tahun': this.dataSelectedTahunNatalitasMortalitasAllWilayah[0]
         }
       });
     }
   },
   mounted: function mounted() {
     if (this.activeTab == 4) {
-      this.init();
+      this.initAll();
+      this.initGraphNatalitasMortalitasCurrentWilayah();
+      this.initGraphNatalitasMortalitasAllWilayah();
     }
   },
   watch: {
     selectedWilayah: function selectedWilayah() {
       if (this.activeTab == 4) {
-        this.init();
+        this.initGraphNatalitasMortalitasCurrentWilayah();
+        this.initGraphNatalitasMortalitasAllWilayah();
       }
+    },
+    selectedTahunNatalitasMortalitasCurrentWilayah: function selectedTahunNatalitasMortalitasCurrentWilayah() {
+      this.initGraphNatalitasMortalitasCurrentWilayah();
+    },
+    selectedTahunNatalitasMortalitasAllWilayah: function selectedTahunNatalitasMortalitasAllWilayah() {
+      this.initGraphNatalitasMortalitasAllWilayah();
     }
   }
 });
@@ -33820,6 +34689,97 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -33844,44 +34804,176 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      statusPieKehidupanCurrentWilayah: true,
-      statusPieKehidupanAllWilayah: true,
-      dataPieKehidupan: [],
-      dataMonthlyKehidupan: [],
-      dataYearlyKehidupan: [],
-      tempDataYearlyKehidupan: [{
-        data: [] // Hidup
+      itemsTahunCurrentWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      itemsTahunAllWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      selectedTahunCurrentWilayah: '10 Tahun',
+      selectedTahunAllWilayah: '10 Tahun',
+      dataSelectedTahunCurrentWilayah: [10, ''],
+      dataSelectedTahunAllWilayah: [10, ''],
+      statusGraphByMonth: true,
+      statusGraphByYearCurrentWilayah: true,
+      statusGraphByYearAllWilayah: true,
+      statusPieKesehatanCurrentWilayah: true,
+      statusPieKesehatanAllWilayah: true,
+      dataMonthlyKesehatan: [],
+      dataYearlyKesehatanCurrentWilayah: [],
+      dataYearlyKesehatanAllWilayah: [],
+      tempDataYearlyKesehatanCurrentWilayah: [{
+        data: [] // Normal
 
       }, {
-        data: [] // RIP
-
-      }],
-      tempDataMonthlyKehidupan: [{
-        data: [] // Hidup
+        data: [] // Cacat Fisik
 
       }, {
-        data: [] // RIP
+        data: [] // Buta
+
+      }, {
+        data: [] // Bisu Tuli
+
+      }, {
+        data: [] // Sulit Mengurus Diri
+
+      }, {
+        data: [] // Kesulitan Mengingat
+
+      }, {
+        data: [] // Penyakit kronis
+
+      }, {
+        data: [] // Pikun
 
       }],
-      seriesKehidupanPerBulan: [{
-        name: "Hidup",
+      tempDataYearlyKesehatanAllWilayah: [{
+        data: [] // Normal
+
+      }, {
+        data: [] // Cacat Fisik
+
+      }, {
+        data: [] // Buta
+
+      }, {
+        data: [] // Bisu Tuli
+
+      }, {
+        data: [] // Sulit Mengurus Diri
+
+      }, {
+        data: [] // Kesulitan Mengingat
+
+      }, {
+        data: [] // Penyakit kronis
+
+      }, {
+        data: [] // Pikun
+
+      }],
+      tempDataMonthlyKesehatan: [{
+        data: [] // Normal
+
+      }, {
+        data: [] // Cacat Fisik
+
+      }, {
+        data: [] // Buta
+
+      }, {
+        data: [] // Bisu Tuli
+
+      }, {
+        data: [] // Sulit Mengurus Diri
+
+      }, {
+        data: [] // Kesulitan Mengingat
+
+      }, {
+        data: [] // Penyakit kronis
+
+      }, {
+        data: [] // Pikun
+
+      }],
+      seriesKesehatanPerBulan: [{
+        name: "Normal",
         data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }, {
-        name: "RIP",
+        name: "Cacat Fisik",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Buta",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Bisu Tuli",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Sulit Mengurus Diri",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Kesulitan Mengingat",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Penyakit kronis",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Pikun",
         data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }],
-      seriesKehidupanPerTahun: [{
-        name: "Hidup",
-        data: [1]
+      seriesKesehatanPerTahunCurrentWilayah: [{
+        name: "Normal",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }, {
-        name: "RIP",
-        data: [1]
+        name: "Cacat Fisik",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Buta",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Bisu Tuli",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Sulit Mengurus Diri",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Kesulitan Mengingat",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Penyakit kronis",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Pikun",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }],
-      seriesProsentasePieKehidupanWilayah: [1, 1],
-      seriesProsentasePieKehidupanKeseluruhanWilayah: [1, 1],
-      chartOptionsProsentasePieKehidupanWilayah: {
-        labels: ['Hidup', 'RIP'],
+      seriesKesehatanPerTahunAllWilayah: [{
+        name: "Normal",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Cacat Fisik",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Buta",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Bisu Tuli",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Sulit Mengurus Diri",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Kesulitan Mengingat",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Penyakit kronis",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: "Pikun",
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }],
+      seriesPersentasePieKesehatanWilayah: [1, 1],
+      seriesPersentasePieKesehatanKeseluruhanWilayah: [1, 1],
+      chartOptionsPersentasePieKesehatanWilayah: {
+        labels: ['Normal', 'Cacat Fisik', 'Buta', 'Bisu Tuli', 'Sulit Mengurus Diri', 'Kesulitan Mengingat', 'Penyakit Kronis', 'Pikun'],
         decimalsInFloat: 4,
+        colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#5A2A27', '#F86624', '#1B998B'],
         responsive: [{
           breakpoint: 2400,
           options: {
@@ -33896,8 +34988,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }]
       },
-      chartOptionsProsentasePieKehidupanKeseluruhanWilayah: {
-        labels: ['Hidup', 'RIP'],
+      chartOptionsPersentasePieKesehatanKeseluruhanWilayah: {
+        labels: ['Normal', 'Cacat Fisik', 'Buta', 'Bisu Tuli', 'Sulit Mengurus Diri', 'Kesulitan Mengingat', 'Penyakit Kronis', 'Pikun'],
+        decimalsInFloat: 4,
+        colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#5A2A27', '#F86624', '#1B998B'],
         responsive: [{
           breakpoint: 2400,
           options: {
@@ -33912,11 +35006,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }]
       },
-      chartOptionsKehidupanPerBulan: {
+      chartOptionsKesehatanPerBulan: {
         chart: {
           type: 'line',
           toolbar: {
-            show: true
+            show: false
           },
           shadow: {
             enabled: false,
@@ -33927,6 +35021,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             opacity: 1
           }
         },
+        colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#5A2A27', '#F86624', '#1B998B'],
         stroke: {
           width: 3,
           curve: 'smooth'
@@ -33950,14 +35045,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }
       },
-      chartOptionsKehidupanPerTahun: {
+      chartOptionsKesehatanPerTahunCurrentWilayah: {
         chart: {
-          stacked: true,
+          type: 'line',
           toolbar: {
-            show: true
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
           },
           zoom: {
-            enabled: true
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
           }
         },
         responsive: [{
@@ -33975,6 +35092,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             horizontal: false
           }
         },
+        colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#5A2A27', '#F86624', '#1B998B'],
+        xaxis: {
+          categories: [1100]
+        },
+        legend: {
+          position: 'bottom'
+        },
+        fill: {
+          opacity: 1
+        }
+      },
+      chartOptionsKesehatanPerTahunAllWilayah: {
+        chart: {
+          type: 'line',
+          toolbar: {
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#5A2A27', '#F86624', '#1B998B'],
         xaxis: {
           categories: [1100]
         },
@@ -33988,116 +35164,389 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    init: function () {
-      var _init = _asyncToGenerator(
+    initAll: function () {
+      var _initAll = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        var resDataPieKehidupan, resDataGraphKehidupan, tempXaxisMonthlyKehidupan, tempXaxisYearlyKehidupan, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return this.fetchPieKehidupan();
-
-              case 3:
-                resDataPieKehidupan = _context.sent;
-                _context.next = 6;
-                return this.fetchGraphKehidupan();
-
-              case 6:
-                resDataGraphKehidupan = _context.sent;
-                this.dataMonthlyKehidupan = resDataGraphKehidupan.data.monthly_chart;
-                this.dataYearlyKehidupan = resDataGraphKehidupan.data.yearly_chart;
-                console.log(this.dataMonthlyKehidupan);
-
-                if (resDataPieKehidupan.data.current_wilayah.length != 0) {
-                  this.statusPieKehidupanCurrentWilayah = true;
-                  this.seriesProsentasePieKehidupanWilayah = [resDataPieKehidupan.data.current_wilayah.status_hidup, resDataPieKehidupan.data.current_wilayah.status_mati];
-                } else {
-                  this.statusPieKehidupanCurrentWilayah = false;
+                try {
+                  this.selectedTahunCurrentWilayah = this.itemsTahunCurrentWilayah[this.itemsTahunCurrentWilayah.length - 1];
+                  this.selectedTahunAllWilayah = this.itemsTahunAllWilayah[this.itemsTahunAllWilayah.length - 1];
+                } catch (error) {
+                  console.log(error);
                 }
 
-                if (resDataPieKehidupan.data.all_wilayah.length != 0) {
-                  this.statusPieKehidupanAllWilayah = true;
-                  this.seriesProsentasePieKehidupanKeseluruhanWilayah = [resDataPieKehidupan.data.all_wilayah.status_hidup, resDataPieKehidupan.data.all_wilayah.status_mati];
-                } else {
-                  this.statusPieKehidupanAllWilayah = false;
-                }
-
-                tempXaxisMonthlyKehidupan = [];
-                tempXaxisYearlyKehidupan = [];
-                this.clearGraph();
-                this.chartOptionsKehidupanPerBulan.xaxis.categories = [];
-                this.chartOptionsKehidupanPerTahun.xaxis.categories = [];
-                this.dataYearlyKehidupan.map(function (item, index) {
-                  tempXaxisYearlyKehidupan.push(item.year);
-
-                  _this.tempDataYearlyKehidupan[0].data.push(item.data.status_hidup);
-
-                  _this.tempDataYearlyKehidupan[1].data.push(item.data.status_mati);
-                });
-                console.log(this.dataMonthlyKehidupan);
-                this.dataMonthlyKehidupan.map(function (item, index) {
-                  tempXaxisMonthlyKehidupan.push(item.month);
-
-                  _this.tempDataMonthlyKehidupan[0].data.push(item.data.status_hidup);
-
-                  _this.tempDataMonthlyKehidupan[1].data.push(item.data.status_mati);
-                });
-
-                for (i = 0; i < 2; i++) {
-                  this.seriesKehidupanPerTahun[i] = _objectSpread({}, this.seriesKehidupanPerTahun[i], {}, {
-                    data: this.tempDataYearlyKehidupan[i].data
-                  });
-                  this.seriesKehidupanPerBulan[i] = _objectSpread({}, this.seriesKehidupanPerBulan[i], {}, {
-                    data: this.tempDataMonthlyKehidupan[i].data
-                  });
-                }
-
-                this.chartOptionsKehidupanPerBulan = _objectSpread({}, this.chartOptionsKehidupanPerBulan, {}, {
-                  xaxis: {
-                    categories: tempXaxisMonthlyKehidupan
-                  }
-                });
-                this.chartOptionsKehidupanPerTahun = _objectSpread({}, this.chartOptionsKehidupanPerTahun, {}, {
-                  xaxis: {
-                    categories: tempXaxisYearlyKehidupan
-                  }
-                });
-                _context.next = 28;
-                break;
-
-              case 25:
-                _context.prev = 25;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
-
-              case 28:
+              case 1:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 25]]);
+        }, _callee, this);
       }));
 
-      function init() {
-        return _init.apply(this, arguments);
+      function initAll() {
+        return _initAll.apply(this, arguments);
       }
 
-      return init;
+      return initAll;
     }(),
-    clearGraph: function clearGraph() {
-      this.tempDataYearlyKehidupan[0].data = [];
-      this.tempDataMonthlyKehidupan[0].data = [];
-      this.tempDataYearlyKehidupan[1].data = [];
-      this.tempDataMonthlyKehidupan[1].data = [];
+    initPie: function () {
+      var _initPie = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var resDataPieKesehatan;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return this.fetchPieKesehatan();
+
+              case 3:
+                resDataPieKesehatan = _context2.sent;
+
+                if (resDataPieKesehatan.data.current_wilayah.length != 0) {
+                  this.statusPieKesehatanCurrentWilayah = true;
+                  this.seriesPersentasePieKesehatanWilayah = [resDataPieKesehatan.data.current_wilayah.normal, resDataPieKesehatan.data.current_wilayah.cacat_fisik, resDataPieKesehatan.data.current_wilayah.buta, resDataPieKesehatan.data.current_wilayah.bisu_tuli, resDataPieKesehatan.data.current_wilayah.sulit_mengurus_diri, resDataPieKesehatan.data.current_wilayah.kesulitan_mengingat, resDataPieKesehatan.data.current_wilayah.penyakit_kronis, resDataPieKesehatan.data.current_wilayah.pikun];
+                } else {
+                  this.statusPieKesehatanCurrentWilayah = false;
+                }
+
+                if (resDataPieKesehatan.data.all_wilayah.length != 0) {
+                  this.statusPieKesehatanAllWilayah = true;
+                  this.seriesPersentasePieKesehatanKeseluruhanWilayah = [resDataPieKesehatan.data.all_wilayah.normal, resDataPieKesehatan.data.all_wilayah.cacat_fisik, resDataPieKesehatan.data.all_wilayah.buta, resDataPieKesehatan.data.all_wilayah.bisu_tuli, resDataPieKesehatan.data.all_wilayah.sulit_mengurus_diri, resDataPieKesehatan.data.all_wilayah.kesulitan_mengingat, resDataPieKesehatan.data.all_wilayah.penyakit_kronis, resDataPieKesehatan.data.all_wilayah.pikun];
+                } else {
+                  this.statusPieKesehatanAllWilayah = false;
+                }
+
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 8]]);
+      }));
+
+      function initPie() {
+        return _initPie.apply(this, arguments);
+      }
+
+      return initPie;
+    }(),
+    initGraphByYearCurrentWilayah: function () {
+      var _initGraphByYearCurrentWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this = this;
+
+        var resDataGraphKesehatanByYearCurrentWilayah, tempXaxisYearlyKesehatan, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                this.dataSelectedTahunCurrentWilayah = this.selectedTahunCurrentWilayah.split(" ");
+                _context3.next = 4;
+                return this.fetchGraphKesehatanByYearCurrentWilayah();
+
+              case 4:
+                resDataGraphKesehatanByYearCurrentWilayah = _context3.sent;
+                this.dataYearlyKesehatanCurrentWilayah = resDataGraphKesehatanByYearCurrentWilayah.data.yearly_chart;
+
+                if (this.dataYearlyKesehatanCurrentWilayah.length > 0) {
+                  this.statusGraphByYearCurrentWilayah = true;
+                  tempXaxisYearlyKesehatan = [];
+                  this.clearGraphYearlyCurrentWilayah();
+                  this.chartOptionsKesehatanPerTahunCurrentWilayah.xaxis.categories = [];
+                  this.dataYearlyKesehatanCurrentWilayah.map(function (item, index) {
+                    tempXaxisYearlyKesehatan.push(item.year);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[0].data.push(item.data.normal);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[1].data.push(item.data.cacat_fisik);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[2].data.push(item.data.buta);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[3].data.push(item.data.bisu_tuli);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[4].data.push(item.data.sulit_mengurus_diri);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[5].data.push(item.data.kesulitan_mengingat);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[6].data.push(item.data.penyakit_kronis);
+
+                    _this.tempDataYearlyKesehatanCurrentWilayah[7].data.push(item.data.pikun);
+                  });
+
+                  for (i = 0; i < 8; i++) {
+                    this.seriesKesehatanPerTahunCurrentWilayah[i] = _objectSpread({}, this.seriesKesehatanPerTahunCurrentWilayah[i], {}, {
+                      data: this.tempDataYearlyKesehatanCurrentWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsKesehatanPerTahunCurrentWilayah = _objectSpread({}, this.chartOptionsKesehatanPerTahunCurrentWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyKesehatan
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearCurrentWilayah = false;
+                  this.selectedTahunCurrentWilayah = '1 Tahun';
+                }
+
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearCurrentWilayah() {
+        return _initGraphByYearCurrentWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearCurrentWilayah;
+    }(),
+    initGraphByYearAllWilayah: function () {
+      var _initGraphByYearAllWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this2 = this;
+
+        var resDataGraphKesehatanByYearAllWilayah, tempXaxisYearlyKesehatan, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                this.dataSelectedTahunAllWilayah = this.selectedTahunAllWilayah.split(" ");
+                _context4.next = 4;
+                return this.fetchGraphKesehatanByYearAllWilayah();
+
+              case 4:
+                resDataGraphKesehatanByYearAllWilayah = _context4.sent;
+                this.dataYearlyKesehatanAllWilayah = resDataGraphKesehatanByYearAllWilayah.data.yearly_chart;
+
+                if (this.dataYearlyKesehatanAllWilayah.length > 0) {
+                  this.statusGraphByYearAllWilayah = true;
+                  tempXaxisYearlyKesehatan = [];
+                  this.clearGraphYearlyAllWilayah();
+                  this.chartOptionsKesehatanPerTahunAllWilayah.xaxis.categories = [];
+                  this.dataYearlyKesehatanAllWilayah.map(function (item, index) {
+                    tempXaxisYearlyKesehatan.push(item.year);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[0].data.push(item.data.normal);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[1].data.push(item.data.cacat_fisik);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[2].data.push(item.data.buta);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[3].data.push(item.data.bisu_tuli);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[4].data.push(item.data.sulit_mengurus_diri);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[5].data.push(item.data.kesulitan_mengingat);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[6].data.push(item.data.penyakit_kronis);
+
+                    _this2.tempDataYearlyKesehatanAllWilayah[7].data.push(item.data.pikun);
+                  });
+
+                  for (i = 0; i < 8; i++) {
+                    this.seriesKesehatanPerTahunAllWilayah[i] = _objectSpread({}, this.seriesKesehatanPerTahunAllWilayah[i], {}, {
+                      data: this.tempDataYearlyKesehatanAllWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsKesehatanPerTahunAllWilayah = _objectSpread({}, this.chartOptionsKesehatanPerTahunAllWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyKesehatan
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearAllWilayah = false;
+                  this.selectedTahunAllWilayah = '1 Tahun';
+                }
+
+                _context4.next = 12;
+                break;
+
+              case 9:
+                _context4.prev = 9;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 12:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearAllWilayah() {
+        return _initGraphByYearAllWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearAllWilayah;
+    }(),
+    initGrapByMonth: function () {
+      var _initGrapByMonth = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var _this3 = this;
+
+        var resDataGraphKesehatanByMonth, tempXaxisMonthlyKesehatan, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return this.fetchGraphKesehatanByMonth();
+
+              case 3:
+                resDataGraphKesehatanByMonth = _context5.sent;
+                this.dataMonthlyKesehatan = resDataGraphKesehatanByMonth.data.monthly_chart;
+
+                if (this.dataMonthlyKesehatan.length > 0) {
+                  this.statusGraphByMonth = true;
+                  tempXaxisMonthlyKesehatan = [];
+                  this.clearGraphMonthly();
+                  this.chartOptionsKesehatanPerBulan.xaxis.categories = [];
+                  this.dataMonthlyKesehatan.map(function (item, index) {
+                    tempXaxisMonthlyKesehatan.push(item.month);
+
+                    _this3.tempDataMonthlyKesehatan[0].data.push(item.data.normal);
+
+                    _this3.tempDataMonthlyKesehatan[1].data.push(item.data.cacat_fisik);
+
+                    _this3.tempDataMonthlyKesehatan[2].data.push(item.data.buta);
+
+                    _this3.tempDataMonthlyKesehatan[3].data.push(item.data.bisu_tuli);
+
+                    _this3.tempDataMonthlyKesehatan[4].data.push(item.data.sulit_mengurus_diri);
+
+                    _this3.tempDataMonthlyKesehatan[5].data.push(item.data.kesulitan_mengingat);
+
+                    _this3.tempDataMonthlyKesehatan[6].data.push(item.data.penyakit_kronis);
+
+                    _this3.tempDataMonthlyKesehatan[7].data.push(item.data.pikun);
+                  });
+
+                  for (i = 0; i < 8; i++) {
+                    this.seriesKesehatanPerBulan[i] = _objectSpread({}, this.seriesKesehatanPerBulan[i], {}, {
+                      data: this.tempDataMonthlyKesehatan[i].data
+                    });
+                  }
+
+                  this.chartOptionsKesehatanPerBulan = _objectSpread({}, this.chartOptionsKesehatanPerBulan, {}, {
+                    xaxis: {
+                      categories: tempXaxisMonthlyKesehatan
+                    }
+                  });
+                } else {
+                  this.statusGraphByMonth = false;
+                }
+
+                _context5.next = 11;
+                break;
+
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[0, 8]]);
+      }));
+
+      function initGrapByMonth() {
+        return _initGrapByMonth.apply(this, arguments);
+      }
+
+      return initGrapByMonth;
+    }(),
+    clearGraphMonthly: function clearGraphMonthly() {
+      this.tempDataMonthlyKesehatan[0].data = [];
+      this.tempDataMonthlyKesehatan[1].data = [];
+      this.tempDataMonthlyKesehatan[2].data = [];
+      this.tempDataMonthlyKesehatan[3].data = [];
+      this.tempDataMonthlyKesehatan[4].data = [];
+      this.tempDataMonthlyKesehatan[5].data = [];
+      this.tempDataMonthlyKesehatan[6].data = [];
+      this.tempDataMonthlyKesehatan[7].data = [];
     },
-    fetchGraphKehidupan: function fetchGraphKehidupan() {
-      return axios.get('/api/kesehatan?mode=graphUmatHidup', {
+    clearGraphYearlyAllWilayah: function clearGraphYearlyAllWilayah() {
+      this.tempDataYearlyKesehatanAllWilayah[0].data = [];
+      this.tempDataYearlyKesehatanAllWilayah[1].data = [];
+      this.tempDataYearlyKesehatanAllWilayah[2].data = [];
+      this.tempDataYearlyKesehatanAllWilayah[3].data = [];
+      this.tempDataYearlyKesehatanAllWilayah[4].data = [];
+      this.tempDataYearlyKesehatanAllWilayah[5].data = [];
+      this.tempDataYearlyKesehatanAllWilayah[6].data = [];
+      this.tempDataYearlyKesehatanAllWilayah[7].data = [];
+    },
+    clearGraphYearlyCurrentWilayah: function clearGraphYearlyCurrentWilayah() {
+      this.tempDataYearlyKesehatanCurrentWilayah[0].data = [];
+      this.tempDataYearlyKesehatanCurrentWilayah[1].data = [];
+      this.tempDataYearlyKesehatanCurrentWilayah[2].data = [];
+      this.tempDataYearlyKesehatanCurrentWilayah[3].data = [];
+      this.tempDataYearlyKesehatanCurrentWilayah[4].data = [];
+      this.tempDataYearlyKesehatanCurrentWilayah[5].data = [];
+      this.tempDataYearlyKesehatanCurrentWilayah[6].data = [];
+      this.tempDataYearlyKesehatanCurrentWilayah[7].data = [];
+    },
+    fetchGraphKesehatanByYearCurrentWilayah: function fetchGraphKesehatanByYearCurrentWilayah() {
+      return axios.get('/api/yearly-data?mode=graphKesehatanByYearCurrentWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'id_wilayah': this.selectedWilayah,
+          'range_tahun': this.dataSelectedTahunCurrentWilayah[0]
+        }
+      });
+    },
+    fetchGraphKesehatanByYearAllWilayah: function fetchGraphKesehatanByYearAllWilayah() {
+      return axios.get('/api/yearly-data?mode=graphKesehatanByYearAllWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'range_tahun': this.dataSelectedTahunAllWilayah[0]
+        }
+      });
+    },
+    fetchGraphKesehatanByMonth: function fetchGraphKesehatanByMonth() {
+      return axios.get('/api/kesehatan?mode=graphKesehatan', {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
@@ -34107,8 +35556,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       });
     },
-    fetchPieKehidupan: function fetchPieKehidupan() {
-      return axios.get('/api/kesehatan?mode=pieUmatHidup', {
+    fetchPieKesehatan: function fetchPieKesehatan() {
+      return axios.get('/api/kesehatan?mode=pieKesehatan', {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
@@ -34121,14 +35570,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     if (this.activeTab == 2) {
-      this.init();
+      this.initAll();
+      this.initPie();
+      this.initGraphByYearCurrentWilayah();
+      this.initGraphByYearAllWilayah();
+      this.initGrapByMonth();
     }
   },
   watch: {
     selectedWilayah: function selectedWilayah() {
       if (this.activeTab == 2) {
-        this.init();
+        this.initPie();
+        this.initGraphByYearCurrentWilayah();
+        this.initGraphByYearAllWilayah();
+        this.initGrapByMonth();
       }
+    },
+    selectedTahunCurrentWilayah: function selectedTahunCurrentWilayah() {
+      this.initGraphByYearCurrentWilayah();
+    },
+    selectedTahunAllWilayah: function selectedTahunAllWilayah() {
+      this.initGraphByYearAllWilayah();
     }
   }
 });
@@ -34217,6 +35679,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -34241,12 +35795,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      itemsTahunCurrentWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      itemsTahunAllWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
+      selectedTahunCurrentWilayah: '10 Tahun',
+      selectedTahunAllWilayah: '10 Tahun',
+      dataSelectedTahunCurrentWilayah: [10, ''],
+      dataSelectedTahunAllWilayah: [10, ''],
+      statusGraphByMonth: true,
+      statusGraphByYearCurrentWilayah: true,
+      statusGraphByYearAllWilayah: true,
       statusPiePerkawinanCurrentWilayah: true,
       statusPiePerkawinanAllWilayah: true,
-      dataPiePerkawinan: [],
       dataMonthlyPerkawinan: [],
-      dataYearlyPerkawinan: [],
-      tempDataYearlyPerkawinan: [{
+      dataYearlyPerkawinanCurrentWilayah: [],
+      dataYearlyPerkawinanAllWilayah: [],
+      tempDataMonthlyPerkawinan: [{
         data: [] // SahKatolik
 
       }, {
@@ -34256,7 +35819,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         data: [] // SahBedaGereja
 
       }],
-      tempDataMonthlyPerkawinan: [{
+      tempDataYearlyPerkawinanCurrentWilayah: [{
+        data: [] // SahKatolik
+
+      }, {
+        data: [] // SahBedaAgama
+
+      }, {
+        data: [] // SahBedaGereja
+
+      }],
+      tempDataYearlyPerkawinanAllWilayah: [{
         data: [] // SahKatolik
 
       }, {
@@ -34276,19 +35849,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: 'Sah Beda Greja',
         data: [1, 1, 1, 1, 1, 1]
       }],
-      seriesPerkawinanPerTahun: [{
+      seriesPerkawinanPerTahunCurrentWilayah: [{
         name: 'Sah Katolik',
-        data: [1, 1, 1]
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }, {
         name: 'Sah Beda Agama',
-        data: [1, 1, 1]
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }, {
         name: 'Sah Beda Greja',
-        data: [1, 1, 1]
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }],
-      seriesProsentasePiePerkawinanWilayah: [1, 1, 1],
-      seriesProsentasePiePerkawinanKeseluruhanWilayah: [1, 1, 1],
-      chartOptionsProsentasePiePerkawinanWilayah: {
+      seriesPerkawinanPerTahunAllWilayah: [{
+        name: 'Sah Katolik',
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: 'Sah Beda Agama',
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }, {
+        name: 'Sah Beda Greja',
+        data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }],
+      seriesPersentasePiePerkawinanWilayah: [1, 1, 1],
+      seriesPersentasePiePerkawinanKeseluruhanWilayah: [1, 1, 1],
+      chartOptionsPersentasePiePerkawinanWilayah: {
         labels: ['Sah Katolik', 'Sah Beda Agama', 'Sah Beda Gereja'],
         responsive: [{
           breakpoint: 2400,
@@ -34304,7 +35887,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }]
       },
-      chartOptionsProsentasePiePerkawinanKeseluruhanWilayah: {
+      chartOptionsPersentasePiePerkawinanKeseluruhanWilayah: {
         labels: ['Sah Katolik', 'Sah Beda Agama', 'Sah Beda Gereja'],
         responsive: [{
           breakpoint: 2400,
@@ -34323,6 +35906,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       chartOptionsPerkawinanPerBulan: {
         chart: {
           type: 'line',
+          toolbar: {
+            show: false
+          },
           shadow: {
             enabled: false,
             color: '#bbb',
@@ -34360,14 +35946,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           showForZeroSeries: false
         }
       },
-      chartOptionsPerkawinanPerTahun: {
+      chartOptionsPerkawinanPerTahunCurrentWilayah: {
         chart: {
-          stacked: true,
+          type: 'line',
           toolbar: {
-            show: true
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
           },
           zoom: {
-            enabled: true
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
           }
         },
         responsive: [{
@@ -34386,7 +35994,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         },
         xaxis: {
-          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
+          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
+        },
+        legend: {
+          position: 'bottom'
+        },
+        fill: {
+          opacity: 1
+        }
+      },
+      chartOptionsPerkawinanPerTahunAllWilayah: {
+        chart: {
+          type: 'line',
+          toolbar: {
+            show: false
+          },
+          shadow: {
+            enabled: false,
+            color: '#bbb',
+            top: 3,
+            left: 2,
+            blur: 3,
+            opacity: 1
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: 'smooth'
+        },
+        markers: {
+          size: 4,
+          opacity: 0.9,
+          colors: ["#FFA41B"],
+          strokeColor: "#fff",
+          strokeWidth: 2,
+          hover: {
+            size: 7
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false
+          }
+        },
+        xaxis: {
+          categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
         },
         legend: {
           position: 'bottom'
@@ -34398,87 +36063,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    init: function () {
-      var _init = _asyncToGenerator(
+    initAll: function () {
+      var _initAll = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        var resDataGraphPerkawinan, resDataPiePerkawinan, tempXaxisYearlyPerkawinan, tempXaxisMonthlyPerkawinan, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return this.fetchGraphPerkawinan();
-
-              case 2:
-                resDataGraphPerkawinan = _context.sent;
-                _context.next = 5;
-                return this.fetchPiePerkawinan();
-
-              case 5:
-                resDataPiePerkawinan = _context.sent;
-
-                if (resDataPiePerkawinan.data.current_wilayah.length != 0) {
-                  this.statusPiePerkawinanCurrentWilayah = true;
-                  this.seriesProsentasePiePerkawinanWilayah = [resDataPiePerkawinan.data.current_wilayah.sah_katolik, resDataPiePerkawinan.data.current_wilayah.sah_beda_agama, resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja];
-                } else {
-                  this.statusPiePerkawinanCurrentWilayah = false;
+                try {
+                  this.selectedTahunCurrentWilayah = this.itemsTahunCurrentWilayah[this.itemsTahunCurrentWilayah.length - 1];
+                  this.selectedTahunAllWilayah = this.itemsTahunAllWilayah[this.itemsTahunAllWilayah.length - 1];
+                } catch (error) {
+                  console.log(error);
                 }
 
-                if (resDataPiePerkawinan.data.all_wilayah.length != 0) {
-                  this.statusPiePerkawinanAllWilayah = true;
-                  this.seriesProsentasePiePerkawinanKeseluruhanWilayah = [resDataPiePerkawinan.data.all_wilayah.sah_katolik, resDataPiePerkawinan.data.all_wilayah.sah_beda_agama, resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja];
-                } else {
-                  this.statusPiePerkawinanAllWilayah = false;
-                }
-
-                this.dataYearlyPerkawinan = resDataGraphPerkawinan.data.yearly_chart;
-                this.dataMonthlyPerkawinan = resDataGraphPerkawinan.data.monthly_chart;
-                tempXaxisYearlyPerkawinan = [];
-                tempXaxisMonthlyPerkawinan = [];
-                this.clearGraph();
-                this.dataYearlyPerkawinan.map(function (item, index) {
-                  tempXaxisYearlyPerkawinan.push(item.year);
-
-                  _this.tempDataYearlyPerkawinan[0].data.push(item.data.sah_katolik);
-
-                  _this.tempDataYearlyPerkawinan[1].data.push(item.data.sah_beda_agama);
-
-                  _this.tempDataYearlyPerkawinan[2].data.push(item.data.sah_beda_gereja);
-                });
-                this.dataMonthlyPerkawinan.map(function (item, index) {
-                  tempXaxisMonthlyPerkawinan.push(item.month);
-
-                  _this.tempDataMonthlyPerkawinan[0].data.push(item.data.sah_katolik);
-
-                  _this.tempDataMonthlyPerkawinan[1].data.push(item.data.sah_beda_agama);
-
-                  _this.tempDataMonthlyPerkawinan[2].data.push(item.data.sah_beda_gereja);
-                });
-
-                for (i = 0; i < 3; i++) {
-                  this.seriesPerkawinanPerTahun[i] = _objectSpread({}, this.seriesPerkawinanPerTahun[i], {}, {
-                    data: this.tempDataYearlyPerkawinan[i].data
-                  });
-                  this.seriesPerkawinanPerBulan[i] = _objectSpread({}, this.seriesPerkawinanPerBulan[i], {}, {
-                    data: this.tempDataMonthlyPerkawinan[i].data
-                  });
-                }
-
-                this.chartOptionsPerkawinanPerTahun = _objectSpread({}, this.chartOptionsPerkawinanPerTahun, {}, {
-                  xaxis: {
-                    categories: tempXaxisYearlyPerkawinan
-                  }
-                });
-                this.chartOptionsPerkawinanPerBulan = _objectSpread({}, this.chartOptionsPerkawinanPerBulan, {}, {
-                  xaxis: {
-                    categories: tempXaxisMonthlyPerkawinan
-                  }
-                });
-
-              case 18:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -34486,21 +36086,310 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function init() {
-        return _init.apply(this, arguments);
+      function initAll() {
+        return _initAll.apply(this, arguments);
       }
 
-      return init;
+      return initAll;
     }(),
-    clearGraph: function clearGraph() {
-      this.tempDataYearlyPerkawinan[0].data = [];
-      this.tempDataYearlyPerkawinan[1].data = [];
-      this.tempDataYearlyPerkawinan[2].data = [];
+    initPie: function () {
+      var _initPie = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var resDataPiePerkawinan;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.fetchPiePerkawinan();
+
+              case 2:
+                resDataPiePerkawinan = _context2.sent;
+
+                if (resDataPiePerkawinan.data.current_wilayah.length != 0) {
+                  this.statusPiePerkawinanCurrentWilayah = true;
+                  this.seriesPersentasePiePerkawinanWilayah = [resDataPiePerkawinan.data.current_wilayah.sah_katolik, resDataPiePerkawinan.data.current_wilayah.sah_beda_agama, resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja];
+                } else {
+                  this.statusPiePerkawinanCurrentWilayah = false;
+                }
+
+                if (resDataPiePerkawinan.data.all_wilayah.length != 0) {
+                  this.statusPiePerkawinanAllWilayah = true;
+                  this.seriesPersentasePiePerkawinanKeseluruhanWilayah = [resDataPiePerkawinan.data.all_wilayah.sah_katolik, resDataPiePerkawinan.data.all_wilayah.sah_beda_agama, resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja];
+                } else {
+                  this.statusPiePerkawinanAllWilayah = false;
+                }
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function initPie() {
+        return _initPie.apply(this, arguments);
+      }
+
+      return initPie;
+    }(),
+    initGraphByYearCurrentWilayah: function () {
+      var _initGraphByYearCurrentWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this = this;
+
+        var resDataGraphPerkawinanByYearCurrentWilayah, tempXaxisYearlyPerkawinan, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                this.dataSelectedTahunCurrentWilayah = this.selectedTahunCurrentWilayah.split(" ");
+                _context3.next = 4;
+                return this.fetchGraphPerkawinanByYearCurrentWilayah();
+
+              case 4:
+                resDataGraphPerkawinanByYearCurrentWilayah = _context3.sent;
+                this.dataYearlyPerkawinanCurrentWilayah = resDataGraphPerkawinanByYearCurrentWilayah.data.yearly_chart;
+
+                if (this.dataYearlyPerkawinanCurrentWilayah.length > 0) {
+                  this.statusGraphByYearCurrentWilayah = true;
+                  tempXaxisYearlyPerkawinan = [];
+                  this.clearGraphYearlyCurrentWilayah();
+                  this.chartOptionsPerkawinanPerTahunCurrentWilayah.xaxis.categories = [];
+                  this.dataYearlyPerkawinanCurrentWilayah.map(function (item, index) {
+                    tempXaxisYearlyPerkawinan.push(item.year);
+
+                    _this.tempDataYearlyPerkawinanCurrentWilayah[0].data.push(item.data.sah_katolik);
+
+                    _this.tempDataYearlyPerkawinanCurrentWilayah[1].data.push(item.data.sah_beda_agama);
+
+                    _this.tempDataYearlyPerkawinanCurrentWilayah[2].data.push(item.data.sah_beda_gereja);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesPerkawinanPerTahunCurrentWilayah[i] = _objectSpread({}, this.seriesPerkawinanPerTahunCurrentWilayah[i], {}, {
+                      data: this.tempDataYearlyPerkawinanCurrentWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsPerkawinanPerTahunCurrentWilayah = _objectSpread({}, this.chartOptionsPerkawinanPerTahunCurrentWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyPerkawinan
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearCurrentWilayah = false;
+                  this.selectedTahunCurrentWilayah = '1 Tahun';
+                }
+
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearCurrentWilayah() {
+        return _initGraphByYearCurrentWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearCurrentWilayah;
+    }(),
+    initGraphByYearAllWilayah: function () {
+      var _initGraphByYearAllWilayah = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _this2 = this;
+
+        var resDataGraphPerkawinanByYearAllCurrentWilayah, tempXaxisYearlyPerkawinan, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                this.dataSelectedTahunAllWilayah = this.selectedTahunAllWilayah.split(" ");
+                _context4.next = 4;
+                return this.fetchGraphPerkawinanByYearAllWilayah();
+
+              case 4:
+                resDataGraphPerkawinanByYearAllCurrentWilayah = _context4.sent;
+                this.dataYearlyPerkawinanAllWilayah = resDataGraphPerkawinanByYearAllCurrentWilayah.data.yearly_chart;
+
+                if (this.dataYearlyPerkawinanAllWilayah.length > 0) {
+                  this.statusGraphByYearAllWilayah = true;
+                  tempXaxisYearlyPerkawinan = [];
+                  this.clearGraphYearlyAllWilayah();
+                  this.chartOptionsPerkawinanPerTahunAllWilayah.xaxis.categories = [];
+                  this.dataYearlyPerkawinanAllWilayah.map(function (item, index) {
+                    tempXaxisYearlyPerkawinan.push(item.year);
+
+                    _this2.tempDataYearlyPerkawinanAllWilayah[0].data.push(item.data.sah_katolik);
+
+                    _this2.tempDataYearlyPerkawinanAllWilayah[1].data.push(item.data.sah_beda_agama);
+
+                    _this2.tempDataYearlyPerkawinanAllWilayah[2].data.push(item.data.sah_beda_gereja);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesPerkawinanPerTahunAllWilayah[i] = _objectSpread({}, this.seriesPerkawinanPerTahunAllWilayah[i], {}, {
+                      data: this.tempDataYearlyPerkawinanAllWilayah[i].data
+                    });
+                  }
+
+                  this.chartOptionsPerkawinanPerTahunAllWilayah = _objectSpread({}, this.chartOptionsPerkawinanPerTahunAllWilayah, {}, {
+                    xaxis: {
+                      categories: tempXaxisYearlyPerkawinan
+                    }
+                  });
+                } else {
+                  this.statusGraphByYearAllWilayah = false;
+                  this.selectedTahunAllWilayah = '1 Tahun';
+                }
+
+                _context4.next = 12;
+                break;
+
+              case 9:
+                _context4.prev = 9;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 12:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 9]]);
+      }));
+
+      function initGraphByYearAllWilayah() {
+        return _initGraphByYearAllWilayah.apply(this, arguments);
+      }
+
+      return initGraphByYearAllWilayah;
+    }(),
+    initGrapByMonth: function () {
+      var _initGrapByMonth = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var _this3 = this;
+
+        var resDataGraphPerkawinanByMonth, tempXaxisMonthlyPerkawinan, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return this.fetchGraphPerkawinanByMonth();
+
+              case 3:
+                resDataGraphPerkawinanByMonth = _context5.sent;
+                this.dataMonthlyPerkawinan = resDataGraphPerkawinanByMonth.data.monthly_chart;
+
+                if (this.dataMonthlyPerkawinan.length > 0) {
+                  this.statusGraphByMonth = true;
+                  tempXaxisMonthlyPerkawinan = [];
+                  this.clearGraphMonthly();
+                  this.dataMonthlyPerkawinan.map(function (item, index) {
+                    tempXaxisMonthlyPerkawinan.push(item.month);
+
+                    _this3.tempDataMonthlyPerkawinan[0].data.push(item.data.sah_katolik);
+
+                    _this3.tempDataMonthlyPerkawinan[1].data.push(item.data.sah_beda_agama);
+
+                    _this3.tempDataMonthlyPerkawinan[2].data.push(item.data.sah_beda_gereja);
+                  });
+
+                  for (i = 0; i < 3; i++) {
+                    this.seriesPerkawinanPerBulan[i] = _objectSpread({}, this.seriesPerkawinanPerBulan[i], {}, {
+                      data: this.tempDataMonthlyPerkawinan[i].data
+                    });
+                  }
+
+                  this.chartOptionsPerkawinanPerBulan = _objectSpread({}, this.chartOptionsPerkawinanPerBulan, {}, {
+                    xaxis: {
+                      categories: tempXaxisMonthlyPerkawinan
+                    }
+                  });
+                } else {
+                  this.statusGraphByMonth = false;
+                }
+
+                _context5.next = 11;
+                break;
+
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[0, 8]]);
+      }));
+
+      function initGrapByMonth() {
+        return _initGrapByMonth.apply(this, arguments);
+      }
+
+      return initGrapByMonth;
+    }(),
+    clearGraphYearlyCurrentWilayah: function clearGraphYearlyCurrentWilayah() {
+      this.tempDataYearlyPerkawinanCurrentWilayah[0].data = [];
+      this.tempDataYearlyPerkawinanCurrentWilayah[1].data = [];
+      this.tempDataYearlyPerkawinanCurrentWilayah[2].data = [];
+    },
+    clearGraphYearlyAllWilayah: function clearGraphYearlyAllWilayah() {
+      this.tempDataYearlyPerkawinanAllWilayah[0].data = [];
+      this.tempDataYearlyPerkawinanAllWilayah[1].data = [];
+      this.tempDataYearlyPerkawinanAllWilayah[2].data = [];
+    },
+    clearGraphMonthly: function clearGraphMonthly() {
       this.tempDataMonthlyPerkawinan[0].data = [];
       this.tempDataMonthlyPerkawinan[1].data = [];
       this.tempDataMonthlyPerkawinan[2].data = [];
     },
-    fetchGraphPerkawinan: function fetchGraphPerkawinan() {
+    fetchGraphPerkawinanByYearCurrentWilayah: function fetchGraphPerkawinanByYearCurrentWilayah() {
+      return axios.get('/api/yearly-data?mode=graphPerkawinanByYearCurrentWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'id_wilayah': this.selectedWilayah,
+          'range_tahun': this.dataSelectedTahunCurrentWilayah[0]
+        }
+      });
+    },
+    fetchGraphPerkawinanByYearAllWilayah: function fetchGraphPerkawinanByYearAllWilayah() {
+      return axios.get('/api/yearly-data?mode=graphPerkawinanByYearAllWilayah', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'range_tahun': this.dataSelectedTahunAllWilayah[0]
+        }
+      });
+    },
+    fetchGraphPerkawinanByMonth: function fetchGraphPerkawinanByMonth() {
       return axios.get('/api/perkawinan?mode=graphPerkawinan', {
         headers: {
           'Accept': 'application/json',
@@ -34525,14 +36414,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     if (this.activeTab == 1) {
-      this.init();
+      this.initAll();
+      this.initPie();
+      this.initGraphByYearCurrentWilayah();
+      this.initGraphByYearAllWilayah();
+      this.initGrapByMonth();
     }
   },
   watch: {
     selectedWilayah: function selectedWilayah() {
       if (this.activeTab == 1) {
-        this.init();
+        this.initAll();
+        this.initPie();
+        this.initGraphByYearCurrentWilayah();
+        this.initGraphByYearAllWilayah();
+        this.initGrapByMonth();
       }
+    },
+    selectedTahunCurrentWilayah: function selectedTahunCurrentWilayah() {
+      this.initGraphByYearCurrentWilayah();
+    },
+    selectedTahunAllWilayah: function selectedTahunAllWilayah() {
+      this.initGraphByYearAllWilayah();
     }
   }
 });
@@ -34726,7 +36629,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-icon[data-v-4a2d6602] {\n    font-size: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.apexcharts-canvas[data-v-4a2d6602] {\n    width: 100%!important;\n}\n.v-menu__content.theme--light.menuable__content__active[data-v-4a2d6602] {\n    z-index:3!important;\n}\n.custom-font-size-icon[data-v-4a2d6602] {\n    font-size: 100px!important;\n}\n", ""]);
 
 // exports
 
@@ -34764,17 +36667,17 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-icon {\n    font-size: 100px;\n}\n.apexcharts-canvas {\n    width: 100%!important;\n}\n", ""]);
+exports.push([module.i, "\n.apexcharts-canvas {\n    width: 100%!important;\n}\n.v-menu__content.theme--light.menuable__content__active {\n    z-index:3!important;\n}\n.custom-font-size-icon {\n    font-size: 100px!important;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34783,7 +36686,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-icon[data-v-4c2ac694] {\n    font-size: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.apexcharts-canvas {\n    width: 100%!important;\n}\n.v-menu__content.theme--light.menuable__content__active {\n    z-index:3!important;\n}\n.custom-font-size-icon {\n    font-size: 100px!important;\n}\n", ""]);
 
 // exports
 
@@ -34802,17 +36705,17 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-icon[data-v-55a1dfbe] {\n    font-size: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.apexcharts-canvas[data-v-55a1dfbe] {\n    width: 100%!important;\n}\n.v-menu__content.theme--light.menuable__content__active[data-v-55a1dfbe] {\n    z-index:3!important;\n}\n.custom-font-size-icon[data-v-55a1dfbe] {\n    font-size: 100px!important;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34821,7 +36724,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-icon[data-v-7f89898b] {\n    font-size: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.apexcharts-canvas {\n    width: 100%!important;\n}\n.v-menu__content.theme--light.menuable__content__active {\n    z-index:3!important;\n}\n.custom-font-size-icon {\n    font-size: 100px!important;\n}\n", ""]);
 
 // exports
 
@@ -35551,15 +37454,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKelahiranCharts.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -35611,15 +37514,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -37232,7 +39135,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Baptis")
+                _vm._v("Persentase Baptis")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -37242,8 +39145,8 @@ var render = function() {
               _c("apexchart", {
                 attrs: {
                   type: "pie",
-                  options: _vm.chartOptionsProsentasePieBaptisWilayah,
-                  series: _vm.seriesProsentasePieBaptisWilayah
+                  options: _vm.chartOptionsPersentasePieBaptisWilayah,
+                  series: _vm.seriesPersentasePieBaptisWilayah
                 }
               })
             ],
@@ -37254,7 +39157,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Baptis")
+                _vm._v("Persentase Baptis")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -37284,7 +39187,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Baptis")
+                _vm._v("Persentase Baptis")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -37295,8 +39198,8 @@ var render = function() {
                 attrs: {
                   type: "pie",
                   options:
-                    _vm.chartOptionsProsentasePieBaptisKeseluruhanWilayah,
-                  series: _vm.seriesProsentasePieBaptisKeseluruhanWilayah
+                    _vm.chartOptionsPersentasePieBaptisKeseluruhanWilayah,
+                  series: _vm.seriesPersentasePieBaptisKeseluruhanWilayah
                 }
               })
             ],
@@ -37307,7 +39210,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Baptis Wilayah")
+                _vm._v("Persentase Baptis Wilayah")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -37331,85 +39234,296 @@ var render = function() {
             ]
           ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Baptis per Bulan " + _vm._s(this.selectedNameWilayah))
+      _vm.statusGraphByMonth
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c("div", { staticClass: "headline my-3" }, [
+                _vm._v("Baptis per Bulan " + _vm._s(this.selectedNameWilayah))
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsBaptisPerBulan,
+                  series: _vm.seriesBaptisPerBulan
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "" } }, [
+            _c("div", { staticClass: "headline my-3" }, [
+              _vm._v(
+                "Baptis per Bulan " + _vm._s(this.selectedNameWilayah) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text mb-3" },
+              [
+                _c(
+                  "v-icon",
+                  { staticClass: "orange--text custom-font-size-icon" },
+                  [_vm._v("report")]
+                ),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data per bulan pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+              ],
+              1
+            )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "line",
-              height: "350px",
-              options: _vm.chartOptionsBaptisPerBulan,
-              series: _vm.seriesBaptisPerBulan
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Baptis per Tahun " + _vm._s(this.selectedNameWilayah))
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350px",
-              options: _vm.chartOptionsBaptisPerTahun,
-              series: _vm.seriesBaptisPerTahun
-            }
-          })
-        ],
-        1
-      ),
+      _vm.statusGraphByYearCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Baptis per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsBaptisPerTahunCurrentWilayah,
+                  series: _vm.seriesBaptisPerTahunCurrentWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Baptis per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v("Tidak ada data per Tahun pada")]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Kematian per Tahun " + _vm._s(this.selectedNameWilayah))
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350px",
-              options: _vm.chartOptionsKematianPerTahunWilayah,
-              series: _vm.seriesKematianPerTahunWilayah
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Kematian per 10 Tahun Keseluruhan Wilayah")
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350px",
-              options: _vm.chartOptionsKematianPerTahunKeseluruhanWilayah,
-              series: _vm.seriesKematianPerTahunKeseluruhanWilayah
-            }
-          })
-        ],
-        1
-      )
+      _vm.statusGraphByYearAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Baptis per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsBaptisPerTahunAllWilayah,
+                  series: _vm.seriesBaptisPerTahunAllWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Baptis per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(this.selectedTahunAllWilayah) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(" Keseluruhan Wilayah ")])
+                ],
+                1
+              )
+            ],
+            1
+          )
     ],
     1
   )
@@ -37728,7 +39842,11 @@ var render = function() {
                                           staticClass:
                                             "title font-weight-regular mt-2"
                                         },
-                                        [_vm._v("200")]
+                                        [
+                                          _vm._v(
+                                            _vm._s(this.dataCard.panggilan_imam)
+                                          )
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
@@ -37883,7 +40001,8 @@ var render = function() {
                                 attrs: {
                                   selectedWilayah: _vm.selected,
                                   selectedNameWilayah: _vm.selectedNameWilayah,
-                                  activeTab: _vm.activeTab
+                                  activeTab: _vm.activeTab,
+                                  isSync: _vm.isSync
                                 }
                               })
                             ],
@@ -37898,7 +40017,8 @@ var render = function() {
                                 attrs: {
                                   selectedWilayah: _vm.selected,
                                   selectedNameWilayah: _vm.selectedNameWilayah,
-                                  activeTab: _vm.activeTab
+                                  activeTab: _vm.activeTab,
+                                  isSync: _vm.isSync
                                 }
                               })
                             ],
@@ -37913,7 +40033,8 @@ var render = function() {
                                 attrs: {
                                   selectedWilayah: _vm.selected,
                                   selectedNameWilayah: _vm.selectedNameWilayah,
-                                  activeTab: _vm.activeTab
+                                  activeTab: _vm.activeTab,
+                                  isSync: _vm.isSync
                                 }
                               })
                             ],
@@ -37928,7 +40049,8 @@ var render = function() {
                                 attrs: {
                                   selectedWilayah: _vm.selected,
                                   selectedNameWilayah: _vm.selectedNameWilayah,
-                                  activeTab: _vm.activeTab
+                                  activeTab: _vm.activeTab,
+                                  isSync: _vm.isSync
                                 }
                               })
                             ],
@@ -37943,7 +40065,8 @@ var render = function() {
                                 attrs: {
                                   selectedWilayah: _vm.selected,
                                   selectedNameWilayah: _vm.selectedNameWilayah,
-                                  activeTab: _vm.activeTab
+                                  activeTab: _vm.activeTab,
+                                  isSync: _vm.isSync
                                 }
                               })
                             ],
@@ -38000,7 +40123,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Ekonomi")
+                _vm._v("Persentase Ekonomi")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38010,8 +40133,8 @@ var render = function() {
               _c("apexchart", {
                 attrs: {
                   type: "pie",
-                  options: _vm.chartOptionsProsentasePieEkonomiWilayah,
-                  series: _vm.seriesProsentasePieEkonomiWilayah
+                  options: _vm.chartOptionsPersentasePieEkonomiWilayah,
+                  series: _vm.seriesPersentasePieEkonomiWilayah
                 }
               })
             ],
@@ -38022,7 +40145,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Ekonomi Wilayah")
+                _vm._v("Persentase Ekonomi Wilayah")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38033,9 +40156,11 @@ var render = function() {
                 "div",
                 { staticClass: "text-xs-center orange--text" },
                 [
-                  _c("v-icon", { staticClass: "orange--text mt-5" }, [
-                    _vm._v("report")
-                  ]),
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
                   _vm._v(" "),
                   _c("h2", {}, [_vm._v("Tidak ada data pada")]),
                   _vm._v(" "),
@@ -38054,7 +40179,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Ekonomi")
+                _vm._v("Persentase Ekonomi")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38065,8 +40190,8 @@ var render = function() {
                 attrs: {
                   type: "pie",
                   options:
-                    _vm.chartOptionsProsentasePieEkonomiKeseluruhanWilayah,
-                  series: _vm.seriesProsentasePieEkonomiKeseluruhanWilayah
+                    _vm.chartOptionsPersentasePieEkonomiKeseluruhanWilayah,
+                  series: _vm.seriesPersentasePieEkonomiKeseluruhanWilayah
                 }
               })
             ],
@@ -38077,7 +40202,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Ekonomi")
+                _vm._v("Persentase Ekonomi")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38088,9 +40213,11 @@ var render = function() {
                 "div",
                 { staticClass: "text-xs-center orange--text" },
                 [
-                  _c("v-icon", { staticClass: "orange--text mt-5" }, [
-                    _vm._v("report")
-                  ]),
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
                   _vm._v(" "),
                   _c("h2", {}, [_vm._v("Tidak ada data pada")]),
                   _vm._v(" "),
@@ -38101,53 +40228,304 @@ var render = function() {
             ]
           ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v(
-              "Ekonomi per Bulan " + _vm._s(this.selectedNameWilayah) + " "
+      _vm.statusGraphByMonth
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c("div", { staticClass: "headline my-3" }, [
+                _vm._v(
+                  "Ekonomi per Bulan " + _vm._s(this.selectedNameWilayah) + " "
+                )
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsEkonomiPerBulan,
+                  series: _vm.seriesEkonomiPerBulan
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "" } }, [
+            _c("div", { staticClass: "headline my-3" }, [
+              _vm._v(
+                "Ekonomi per Bulan " + _vm._s(this.selectedNameWilayah) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text mb-3" },
+              [
+                _c(
+                  "v-icon",
+                  { staticClass: "orange--text custom-font-size-icon" },
+                  [_vm._v("report")]
+                ),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data per bulan pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+              ],
+              1
             )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "line",
-              height: "350px",
-              options: _vm.chartOptionsEkonomiPerBulan,
-              series: _vm.seriesEkonomiPerBulan
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v(
-              "Ekonomi per Tahun " + _vm._s(this.selectedNameWilayah) + " "
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _vm._v("\n            Range Tahun\n            \n        ")
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350px",
-              options: _vm.chartOptionsEkonomiPerTahun,
-              series: _vm.seriesEkonomiPerTahun
-            }
-          })
-        ],
-        1
-      )
+      _vm.statusGraphByYearCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Ekonomi per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsEkonomiPerTahunCurrentWilayah,
+                  series: _vm.seriesEkonomiPerTahunCurrentWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Ekonomi per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(this.selectedTahunCurrentWilayah) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+      _vm._v(" "),
+      _vm.statusGraphByYearAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Ekonomi per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsEkonomiPerTahunAllWilayah,
+                  series: _vm.seriesEkonomiPerTahunAllWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Ekonomi per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(this.selectedTahunAllWilayah) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(" Keseluruhan Wilayah ")])
+                ],
+                1
+              )
+            ],
+            1
+          )
     ],
     1
   )
@@ -38159,10 +40537,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true&":
-/*!*************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true& ***!
-  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38178,45 +40556,279 @@ var render = function() {
     "v-layout",
     { attrs: { row: "", wrap: "" } },
     [
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Kelahiran per Tahun " + _vm._s(this.selectedNameWilayah))
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350px",
-              options: _vm.chartOptionsKelahiranPerTahunWilayah,
-              series: _vm.seriesKelahiranPerTahunWilayah
-            }
-          })
-        ],
-        1
-      ),
+      _vm.statusGraphNatalitasMortalitasCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Natalitas Mortalitas per " +
+                          _vm._s(
+                            this.selectedTahunNatalitasMortalitasCurrentWilayah
+                          ) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items:
+                            _vm.itemsTahunNatalitasMortalitasCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value:
+                            _vm.selectedTahunNatalitasMortalitasCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunNatalitasMortalitasCurrentWilayah = $$v
+                          },
+                          expression:
+                            "selectedTahunNatalitasMortalitasCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsNatalitasMortalitasCurrentWilayah,
+                  series: _vm.seriesNatalitasMortalitasCurrentWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Natalitas Mortalitas per " +
+                          _vm._s(
+                            this.selectedTahunNatalitasMortalitasCurrentWilayah
+                          ) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items:
+                            _vm.itemsTahunNatalitasMortalitasCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value:
+                            _vm.selectedTahunNatalitasMortalitasCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunNatalitasMortalitasCurrentWilayah = $$v
+                          },
+                          expression:
+                            "selectedTahunNatalitasMortalitasCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(
+                          this.selectedTahunNatalitasMortalitasCurrentWilayah
+                        ) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Kelahiran per 10 Tahun Keseluruhan Wilayah")
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350px",
-              options: _vm.chartOptionsKelahiranPerTahunKeseluruhanWilayah,
-              series: _vm.seriesKelahiranPerTahunKeseluruhanWilayah
-            }
-          })
-        ],
-        1
-      )
+      _vm.statusGraphNatalitasMortalitasAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Natalitas Mortalitas per " +
+                          _vm._s(
+                            this.selectedTahunNatalitasMortalitasAllWilayah
+                          ) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunNatalitasMortalitasAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunNatalitasMortalitasAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunNatalitasMortalitasAllWilayah = $$v
+                          },
+                          expression:
+                            "selectedTahunNatalitasMortalitasAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsNatalitasMortalitasAllWilayah,
+                  series: _vm.seriesNatalitasMortalitasAllWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Natalitas Mortalitas per " +
+                          _vm._s(
+                            this.selectedTahunNatalitasMortalitasAllWilayah
+                          ) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunNatalitasMortalitasAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunNatalitasMortalitasAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunNatalitasMortalitasAllWilayah = $$v
+                          },
+                          expression:
+                            "selectedTahunNatalitasMortalitasAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(
+                          this.selectedTahunNatalitasMortalitasAllWilayah
+                        ) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+                ],
+                1
+              )
+            ],
+            1
+          )
     ],
     1
   )
@@ -38247,13 +40859,13 @@ var render = function() {
     "v-layout",
     { attrs: { row: "", wrap: "" } },
     [
-      _vm.statusPieKehidupanCurrentWilayah
+      _vm.statusPieKesehatanCurrentWilayah
         ? _c(
             "v-flex",
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Kehidupan")
+                _vm._v("Persentase Kesehatan")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38263,8 +40875,8 @@ var render = function() {
               _c("apexchart", {
                 attrs: {
                   type: "pie",
-                  options: _vm.chartOptionsProsentasePieKehidupanWilayah,
-                  series: _vm.seriesProsentasePieKehidupanWilayah
+                  options: _vm.chartOptionsPersentasePieKesehatanWilayah,
+                  series: _vm.seriesPersentasePieKesehatanWilayah
                 }
               })
             ],
@@ -38275,7 +40887,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Kehidupan")
+                _vm._v("Persentase Kesehatan")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38286,9 +40898,11 @@ var render = function() {
                 "div",
                 { staticClass: "text-xs-center orange--text" },
                 [
-                  _c("v-icon", { staticClass: "orange--text mt-5" }, [
-                    _vm._v("report")
-                  ]),
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
                   _vm._v(" "),
                   _c("h2", {}, [_vm._v("Tidak ada data pada")]),
                   _vm._v(" "),
@@ -38299,13 +40913,13 @@ var render = function() {
             ]
           ),
       _vm._v(" "),
-      _vm.statusPieKehidupanAllWilayah
+      _vm.statusPieKesehatanAllWilayah
         ? _c(
             "v-flex",
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Kehidupan")
+                _vm._v("Persentase Kesehatan")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38316,8 +40930,8 @@ var render = function() {
                 attrs: {
                   type: "pie",
                   options:
-                    _vm.chartOptionsProsentasePieKehidupanKeseluruhanWilayah,
-                  series: _vm.seriesProsentasePieKehidupanKeseluruhanWilayah
+                    _vm.chartOptionsPersentasePieKesehatanKeseluruhanWilayah,
+                  series: _vm.seriesPersentasePieKesehatanKeseluruhanWilayah
                 }
               })
             ],
@@ -38328,7 +40942,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Kehidupan Wilayah")
+                _vm._v("Persentase Kesehatan Wilayah")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38339,9 +40953,11 @@ var render = function() {
                 "div",
                 { staticClass: "text-xs-center orange--text" },
                 [
-                  _c("v-icon", { staticClass: "orange--text mt-5" }, [
-                    _vm._v("report")
-                  ]),
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
                   _vm._v(" "),
                   _c("h2", {}, [_vm._v("Tidak ada data pada")]),
                   _vm._v(" "),
@@ -38352,45 +40968,304 @@ var render = function() {
             ]
           ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Kehidupan per Bulan " + _vm._s(this.selectedNameWilayah))
+      _vm.statusGraphByMonth
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c("div", { staticClass: "headline my-3" }, [
+                _vm._v(
+                  "Kesehatan per Bulan " + _vm._s(this.selectedNameWilayah)
+                )
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsKesehatanPerBulan,
+                  series: _vm.seriesKesehatanPerBulan
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "" } }, [
+            _c("div", { staticClass: "headline my-3" }, [
+              _vm._v(
+                "Kesehatan per Bulan " + _vm._s(this.selectedNameWilayah) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text mb-3" },
+              [
+                _c(
+                  "v-icon",
+                  { staticClass: "orange--text custom-font-size-icon" },
+                  [_vm._v("report")]
+                ),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data per bulan pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+              ],
+              1
+            )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "line",
-              height: "350px",
-              options: _vm.chartOptionsKehidupanPerBulan,
-              series: _vm.seriesKehidupanPerBulan
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Kehidupan per Tahun " + _vm._s(this.selectedNameWilayah))
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350px",
-              options: _vm.chartOptionsKehidupanPerTahun,
-              series: _vm.seriesKehidupanPerTahun
-            }
-          })
-        ],
-        1
-      )
+      _vm.statusGraphByYearCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Kesehatan per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsKesehatanPerTahunCurrentWilayah,
+                  series: _vm.seriesKesehatanPerTahunCurrentWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Kesehatan per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(this.selectedTahunCurrentWilayah) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+      _vm._v(" "),
+      _vm.statusGraphByYearAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Kesehatan per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsKesehatanPerTahunAllWilayah,
+                  series: _vm.seriesKesehatanPerTahunAllWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Kesehatan per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(this.selectedTahunAllWilayah) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(" Keseluruhan Wilayah ")])
+                ],
+                1
+              )
+            ],
+            1
+          )
     ],
     1
   )
@@ -38402,10 +41277,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38427,7 +41302,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Perkawinan")
+                _vm._v("Persentase Perkawinan")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38437,8 +41312,8 @@ var render = function() {
               _c("apexchart", {
                 attrs: {
                   type: "pie",
-                  options: _vm.chartOptionsProsentasePiePerkawinanWilayah,
-                  series: _vm.seriesProsentasePiePerkawinanWilayah
+                  options: _vm.chartOptionsPersentasePiePerkawinanWilayah,
+                  series: _vm.seriesPersentasePiePerkawinanWilayah
                 }
               })
             ],
@@ -38449,7 +41324,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Perkawinan")
+                _vm._v("Persentase Perkawinan")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38460,9 +41335,11 @@ var render = function() {
                 "div",
                 { staticClass: "text-xs-center orange--text" },
                 [
-                  _c("v-icon", { staticClass: "orange--text mt-5" }, [
-                    _vm._v("report")
-                  ]),
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
                   _vm._v(" "),
                   _c("h2", {}, [_vm._v("Tidak ada data pada")]),
                   _vm._v(" "),
@@ -38479,7 +41356,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Perkawinan")
+                _vm._v("Persentase Perkawinan")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38490,8 +41367,8 @@ var render = function() {
                 attrs: {
                   type: "pie",
                   options:
-                    _vm.chartOptionsProsentasePiePerkawinanKeseluruhanWilayah,
-                  series: _vm.seriesProsentasePiePerkawinanKeseluruhanWilayah
+                    _vm.chartOptionsPersentasePiePerkawinanKeseluruhanWilayah,
+                  series: _vm.seriesPersentasePiePerkawinanKeseluruhanWilayah
                 }
               })
             ],
@@ -38502,7 +41379,7 @@ var render = function() {
             { staticClass: "text-center", attrs: { xs12: "", md6: "" } },
             [
               _c("div", { staticClass: "headline my-3" }, [
-                _vm._v("Prosentase Perkawinan Wilayah")
+                _vm._v("Persentase Perkawinan Wilayah")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "title my-3" }, [
@@ -38513,9 +41390,11 @@ var render = function() {
                 "div",
                 { staticClass: "text-xs-center orange--text" },
                 [
-                  _c("v-icon", { staticClass: "orange--text mt-5" }, [
-                    _vm._v("report")
-                  ]),
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
                   _vm._v(" "),
                   _c("h2", {}, [_vm._v("Tidak ada data pada")]),
                   _vm._v(" "),
@@ -38526,45 +41405,304 @@ var render = function() {
             ]
           ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Perkawinan per Bulan " + _vm._s(this.selectedNameWilayah))
+      _vm.statusGraphByMonth
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c("div", { staticClass: "headline my-3" }, [
+                _vm._v(
+                  "Perkawinan per Bulan " + _vm._s(this.selectedNameWilayah)
+                )
+              ]),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350",
+                  options: _vm.chartOptionsPerkawinanPerBulan,
+                  series: _vm.seriesPerkawinanPerBulan
+                }
+              })
+            ],
+            1
+          )
+        : _c("v-flex", { attrs: { xs12: "" } }, [
+            _c("div", { staticClass: "headline my-3" }, [
+              _vm._v(
+                "Perkawinan per Bulan " + _vm._s(this.selectedNameWilayah) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "text-xs-center orange--text mb-3" },
+              [
+                _c(
+                  "v-icon",
+                  { staticClass: "orange--text custom-font-size-icon" },
+                  [_vm._v("report")]
+                ),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v("Tidak ada data per bulan pada")]),
+                _vm._v(" "),
+                _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+              ],
+              1
+            )
           ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "line",
-              height: "350",
-              options: _vm.chartOptionsPerkawinanPerBulan,
-              series: _vm.seriesPerkawinanPerBulan
-            }
-          })
-        ],
-        1
-      ),
       _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "" } },
-        [
-          _c("div", { staticClass: "headline my-3" }, [
-            _vm._v("Perkawinan per Tahun " + _vm._s(this.selectedNameWilayah))
-          ]),
-          _vm._v(" "),
-          _c("apexchart", {
-            attrs: {
-              type: "bar",
-              height: "350",
-              options: _vm.chartOptionsPerkawinanPerTahun,
-              series: _vm.seriesPerkawinanPerTahun
-            }
-          })
-        ],
-        1
-      )
+      _vm.statusGraphByYearCurrentWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Perkawinan per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsPerkawinanPerTahunCurrentWilayah,
+                  series: _vm.seriesPerkawinanPerTahunCurrentWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Perkawinan per " +
+                          _vm._s(this.selectedTahunCurrentWilayah) +
+                          " " +
+                          _vm._s(this.selectedNameWilayah) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunCurrentWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunCurrentWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunCurrentWilayah = $$v
+                          },
+                          expression: "selectedTahunCurrentWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(this.selectedTahunCurrentWilayah) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(_vm._s(this.selectedNameWilayah) + " ")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+      _vm._v(" "),
+      _vm.statusGraphByYearAllWilayah
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Perkawinan per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("apexchart", {
+                attrs: {
+                  type: "line",
+                  height: "350px",
+                  options: _vm.chartOptionsPerkawinanPerTahunAllWilayah,
+                  series: _vm.seriesPerkawinanPerTahunAllWilayah
+                }
+              })
+            ],
+            1
+          )
+        : _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs12: "", md10: "" } }, [
+                    _c("div", { staticClass: "headline my-3" }, [
+                      _vm._v(
+                        "Perkawinan per " +
+                          _vm._s(this.selectedTahunAllWilayah) +
+                          " Keseluruhan Wilayah "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", md2: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.itemsTahunAllWilayah,
+                          label: "Rentang Tahun",
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.selectedTahunAllWilayah,
+                          callback: function($$v) {
+                            _vm.selectedTahunAllWilayah = $$v
+                          },
+                          expression: "selectedTahunAllWilayah"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-xs-center orange--text mb-3" },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "orange--text custom-font-size-icon" },
+                    [_vm._v("report")]
+                  ),
+                  _vm._v(" "),
+                  _c("h2", {}, [
+                    _vm._v(
+                      "Tidak ada data per " +
+                        _vm._s(this.selectedTahunAllWilayah) +
+                        " pada"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h2", {}, [_vm._v(" Keseluruhan Wilayah ")])
+                ],
+                1
+              )
+            ],
+            1
+          )
     ],
     1
   )
@@ -80353,7 +83491,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 window.EventBus = new Vue();
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a.create({
-  timeout: 3000
+  timeout: 30000
 });
 window.axios.interceptors.response.use(function (res) {
   if (!!res.data.error) {
@@ -81255,9 +84393,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppKelahiranCharts_vue_vue_type_template_id_4c2ac694_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true& */ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true&");
+/* harmony import */ var _AppKelahiranCharts_vue_vue_type_template_id_4c2ac694___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppKelahiranCharts.vue?vue&type=template&id=4c2ac694& */ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&");
 /* harmony import */ var _AppKelahiranCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppKelahiranCharts.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _AppKelahiranCharts_vue_vue_type_style_index_0_id_4c2ac694_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css& */ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _AppKelahiranCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppKelahiranCharts.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -81269,11 +84407,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _AppKelahiranCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AppKelahiranCharts_vue_vue_type_template_id_4c2ac694_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AppKelahiranCharts_vue_vue_type_template_id_4c2ac694_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AppKelahiranCharts_vue_vue_type_template_id_4c2ac694___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppKelahiranCharts_vue_vue_type_template_id_4c2ac694___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "4c2ac694",
+  null,
   null
   
 )
@@ -81299,35 +84437,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_id_4c2ac694_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&id=4c2ac694&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_id_4c2ac694_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_id_4c2ac694_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_id_4c2ac694_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_id_4c2ac694_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_id_4c2ac694_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKelahiranCharts.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true&":
-/*!*******************************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true& ***!
-  \*******************************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694& ***!
+  \*******************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_template_id_4c2ac694_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_template_id_4c2ac694_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_template_id_4c2ac694___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppKelahiranCharts.vue?vue&type=template&id=4c2ac694& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppKelahiranCharts.vue?vue&type=template&id=4c2ac694&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_template_id_4c2ac694___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_template_id_4c2ac694_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppKelahiranCharts_vue_vue_type_template_id_4c2ac694___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -81429,9 +84567,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&");
+/* harmony import */ var _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&");
 /* harmony import */ var _AppPerkawinanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=script&lang=js& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _AppPerkawinanCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -81443,11 +84581,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _AppPerkawinanCharts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "7f89898b",
+  null,
   null
   
 )
@@ -81473,35 +84611,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&id=7f89898b&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_id_7f89898b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& ***!
-  \********************************************************************************************************************/
+/***/ "./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& ***!
+  \********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppPerkawinanCharts.vue?vue&type=template&id=7f89898b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pages/Dashboard/AppPerkawinanCharts.vue?vue&type=template&id=7f89898b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppPerkawinanCharts_vue_vue_type_template_id_7f89898b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -81801,9 +84939,6 @@ var routes = [{
   children: [{
     path: '/login',
     component: _components_Auth_AppLogin__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }, {
-    path: '/',
-    redirect: '/dashboard'
   }]
 }, {
   path: '/',

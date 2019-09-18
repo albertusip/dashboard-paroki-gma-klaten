@@ -6,7 +6,7 @@ use App\Models\Umat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class StatusKelahiranController extends Controller
+class StatusKelahiranKematianController extends Controller
 {
     /**
      * Umat model.
@@ -101,10 +101,11 @@ class StatusKelahiranController extends Controller
     public function ajax(Request $request)
     { 
         switch ($request->mode) {
-            case 'graphKelahiran':
+            case 'graphKelahiranKematian':
                 return [
                     'current_wilayah_chart' => $this->umat->getKelahiranChartWilayahByYear($request->id_wilayah),
-                    'all_wilayah_chart' => $this->umat->getKelahiranChartAllWilayahByYear($request->id_wilayah),
+                    'all_wilayah_chart_by_month' => $this->umat->getKelahiranKematianChartAllWilayahByMonth($request->id_wilayah),
+                    'all_wilayah_chart_by_year' => $this->umat->getKelahiranKematianChartAllWilayahByMonth($request->id_wilayah),
                 ];
                 break;
         }

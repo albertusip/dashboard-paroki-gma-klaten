@@ -74,8 +74,10 @@ export default {
         }
     },
     methods: {
-        async login(){
+        async login(){console.log('if 0');
             if(this.$refs.form.validate()) {
+                console.log('if 1');
+                
                 this.isSubmitted = true;
                 const request = {
                     username: this.form.username.value,
@@ -84,14 +86,11 @@ export default {
                 try {
                     
                     const res1 = await this.$user.login(request)
-                    
-                    console.log(res1);
-                    
-
+console.log('if 3');
                     if(res1.data.authenticate == true) {
-                        // console.log(this.$user.storeSession(res1.data));
+                        console.log(res1.data.authenticate);
                         // this.$router.replace("/dashboard");
-                        
+                        console.log('if 4');
                         await this.$user.storeSession(res1.data)
                         .then(() => this.$router.replace('/'))
                         
@@ -99,6 +98,7 @@ export default {
                         
                     } else {
                         this.wrongCredentials = true
+                        console.log('if 5');
                         setTimeout(() => {
                             this.wrongCredentials = false
                         }, 3000);

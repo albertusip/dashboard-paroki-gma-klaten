@@ -103,7 +103,6 @@ class StatusPerkawinanController extends Controller
         switch ($request->mode) {
             case 'graphPerkawinan':
                 return [
-                    'yearly_chart' => $this->umat->getPerkawinanChartByYear($request->id_wilayah),
                     'monthly_chart' => $this->umat->getPerkawinanCurrentYearChart($request->id_wilayah),
                 ];
                 break;
@@ -115,8 +114,4 @@ class StatusPerkawinanController extends Controller
                 break;
         }
     }
-
-    // public function card(Request $request){
-    //     return $this->umat->getCard($request);
-    // }
 }

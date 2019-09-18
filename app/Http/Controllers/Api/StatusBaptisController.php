@@ -103,7 +103,6 @@ class StatusBaptisController extends Controller
         switch ($request->mode) {
             case 'graphBaptis':
                 return [
-                    'yearly_chart' => $this->umat->getBaptisChartByYear($request->id_wilayah),
                     'monthly_chart' => $this->umat->getCurrentYearBaptisChart($request->id_wilayah),
                 ];
                 break;

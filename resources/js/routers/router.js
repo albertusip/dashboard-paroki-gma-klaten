@@ -17,7 +17,6 @@ const routes = [
         path: '/login', component: AppNotAuthenticated,
         children: [
             { path: '/login', component: AppLogin },
-            { path: '/', redirect: '/dashboard' },
         ]
     },
 

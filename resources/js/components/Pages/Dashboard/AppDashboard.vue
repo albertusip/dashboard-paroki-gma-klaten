@@ -50,7 +50,7 @@
                                             <v-flex><span class="subheading font-weight-light">Total Panggilan Imam</span></v-flex>
                                             <v-flex class="text-xs-right"><v-icon medium dark>group</v-icon></v-flex>
                                         </v-layout>
-                                        <div class="title font-weight-regular mt-2">200</div>
+                                        <div class="title font-weight-regular mt-2">{{ this.dataCard.panggilan_imam }}</div>
                                         <div class="body-2 font-weight-light mt-2">
                                             <v-icon class="body-2 font-weight-light" medium dark>refresh</v-icon>
                                             <span>updated today</span>
@@ -106,6 +106,7 @@
                                 >
                                     {{ data.name }}
                                     <v-icon>{{ data.icon }}</v-icon>
+                                    
                                 </v-tab>
 
                                 <v-tab-item>
@@ -113,6 +114,7 @@
                                         :selectedWilayah = 'selected'
                                         :selectedNameWilayah = 'selectedNameWilayah'
                                         :activeTab = 'activeTab'
+                                        :isSync = 'isSync'
                                         :key = 'activeTab'
                                     ></ekonomicharts>
                                 </v-tab-item>
@@ -122,6 +124,7 @@
                                         :selectedWilayah = 'selected'
                                         :selectedNameWilayah = 'selectedNameWilayah'
                                         :activeTab = 'activeTab'
+                                        :isSync = 'isSync'
                                         :key = 'activeTab'
                                     ></perkawinancharts>
                                 </v-tab-item>
@@ -131,6 +134,7 @@
                                         :selectedWilayah = 'selected'
                                         :selectedNameWilayah = 'selectedNameWilayah'
                                         :activeTab = 'activeTab'
+                                        :isSync = 'isSync'
                                         :key = 'activeTab'
                                     ></kesehatancharts>
                                 </v-tab-item>
@@ -140,6 +144,7 @@
                                         :selectedWilayah = 'selected'
                                         :selectedNameWilayah = 'selectedNameWilayah'
                                         :activeTab = 'activeTab'
+                                        :isSync = 'isSync'
                                         :key = 'activeTab'
                                     ></baptischarts>
                                 </v-tab-item>
@@ -149,6 +154,7 @@
                                         :selectedWilayah = 'selected'
                                         :selectedNameWilayah = 'selectedNameWilayah'
                                         :activeTab = 'activeTab'
+                                        :isSync = 'isSync'
                                         :key = 'activeTab'
                                     ></kelahirancharts>
                                 </v-tab-item>
@@ -200,7 +206,7 @@ export default {
                     icon: 'wc'
                 },
                 {
-                    name: 'Status Kehidupan',
+                    name: 'Status Kesehatan',
                     icon: 'local_hospital'
                 },
                 {
@@ -213,185 +219,53 @@ export default {
                 },
                 ],
             activeTab: 0,
+            isSync: 0,
             labelPiePerkawinan: [],
             dataCard:{},
             selected: '01',
             wilayah: [],
             selectedNameWilayah: 'Wilayah Santa Maria Assumpta Klaten',
-            seriesPendidikanPerBulan: [{
-                name: "1",
-                data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
-                },{
-                name: "2",
-                data: [35, 41, 62, 42, 13, 18, 29, 37, 36]
-                },{
-                name: '3',
-                data: [87, 57, 74, 99, 75, 38, 62, 47, 82]
-            }],
-            seriesPendidikan: [{
-                name: "1",
-                data: [45, 52, 38, 24, 33, 26, 21, 20, 6]
-                },{
-                name: "2",
-                data: [35, 41, 62, 42, 13, 18, 29, 37, 36]
-                },{
-                name: '3',
-                data: [87, 57, 74, 99, 75, 38, 62, 47, 82]
-            }],
-            seriesProsentasePiePendidikan: [44, 55, 13],
-            seriesProsentasePiePendidikanWilayah: [44, 55, 13, 43, 22],
-            chartOptionsProsentasePiePendidikan: {
-                labels: ['1', '2', '3'],
-                title: {
-                    text: 'Prosentase Pendidikan Keseluruhan',
-                    align: 'left',
-                    style: {
-                    fontSize: "16px",
-                    color: '#666'
-                    }
-                },
-                responsive: [{
-                    breakpoint: 2400,
-                    options: {
-                    chart: {
-                        width: 400
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                    }
-                }]
-            },
-            chartOptionsProsentasePiePendidikanWilayah: {
-                labels: ['1', '2', '3', '4', '5'],
-                title: {
-                    text: 'Prosentase Pendidikan Berdasarkan Wilayah',
-                    align: 'left',
-                    style: {
-                    fontSize: "16px",
-                    color: '#666'
-                    }
-                },
-                responsive: [{
-                    breakpoint: 2400,
-                    options: {
-                    chart: {
-                        width: 400
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                    }
-                }]
-            },
-            chartOptionsPendidikanPerBulan: {
-                chart: {
-                    type: 'line',
-                    shadow: {
-                    enabled: false,
-                    color: '#bbb',
-                    top: 3,
-                    left: 2,
-                    blur: 3,
-                    opacity: 1
-                    },
-                },
-                stroke: {
-                    width: 7,
-                    curve: 'smooth'
-                },
-
-                xaxis: {
-                    categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018
-                    ],
-                },
-                markers: {
-                    size: 4,
-                    opacity: 0.9,
-                    colors: ["#FFA41B"],
-                    strokeColor: "#fff",
-                    strokeWidth: 2,
-                    
-                    hover: {
-                    size: 7,
-                    }
-                },
-                yaxis: {
-                    title: {
-                    text: 'Jumlah',
-                    },
-                }
-            },
-            chartOptionsPendidikan: {
-                chart: {
-                    type: 'line',
-                    shadow: {
-                    enabled: false,
-                    color: '#bbb',
-                    top: 3,
-                    left: 2,
-                    blur: 3,
-                    opacity: 1
-                    },
-                },
-                stroke: {
-                    width: 7,
-                    curve: 'smooth'
-                },
-
-                xaxis: {
-                    categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018
-                    ],
-                },
-                markers: {
-                    size: 4,
-                    opacity: 0.9,
-                    colors: ["#FFA41B"],
-                    strokeColor: "#fff",
-                    strokeWidth: 2,
-                    
-                    hover: {
-                    size: 7,
-                    }
-                },
-                yaxis: {
-                    title: {
-                    text: 'Jumlah',
-                    },
-                }
-            },
         }
     },
     mounted() {
-        this.init();
+        this.initCard();
+        this.initWilayah();
     },
     methods: {
-        async init() {
+        async initCard() {
             try {
-                let dataWilayah = await this.fetchWilayah();
-                this.wilayah = dataWilayah.data.items;
-                
-
                 let resCard = await this.fetchCard();
                 this.dataCard = resCard.data.data;
-                
-                for(var i=0; i < this.wilayah.length; i++){
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async initWilayah() {
+            try {
+                let self = this
+                let dataWilayah = await this.fetchWilayah();
+                this.wilayah = dataWilayah.data.items;
 
-                     /**
-                     * Capitalize First Letter Of Each Word In A String
-                     *
-                     * var splitStr : lowercase string Wilayah and split by white space
-                     * 
-                     */
-                    if( this.wilayah[i].id_wilayah == this.selected){
-                        var splitStr = this.wilayah[i].nama_wilayah.toLowerCase().split(' ');
-                        for (var i = 0; i < splitStr.length; i++) {
-                            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-                        }
-                        this.selectedNameWilayah = splitStr.join(' ')
+                this.wilayah.find(function (value) {
+
+                    /**
+                    * Capitalize First Letter Of Each Word In A String
+                    *
+                    * var splitStr : lowercase string Wilayah and split by white space
+                    * 
+                    */
+
+                    if( value.id_wilayah == self.selected  ){
+                        let splitStr = value.nama_wilayah.toLowerCase().split(' ');
+                        let temp = []
+                        let upperCase = splitStr.map((item, index) => {
+                            temp[index] = item.charAt(0).toUpperCase() + item.substring(1);
+                        });
+
+                        self.selectedNameWilayah = temp.join(' ')
                     }
-                }
-
+                });
+                
             } catch (error) {
                 console.log(error);
             }
@@ -410,7 +284,7 @@ export default {
         },
         fetchCard() {
             return new Promise((resolve, reject) => {
-                axios.get('/api/current-card', {
+                axios.get('/api/card-total-info', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
@@ -421,7 +295,6 @@ export default {
             })
         },
         syncData() {
-            console.log('loading');
             this.isLoading = true
             return axios.get('/api/recap', {
                     headers: {
@@ -439,6 +312,10 @@ export default {
                             title: "Berhasil Sinkronisasi Data!",
                             icon: "success",
                             button: "Tutup",
+                        })
+                        .then((value) => {
+                            this.isSync = 1;
+                            location.reload();
                         });
                     }
                 }
@@ -448,7 +325,8 @@ export default {
     },
     watch: {
         selected() {
-            this.init();
+            this.initCard();
+            this.initWilayah();
         }
     }
 }

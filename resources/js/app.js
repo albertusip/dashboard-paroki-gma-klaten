@@ -12,7 +12,7 @@ import 'vuetify/dist/vuetify.min.css'
 window.EventBus = new Vue()
 
 window.axios = axios.create({
-    timeout: 3000,
+    timeout: 30000,
 })
 
 window.axios.interceptors.response.use((res) => {
