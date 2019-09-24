@@ -12,7 +12,7 @@
                         <v-flex xs12 sm8 md6>
                             <v-form ref="form" @submit.prevent="login" lazy-validation>
                                 <v-text-field 
-                                    prepend-icon="person" 
+                                    prepend-icon="fas fa-user" 
                                     label="Username" 
                                     v-model="form.username.value"
                                     :rules="form.username.rules"
@@ -20,11 +20,11 @@
                                     autofocus
                                 ></v-text-field>
                                 <v-text-field 
-                                    prepend-icon="lock" 
+                                    prepend-icon="fas fa-lock" 
                                     label="Password"
                                     v-model="form.password.value" 
                                     :rules="form.password.rules" 
-                                    :append-icon="form.password.show ? 'visibility_off' : 'visibility'"
+                                    :append-icon="form.password.show ? 'fas fa-eye-slash' : 'fas fa-eye'"
                                     @click:append="form.password.show = !form.password.show" 
                                     :type="form.password.show ? 'text' : 'password'"
                                 ></v-text-field>

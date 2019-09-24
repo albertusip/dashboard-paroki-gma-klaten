@@ -55,14 +55,14 @@ export default {
             drawer: false,
             routes: [
                 {
-                    icon: "dashboard",
+                    icon: "far fa-chart-bar",
                     title: "Dashboard",
                     route: "/",
                 },
                 {
-                    icon: "group",
-                    title: "Daftar Umat",
-                    route: "/daftar-umat",
+                    icon: "fas fa-user-plus",
+                    title: "Tambah Umat",
+                    route: "/tambah-umat",
                 },
                 
             ],

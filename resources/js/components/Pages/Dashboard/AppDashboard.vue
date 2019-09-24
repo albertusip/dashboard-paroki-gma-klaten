@@ -10,11 +10,10 @@
                                     <v-flex xs12>
                                         <v-layout row wrap>
                                             <v-flex><span class="subheading font-weight-light">Total Sudah Krisma</span></v-flex>
-                                            <v-flex class="text-xs-right"><v-icon medium dark>group</v-icon></v-flex>
+                                            <v-flex class="text-xs-right"><v-icon medium dark>fas fa-user-friends</v-icon></v-flex>
                                         </v-layout>
                                         <div class="title font-weight-regular mt-2"> {{ this.dataCard.krisma }} </div>
                                         <div class="body-2 font-weight-light mt-2">
-                                            <v-icon class="body-2 font-weight-light" medium dark>refresh</v-icon>
                                             <span>updated today</span>
                                         </div>
                                     </v-flex>
@@ -29,11 +28,10 @@
                                     <v-flex xs12>
                                         <v-layout row wrap>
                                             <v-flex><span class="subheading font-weight-light">Total Sudah Baptis</span></v-flex>
-                                            <v-flex class="text-xs-right"><v-icon medium dark>group</v-icon></v-flex>
+                                            <v-flex class="text-xs-right"><v-icon medium dark>fas fa-user-friends</v-icon></v-flex>
                                         </v-layout>
                                         <div class="title font-weight-regular mt-2">{{ this.dataCard.baptis }}</div>
                                         <div class="body-2 font-weight-light mt-2">
-                                            <v-icon class="body-2 font-weight-light" medium dark>refresh</v-icon>
                                             <span>updated today</span>
                                         </div>
                                     </v-flex>
@@ -48,11 +46,10 @@
                                     <v-flex xs12>
                                         <v-layout row wrap>
                                             <v-flex><span class="subheading font-weight-light">Total Panggilan Imam</span></v-flex>
-                                            <v-flex class="text-xs-right"><v-icon medium dark>group</v-icon></v-flex>
+                                            <v-flex class="text-xs-right"><v-icon medium dark>fas fa-user-friends</v-icon></v-flex>
                                         </v-layout>
                                         <div class="title font-weight-regular mt-2">{{ this.dataCard.panggilan_imam }}</div>
                                         <div class="body-2 font-weight-light mt-2">
-                                            <v-icon class="body-2 font-weight-light" medium dark>refresh</v-icon>
                                             <span>updated today</span>
                                         </div>
                                     </v-flex>
@@ -83,7 +80,7 @@
                             color="warning"
                             @click.prevent="syncData"
                             >
-                                <v-icon>sync</v-icon>    
+                                <v-icon class="mr-2">fas fa-sync</v-icon>    
                                 Sinkronasi Data
                             </v-btn>
                         </div>
@@ -105,7 +102,10 @@
                                     :key="data.index"
                                 >
                                     {{ data.name }}
-                                    <v-icon>{{ data.icon }}</v-icon>
+                                    <div>
+                                        <v-icon>{{ data.icon }}</v-icon>
+                                        <v-icon>{{ data.icon2 }}</v-icon>
+                                    </div>
                                     
                                 </v-tab>
 
@@ -180,8 +180,6 @@ import BaptisCharts from './AppBaptisCharts.vue'
 import KelahiranCharts from './AppKelahiranCharts.vue'
 import VueApexCharts from 'vue-apexcharts'
 
-// Status kematian digabung dengan status kelahiran. hanya menampilkan RIP
-// Status kehidupan diganti status kesehatan dan berisi semua recor di tabl kesehatan
 export default {
     components: {
         loading: VueLoading,
@@ -199,23 +197,25 @@ export default {
             dataTabs: [
                 {
                     name: 'Ekonomi Umat',
-                    icon: 'local_atm'
+                    icon: 'fas fa-dollar-sign'
                 },
                 {
                     name: 'Status Perkawinan',
-                    icon: 'wc'
+                    icon: 'fas fa-male',
+                    icon2: 'fas fa-female'
                 },
                 {
                     name: 'Status Kesehatan',
-                    icon: 'local_hospital'
+                    icon: 'fas fa-briefcase-medical'
                 },
                 {
                     name: 'Status Baptis',
-                    icon: 'pool'
+                    icon: 'fas fa-church'
                 },
                 {
                     name: 'Natalitas / Mortalitas',
-                    icon: 'pregnant_woman'
+                    icon: 'fas fa-baby',
+                    icon2: 'fas fa-cross'
                 },
                 ],
             activeTab: 0,

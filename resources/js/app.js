@@ -1,5 +1,5 @@
 window.Vue = require('vue');
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 import Vuetify from 'vuetify'
 import router from './routers/router.js'
@@ -49,7 +49,7 @@ window.axios.interceptors.response.use((res) => {
 Vue.prototype.$user = User;
 
 Vue.use(Vuetify, {
-    iconfont: 'md',
+    iconfont: 'fa',
     // override colors
     theme: {
         primary: "#F39B41",

@@ -25,7 +25,7 @@ const routes = [
         children: [
             { path: '/', redirect: '/dashboard' },
             { path: '/dashboard', component: AppDashboard },
-            { path: '/daftar-umat', component: AppUmat },
+            { path: '/tambah-umat', component: AppUmat },
             { path: '/logout', component: AppLogout, },
             { path: '*', redirect: '/', },
         ],

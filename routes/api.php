@@ -39,3 +39,9 @@ Route::get('card-total-info', 'Api\DashboardController@card');
 Route::get('recap', 'Api\RecapController@index');
 
 Route::get('yearly-data', 'Api\AllYearlyDataController@ajax');
+
+
+
+Route::post('add-umat', 'Api\CreateDataController@addUmat');
+
+Route::get('select-add-data', 'Api\CreateDataController@getAddData');
