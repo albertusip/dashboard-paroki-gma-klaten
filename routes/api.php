@@ -24,6 +24,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth', 'namespace' => 'Auth'],
 
 Route::resource('umat', 'Api\StatusEkonomiController');
 Route::get('wilayah', 'Api\DashboardController@getWilayah');
+Route::get('dateUpdated', 'Api\RecapDateInfoController@dateUpdated');
 Route::get('ekonomi', 'Api\StatusEkonomiController@ajax');
 
 Route::get('perkawinan', 'Api\StatusPerkawinanController@ajax');

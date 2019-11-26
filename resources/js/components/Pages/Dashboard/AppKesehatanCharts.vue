@@ -341,36 +341,110 @@ export default {
                 decimalsInFloat: 4,
                 colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#5A2A27', '#F86624', '#1B998B'],
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 500,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsPersentasePieKesehatanKeseluruhanWilayah: {
                 labels: ['Normal', 'Cacat Fisik', 'Buta', 'Bisu Tuli', 'Sulit Mengurus Diri', 'Kesulitan Mengingat', 'Penyakit Kronis', 'Pikun'],
                 decimalsInFloat: 4,
                 colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#5A2A27', '#F86624', '#1B998B'],
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 500,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsKesehatanPerBulan: {
                 chart: {
@@ -413,7 +487,14 @@ export default {
                     title: {
                     text: 'Jumlah',
                     },
-                }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return val
+                        }
+                    }
+                },
             },
             chartOptionsKesehatanPerTahunCurrentWilayah: {
                 chart: {

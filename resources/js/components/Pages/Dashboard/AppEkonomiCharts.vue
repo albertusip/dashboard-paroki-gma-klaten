@@ -1,6 +1,5 @@
 <template>
     <v-layout row wrap>
-
         <v-flex xs12 md6 v-if="statusPieEkonomiCurrentWilayah" class="text-center">
             <div class="headline my-3">Persentase Ekonomi</div>
             <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
@@ -272,34 +271,107 @@ export default {
                 labels: ['Bisa Membantu', 'Biasa', 'Perlu Dibantu'],
                 decimalsInFloat: 4,
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsPersentasePieEkonomiKeseluruhanWilayah: {
                 labels: ['Bisa Membantu', 'Biasa', 'Perlu Dibantu'],
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 500,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsEkonomiPerBulan: {
                 chart: {
@@ -335,6 +407,13 @@ export default {
                     
                     hover: {
                     size: 7,
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return val
+                        }
                     }
                 },
                 yaxis: {

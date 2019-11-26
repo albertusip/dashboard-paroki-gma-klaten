@@ -266,18 +266,55 @@ export default {
                         'Sah Beda Gereja',
                         ],
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 500,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsPersentasePiePerkawinanKeseluruhanWilayah: {
                 labels: ['Sah Katolik', 
@@ -285,18 +322,55 @@ export default {
                         'Sah Beda Gereja'
                         ],
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 500,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsPerkawinanPerBulan: {
                 chart: {
@@ -341,7 +415,14 @@ export default {
                     show: true,
                     showForNullSeries: false,
                     showForZeroSeries: false,
-                }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return val
+                        }
+                    }
+                },
             },
             chartOptionsPerkawinanPerTahunCurrentWilayah: {
                 chart: {
@@ -400,7 +481,14 @@ export default {
                 },
                 fill: {
                     opacity: 1
-                }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return val
+                        }
+                    }
+                },
             },
             chartOptionsPerkawinanPerTahunAllWilayah: {
                 chart: {

@@ -58,7 +58,7 @@
                         </v-card>
                     </v-flex>
 
-                    <v-flex xs6>
+                    <v-flex xs12 sm6>
                         <v-select
                             v-model="selected"
                             :items="wilayah"
@@ -67,10 +67,7 @@
                         ></v-select>
                     </v-flex>
 
-                    <v-flex xs6>
-                        <div class="text-right">
-                            
-                        </div>
+                    <v-flex xs12 sm6>
                         <div class="vld-parent text-right">
                             <loading 
                             :active.sync="isLoading" 
@@ -79,6 +76,7 @@
                             <v-btn 
                             color="warning"
                             @click.prevent="syncData"
+                            
                             >
                                 <v-icon class="mr-2">fas fa-sync</v-icon>    
                                 Sinkronasi Data
@@ -87,78 +85,78 @@
                     </v-flex>
 
                     <v-flex xs12>
-                            <v-tabs
-                                centered
-                                color="cyan"
-                                dark
-                                icons-and-text
-                                v-model="activeTab"
-                                show-arrows
+                        <v-tabs
+                            centered
+                            color="cyan"
+                            dark
+                            icons-and-text
+                            v-model="activeTab"
+                            show-arrows
+                        >
+                            <v-tabs-slider color="yellow"></v-tabs-slider>
+                            
+                            <v-tab
+                                v-for="data in dataTabs"
+                                :key="data.index"
                             >
-                                <v-tabs-slider color="yellow"></v-tabs-slider>
+                                {{ data.name }}
+                                <div>
+                                    <v-icon>{{ data.icon }}</v-icon>
+                                    <v-icon>{{ data.icon2 }}</v-icon>
+                                </div>
                                 
-                                <v-tab
-                                    v-for="data in dataTabs"
-                                    :key="data.index"
-                                >
-                                    {{ data.name }}
-                                    <div>
-                                        <v-icon>{{ data.icon }}</v-icon>
-                                        <v-icon>{{ data.icon2 }}</v-icon>
-                                    </div>
-                                    
-                                </v-tab>
+                            </v-tab>
 
-                                <v-tab-item>
-                                    <ekonomicharts
-                                        :selectedWilayah = 'selected'
-                                        :selectedNameWilayah = 'selectedNameWilayah'
-                                        :activeTab = 'activeTab'
-                                        :isSync = 'isSync'
-                                        :key = 'activeTab'
-                                    ></ekonomicharts>
-                                </v-tab-item>
+                            <v-tab-item>
+                                <ekonomicharts
+                                    :selectedWilayah = 'selected'
+                                    :selectedNameWilayah = 'selectedNameWilayah'
+                                    :activeTab = 'activeTab'
+                                    :isSync = 'isSync'
+                                    :key = 'activeTab'
+                                ></ekonomicharts>
+                            </v-tab-item>
 
-                                <v-tab-item>
-                                    <perkawinancharts
-                                        :selectedWilayah = 'selected'
-                                        :selectedNameWilayah = 'selectedNameWilayah'
-                                        :activeTab = 'activeTab'
-                                        :isSync = 'isSync'
-                                        :key = 'activeTab'
-                                    ></perkawinancharts>
-                                </v-tab-item>
-                                
-                                <v-tab-item>
-                                    <kesehatancharts
-                                        :selectedWilayah = 'selected'
-                                        :selectedNameWilayah = 'selectedNameWilayah'
-                                        :activeTab = 'activeTab'
-                                        :isSync = 'isSync'
-                                        :key = 'activeTab'
-                                    ></kesehatancharts>
-                                </v-tab-item>
-                                
-                                <v-tab-item>
-                                    <baptischarts
-                                        :selectedWilayah = 'selected'
-                                        :selectedNameWilayah = 'selectedNameWilayah'
-                                        :activeTab = 'activeTab'
-                                        :isSync = 'isSync'
-                                        :key = 'activeTab'
-                                    ></baptischarts>
-                                </v-tab-item>
+                            <v-tab-item>
+                                <perkawinancharts
+                                    :selectedWilayah = 'selected'
+                                    :selectedNameWilayah = 'selectedNameWilayah'
+                                    :activeTab = 'activeTab'
+                                    :isSync = 'isSync'
+                                    :key = 'activeTab'
+                                ></perkawinancharts>
+                            </v-tab-item>
+                            
+                            <v-tab-item>
+                                <kesehatancharts
+                                    :selectedWilayah = 'selected'
+                                    :selectedNameWilayah = 'selectedNameWilayah'
+                                    :activeTab = 'activeTab'
+                                    :isSync = 'isSync'
+                                    :key = 'activeTab'
+                                ></kesehatancharts>
+                            </v-tab-item>
+                            
+                            <v-tab-item>
+                                <baptischarts
+                                    :selectedWilayah = 'selected'
+                                    :selectedNameWilayah = 'selectedNameWilayah'
+                                    :activeTab = 'activeTab'
+                                    :isSync = 'isSync'
+                                    :key = 'activeTab'
+                                ></baptischarts>
+                            </v-tab-item>
 
-                                <v-tab-item>
-                                    <kelahirancharts
-                                        :selectedWilayah = 'selected'
-                                        :selectedNameWilayah = 'selectedNameWilayah'
-                                        :activeTab = 'activeTab'
-                                        :isSync = 'isSync'
-                                        :key = 'activeTab'
-                                    ></kelahirancharts>
-                                </v-tab-item>
-                            </v-tabs>
+                            <v-tab-item>
+                                <kelahirancharts
+                                    :selectedWilayah = 'selected'
+                                    :selectedNameWilayah = 'selectedNameWilayah'
+                                    :activeTab = 'activeTab'
+                                    :isSync = 'isSync'
+                                    :key = 'activeTab'
+                                ></kelahirancharts>
+                            </v-tab-item>
+                        </v-tabs>
                     </v-flex>
                 </v-layout>
             </v-card-text>
@@ -194,6 +192,7 @@ export default {
         return {
             isLoading: false,
             fullPage: true,
+            updatedDate: "",
             dataTabs: [
                 {
                     name: 'Ekonomi Umat',
@@ -297,31 +296,30 @@ export default {
         syncData() {
             this.isLoading = true
             return axios.get('/api/recap', {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-type': 'application/json'
-                    },
-                    params: {
-                        'id_wilayah': this.selected
-                    }
-                })
-                .then(res => {
-                    if (res.status == 200) {
-                        this.isLoading = false
-                        swal({
-                            title: "Berhasil Sinkronisasi Data!",
-                            icon: "success",
-                            button: "Tutup",
-                        })
-                        .then((value) => {
-                            this.isSync = 1;
-                            location.reload();
-                        });
-                    }
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json'
+                },
+                params: {
+                    'id_wilayah': this.selected
                 }
-                )
-            
-        }
+            })
+            .then(res => {
+                if (res.status == 200) {
+                    this.isLoading = false
+
+                    swal({
+                        title: "Berhasil Sinkronisasi Data!",
+                        icon: "success",
+                        button: "Tutup",
+                    })
+                    .then((value) => {
+                        this.isSync = 1;
+                        location.reload();
+                    });
+                }
+            })
+        },
     },
     watch: {
         selected() {

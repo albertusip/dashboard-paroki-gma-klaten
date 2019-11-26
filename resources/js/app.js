@@ -6,6 +6,7 @@ import router from './routers/router.js'
 import axios from 'axios'
 import User from './helpers/User.js'
 import VueSwal from 'vue-swal'
+import vueScrollTo from 'vue-scrollto'
 
 import 'vuetify/dist/vuetify.min.css'
 
@@ -64,6 +65,18 @@ Vue.use(Vuetify, {
 });
 
 Vue.use(VueSwal);
+Vue.use(vueScrollTo, {
+    duration: 500,
+    easing: "ease",
+    offset: 0,
+    force: true,
+    cancelable: true,
+    onStart: false,
+    onDone: false,
+    onCancel: false,
+    x: false,
+    y: true
+});
 
 import DashboardApp from './components/DashboardApp'
 const app = new Vue({

@@ -8,7 +8,6 @@ use DB;
 class Recap extends Model
 {
     protected $table = 'rekap';
-    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +23,13 @@ class Recap extends Model
 
     public function wilayah () {
         return $this->belongsTo(Wilayah::class,'id_wilayah', 'id_wilayah');
+    }
+
+    public function getDateUpdated()
+    {
+        $results = $this->select('updated_at')
+                        ->orderBy('updated_at', 'desc')->first();
+        return $results;
     }
 
     public function getEkonomiChartByYearCurrentWilayah($id_wilayah, $range_tahun){

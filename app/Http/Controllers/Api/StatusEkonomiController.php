@@ -27,7 +27,7 @@ class StatusEkonomiController extends Controller
     public function index(Request $request)
     {
         $dataUmat = $this->umat->where('id_wilayah', $request->id)->get();
-        return response()->json([
+        return response()->json([   
             'response'=> $dataUmat
         ]);
     }

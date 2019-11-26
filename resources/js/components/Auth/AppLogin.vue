@@ -6,8 +6,8 @@
                     <v-card class="pa-5" elevation="10">
                     <v-layout row wrap justify-center align-center>
                         <v-flex xs12 sd8 md6>
-                            <!-- <v-img src="/assets/images/logo-black.png" contain max-height="150">
-                            </v-img> -->
+                            <v-img src="/assets/images/gma-logo.jpg" contain max-height="250">
+                            </v-img>
                         </v-flex>
                         <v-flex xs12 sm8 md6>
                             <v-form ref="form" @submit.prevent="login" lazy-validation>
@@ -58,14 +58,14 @@ export default {
             wrongCredentials: false,
             form: {
                 username: {
-                    value: 'albert',
+                    value: '',
                     rules: [
                         v => !!v || 'Username harus diisi',
                     ],
                 },
                 password: {
                     show: false,
-                    value: 'albert',
+                    value: '',
                     rules: [
                         v => !!v || 'Password harus diisi',
                     ]
@@ -74,31 +74,22 @@ export default {
         }
     },
     methods: {
-        async login(){console.log('if 0');
+        async login(){
             if(this.$refs.form.validate()) {
-                console.log('if 1');
                 
                 this.isSubmitted = true;
-                const request = {
+                    const request = {
                     username: this.form.username.value,
                     password: this.form.password.value,
+                    role: 'admin'
                 }
                 try {
-                    
                     const res1 = await this.$user.login(request)
-console.log('if 3');
                     if(res1.data.authenticate == true) {
-                        console.log(res1.data.authenticate);
-                        // this.$router.replace("/dashboard");
-                        console.log('if 4');
                         await this.$user.storeSession(res1.data)
-                        .then(() => this.$router.replace('/'))
-                        
-                        
-                        
+                        this.$router.replace("/");                
                     } else {
                         this.wrongCredentials = true
-                        console.log('if 5');
                         setTimeout(() => {
                             this.wrongCredentials = false
                         }, 3000);

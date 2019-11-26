@@ -19,6 +19,7 @@ class CreateRekapTable extends Migration
             $table->string('kategori');
             $table->string('jumlah');
             $table->string('tahun');
+            $table->timestamps();
         });
     }
 

@@ -265,34 +265,108 @@ export default {
                 labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
                 decimalsInFloat: 4,
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 500,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsPersentasePieBaptisKeseluruhanWilayah: {
                 labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
                 responsive: [{
-                    breakpoint: 2400,
+                    breakpoint: 400,
                     options: {
-                    chart: {
-                        width: 400,
-                        height: 450,
-                        left: 400
-                    },
-                    legend: {
-                        position: 'bottom'
+                        chart: {
+                            width: 250,
+                            height: 300,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
+                },
+                {
+                    breakpoint: 500,
+                    options: {
+                        chart: {
+                            width: 300,
+                            height: 350,
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
-                }]
+                },
+                {
+                    breakpoint: 1500,
+                    options: {
+                        chart: {
+                            width: 350,
+                            height: 400,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },
+                {
+                    breakpoint: 2700,
+                    options: {
+                        chart: {
+                            width: 450,
+                            height: 500,
+                            left: 400
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                },]
             },
             chartOptionsBaptisPerBulan: {
                 chart: {

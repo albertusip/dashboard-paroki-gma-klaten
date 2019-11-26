@@ -6,14 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin St. Maria Assumpta Klaten</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     <meta name="theme-color" content="#F5BF0E">
-    <link rel="stylesheet" sizes="192x192" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" sizes="192x192" href="{{ asset(mix('css/app.css')) }}">
 </head>
 <body>
     <div id="app">
         <dashboard-app></dashboard-app>
     </div>
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset(mix('js/app.js')) }}"></script>
   <script src="{{ asset('js/postman.js') }}"></script>
 </body>
 </html>
