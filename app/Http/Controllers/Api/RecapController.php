@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Recap;
 use Illuminate\Http\Request;
 use App\Models\Wilayah;
 use App\Models\Umat;
 use App\Models\DataTahunan;
+
 use DB;
 
 class RecapController extends Controller
@@ -25,10 +25,30 @@ class RecapController extends Controller
 
             $this->ekonomiUmat($idWilayah);
             $this->statusPerkawinan($idWilayah);
-            $this->statusKehidupan($idWilayah);
+            $this->statusKesehatan($idWilayah);
             $this->statusBaptis($idWilayah);
-            $this->statusKelahiran($idWilayah);
+            $this->statusKelahiranKematian($idWilayah);
         }
+    }
+
+    protected function schedule(Schedule $schedule)
+    {
+        // $schedule->call(function () {
+        //     $listWilayah = Wilayah::select('id_wilayah', 'nama_wilayah')->get();
+        //     foreach($listWilayah as $item){
+        //         $idWilayah = $item->id_wilayah;
+
+        //         $this->ekonomiUmat($idWilayah);
+        //         $this->statusPerkawinan($idWilayah);
+        //         $this->statusKesehatan($idWilayah);
+        //         $this->statusBaptis($idWilayah);
+        //         $this->statusKelahiranKematian($idWilayah);
+        //     }
+        // })->cron('0 0 1 1 *');
+
+        $schedule->call(function () {
+            echo('cron');
+        })->everyMinute();
     }
 
     public function ekonomiUmat($idWilayah)
@@ -46,6 +66,7 @@ class RecapController extends Controller
             
             $dataEkonomi[$value->year][$value->id_ekonomi]['kriteria'] = $value->ekonomi->kriteria_ekonomi;
             $dataEkonomi[$value->year][$value->id_ekonomi]['total'] = $value->total;
+        
         }
         
         $filteredData = [];
@@ -83,25 +104,16 @@ class RecapController extends Controller
 
         $dataPerkawinan = [];
         foreach ($results as $key => $value) {
-            $dataPerkawinan[$value->year][$value->id_sts_kawin]['status_perkawinan'] = str_replace('/',' ', $value->statusPerkawinan->deskripsi_sts_kawin);
-
-            
-            $dataPerkawinan[$value->year][$value->id_sts_kawin]['total'] = $value->total;
+            if ($value->id_sts_kawin == '02' || $value->id_sts_kawin == '03' || $value->id_sts_kawin == '04') {
+                $dataPerkawinan[$value->year][$value->id_sts_kawin]['status_perkawinan'] = str_replace('/',' ', $value->statusPerkawinan->deskripsi_sts_kawin);
+                $dataPerkawinan[$value->year][$value->id_sts_kawin]['total'] = $value->total;
+            }
         }
         
         $filteredData = [];
-        $statusPerkawinan = ['Belum Nikah', 
-                            'Sah Katolik', 
+        $statusPerkawinan = ['Sah Katolik', 
                             'Sah Beda Agama', 
-                            'Sah Beda Gereja', 
-                            'Nikah di Luar Gereja', 
-                            'Ditinggal pasangannya',
-                            'Krisis berkepanjangan',
-                            'Janda Duda Mati',
-                            'Rm Br Sr dari Paroki',
-                            'Rm Br Sr bekerja di Paroki',
-                            'Hidup Bersama Tanpa Ikatan',
-                            'Nikah Adat'
+                            'Sah Beda Gereja'
                             ];
         foreach ($dataPerkawinan as $key => $value) {
             $temp = [];
@@ -124,7 +136,7 @@ class RecapController extends Controller
         $this->insertData($filteredData, $idWilayah);
     }
 
-    public function statusKehidupan($idWilayah)
+    public function statusKesehatan($idWilayah)
     {
          $results = Umat::with('kesehatan')
                         ->whereHas('kesehatan')
@@ -140,47 +152,43 @@ class RecapController extends Controller
             
             if ($value->id_sts_sehat != '99') {
                 $dataKesehatan[$value->year][$value->id_sts_sehat]['id'] = $value->id_sts_sehat;
-                $dataKesehatan[$value->year][$value->id_sts_sehat]['status_hidup'] = str_replace('/',' ', $value->kesehatan->deskripsi_sts_sehat);
-                $dataKesehatan[$value->year][$value->id_sts_sehat]['total'] = $value->total;
-            } else {
-                $dataKesehatan[$value->year][$value->id_sts_sehat]['id'] = $value->id_sts_sehat;
-                $dataKesehatan[$value->year][$value->id_sts_sehat]['status_mati'] = str_replace('/',' ', $value->kesehatan->deskripsi_sts_sehat);
+                $dataKesehatan[$value->year][$value->id_sts_sehat]['status_kesehatan'] = str_replace('/',' ', $value->kesehatan->deskripsi_sts_sehat);
                 $dataKesehatan[$value->year][$value->id_sts_sehat]['total'] = $value->total;
             }
                 
         }
         
-        $filteredData = [];
-        $statusKesehatan = ['status_hidup'];
+        $response = [];
+        $statusKesehatan = ['Normal', 
+                            'Cacat Fisik', 
+                            'Buta', 
+                            'Bisu Tuli', 
+                            'Sulit Mengurus Diri', 
+                            'Kesulitan Mengingat',
+                            'Penyakit kronis',
+                            'Pikun'
+                            ];
+
         foreach ($dataKesehatan as $key => $value) {
             $temp = [];
-            $tempTotalHidup = 0;
-            $tempTotalMati = 0;
-            
-            foreach ($value as $item) {
-                if ($item['id'] != '99') {
-                    $tempTotalHidup += $item['total'];
-                } else {
-                    $tempTotalMati += $item['total'];
-                }
 
-                $temp['status_hidup'] = $tempTotalHidup;
-                $temp['status_mati'] = $tempTotalMati;
+            foreach ($value as $item){
+                $temp[snake_case($item['status_kesehatan'])] = $item['total'];
             }
 
-            foreach ($statusKesehatan as $status) {
-                if(empty($temp[snake_case($status)])) {
+            foreach($statusKesehatan as $status){
+                if (empty($temp[snake_case($status)])){
                     $temp[snake_case($status)] = 0;
                 }
             }
-            $filteredData[] = [
+
+            $response[] = [
                 'year' => $key,
                 'data' => $temp
             ];
-            
         }
 
-        $this->insertData($filteredData, $idWilayah);
+        $this->insertData($response, $idWilayah);
     }
 
     public function statusBaptis($idWilayah){
@@ -253,60 +261,75 @@ class RecapController extends Controller
         $this->insertData($filteredData, $idWilayah);
     }
 
-    public function statusKelahiran($idWilayah)
+    public function statusKelahiranKematian($idWilayah)
     {
-        $results = Umat::with('wilayah')
-                        ->whereHas('wilayah')
-                        ->select('jen_kel', DB::raw("DATE_FORMAT(tgl_lahir, '%Y') yearBase"),DB::raw("DATE_FORMAT(tgl_lahir, '%Y') year"), DB::raw('count(*) as total'))
-                        ->whereYear('tgl_lahir', '>=', date('Y') - 10)
-                        ->whereYear('tgl_lahir', '<=', date('Y'))
-                        ->where('id_wilayah', $idWilayah)
-                        ->groupBy('year', 'yearBase', 'jen_kel')
-                        ->get();
+        $resultsKelahiran = Umat::with('wilayah')
+                                ->whereHas('wilayah')
+                                ->select(DB::raw("DATE_FORMAT(tgl_lahir, '%Y') yearBase"),DB::raw("DATE_FORMAT(tgl_lahir, '%Y') year"), DB::raw('count(*) as total'))
+                                ->whereYear('tgl_lahir', '>=', date('Y') - 10)
+                                ->whereYear('tgl_lahir', '<=', date('Y'))
+                                ->where('id_wilayah', $idWilayah)
+                                ->groupBy('year', 'yearBase')
+                                ->get();
+
+        $resultsKematian = Umat::with('kesehatan')
+                                ->whereHas('kesehatan')
+                                ->select('id_sts_sehat', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
+                                ->whereYear('tgl_update', '>=', date('Y') - 10)
+                                ->whereYear('tgl_update', '<=', date('Y'))
+                                ->where('id_wilayah', $idWilayah)
+                                ->groupBy('year', 'id_sts_sehat')
+                                ->get();
                         
-        $dataKelahiran = [];
-        foreach ($results as $key => $value) {
+        $dataKelahiranKematian = [];
+
+        foreach ($resultsKelahiran as $key => $value) {
+
+            $dataKelahiranKematian[$value->year]['0']['status'] = 'total_lahir';
+            $dataKelahiranKematian[$value->year]['0']['total_lahir'] = $value->total;
+                
+        }
+        
+        foreach ($resultsKematian as $key => $value) {
             
-            if ($value->jen_kel == 1) {
-                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'laki_laki';
-                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
-            } else if ($value->jen_kel == 2) {
-                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'perempuan';
-                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
-            } else {
-                $dataKelahiran[$value->year][$value->jen_kel]['jen_kel'] = 'lain_lain';
-                $dataKelahiran[$value->year][$value->jen_kel]['total'] = $value->total;
+            if ($value->id_sts_sehat == '99') {
+                $dataKelahiranKematian[$value->year]['1']['status'] = 'total_mati';
+                $dataKelahiranKematian[$value->year]['1']['total_mati'] = $value->total;
             }
                 
         }
         
-        $filteredData = [];
-        $jenisKelamin = [
-                        'laki_laki',
-                        'perempuan',
-                        'lain_lain'
+        $response = [];
+        $statusData = [
+                        'total_lahir',
+                        'total_mati'
                     ];
-        foreach ($dataKelahiran as $key => $value) {
+        foreach ($dataKelahiranKematian as $key => $value) {
             $temp = [];
 
             foreach ($value as $item) {
-                $temp[snake_case($item['jen_kel'])] = $item['total'];
                 
-            }
+                if ($item['status'] == 'total_lahir') {
+                    $temp[snake_case($item['status'])] = $item['total_lahir'];
+                } else {
+                    $temp[snake_case($item['status'])] = $item['total_mati'];
+                }
 
-            foreach ($jenisKelamin as $jk) {
-                if(empty($temp[snake_case($jk)])) {
-                    $temp[snake_case($jk)] = 0;
+            }
+            
+            foreach ($statusData as $stat) {
+                if(empty($temp[snake_case($stat)])) {
+                    $temp[snake_case($stat)] = 0;
                 }
             }
 
-            $filteredData[] = [
+            $response[] = [
                 'year' => $key,
                 'data' => $temp
             ];
             
         }
-        $this->insertData($filteredData, $idWilayah);
+        $this->insertData($response, $idWilayah);
     }
 
     public function insertData($filteredData, $idWilayah)
@@ -317,10 +340,10 @@ class RecapController extends Controller
                 $kategori = $key;
                 $jumlah = $x;
 
-                DataTahunan::updateOrInsert(
+                DataTahunan::firstOrNew(
                     ['id_wilayah' => $idWilayah, "tahun" => $year, "kategori" => $kategori],
                     ['jumlah' => $jumlah]
-                );
+                )->save();
             }
         }
     }

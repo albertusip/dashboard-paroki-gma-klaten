@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Exceptions\InvalidCredentialsException;
 use App\Http\Requests\ValidateCredentials;
 use App\Http\Requests\ValidatePassword;
 use App\Models\User;
@@ -33,6 +34,7 @@ class JWTAuthController extends Controller
      *
      * @param ValidateCredentials $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws InvalidCredentialsException
      */
     public function login(ValidateCredentials $request)
     {
@@ -116,7 +118,7 @@ class JWTAuthController extends Controller
         return response()->json([
             'authenticate' => true,
             'access_token' => $token,
-            'user' => $user->output(),
+            'role' => $user->role
         ], 200);
     }
 
@@ -128,7 +130,8 @@ class JWTAuthController extends Controller
     protected function sendFailedLoginResponse()
     {
         return response()->json([
-            'message' => 'Invalid Credentials'
-        ], 401);
+            'authenticate' => false,
+            'message' => 'Invalid Username / Password',
+        ]);
     }
 }

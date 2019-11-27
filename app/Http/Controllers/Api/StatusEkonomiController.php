@@ -6,7 +6,7 @@ use App\Models\Umat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UmatController extends Controller 
+class StatusEkonomiController extends Controller 
 {
     /**
      * Umat model.
@@ -27,7 +27,7 @@ class UmatController extends Controller
     public function index(Request $request)
     {
         $dataUmat = $this->umat->where('id_wilayah', $request->id)->get();
-        return response()->json([
+        return response()->json([   
             'response'=> $dataUmat
         ]);
     }
@@ -103,7 +103,6 @@ class UmatController extends Controller
         switch ($request->mode) {
             case 'graphEkonomi':
                 return [
-                    'yearly_chart' => $this->umat->getEkonomiChartByYear($request->id_wilayah),
                     'monthly_chart' => $this->umat->getCurrentYearEkonomiChart($request->id_wilayah)
                 ];
                 break;
@@ -114,13 +113,5 @@ class UmatController extends Controller
                 ];
                 break;
         }
-    }
-
-    public function currentEconomyGraph(Request $request){
-        return $this->umat->getCurrentEconomyChart($request->id_wilayah);
-    }
-
-    public function card(Request $request){
-        return $this->umat->getCard($request);
     }
 }

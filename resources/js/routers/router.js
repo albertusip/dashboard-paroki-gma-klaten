@@ -17,7 +17,6 @@ const routes = [
         path: '/login', component: AppNotAuthenticated,
         children: [
             { path: '/login', component: AppLogin },
-            { path: '/', redirect: '/dashboard' },
         ]
     },
 
@@ -26,7 +25,7 @@ const routes = [
         children: [
             { path: '/', redirect: '/dashboard' },
             { path: '/dashboard', component: AppDashboard },
-            { path: '/daftar-umat', component: AppUmat },
+            { path: '/tambah-umat', component: AppUmat },
             { path: '/logout', component: AppLogout, },
             { path: '*', redirect: '/', },
         ],

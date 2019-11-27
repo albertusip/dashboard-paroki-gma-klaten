@@ -3,7 +3,15 @@
 namespace App\Exceptions;
 
 use Exception;
+use ErrorException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +54,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+       if ($exception instanceof NotFoundHttpException) {
+            return InvalidRouteException::render();
+        } else if ($exception instanceof AuthenticationException) {
+            return InvalidTokenException::render();
+        } else if ($exception instanceof ModelNotFoundException) {
+            return InvalidParameterException::render();
+        } else if ($exception instanceof MethodNotAllowedHttpException) {
+            return InvalidRouteException::render();
+        } else if ($exception instanceof MethodNotAllowedException) {
+            return InvalidRouteException::render();
+        } else if (config('constants.mode') == 'production' && config('constants.debug') == false) {
+            if ($exception instanceof QueryException) {
+                return InvalidParameterException::render();
+            }
+
+            if ($exception instanceof ErrorException) {
+                return InvalidParameterException::render();
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }

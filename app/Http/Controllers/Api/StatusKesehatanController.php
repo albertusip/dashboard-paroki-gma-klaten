@@ -101,13 +101,12 @@ class StatusKesehatanController extends Controller
     public function ajax(Request $request)
     { 
         switch ($request->mode) {
-            case 'graphUmatHidup':
+            case 'graphKesehatan':
                 return [
-                    'yearly_chart' => $this->umat->getKesehatanChartByYear($request->id_wilayah),
                     'monthly_chart' => $this->umat->getCurrentYearKesehatanChart($request->id_wilayah),
                 ];
                 break;
-            case 'pieUmatHidup':
+            case 'pieKesehatan':
                 return [
                     'current_wilayah' => $this->umat->getCurrentWilayahKesehatanChart($request->id_wilayah),
                     'all_wilayah' => $this->umat->getAllWilayahKesehatanChart($request->id_wilayah),

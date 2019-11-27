@@ -22,11 +22,10 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth', 'namespace' => 'Auth'],
 //    Route::patch('/update-password', 'JWTAuthController@updatePassword');
 });
 
-Route::resource('umat', 'Api\UmatController');
-Route::get('dashboard', 'Api\DashboardController@index');
+Route::resource('umat', 'Api\StatusEkonomiController');
 Route::get('wilayah', 'Api\DashboardController@getWilayah');
-Route::get('ekonomi', 'Api\UmatController@ajax');
-Route::get('current-ekonomi', 'Api\UmatController@currentEconomyGraph');
+Route::get('dateUpdated', 'Api\RecapDateInfoController@dateUpdated');
+Route::get('ekonomi', 'Api\StatusEkonomiController@ajax');
 
 Route::get('perkawinan', 'Api\StatusPerkawinanController@ajax');
 Route::get('current-perkawinan', 'Api\StatusPerkawinanController@currentPerkawinanGraph');
@@ -35,7 +34,15 @@ Route::get('kesehatan', 'Api\StatusKesehatanController@ajax');
 
 Route::get('baptis', 'Api\StatusBaptisController@ajax');
 
-Route::get('kelahiran', 'Api\StatusKelahiranController@ajax');
+Route::get('kelahiran-kematian', 'Api\StatusKelahiranKematianController@ajax');
 
-Route::get('current-card', 'Api\UmatController@card');
+Route::get('card-total-info', 'Api\DashboardController@card');
 Route::get('recap', 'Api\RecapController@index');
+
+Route::get('yearly-data', 'Api\AllYearlyDataController@ajax');
+
+
+
+Route::post('add-umat', 'Api\CreateDataController@addUmat');
+
+Route::get('select-add-data', 'Api\CreateDataController@getAddData');

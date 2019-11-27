@@ -35,7 +35,7 @@ export default {
         DialogLoginError,
         DialogNotFoundError,
     },
-    data: () => ({
+    data: () => ({  
         dialogInternalErr: false,
         dialogLoginErr: false,
         dialogNotFoundError: false,
@@ -56,7 +56,7 @@ export default {
 }
 </script>
 <style>
-    @import url('http://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700,900');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700,900');
 
     div.swal-modal {
         font-family: 'Montserrat', sans-serif !important;
@@ -67,6 +67,10 @@ export default {
     }
 
     button {
+        outline: none;
+    }
+    
+    .v-btn {
         outline: none;
     }
 </style>

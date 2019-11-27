@@ -1,41 +1,96 @@
 <template>
     <v-layout row wrap>
 
-        <v-flex xs12>
-            <div class="headline my-3">Kelahiran per Tahun {{ this.selectedNameWilayah }}</div>
+        <v-flex xs12 v-if="statusGraphNatalitasMortalitasCurrentWilayah">
+            <v-layout row wrap>
+                <v-flex xs12 md10>
+                    <div class="headline my-3">Natalitas Mortalitas per {{ this.selectedTahunNatalitasMortalitasCurrentWilayah }} {{ this.selectedNameWilayah }} </div>
+                </v-flex>
+        
+                <v-flex xs12 md2>
+                    <v-select
+                    :items="itemsTahunNatalitasMortalitasCurrentWilayah"
+                    v-model="selectedTahunNatalitasMortalitasCurrentWilayah"
+                    label='Rentang Tahun'
+                    outlined
+                    ></v-select>
+                </v-flex>
+            </v-layout>
+
             <apexchart
-            type=bar
+            type=line
             height= "350px"
-            :options="chartOptionsKelahiranPerTahunWilayah"
-            :series="seriesKelahiranPerTahunWilayah"
+            :options="chartOptionsNatalitasMortalitasCurrentWilayah"
+            :series="seriesNatalitasMortalitasCurrentWilayah"
             />
         </v-flex>
-        <v-flex xs12>
-            <div class="headline my-3">Kelahiran per 10 Tahun Keseluruhan Wilayah</div>
+        <v-flex xs12 v-else>
+            <v-layout row wrap>
+                <v-flex xs12 md10>
+                    <div class="headline my-3">Natalitas Mortalitas per {{ this.selectedTahunNatalitasMortalitasCurrentWilayah }} {{ this.selectedNameWilayah }} </div>
+                </v-flex>
+        
+                <v-flex xs12 md2>
+                    <v-select
+                    :items="itemsTahunNatalitasMortalitasCurrentWilayah"
+                    v-model="selectedTahunNatalitasMortalitasCurrentWilayah"
+                    label='Rentang Tahun'
+                    outlined
+                    ></v-select>
+                </v-flex>
+            </v-layout>
+
+            <div class="text-xs-center orange--text mb-3">
+                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <h2 class="">Tidak ada data per {{ this.selectedTahunNatalitasMortalitasCurrentWilayah }} pada</h2>
+                <h2 class="">{{ this.selectedNameWilayah }} </h2>
+            </div>
+        </v-flex>
+
+        <v-flex xs12 v-if="statusGraphNatalitasMortalitasAllWilayah">
+            <v-layout row wrap>
+                <v-flex xs12 md10>
+                    <div class="headline my-3">Natalitas Mortalitas per {{ this.selectedTahunNatalitasMortalitasAllWilayah }} Keseluruhan Wilayah </div>
+                </v-flex>
+        
+                <v-flex xs12 md2>
+                    <v-select
+                    :items="itemsTahunNatalitasMortalitasAllWilayah"
+                    v-model="selectedTahunNatalitasMortalitasAllWilayah"
+                    label='Rentang Tahun'
+                    outlined
+                    ></v-select>
+                </v-flex>
+            </v-layout>
+
             <apexchart
-            type=bar
+            type=line
             height= "350px"
-            :options="chartOptionsKelahiranPerTahunKeseluruhanWilayah"
-            :series="seriesKelahiranPerTahunKeseluruhanWilayah"
+            :options="chartOptionsNatalitasMortalitasAllWilayah"
+            :series="seriesNatalitasMortalitasAllWilayah"
             />
         </v-flex>
-        <v-flex xs12>
-            <div class="headline my-3">Kematian per Tahun {{ this.selectedNameWilayah }}</div>
-            <apexchart
-            type=bar
-            height= "350px"
-            :options="chartOptionsKematianPerTahunWilayah"
-            :series="seriesKematianPerTahunWilayah"
-            />
-        </v-flex>
-        <v-flex xs12>
-            <div class="headline my-3">Kematian per 10 Tahun Keseluruhan Wilayah</div>
-            <apexchart
-            type=bar
-            height= "350px"
-            :options="chartOptionsKematianPerTahunKeseluruhanWilayah"
-            :series="seriesKematianPerTahunKeseluruhanWilayah"
-            />
+        <v-flex xs12 v-else>
+            <v-layout row wrap>
+                <v-flex xs12 md10>
+                    <div class="headline my-3">Natalitas Mortalitas per {{ this.selectedTahunNatalitasMortalitasAllWilayah }} {{ this.selectedNameWilayah }} </div>
+                </v-flex>
+        
+                <v-flex xs12 md2>
+                    <v-select
+                    :items="itemsTahunNatalitasMortalitasAllWilayah"
+                    v-model="selectedTahunNatalitasMortalitasAllWilayah"
+                    label='Rentang Tahun'
+                    outlined
+                    ></v-select>
+                </v-flex>
+            </v-layout>
+
+            <div class="text-xs-center orange--text mb-3">
+                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <h2 class="">Tidak ada data per {{ this.selectedTahunNatalitasMortalitasAllWilayah }} pada</h2>
+                <h2 class="">{{ this.selectedNameWilayah }} </h2>
+            </div>
         </v-flex>
     </v-layout>
 </template>
@@ -66,66 +121,91 @@ export default {
     },
     data() {
         return {
-            dataKelahiranChartCurrentWilayahByYear: [],
-            dataKelahiranChartAllWilayahByYear: [],
-            dataKematianChartCurrentWilayahByYear: [],
-            dataKematianChartAllWilayahByYear: [],
-            tempDataKelahiranChartAllWilayahByYear: [{
-                    data: [], // Laki - Laki
+            itemsTahunNatalitasMortalitasCurrentWilayah: [  
+                '1 Tahun', 
+                '2 Tahun', 
+                '3 Tahun',
+                '4 Tahun',
+                '5 Tahun',
+                '6 Tahun',
+                '7 Tahun',
+                '8 Tahun',
+                '9 Tahun',
+                '10 Tahun'],
+            itemsTahunNatalitasMortalitasAllWilayah: [  
+                '1 Tahun', 
+                '2 Tahun', 
+                '3 Tahun',
+                '4 Tahun',
+                '5 Tahun',
+                '6 Tahun',
+                '7 Tahun',
+                '8 Tahun',
+                '9 Tahun',
+                '10 Tahun'],
+            selectedTahunNatalitasMortalitasCurrentWilayah: '10 Tahun',
+            selectedTahunNatalitasMortalitasAllWilayah: '10 Tahun',
+            dataSelectedTahunNatalitasMortalitasCurrentWilayah: [10,''],
+            dataSelectedTahunNatalitasMortalitasAllWilayah: [10,''],
+            statusGraphNatalitasMortalitasCurrentWilayah: true,
+            statusGraphNatalitasMortalitasAllWilayah: true,
+            dataNatalitasMortalitasCurrentWilayah: [],
+            dataNatalitasMortalitasAllWilayah: [],
+            tempDataNatalitasMortalitasCurrentWilayah: [{
+                    data: [], // BisaMembantu
                 },{
-                    data: [], // Perempuan
-                },{
-                    data: [], // Lain - Lain
+                    data: [], // Biasa
             }],
-            tempDataKelahiranChartCurrentWilayahByYear: [{
-                    data: [], // Laki - Laki
+            tempDataNatalitasMortalitasAllWilayah: [{
+                    data: [], // BisaMembantu
                 },{
-                    data: [], // Perempuan
-                },{
-                    data: [], // Lain - Lain
+                    data: [], // Biasa
             }],
-             tempDataKematianChartAllWilayahByYear: [{
-                    data: [], // Laki - Laki
+            seriesNatalitasMortalitasCurrentWilayah: [{
+                name: "Kelahiran",
+                data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
                 },{
-                    data: [], // Perempuan
-                },{
-                    data: [], // Lain - Lain
+                name: "Kematian",
+                data: [61, 57, 63, 55, 58, 54, 55, 61, 65]
             }],
-            tempDataKematianChartCurrentWilayahByYear: [{
-                    data: [], // Laki - Laki
+            seriesNatalitasMortalitasAllWilayah: [{
+                name: "Kelahiran",
+                data: [13, 15, 12, 20, 18, 15, 16, 13, 14]
                 },{
-                    data: [], // Perempuan
-                },{
-                    data: [], // Lain - Lain
+                name: "Kematian",
+                data: [61, 57, 63, 55, 58, 54, 55, 61, 65]
             }],
-            seriesKelahiranPerTahunWilayah: [{
-                    name: "Laki - Laki",
-                    data: [1]
-                },{
-                    name: "Perempuan",
-                    data: [1]
-                },{
-                    name: "Lain - Lain",
-                    data: [1]
-            }],
-            seriesKelahiranPerTahunKeseluruhanWilayah: [{
-                    name: "Laki-Laki",
-                    data: [1]
-                },{
-                    name: "Perempuan",
-                    data: [1]
-                },{
-                    name: "Lain - Lain",
-                    data: [1]
-            }],
-            chartOptionsKelahiranPerTahunWilayah: {
+            chartOptionsNatalitasMortalitasCurrentWilayah: {
                 chart: {
-                    stacked: true,
+                    type: 'line',
                     toolbar: {
-                        show: true
+                        show: false
+                    },
+                    shadow: {
+                        enabled: false,
+                        color: '#bbb',
+                        top: 3,
+                        left: 2,
+                        blur: 3,
+                        opacity: 1
                     },
                     zoom: {
-                        enabled: true
+                        enabled: false
+                    }
+                },
+                stroke: {
+                    width: 3,
+                    curve: 'smooth'
+                },
+                markers: {
+                    size: 4,
+                    opacity: 0.9,
+                    colors: ["#FFA41B"],
+                    strokeColor: "#fff",
+                    strokeWidth: 2,
+                    
+                    hover: {
+                    size: 7,
                     }
                 },
                 responsive: [{
@@ -145,7 +225,7 @@ export default {
                 },
 
                 xaxis: {
-                    categories: [1100],
+                    categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
                 },
                 legend: {
                     position: 'bottom',
@@ -154,14 +234,37 @@ export default {
                     opacity: 1
                 }
             },
-            chartOptionsKelahiranPerTahunKeseluruhanWilayah: {
+            chartOptionsNatalitasMortalitasAllWilayah: {
                 chart: {
-                    stacked: true,
+                    type: 'line',
                     toolbar: {
-                        show: true
+                        show: false
+                    },
+                    shadow: {
+                        enabled: false,
+                        color: '#bbb',
+                        top: 3,
+                        left: 2,
+                        blur: 3,
+                        opacity: 1
                     },
                     zoom: {
-                        enabled: true
+                        enabled: false
+                    }
+                },
+                stroke: {
+                    width: 3,
+                    curve: 'smooth'
+                },
+                markers: {
+                    size: 4,
+                    opacity: 0.9,
+                    colors: ["#FFA41B"],
+                    strokeColor: "#fff",
+                    strokeWidth: 2,
+                    
+                    hover: {
+                    size: 7,
                     }
                 },
                 responsive: [{
@@ -181,99 +284,7 @@ export default {
                 },
 
                 xaxis: {
-                    categories: [1100],
-                },
-                legend: {
-                    position: 'bottom',
-                },
-                fill: {
-                    opacity: 1
-                }
-            },
-            seriesKematianPerTahunWilayah: [{
-                    name: "Laki - Laki",
-                    data: [1]
-                },{
-                    name: "Perempuan",
-                    data: [1]
-                },{
-                    name: "Lain - Lain",
-                    data: [1]
-            }],
-            seriesKematianPerTahunKeseluruhanWilayah: [{
-                    name: "Laki-Laki",
-                    data: [1]
-                },{
-                    name: "Perempuan",
-                    data: [1]
-                },{
-                    name: "Lain - Lain",
-                    data: [1]
-            }],
-            chartOptionsKematianPerTahunWilayah: {
-                chart: {
-                    stacked: true,
-                    toolbar: {
-                        show: true
-                    },
-                    zoom: {
-                        enabled: true
-                    }
-                },
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        legend: {
-                            position: 'bottom',
-                            offsetX: -10,
-                            offsetY: 0
-                        }
-                    }
-                }],
-                plotOptions: {
-                    bar: {
-                    horizontal: false,
-                    },
-                },
-
-                xaxis: {
-                    categories: [1100],
-                },
-                legend: {
-                    position: 'bottom',
-                },
-                fill: {
-                    opacity: 1
-                }
-            },
-            chartOptionsKematianPerTahunKeseluruhanWilayah: {
-                chart: {
-                    stacked: true,
-                    toolbar: {
-                        show: true
-                    },
-                    zoom: {
-                        enabled: true
-                    }
-                },
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        legend: {
-                            position: 'bottom',
-                            offsetX: -10,
-                            offsetY: 0
-                        }
-                    }
-                }],
-                plotOptions: {
-                    bar: {
-                    horizontal: false,
-                    },
-                },
-
-                xaxis: {
-                    categories: [1100],
+                    categories: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
                 },
                 legend: {
                     position: 'bottom',
@@ -285,96 +296,167 @@ export default {
         }
     },
     methods: {
-        async init() {
+        async initAll() {
             try {
-                let resDataGraphKelahiran = await this.fetchGraphKelahiran();
-                this.dataKelahiranChartCurrentWilayahByYear = resDataGraphKelahiran.data.current_wilayah_chart
-                this.dataKelahiranChartAllWilayahByYear = resDataGraphKelahiran.data.all_wilayah_chart
-                console.log(resDataGraphKelahiran);
+                this.selectedTahunNatalitasMortalitasCurrentWilayah = this.itemsTahunNatalitasMortalitasCurrentWilayah[this.itemsTahunNatalitasMortalitasCurrentWilayah.length - 1]
+                this.selectedTahunNatalitasMortalitasAllWilayah = this.itemsTahunNatalitasMortalitasAllWilayah[this.itemsTahunNatalitasMortalitasAllWilayah.length - 1]
+            } catch (error) {
+                console.log(error);
                 
-                let tempXaxisKelahiranChartCurrentWilayahByYear = []
-                let tempXaxisKelahiranChartAllWilayahByYear = []
-                this.clearGraph()
-
-                this.chartOptionsKelahiranPerTahunWilayah.xaxis.categories = []
-                this.chartOptionsKelahiranPerTahunKeseluruhanWilayah.xaxis.categories = []
+            }
+        },
+        async initGraphNatalitasMortalitasCurrentWilayah() {
+            try {
+                this.dataSelectedTahunNatalitasMortalitasCurrentWilayah = this.selectedTahunNatalitasMortalitasCurrentWilayah.split(" ");
                 
-                this.dataKelahiranChartCurrentWilayahByYear.map((item, index) => {
-                    tempXaxisKelahiranChartCurrentWilayahByYear.push(item.year)
-                    this.tempDataKelahiranChartCurrentWilayahByYear[0].data.push(item.data.laki_laki)
-                    this.tempDataKelahiranChartCurrentWilayahByYear[1].data.push(item.data.perempuan)
-                    this.tempDataKelahiranChartCurrentWilayahByYear[2].data.push(item.data.lain_lain)
-                });
+                let resDataGraphNatalitasMortalitasCurrentWilayah = await this.fetchGraphNatalitasMortalitasCurrentWilayah();
+                
+                this.dataNatalitasMortalitasCurrentWilayah = resDataGraphNatalitasMortalitasCurrentWilayah.data.yearly_chart       
 
-                this.dataKelahiranChartAllWilayahByYear.map((item, index) => {
-                    tempXaxisKelahiranChartAllWilayahByYear.push(item.year)
-                    this.tempDataKelahiranChartAllWilayahByYear[0].data.push(item.data.laki_laki)
-                    this.tempDataKelahiranChartAllWilayahByYear[1].data.push(item.data.perempuan)
-                    this.tempDataKelahiranChartAllWilayahByYear[2].data.push(item.data.lain_lain)
-                });
+                if (this.dataNatalitasMortalitasCurrentWilayah.length > 0) {
+                    this.statusGraphNatalitasMortalitasCurrentWilayah = true   
 
-                for (let i = 0; i < 3; i++) {
-                    this.seriesKelahiranPerTahunKeseluruhanWilayah[i] = {...this.seriesKelahiranPerTahunKeseluruhanWilayah[i], ...{
-                                                            data: this.tempDataKelahiranChartAllWilayahByYear[i].data
+                    let tempXaxisNatalitasMortalitasCurrentWilayah = []
+                    this.clearGraphNatalitasMortalitasCurrentWilayah()
+
+                    this.chartOptionsNatalitasMortalitasCurrentWilayah.xaxis.categories = []
+                    
+                    this.dataNatalitasMortalitasCurrentWilayah.map((item, index) => {
+                        tempXaxisNatalitasMortalitasCurrentWilayah.push(item.year)
+                        this.tempDataNatalitasMortalitasCurrentWilayah[0].data.push(item.data.total_lahir)
+                        this.tempDataNatalitasMortalitasCurrentWilayah[1].data.push(item.data.total_mati)
+                    });
+
+                    for (let i = 0; i < 2; i++) {
+                        this.seriesNatalitasMortalitasCurrentWilayah[i] = {...this.seriesNatalitasMortalitasCurrentWilayah[i], ...{
+                                                                data: this.tempDataNatalitasMortalitasCurrentWilayah[i].data
+                                                            }}
+                    }
+
+                    this.chartOptionsNatalitasMortalitasCurrentWilayah = {...this.chartOptionsNatalitasMortalitasCurrentWilayah, ...{
+                                                            xaxis: {
+                                                                categories: tempXaxisNatalitasMortalitasCurrentWilayah
+                                                            }
                                                         }}
-                    this.seriesKelahiranPerTahunWilayah[i] = {...this.seriesKelahiranPerTahunWilayah[i], ...{
-                                                            data: this.tempDataKelahiranChartCurrentWilayahByYear[i].data
-                                                        }}
+                } else {
+                    this.statusGraphNatalitasMortalitasCurrentWilayah = false
+                    this.selectedTahunNatalitasMortalitasCurrentWilayah = '1 Tahun'
                 }
-                
-                this.chartOptionsKelahiranPerTahunWilayah = {...this.chartOptionsKelahiranPerTahunWilayah, ...{
-                                                        xaxis: {
-                                                            categories: tempXaxisKelahiranChartCurrentWilayahByYear
-                                                        }
-                                                    }}
-                
-                this.chartOptionsKelahiranPerTahunKeseluruhanWilayah = {...this.chartOptionsKelahiranPerTahunKeseluruhanWilayah, ...{
-                                                        xaxis: {
-                                                            categories: tempXaxisKelahiranChartAllWilayahByYear
-                                                        }
-                                                    }}
-                                                    
+
             } catch (error) {
                 console.log(error);
             }
         },
-        clearGraph() {
-            this.tempDataKelahiranChartAllWilayahByYear[0].data = []
-            this.tempDataKelahiranChartCurrentWilayahByYear[0].data = []
-            this.tempDataKelahiranChartAllWilayahByYear[1].data = []
-            this.tempDataKelahiranChartCurrentWilayahByYear[1].data = []
-            this.tempDataKelahiranChartAllWilayahByYear[2].data = []
-            this.tempDataKelahiranChartCurrentWilayahByYear[2].data = []
+        async initGraphNatalitasMortalitasAllWilayah() {
+            try {
+                this.dataSelectedTahunNatalitasMortalitasAllWilayah = this.selectedTahunNatalitasMortalitasAllWilayah.split(" ");
+                
+                let resDataGraphNatalitasMortalitasAllWilayah = await this.fetchGraphNatalitasMortalitasAllWilayah();
+                
+                this.dataNatalitasMortalitasAllWilayah = resDataGraphNatalitasMortalitasAllWilayah.data.yearly_chart       
+
+                if (this.dataNatalitasMortalitasAllWilayah.length > 0) {
+                    this.statusGraphNatalitasMortalitasAllWilayah = true
+                    
+                    
+
+                    let tempXaxisNatalitasMortalitasAllWilayah = []
+                    this.clearGraphNatalitasMortalitasAllWilayah()
+
+                    this.chartOptionsNatalitasMortalitasAllWilayah.xaxis.categories = []
+                    
+                    this.dataNatalitasMortalitasAllWilayah.map((item, index) => {
+                        tempXaxisNatalitasMortalitasAllWilayah.push(item.year)
+                        this.tempDataNatalitasMortalitasAllWilayah[0].data.push(item.data.total_lahir)
+                        this.tempDataNatalitasMortalitasAllWilayah[1].data.push(item.data.total_mati)
+                    });
+
+                    for (let i = 0; i < 2; i++) {
+                        this.seriesNatalitasMortalitasAllWilayah[i] = {...this.seriesNatalitasMortalitasAllWilayah[i], ...{
+                                                                data: this.tempDataNatalitasMortalitasAllWilayah[i].data
+                                                            }}
+                    }
+
+                    this.chartOptionsNatalitasMortalitasAllWilayah = {...this.chartOptionsNatalitasMortalitasAllWilayah, ...{
+                                                            xaxis: {
+                                                                categories: tempXaxisNatalitasMortalitasAllWilayah
+                                                            }
+                                                        }}
+                } else {
+                    this.statusGraphNatalitasMortalitasAllWilayah = false
+                    this.selectedTahunNatalitasMortalitasAllWilayah = '1 Tahun'
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
         },
-        fetchGraphKelahiran() {
-            return axios.get('/api/kelahiran?mode=graphKelahiran', {
+        clearGraphNatalitasMortalitasAllWilayah() {
+            this.tempDataNatalitasMortalitasAllWilayah[0].data = []
+            this.tempDataNatalitasMortalitasAllWilayah[1].data = []
+        },
+        clearGraphNatalitasMortalitasCurrentWilayah() {
+            this.tempDataNatalitasMortalitasCurrentWilayah[0].data = []
+            this.tempDataNatalitasMortalitasCurrentWilayah[1].data = []
+        },
+        fetchGraphNatalitasMortalitasCurrentWilayah() {
+            return axios.get('/api/yearly-data?mode=graphNatalitasMortalitasByYearCurrentWilayah', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-type': 'application/json'
                     },
                     params: {
-                        'id_wilayah': this.selectedWilayah
+                        'id_wilayah': this.selectedWilayah,
+                        'range_tahun': this.dataSelectedTahunNatalitasMortalitasCurrentWilayah[0],
+                    }
+                })
+        },
+        fetchGraphNatalitasMortalitasAllWilayah() {
+            return axios.get('/api/yearly-data?mode=graphNatalitasMortalitasByYearAllWilayah', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-type': 'application/json'
+                    },
+                    params: {
+                        'range_tahun': this.dataSelectedTahunNatalitasMortalitasAllWilayah[0],
                     }
                 })
         },
     },
     mounted() {
         if (this.activeTab == 4) {
-            this.init();
+            this.initAll();
+            this.initGraphNatalitasMortalitasCurrentWilayah();
+            this.initGraphNatalitasMortalitasAllWilayah();
         }
     },
     watch: {
         selectedWilayah() {
             if (this.activeTab == 4) {
-            this.init();
+                this.initGraphNatalitasMortalitasCurrentWilayah();
+                this.initGraphNatalitasMortalitasAllWilayah();
             }
+        },
+        selectedTahunNatalitasMortalitasCurrentWilayah() {
+                this.initGraphNatalitasMortalitasCurrentWilayah();
+        },
+        selectedTahunNatalitasMortalitasAllWilayah() {
+                this.initGraphNatalitasMortalitasAllWilayah();
         }
     },
 }
 </script>
 
-<style scoped>
-    .v-icon {
-        font-size: 100px;
+<style>
+    .apexcharts-canvas {
+        width: 100%!important;
+    }
+
+    .v-menu__content.theme--light.menuable__content__active {
+        z-index:3!important;
+    }
+
+    .custom-font-size-icon {
+        font-size: 100px!important;
     }
 </style>
