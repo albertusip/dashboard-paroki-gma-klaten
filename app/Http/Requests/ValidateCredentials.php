@@ -27,8 +27,7 @@ class ValidateCredentials extends FormRequest
     {
         return [
             'username' => 'required',
-            'password' => 'required',
-            'role' => 'required'
+            'password' => 'required'
         ];
     }
 
