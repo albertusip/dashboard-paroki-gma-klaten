@@ -112,6 +112,11 @@ class StatusEkonomiController extends Controller
                     'all_wilayah' => $this->umat->getAllWilayahEkonomiChart($request->id_wilayah)
                 ];
                 break;
+            case 'pieEkonomiDetail':
+                return [
+                    'current_wilayah_detail' => $this->umat->getCurrentWilayahEkonomiChartDetail($request->id_wilayah, $request->id_ekonomi)
+                ];
+                break;
         }
     }
 }

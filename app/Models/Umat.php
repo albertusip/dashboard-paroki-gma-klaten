@@ -67,25 +67,11 @@ class Umat extends Model
     }
 
     public function getCard() {
-        $krisma = $this->with('wilayah')
-                            ->whereHas('wilayah')
-                            ->where(function($query){
-                                $query->where('status_krisma', '=', 'SDH');
-                            })
+        $krisma = $this->whereIn('status_krisma', ['SDH'])
                             ->get()->count();
-        $baptis = $this->with('wilayah')
-                            ->whereHas('wilayah')
-                            ->where(function($query){
-                                $query->where('id_wkt_baptis', '!=', '09')
-                                ->where('id_wkt_baptis', '!=','10');
-                            })
+        $baptis = $this->whereNotIn('id_wkt_baptis', ['09','10'])
                             ->get()->count();
-        $panggilanImam = $this->with('wilayah')
-                                ->whereHas('wilayah')
-                                ->where(function($query){
-                                    $query->where('id_sts_kawin', '=', '09')
-                                            ->orWhere('id_sts_kawin', '=', '10');
-                                })
+        $panggilanImam = $this->whereIn('id_sts_kawin', ['09','10'])
                                 ->get()->count();
         
         return [
@@ -107,6 +93,7 @@ class Umat extends Model
                         ->whereHas('ekonomi')
                         ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
+                        ->where('no_urut', 1)
                         ->whereYear('tgl_update', date('Y'))
                         ->orderBy('tgl_update', 'asc')
                         ->groupBy('month', 'id_ekonomi')
@@ -185,19 +172,21 @@ class Umat extends Model
     public function getCurrentWilayahEkonomiChart($id_wilayah){
         $results = $this->with('ekonomi')
                         ->whereHas('ekonomi')
-                        ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
+                        ->select('id_ekonomi',
+                                DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), 
+                                DB::raw('count(*) as total')
+                                )
                         ->where('id_wilayah', $id_wilayah)
+                        ->where('no_urut', 1)
                         ->whereYear('tgl_update', date('Y'))
                         // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_ekonomi')
                         ->get();
         $dataEkonomi = [];
-        
         foreach($results as $result){
             
                 $dataEkonomi[$result->year][$result->id_ekonomi]['kriteria'] = $result->ekonomi->kriteria_ekonomi;
                 $dataEkonomi[$result->year][$result->id_ekonomi]['total'] = $result->total;
-            
         } 
         
         $response = [];
@@ -213,17 +202,34 @@ class Umat extends Model
             foreach ($value as $item){
                 $temp[snake_case($item['kriteria'])] = $item['total'];
             }
-
+            
             foreach($kriteriaEkonomi as $status){
                 if (empty($temp[snake_case($status)])){
                     $temp[snake_case($status)] = 0;
                 }
             }
-            
+
             $response = $temp;
         }
         
         return $response;
+    }
+
+    public function getCurrentWilayahEkonomiChartDetail($id_wilayah, $id_ekonomi){
+        $results = $this->with('ekonomi')
+                        ->whereHas('ekonomi')
+                        ->select('id_ekonomi',
+                                DB::raw("nama_anggota_rt nama"), 
+                                DB::raw("tgl_lahir tgl_lahir"), 
+                                DB::raw("id_sts_sehat as status_hidup"),
+                                )
+                        ->where('id_ekonomi', $id_ekonomi)
+                        ->where('id_wilayah', $id_wilayah)
+                        ->where('no_urut', 1)
+                        ->whereYear('tgl_update', date('Y'))
+                        ->get();
+        
+        return $results;
     }
 
     public function getAllWilayahEkonomiChart($id_wilayah){
@@ -231,6 +237,7 @@ class Umat extends Model
                         ->whereHas('ekonomi')
                         ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', date('Y'))
+                        ->where('no_urut', 1)
                         // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_ekonomi')
                         ->get();

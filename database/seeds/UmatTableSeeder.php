@@ -32,6 +32,7 @@ class UmatTableSeeder extends Seeder
                 'alamat' => 'KLATEN',
                 'id_jenis_rt' => '0'. rand(1,3),
                 'np' => '3'.rand(0,9).'0010'.rand(0,9).'503'.rand(0,9).'001',
+                'no_urut' => rand(1,9),
                 'id_agama' => '0'. rand(1,3),
                 'id_ekonomi' => '0' . rand(1,3),
                 'id_hub_kk' => '0' . rand(1,3),

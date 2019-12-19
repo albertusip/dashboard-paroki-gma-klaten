@@ -41,7 +41,7 @@
             </v-layout>
 
             <div class="text-xs-center orange--text mb-3">
-                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data per {{ this.selectedTahunNatalitasMortalitasCurrentWilayah }} pada</h2>
                 <h2 class="">{{ this.selectedNameWilayah }} </h2>
             </div>
@@ -87,7 +87,7 @@
             </v-layout>
 
             <div class="text-xs-center orange--text mb-3">
-                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data per {{ this.selectedTahunNatalitasMortalitasAllWilayah }} pada</h2>
                 <h2 class="">{{ this.selectedNameWilayah }} </h2>
             </div>
@@ -448,15 +448,5 @@ export default {
 </script>
 
 <style>
-    .apexcharts-canvas {
-        width: 100%!important;
-    }
 
-    .v-menu__content.theme--light.menuable__content__active {
-        z-index:3!important;
-    }
-
-    .custom-font-size-icon {
-        font-size: 100px!important;
-    }
 </style>

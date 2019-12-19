@@ -336,4 +336,20 @@ export default {
 .application a{
     text-decoration: none!important;
 }
+
+.apexcharts-canvas {
+        width: 100%!important;
+    }
+
+.v-menu__content.theme--light.menuable__content__active {
+    z-index:3!important;
+}
+
+.v-menu__content.theme--light.v-menu__content--auto.v-menu__content--fixed.menuable__content__active {
+    z-index:204!important;
+}
+
+.custom-font-size-icon {
+    font-size: 100px!important;
+}
 </style>

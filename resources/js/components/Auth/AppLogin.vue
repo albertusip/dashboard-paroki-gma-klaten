@@ -81,12 +81,15 @@ export default {
                     const request = {
                     username: this.form.username.value,
                     password: this.form.password.value,
-                    role: 'admin'
                 }
                 try {
                     const res1 = await this.$user.login(request)
                     if(res1.data.authenticate == true) {
                         await this.$user.storeSession(res1.data)
+                        console.log('1');
+                        
+                        console.log(res1);
+                        
                         this.$router.replace("/");                
                     } else {
                         this.wrongCredentials = true

@@ -4,7 +4,7 @@
             <div class="headline my-3">Persentase Ekonomi</div>
             <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
             <apexchart 
-            type=pie 
+            type=pie
             :options="chartOptionsPersentasePieEkonomiWilayah" 
             :series="seriesPersentasePieEkonomiWilayah" />
         </v-flex>
@@ -12,7 +12,7 @@
             <div class="headline my-3">Persentase Ekonomi Wilayah</div>
             <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
             <div class="text-xs-center orange--text">
-                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <v-icon class="orange--text custom-font-size-icon" >fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
                 <h2 class=""> {{ this.selectedNameWilayah }} </h2>
             </div>
@@ -30,7 +30,7 @@
             <div class="headline my-3">Persentase Ekonomi</div>
             <div class="title my-3">Keseluruhan Wilayah</div>
             <div class="text-xs-center orange--text">
-                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
                 <h2 class=""> Keseluruhan Wilayah</h2>
             </div>
@@ -48,7 +48,7 @@
         <v-flex xs12 v-else>
             <div class="headline my-3">Ekonomi per Bulan {{ this.selectedNameWilayah }} </div>
             <div class="text-xs-center orange--text mb-3">
-                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data per bulan pada</h2>
                 <h2 class="">{{ this.selectedNameWilayah }} </h2>
             </div>
@@ -94,7 +94,7 @@
             </v-layout>
 
             <div class="text-xs-center orange--text mb-3">
-                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data per {{ this.selectedTahunCurrentWilayah }} pada</h2>
                 <h2 class="">{{ this.selectedNameWilayah }} </h2>
             </div>
@@ -140,11 +140,36 @@
             </v-layout>
 
             <div class="text-xs-center orange--text mb-3">
-                <v-icon class="orange--text custom-font-size-icon">report</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data per {{ this.selectedTahunAllWilayah }} pada</h2>
                 <h2 class=""> Keseluruhan Wilayah </h2>
             </div>
         </v-flex>
+
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+            <v-card>
+                <v-toolbar dark color="primary" class="mb-5">
+                    <v-toolbar-title>Settings</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn icon dark @click="dialog = false">
+                        <v-icon>fas fa-times</v-icon>
+                    </v-btn>
+                </v-toolbar>
+                <v-data-table
+                    :headers="headers"
+                    :items="dataUmat"
+                    :loading="true"
+                    class="elevation-1"
+                >
+                    <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
+                    <template v-slot:items="props">
+                    <td class="text-xs-left">{{ props.item.name }}</td>
+                    <td class="text-xs-left">{{ props.item.birthday }}</td>
+                    <td class="text-xs-left">{{ props.item.status }}</td>
+                    </template>
+                </v-data-table>
+            </v-card>
+        </v-dialog>
     </v-layout>
 </template>
 
@@ -179,6 +204,27 @@ export default {
     },
     data() {
         return {
+            headers: [{
+                text: 'Nama',
+                align: 'left',
+                width: '70%',
+                value: 'name'
+            },{ 
+                text: 'Tanggal lahir', 
+                align: 'left',
+                width: '15%',
+                value: 'birthday' 
+            },{ 
+                text: 'Status Hidup', 
+                align: 'left',
+                width: '15%',
+                value: 'status' 
+            }],
+            dataUmat: [{
+                name: 'Frozen Yogurttttt',
+                birthday: 159,
+                status: 6.0,
+            }],
             itemsTahunCurrentWilayah: [  
                 '1 Tahun', 
                 '2 Tahun', 
@@ -203,9 +249,11 @@ export default {
                 '10 Tahun'],
             selectedTahunCurrentWilayah: '10 Tahun',
             selectedTahunAllWilayah: '10 Tahun',
+            indexPie: 0,
             nameWilayah: [],
             dataSelectedTahunCurrentWilayah: [10,''],
             dataSelectedTahunAllWilayah: [10,''],
+            dialog: false,
             statusGraphByMonth: true,
             statusGraphByYearCurrentWilayah: true,
             statusGraphByYearAllWilayah: true,
@@ -318,7 +366,18 @@ export default {
                             position: 'bottom'
                         }
                     }
-                },]
+                },],
+                chart: {
+                    events: {
+                        dataPointSelection: (event, chartContext, config) => {
+                            // console.log(config.dataPointIndex);
+                            let temp = config.dataPointIndex + 1
+                            this.indexPie = "0" + temp
+                            this.initPieDetail()
+                            console.log(this.$user.info());
+                        }
+                    }
+                }
             },
             chartOptionsPersentasePieEkonomiKeseluruhanWilayah: {
                 labels: ['Bisa Membantu', 'Biasa', 'Perlu Dibantu'],
@@ -579,6 +638,18 @@ export default {
                 console.log(error);
             }
         },
+        async initPieDetail() {
+            try {
+                
+                let resDataPieEkonomiDetail = await this.fetchPieEkonomiDetail();
+
+                console.log(resDataPieEkonomiDetail);
+                
+                this.dialog = true
+            } catch (error) {
+                console.log(error);
+            }
+        },
         async initGraphByYearCurrentWilayah() {
             try {
                 this.dataSelectedTahunCurrentWilayah = this.selectedTahunCurrentWilayah.split(" ");
@@ -763,6 +834,18 @@ export default {
                     }
                 })
         },
+        fetchPieEkonomiDetail() {
+            return axios.get('/api/ekonomi?mode=pieEkonomiDetail', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-type': 'application/json'
+                    },
+                    params: {
+                        'id_wilayah': this.selectedWilayah,
+                        'id_ekonomi': this.indexPie,
+                    }
+                })
+        },
     },
     mounted() {
         if (this.activeTab == 0) {
@@ -802,27 +885,16 @@ export default {
         selectedTahunAllWilayah() {
             this.initGraphByYearAllWilayah();
             this.initGraphByYearAllWilayah();
-        }
+        },
     },
     computed: {
         toUpperCase: function () {
-            
             return this.nameWilayah.join(' ')
-        }
+        },
     },
 }
 </script>
 
 <style>
-    .apexcharts-canvas {
-        width: 100%!important;
-    }
-
-    .v-menu__content.theme--light.menuable__content__active {
-        z-index:3!important;
-    }
-
-    .custom-font-size-icon {
-        font-size: 100px!important;
-    }
+    
 </style>

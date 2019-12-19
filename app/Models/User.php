@@ -39,7 +39,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function output()
     {
-        return $this->only('username');
+        return $this->only('username', 'role');
     }
 
     /**
