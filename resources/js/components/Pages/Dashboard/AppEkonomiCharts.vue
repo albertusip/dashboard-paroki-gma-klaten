@@ -149,17 +149,28 @@
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
                 <v-toolbar dark color="primary" class="mb-5">
-                    <v-toolbar-title>Settings</v-toolbar-title>
+                    <v-toolbar-title>Detail Umat {{ this.kriteriaDataUmat}}</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-btn icon dark @click="dialog = false">
                         <v-icon>fas fa-times</v-icon>
                     </v-btn>
                 </v-toolbar>
+                <v-card-title class="w-50">
+                    <v-text-field
+                        v-model="search"
+                        append-icon="fas fa-search"
+                        label="Search"
+                        single-line
+                        hide-details
+                    ></v-text-field>
+                </v-card-title>
                 <v-data-table
                     :headers="headers"
                     :items="dataUmat"
-                    :loading="true"
+                    :loading="false"
+                    :search='search'
                     class="elevation-1"
+                    loading-text="Loading... Please wait"
                 >
                     <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
                     <template v-slot:items="props">
@@ -215,16 +226,12 @@ export default {
                 width: '15%',
                 value: 'birthday' 
             },{ 
-                text: 'Status Hidup', 
+                text: 'Status Kesehatan', 
                 align: 'left',
                 width: '15%',
                 value: 'status' 
             }],
-            dataUmat: [{
-                name: 'Frozen Yogurttttt',
-                birthday: 159,
-                status: 6.0,
-            }],
+            dataUmat: [],
             itemsTahunCurrentWilayah: [  
                 '1 Tahun', 
                 '2 Tahun', 
@@ -249,10 +256,13 @@ export default {
                 '10 Tahun'],
             selectedTahunCurrentWilayah: '10 Tahun',
             selectedTahunAllWilayah: '10 Tahun',
+            kriteriaDataUmat:'',
+            search: '',
             indexPie: 0,
             nameWilayah: [],
             dataSelectedTahunCurrentWilayah: [10,''],
             dataSelectedTahunAllWilayah: [10,''],
+            loading: false,
             dialog: false,
             statusGraphByMonth: true,
             statusGraphByYearCurrentWilayah: true,
@@ -348,6 +358,7 @@ export default {
                         chart: {
                             width: 350,
                             height: 400,
+                            left: 400
                         },
                         legend: {
                             position: 'bottom'
@@ -370,11 +381,11 @@ export default {
                 chart: {
                     events: {
                         dataPointSelection: (event, chartContext, config) => {
-                            // console.log(config.dataPointIndex);
-                            let temp = config.dataPointIndex + 1
-                            this.indexPie = "0" + temp
-                            this.initPieDetail()
-                            console.log(this.$user.info());
+                            if (this.$user.info().role == 1) {
+                                let temp = config.dataPointIndex + 1
+                                this.indexPie = "0" + temp
+                                this.initPieDetail()
+                            }
                         }
                     }
                 }
@@ -615,9 +626,9 @@ export default {
                     this.statusPieEkonomiCurrentWilayah = true
 
                     this.seriesPersentasePieEkonomiWilayah = [
-                        resDataPieEkonomi.data.current_wilayah.bisa_membantu, 
-                        resDataPieEkonomi.data.current_wilayah.biasa, 
-                        resDataPieEkonomi.data.current_wilayah.perlu_dibantu
+                        parseInt(resDataPieEkonomi.data.current_wilayah.bisa_membantu), 
+                        parseInt(resDataPieEkonomi.data.current_wilayah.biasa), 
+                        parseInt(resDataPieEkonomi.data.current_wilayah.perlu_dibantu)
                     ]
                 } else {
                     this.statusPieEkonomiCurrentWilayah = false
@@ -627,9 +638,9 @@ export default {
                     this.statusPieEkonomiAllWilayah = true
 
                     this.seriesPersentasePieEkonomiKeseluruhanWilayah = [
-                        resDataPieEkonomi.data.all_wilayah.bisa_membantu, 
-                        resDataPieEkonomi.data.all_wilayah.biasa, 
-                        resDataPieEkonomi.data.all_wilayah.perlu_dibantu
+                        parseInt(resDataPieEkonomi.data.all_wilayah.bisa_membantu), 
+                        parseInt(resDataPieEkonomi.data.all_wilayah.biasa), 
+                        parseInt(resDataPieEkonomi.data.all_wilayah.perlu_dibantu)
                     ]
                 } else {
                     this.statusPieEkonomiAllWilayah = false
@@ -642,10 +653,38 @@ export default {
             try {
                 
                 let resDataPieEkonomiDetail = await this.fetchPieEkonomiDetail();
+                let data = resDataPieEkonomiDetail.data.current_wilayah_detail
+                this.kriteriaDataUmat = data[0].ekonomi.kriteria_ekonomi,
+                this.dataUmat = []
+                data.map((item, index) => {
+                    let convertedUpdatedDate = new Date(item.tgl_lahir)
+                    
+                    
+                    Date.prototype.toShortFormat = function() {
 
-                console.log(resDataPieEkonomiDetail);
+                        var month_names =["Jan","Feb","Mar",
+                                        "Apr","May","Jun",
+                                        "Jul","Aug","Sep",
+                                        "Oct","Nov","Dec"];
+                        
+                        var day = this.getDate();
+                        var month_index = this.getMonth();
+                        var year = this.getFullYear();
+                        
+                        return "" + day + "-" + month_names[month_index] + "-" + year;
+                    }
+
+                    let temp = {
+                        name: item.nama,
+                        birthday: convertedUpdatedDate.toShortFormat(),
+                        status: item.kesehatan.deskripsi_sts_sehat,
+                    }
+
+                    this.dataUmat.push(temp);
+                });
                 
                 this.dialog = true
+                this.loading = false
             } catch (error) {
                 console.log(error);
             }
@@ -835,16 +874,25 @@ export default {
                 })
         },
         fetchPieEkonomiDetail() {
-            return axios.get('/api/ekonomi?mode=pieEkonomiDetail', {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-type': 'application/json'
-                    },
-                    params: {
-                        'id_wilayah': this.selectedWilayah,
-                        'id_ekonomi': this.indexPie,
-                    }
-                })
+            this.loading = true;
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let res = axios.get('/api/ekonomi?mode=pieEkonomiDetail', {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-type': 'application/json'
+                            },
+                            params: {
+                                'id_wilayah': this.selectedWilayah,
+                                'id_ekonomi': this.indexPie,
+                            }
+                        })
+                    this.loading = false;
+                    resolve(res);
+                } catch (err) {
+                    reject(err);
+                }
+            })
         },
     },
     mounted() {
@@ -857,19 +905,6 @@ export default {
         }
     },
     watch: {
-        // isSync() {
-        //     if (this.isSync == 1 && this.activeTab == 0) {
-        //         this.initPie();
-        //         this.initGraphByYearCurrentWilayah();
-        //         this.initGraphByYearAllWilayah()
-        //         this.initGrapByMonth();
-        //         console.log('notSync');
-        //         console.log(this.isSync);
-        //         this.$emit('isSync', 0)
-        //         console.log(this.isSync);
-        //         console.log('Sync');
-        //     }
-        // },
         selectedWilayah() {
             if (this.activeTab == 0) {
                 this.initPie();

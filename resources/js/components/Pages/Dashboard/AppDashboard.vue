@@ -3,55 +3,23 @@
         <v-card>
             <v-card-text>
                 <v-layout row wrap>
-                    <v-flex xs12 sm6 lg4>
+                    <v-flex xs12 md6 lg3 
+                    v-for="item in dataCard"
+                    :key="item.index">
                         <v-card color="darkslate darken-2" class="white--text">
                             <v-card-text>
                                 <v-layout row wrap>
-                                    <v-flex xs12>
-                                        <v-layout row wrap>
-                                            <v-flex><span class="subheading font-weight-light">Total Sudah Krisma</span></v-flex>
-                                            <v-flex class="text-xs-right"><v-icon medium dark>fas fa-user-friends</v-icon></v-flex>
-                                        </v-layout>
-                                        <div class="title font-weight-regular mt-2"> {{ this.dataCard.krisma }} </div>
-                                        <div class="body-2 font-weight-light mt-2">
-                                            <span>updated today</span>
-                                        </div>
+                                    <v-flex xs9>
+                                        <span class="subheading font-weight-light">{{ item.name }}</span>
                                     </v-flex>
-                                </v-layout>
-                            </v-card-text>
-                        </v-card>
-                    </v-flex>
-                    <v-flex xs12 sm6 lg4>
-                        <v-card color="darkslate darken-2" class="white--text">
-                            <v-card-text>
-                                <v-layout row wrap>
-                                    <v-flex xs12>
-                                        <v-layout row wrap>
-                                            <v-flex><span class="subheading font-weight-light">Total Sudah Baptis</span></v-flex>
-                                            <v-flex class="text-xs-right"><v-icon medium dark>fas fa-user-friends</v-icon></v-flex>
-                                        </v-layout>
-                                        <div class="title font-weight-regular mt-2">{{ this.dataCard.baptis }}</div>
-                                        <div class="body-2 font-weight-light mt-2">
-                                            <span>updated today</span>
-                                        </div>
+                                    <v-flex xs3 class="text-xs-right">
+                                        <v-icon medium dark>fas fa-user-friends</v-icon>
                                     </v-flex>
-                                </v-layout>
-                            </v-card-text>
-                        </v-card>
-                    </v-flex>
-                    <v-flex xs12 lg4>
-                        <v-card color="darkslate darken-2" class="white--text">
-                            <v-card-text>
-                                <v-layout row wrap>
                                     <v-flex xs12>
-                                        <v-layout row wrap>
-                                            <v-flex><span class="subheading font-weight-light">Total Panggilan Imam</span></v-flex>
-                                            <v-flex class="text-xs-right"><v-icon medium dark>fas fa-user-friends</v-icon></v-flex>
-                                        </v-layout>
-                                        <div class="title font-weight-regular mt-2">{{ this.dataCard.panggilan_imam }}</div>
-                                        <div class="body-2 font-weight-light mt-2">
-                                            <span>updated today</span>
-                                        </div>
+                                        <span class="title font-weight-regular">{{ item.value }}</span>
+                                    </v-flex>
+                                    <v-flex xs12>
+                                        <span class="body-2 font-weight-light">updated today</span>
                                     </v-flex>
                                 </v-layout>
                             </v-card-text>
@@ -216,11 +184,11 @@ export default {
                     icon: 'fas fa-baby',
                     icon2: 'fas fa-cross'
                 },
-                ],
+            ],
             activeTab: 0,
             isSync: 0,
             labelPiePerkawinan: [],
-            dataCard:{},
+            dataCard:[],
             selected: '01',
             wilayah: [],
             selectedNameWilayah: 'Wilayah Santa Maria Assumpta Klaten',
@@ -233,8 +201,19 @@ export default {
     methods: {
         async initCard() {
             try {
+                
                 let resCard = await this.fetchCard();
-                this.dataCard = resCard.data.data;
+                let toArray = Object.values(resCard.data.data);
+                toArray.map((item,index) => {
+                    let temp = {
+                        name: item[0],
+                        value: item[1]
+                    }
+                    
+                    this.dataCard.push(temp);
+                })
+                
+
             } catch (error) {
                 console.log(error);
             }

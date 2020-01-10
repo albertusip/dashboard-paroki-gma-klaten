@@ -31669,7 +31669,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!this.$refs.form.validate()) {
-                  _context.next = 23;
+                  _context.next = 21;
                   break;
                 }
 
@@ -31686,7 +31686,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 res1 = _context.sent;
 
                 if (!(res1.data.authenticate == true)) {
-                  _context.next = 15;
+                  _context.next = 13;
                   break;
                 }
 
@@ -31694,36 +31694,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return this.$user.storeSession(res1.data);
 
               case 10:
-                console.log('1');
-                console.log(res1);
                 this.$router.replace("/");
-                _context.next = 17;
+                _context.next = 15;
                 break;
 
-              case 15:
+              case 13:
                 this.wrongCredentials = true;
                 setTimeout(function () {
                   _this.wrongCredentials = false;
                 }, 3000);
 
-              case 17:
-                _context.next = 22;
+              case 15:
+                _context.next = 20;
                 break;
 
-              case 19:
-                _context.prev = 19;
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](3);
                 console.log(_context.t0);
 
-              case 22:
+              case 20:
                 this.isSubmitted = false;
 
-              case 23:
+              case 21:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 19]]);
+        }, _callee, this, [[3, 17]]);
       }));
 
       function login() {
@@ -32063,53 +32061,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -32558,8 +32509,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: "Belum Baptis",
         data: [1]
       }],
-      seriesPersentasePieBaptisWilayah: [1, 1],
-      seriesPersentasePieBaptisKeseluruhanWilayah: [1, 1],
+      seriesPersentasePieBaptisWilayah: [1, 1, 1],
+      seriesPersentasePieBaptisKeseluruhanWilayah: [1, 1, 1],
       chartOptionsPersentasePieBaptisWilayah: {
         labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
         decimalsInFloat: 4,
@@ -32863,14 +32814,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (resDataPieBaptis.data.current_wilayah.length != 0) {
                   this.statusPieBaptisCurrentWilayah = true;
-                  this.seriesPersentasePieBaptisWilayah = [resDataPieBaptis.data.current_wilayah.baptis_bayi, resDataPieBaptis.data.current_wilayah.baptis_dewasa, resDataPieBaptis.data.current_wilayah.belum_baptis];
+                  this.seriesPersentasePieBaptisWilayah = [parseInt(resDataPieBaptis.data.current_wilayah.baptis_bayi), parseInt(resDataPieBaptis.data.current_wilayah.baptis_dewasa), parseInt(resDataPieBaptis.data.current_wilayah.belum_baptis)];
                 } else {
                   this.statusPieBaptisCurrentWilayah = false;
                 }
 
                 if (resDataPieBaptis.data.all_wilayah.length != 0) {
                   this.statusPieBaptisAllWilayah = true;
-                  this.seriesPersentasePieBaptisKeseluruhanWilayah = [resDataPieBaptis.data.all_wilayah.baptis_bayi, resDataPieBaptis.data.all_wilayah.baptis_dewasa, resDataPieBaptis.data.all_wilayah.belum_baptis];
+                  this.seriesPersentasePieBaptisKeseluruhanWilayah = [parseInt(resDataPieBaptis.data.all_wilayah.baptis_bayi), parseInt(resDataPieBaptis.data.all_wilayah.baptis_dewasa), parseInt(resDataPieBaptis.data.all_wilayah.belum_baptis)];
                 } else {
                   this.statusPieBaptisAllWilayah = false;
                 }
@@ -33367,38 +33318,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 // Import component
  // Import stylesheet
 
@@ -33445,7 +33364,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       activeTab: 0,
       isSync: 0,
       labelPiePerkawinan: [],
-      dataCard: {},
+      dataCard: [],
       selected: '01',
       wilayah: [],
       selectedNameWilayah: 'Wilayah Santa Maria Assumpta Klaten'
@@ -33460,7 +33379,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _initCard = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var resCard;
+        var _this = this;
+
+        var resCard, toArray;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -33471,21 +33392,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 resCard = _context.sent;
-                this.dataCard = resCard.data.data;
-                _context.next = 10;
+                toArray = Object.values(resCard.data.data);
+                toArray.map(function (item, index) {
+                  var temp = {
+                    name: item[0],
+                    value: item[1]
+                  };
+
+                  _this.dataCard.push(temp);
+                });
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
       function initCard() {
@@ -33578,7 +33507,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     syncData: function syncData() {
-      var _this = this;
+      var _this2 = this;
 
       this.isLoading = true;
       return axios.get('/api/recap', {
@@ -33591,13 +33520,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }).then(function (res) {
         if (res.status == 200) {
-          _this.isLoading = false;
+          _this2.isLoading = false;
           swal({
             title: "Berhasil Sinkronisasi Data!",
             icon: "success",
             button: "Tutup"
           }).then(function (value) {
-            _this.isSync = 1;
+            _this2.isSync = 1;
             location.reload();
           });
         }
@@ -33639,6 +33568,17 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -33856,24 +33796,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         width: '15%',
         value: 'birthday'
       }, {
-        text: 'Status Hidup',
+        text: 'Status Kesehatan',
         align: 'left',
         width: '15%',
         value: 'status'
       }],
-      dataUmat: [{
-        name: 'Frozen Yogurttttt',
-        birthday: 159,
-        status: 6.0
-      }],
+      dataUmat: [],
       itemsTahunCurrentWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
       itemsTahunAllWilayah: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun', '5 Tahun', '6 Tahun', '7 Tahun', '8 Tahun', '9 Tahun', '10 Tahun'],
       selectedTahunCurrentWilayah: '10 Tahun',
       selectedTahunAllWilayah: '10 Tahun',
+      kriteriaDataUmat: '',
+      search: '',
       indexPie: 0,
       nameWilayah: [],
       dataSelectedTahunCurrentWilayah: [10, ''],
       dataSelectedTahunAllWilayah: [10, ''],
+      loading: false,
       dialog: false,
       statusGraphByMonth: true,
       statusGraphByYearCurrentWilayah: true,
@@ -33975,7 +33914,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           options: {
             chart: {
               width: 350,
-              height: 400
+              height: 400,
+              left: 400
             },
             legend: {
               position: 'bottom'
@@ -33997,13 +33937,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         chart: {
           events: {
             dataPointSelection: function dataPointSelection(event, chartContext, config) {
-              // console.log(config.dataPointIndex);
-              var temp = config.dataPointIndex + 1;
-              _this.indexPie = "0" + temp;
+              if (_this.$user.info().role == 1) {
+                var temp = config.dataPointIndex + 1;
+                _this.indexPie = "0" + temp;
 
-              _this.initPieDetail();
-
-              console.log(_this.$user.info());
+                _this.initPieDetail();
+              }
             }
           }
         }
@@ -34242,14 +34181,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (resDataPieEkonomi.data.current_wilayah.length != 0) {
                   this.statusPieEkonomiCurrentWilayah = true;
-                  this.seriesPersentasePieEkonomiWilayah = [resDataPieEkonomi.data.current_wilayah.bisa_membantu, resDataPieEkonomi.data.current_wilayah.biasa, resDataPieEkonomi.data.current_wilayah.perlu_dibantu];
+                  this.seriesPersentasePieEkonomiWilayah = [parseInt(resDataPieEkonomi.data.current_wilayah.bisa_membantu), parseInt(resDataPieEkonomi.data.current_wilayah.biasa), parseInt(resDataPieEkonomi.data.current_wilayah.perlu_dibantu)];
                 } else {
                   this.statusPieEkonomiCurrentWilayah = false;
                 }
 
                 if (resDataPieEkonomi.data.all_wilayah.length != 0) {
                   this.statusPieEkonomiAllWilayah = true;
-                  this.seriesPersentasePieEkonomiKeseluruhanWilayah = [resDataPieEkonomi.data.all_wilayah.bisa_membantu, resDataPieEkonomi.data.all_wilayah.biasa, resDataPieEkonomi.data.all_wilayah.perlu_dibantu];
+                  this.seriesPersentasePieEkonomiKeseluruhanWilayah = [parseInt(resDataPieEkonomi.data.all_wilayah.bisa_membantu), parseInt(resDataPieEkonomi.data.all_wilayah.biasa), parseInt(resDataPieEkonomi.data.all_wilayah.perlu_dibantu)];
                 } else {
                   this.statusPieEkonomiAllWilayah = false;
                 }
@@ -34280,7 +34219,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _initPieDetail = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var resDataPieEkonomiDetail;
+        var _this2 = this;
+
+        var resDataPieEkonomiDetail, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -34291,22 +34232,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 resDataPieEkonomiDetail = _context2.sent;
-                console.log(resDataPieEkonomiDetail);
+                data = resDataPieEkonomiDetail.data.current_wilayah_detail;
+                this.kriteriaDataUmat = data[0].ekonomi.kriteria_ekonomi, this.dataUmat = [];
+                data.map(function (item, index) {
+                  var convertedUpdatedDate = new Date(item.tgl_lahir);
+
+                  Date.prototype.toShortFormat = function () {
+                    var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    var day = this.getDate();
+                    var month_index = this.getMonth();
+                    var year = this.getFullYear();
+                    return "" + day + "-" + month_names[month_index] + "-" + year;
+                  };
+
+                  var temp = {
+                    name: item.nama,
+                    birthday: convertedUpdatedDate.toShortFormat(),
+                    status: item.kesehatan.deskripsi_sts_sehat
+                  };
+
+                  _this2.dataUmat.push(temp);
+                });
                 this.dialog = true;
-                _context2.next = 11;
+                this.loading = false;
+                _context2.next = 14;
                 break;
 
-              case 8:
-                _context2.prev = 8;
+              case 11:
+                _context2.prev = 11;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0);
 
-              case 11:
+              case 14:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 8]]);
+        }, _callee2, this, [[0, 11]]);
       }));
 
       function initPieDetail() {
@@ -34319,7 +34281,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _initGraphByYearCurrentWilayah = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _this2 = this;
+        var _this3 = this;
 
         var resDataGraphEkonomiByYearCurrentWilayah, tempXaxisYearlyEkonomi, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -34343,11 +34305,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.dataYearlyEkonomiCurrentWilayah.map(function (item, index) {
                     tempXaxisYearlyEkonomi.push(item.year);
 
-                    _this2.tempDataYearlyEkonomiCurrentWilayah[0].data.push(item.data.bisa_membantu);
+                    _this3.tempDataYearlyEkonomiCurrentWilayah[0].data.push(item.data.bisa_membantu);
 
-                    _this2.tempDataYearlyEkonomiCurrentWilayah[1].data.push(item.data.biasa);
+                    _this3.tempDataYearlyEkonomiCurrentWilayah[1].data.push(item.data.biasa);
 
-                    _this2.tempDataYearlyEkonomiCurrentWilayah[2].data.push(item.data.perlu_dibantu);
+                    _this3.tempDataYearlyEkonomiCurrentWilayah[2].data.push(item.data.perlu_dibantu);
                   });
 
                   for (i = 0; i < 3; i++) {
@@ -34392,7 +34354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _initGraphByYearAllWilayah = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var _this3 = this;
+        var _this4 = this;
 
         var resDataGraphEkonomiByYearAllCurrentWilayah, tempXaxisYearlyEkonomi, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
@@ -34416,11 +34378,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.dataYearlyEkonomiAllWilayah.map(function (item, index) {
                     tempXaxisYearlyEkonomi.push(item.year);
 
-                    _this3.tempDataYearlyEkonomiAllWilayah[0].data.push(item.data.bisa_membantu);
+                    _this4.tempDataYearlyEkonomiAllWilayah[0].data.push(item.data.bisa_membantu);
 
-                    _this3.tempDataYearlyEkonomiAllWilayah[1].data.push(item.data.biasa);
+                    _this4.tempDataYearlyEkonomiAllWilayah[1].data.push(item.data.biasa);
 
-                    _this3.tempDataYearlyEkonomiAllWilayah[2].data.push(item.data.perlu_dibantu);
+                    _this4.tempDataYearlyEkonomiAllWilayah[2].data.push(item.data.perlu_dibantu);
                   });
 
                   for (i = 0; i < 3; i++) {
@@ -34465,7 +34427,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _initGrapByMonth = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        var _this4 = this;
+        var _this5 = this;
 
         var resDataGraphEkonomiByMonth, tempXaxisMonthlyEkonomi, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
@@ -34488,11 +34450,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.dataMonthlyEkonomi.map(function (item, index) {
                     tempXaxisMonthlyEkonomi.push(item.month);
 
-                    _this4.tempDataMonthlyEkonomi[0].data.push(item.data.bisa_membantu);
+                    _this5.tempDataMonthlyEkonomi[0].data.push(item.data.bisa_membantu);
 
-                    _this4.tempDataMonthlyEkonomi[1].data.push(item.data.biasa);
+                    _this5.tempDataMonthlyEkonomi[1].data.push(item.data.biasa);
 
-                    _this4.tempDataMonthlyEkonomi[2].data.push(item.data.perlu_dibantu);
+                    _this5.tempDataMonthlyEkonomi[2].data.push(item.data.perlu_dibantu);
                   });
 
                   for (i = 0; i < 3; i++) {
@@ -34593,16 +34555,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     fetchPieEkonomiDetail: function fetchPieEkonomiDetail() {
-      return axios.get('/api/ekonomi?mode=pieEkonomiDetail', {
-        headers: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-        },
-        params: {
-          'id_wilayah': this.selectedWilayah,
-          'id_ekonomi': this.indexPie
-        }
-      });
+      var _this6 = this;
+
+      this.loading = true;
+      return new Promise(
+      /*#__PURE__*/
+      function () {
+        var _ref = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(resolve, reject) {
+          var res;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+            while (1) {
+              switch (_context6.prev = _context6.next) {
+                case 0:
+                  try {
+                    res = axios.get('/api/ekonomi?mode=pieEkonomiDetail', {
+                      headers: {
+                        'Accept': 'application/json',
+                        'Content-type': 'application/json'
+                      },
+                      params: {
+                        'id_wilayah': _this6.selectedWilayah,
+                        'id_ekonomi': _this6.indexPie
+                      }
+                    });
+                    _this6.loading = false;
+                    resolve(res);
+                  } catch (err) {
+                    reject(err);
+                  }
+
+                case 1:
+                case "end":
+                  return _context6.stop();
+              }
+            }
+          }, _callee6);
+        }));
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
     }
   },
   mounted: function mounted() {
@@ -34615,19 +34610,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   watch: {
-    // isSync() {
-    //     if (this.isSync == 1 && this.activeTab == 0) {
-    //         this.initPie();
-    //         this.initGraphByYearCurrentWilayah();
-    //         this.initGraphByYearAllWilayah()
-    //         this.initGrapByMonth();
-    //         console.log('notSync');
-    //         console.log(this.isSync);
-    //         this.$emit('isSync', 0)
-    //         console.log(this.isSync);
-    //         console.log('Sync');
-    //     }
-    // },
     selectedWilayah: function selectedWilayah() {
       if (this.activeTab == 0) {
         this.initPie();
@@ -35864,14 +35846,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (resDataPieKesehatan.data.current_wilayah.length != 0) {
                   this.statusPieKesehatanCurrentWilayah = true;
-                  this.seriesPersentasePieKesehatanWilayah = [resDataPieKesehatan.data.current_wilayah.normal, resDataPieKesehatan.data.current_wilayah.cacat_fisik, resDataPieKesehatan.data.current_wilayah.buta, resDataPieKesehatan.data.current_wilayah.bisu_tuli, resDataPieKesehatan.data.current_wilayah.sulit_mengurus_diri, resDataPieKesehatan.data.current_wilayah.kesulitan_mengingat, resDataPieKesehatan.data.current_wilayah.penyakit_kronis, resDataPieKesehatan.data.current_wilayah.pikun];
+                  this.seriesPersentasePieKesehatanWilayah = [parseInt(resDataPieKesehatan.data.current_wilayah.normal), parseInt(resDataPieKesehatan.data.current_wilayah.cacat_fisik), parseInt(resDataPieKesehatan.data.current_wilayah.buta), parseInt(resDataPieKesehatan.data.current_wilayah.bisu_tuli), parseInt(resDataPieKesehatan.data.current_wilayah.sulit_mengurus_diri), parseInt(resDataPieKesehatan.data.current_wilayah.kesulitan_mengingat), parseInt(resDataPieKesehatan.data.current_wilayah.penyakit_kronis), parseInt(resDataPieKesehatan.data.current_wilayah.pikun)];
                 } else {
                   this.statusPieKesehatanCurrentWilayah = false;
                 }
 
                 if (resDataPieKesehatan.data.all_wilayah.length != 0) {
                   this.statusPieKesehatanAllWilayah = true;
-                  this.seriesPersentasePieKesehatanKeseluruhanWilayah = [resDataPieKesehatan.data.all_wilayah.normal, resDataPieKesehatan.data.all_wilayah.cacat_fisik, resDataPieKesehatan.data.all_wilayah.buta, resDataPieKesehatan.data.all_wilayah.bisu_tuli, resDataPieKesehatan.data.all_wilayah.sulit_mengurus_diri, resDataPieKesehatan.data.all_wilayah.kesulitan_mengingat, resDataPieKesehatan.data.all_wilayah.penyakit_kronis, resDataPieKesehatan.data.all_wilayah.pikun];
+                  this.seriesPersentasePieKesehatanKeseluruhanWilayah = [parseInt(resDataPieKesehatan.data.all_wilayah.normal), parseInt(resDataPieKesehatan.data.all_wilayah.cacat_fisik), parseInt(resDataPieKesehatan.data.all_wilayah.buta), parseInt(resDataPieKesehatan.data.all_wilayah.bisu_tuli), parseInt(resDataPieKesehatan.data.all_wilayah.sulit_mengurus_diri), parseInt(resDataPieKesehatan.data.all_wilayah.kesulitan_mengingat), parseInt(resDataPieKesehatan.data.all_wilayah.penyakit_kronis), parseInt(resDataPieKesehatan.data.all_wilayah.pikun)];
                 } else {
                   this.statusPieKesehatanAllWilayah = false;
                 }
@@ -36844,14 +36826,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (resDataPiePerkawinan.data.current_wilayah.length != 0) {
                   this.statusPiePerkawinanCurrentWilayah = true;
-                  this.seriesPersentasePiePerkawinanWilayah = [resDataPiePerkawinan.data.current_wilayah.sah_katolik, resDataPiePerkawinan.data.current_wilayah.sah_beda_agama, resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja];
+                  this.seriesPersentasePiePerkawinanWilayah = [parseInt(resDataPiePerkawinan.data.current_wilayah.sah_katolik), parseInt(resDataPiePerkawinan.data.current_wilayah.sah_beda_agama), parseInt(resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja)];
                 } else {
                   this.statusPiePerkawinanCurrentWilayah = false;
                 }
 
                 if (resDataPiePerkawinan.data.all_wilayah.length != 0) {
                   this.statusPiePerkawinanAllWilayah = true;
-                  this.seriesPersentasePiePerkawinanKeseluruhanWilayah = [resDataPiePerkawinan.data.all_wilayah.sah_katolik, resDataPiePerkawinan.data.all_wilayah.sah_beda_agama, resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja];
+                  this.seriesPersentasePiePerkawinanKeseluruhanWilayah = [parseInt(resDataPiePerkawinan.data.all_wilayah.sah_katolik), parseInt(resDataPiePerkawinan.data.all_wilayah.sah_beda_agama), parseInt(resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja)];
                 } else {
                   this.statusPiePerkawinanAllWilayah = false;
                 }
@@ -39732,58 +39714,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-content", [_c("router-view")], 1),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs12: "" } },
-            [
-              _c(
-                "v-fab-transition",
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      directives: [
-                        {
-                          name: "scroll-to",
-                          rawName: "v-scroll-to",
-                          value: "#img-logo",
-                          expression: "'#img-logo'"
-                        },
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.hidden,
-                          expression: "!hidden"
-                        }
-                      ],
-                      attrs: {
-                        color: "pink",
-                        dark: "",
-                        large: "",
-                        fixed: "",
-                        bottom: "",
-                        right: "",
-                        fab: ""
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("fas fa-angle-up")])],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
+      _c("v-content", [_c("router-view")], 1)
     ],
     1
   )
@@ -40273,288 +40204,89 @@ var render = function() {
                 "v-layout",
                 { attrs: { row: "", wrap: "" } },
                 [
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", lg4: "" } },
-                    [
-                      _c(
-                        "v-card",
-                        {
-                          staticClass: "white--text",
-                          attrs: { color: "darkslate darken-2" }
-                        },
-                        [
-                          _c(
-                            "v-card-text",
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { row: "", wrap: "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "" } },
-                                    [
+                  _vm._l(_vm.dataCard, function(item) {
+                    return _c(
+                      "v-flex",
+                      {
+                        key: item.index,
+                        attrs: { xs12: "", md6: "", lg3: "" }
+                      },
+                      [
+                        _c(
+                          "v-card",
+                          {
+                            staticClass: "white--text",
+                            attrs: { color: "darkslate darken-2" }
+                          },
+                          [
+                            _c(
+                              "v-card-text",
+                              [
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "", wrap: "" } },
+                                  [
+                                    _c("v-flex", { attrs: { xs9: "" } }, [
                                       _c(
-                                        "v-layout",
-                                        { attrs: { row: "", wrap: "" } },
-                                        [
-                                          _c("v-flex", [
-                                            _c(
-                                              "span",
-                                              {
-                                                staticClass:
-                                                  "subheading font-weight-light"
-                                              },
-                                              [_vm._v("Total Sudah Krisma")]
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { staticClass: "text-xs-right" },
-                                            [
-                                              _c(
-                                                "v-icon",
-                                                {
-                                                  attrs: {
-                                                    medium: "",
-                                                    dark: ""
-                                                  }
-                                                },
-                                                [_vm._v("fas fa-user-friends")]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
+                                        "span",
                                         {
                                           staticClass:
-                                            "title font-weight-regular mt-2"
+                                            "subheading font-weight-light"
                                         },
-                                        [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(this.dataCard.krisma) +
-                                              " "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "body-2 font-weight-light mt-2"
-                                        },
-                                        [_c("span", [_vm._v("updated today")])]
+                                        [_vm._v(_vm._s(item.name))]
                                       )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", lg4: "" } },
-                    [
-                      _c(
-                        "v-card",
-                        {
-                          staticClass: "white--text",
-                          attrs: { color: "darkslate darken-2" }
-                        },
-                        [
-                          _c(
-                            "v-card-text",
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { row: "", wrap: "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "" } },
-                                    [
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-flex",
+                                      {
+                                        staticClass: "text-xs-right",
+                                        attrs: { xs3: "" }
+                                      },
+                                      [
+                                        _c(
+                                          "v-icon",
+                                          { attrs: { medium: "", dark: "" } },
+                                          [_vm._v("fas fa-user-friends")]
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs12: "" } }, [
                                       _c(
-                                        "v-layout",
-                                        { attrs: { row: "", wrap: "" } },
-                                        [
-                                          _c("v-flex", [
-                                            _c(
-                                              "span",
-                                              {
-                                                staticClass:
-                                                  "subheading font-weight-light"
-                                              },
-                                              [_vm._v("Total Sudah Baptis")]
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { staticClass: "text-xs-right" },
-                                            [
-                                              _c(
-                                                "v-icon",
-                                                {
-                                                  attrs: {
-                                                    medium: "",
-                                                    dark: ""
-                                                  }
-                                                },
-                                                [_vm._v("fas fa-user-friends")]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
+                                        "span",
                                         {
                                           staticClass:
-                                            "title font-weight-regular mt-2"
+                                            "title font-weight-regular"
                                         },
-                                        [_vm._v(_vm._s(this.dataCard.baptis))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "body-2 font-weight-light mt-2"
-                                        },
-                                        [_c("span", [_vm._v("updated today")])]
+                                        [_vm._v(_vm._s(item.value))]
                                       )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", lg4: "" } },
-                    [
-                      _c(
-                        "v-card",
-                        {
-                          staticClass: "white--text",
-                          attrs: { color: "darkslate darken-2" }
-                        },
-                        [
-                          _c(
-                            "v-card-text",
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { row: "", wrap: "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "" } },
-                                    [
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs12: "" } }, [
                                       _c(
-                                        "v-layout",
-                                        { attrs: { row: "", wrap: "" } },
-                                        [
-                                          _c("v-flex", [
-                                            _c(
-                                              "span",
-                                              {
-                                                staticClass:
-                                                  "subheading font-weight-light"
-                                              },
-                                              [_vm._v("Total Panggilan Imam")]
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { staticClass: "text-xs-right" },
-                                            [
-                                              _c(
-                                                "v-icon",
-                                                {
-                                                  attrs: {
-                                                    medium: "",
-                                                    dark: ""
-                                                  }
-                                                },
-                                                [_vm._v("fas fa-user-friends")]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
+                                        "span",
                                         {
                                           staticClass:
-                                            "title font-weight-regular mt-2"
+                                            "body-2 font-weight-light"
                                         },
-                                        [
-                                          _vm._v(
-                                            _vm._s(this.dataCard.panggilan_imam)
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "body-2 font-weight-light mt-2"
-                                        },
-                                        [_c("span", [_vm._v("updated today")])]
+                                        [_vm._v("updated today")]
                                       )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  }),
                   _vm._v(" "),
                   _c(
                     "v-flex",
@@ -40752,7 +40484,7 @@ var render = function() {
                     1
                   )
                 ],
-                1
+                2
               )
             ],
             1
@@ -41224,7 +40956,9 @@ var render = function() {
                 "v-toolbar",
                 { staticClass: "mb-5", attrs: { dark: "", color: "primary" } },
                 [
-                  _c("v-toolbar-title", [_vm._v("Settings")]),
+                  _c("v-toolbar-title", [
+                    _vm._v("Detail Umat " + _vm._s(this.kriteriaDataUmat))
+                  ]),
                   _vm._v(" "),
                   _c("v-spacer"),
                   _vm._v(" "),
@@ -41246,13 +40980,38 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
+                "v-card-title",
+                { staticClass: "w-50" },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      "append-icon": "fas fa-search",
+                      label: "Search",
+                      "single-line": "",
+                      "hide-details": ""
+                    },
+                    model: {
+                      value: _vm.search,
+                      callback: function($$v) {
+                        _vm.search = $$v
+                      },
+                      expression: "search"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
                 "v-data-table",
                 {
                   staticClass: "elevation-1",
                   attrs: {
                     headers: _vm.headers,
                     items: _vm.dataUmat,
-                    loading: true
+                    loading: false,
+                    search: _vm.search,
+                    "loading-text": "Loading... Please wait"
                   },
                   scopedSlots: _vm._u([
                     {
@@ -86055,8 +85814,6 @@ function () {
     value: function storeSession(data) {
       return new Promise(function (resolve, reject) {
         var user = JSON.stringify(data.user);
-        console.log('2');
-        console.log(data);
         var token = data.access_token;
         _AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].store(user, token);
         resolve();

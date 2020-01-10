@@ -259,8 +259,8 @@ export default {
                 name: "Belum Baptis",
                 data: [1]
             }],
-            seriesPersentasePieBaptisWilayah: [1,1],
-            seriesPersentasePieBaptisKeseluruhanWilayah: [1,1],
+            seriesPersentasePieBaptisWilayah: [1,1,1],
+            seriesPersentasePieBaptisKeseluruhanWilayah: [1,1,1],
             chartOptionsPersentasePieBaptisWilayah: {
                 labels: ['Baptis Bayi', 'Baptis Dewasa', 'Belum Baptis'],
                 decimalsInFloat: 4,
@@ -548,9 +548,9 @@ export default {
                     this.statusPieBaptisCurrentWilayah = true
 
                     this.seriesPersentasePieBaptisWilayah = [
-                        resDataPieBaptis.data.current_wilayah.baptis_bayi, 
-                        resDataPieBaptis.data.current_wilayah.baptis_dewasa,
-                        resDataPieBaptis.data.current_wilayah.belum_baptis,
+                        parseInt(resDataPieBaptis.data.current_wilayah.baptis_bayi), 
+                        parseInt(resDataPieBaptis.data.current_wilayah.baptis_dewasa),
+                        parseInt(resDataPieBaptis.data.current_wilayah.belum_baptis),
                     ]
                 } else {
                     this.statusPieBaptisCurrentWilayah = false
@@ -560,9 +560,9 @@ export default {
                     this.statusPieBaptisAllWilayah = true
 
                     this.seriesPersentasePieBaptisKeseluruhanWilayah = [
-                        resDataPieBaptis.data.all_wilayah.baptis_bayi, 
-                        resDataPieBaptis.data.all_wilayah.baptis_dewasa,
-                        resDataPieBaptis.data.all_wilayah.belum_baptis,
+                        parseInt(resDataPieBaptis.data.all_wilayah.baptis_bayi), 
+                        parseInt(resDataPieBaptis.data.all_wilayah.baptis_dewasa),
+                        parseInt(resDataPieBaptis.data.all_wilayah.belum_baptis),
                     ]
                 } else {
                     this.statusPieBaptisAllWilayah = false

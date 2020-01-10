@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('cronRekap:command')
-                 ->everyMinute();
+        $schedule->job( new NewYearRecordJob())->cron('0 0 1 1 *')->runInBackground();
+        
     }
 
     /**

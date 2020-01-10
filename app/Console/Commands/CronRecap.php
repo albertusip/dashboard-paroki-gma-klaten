@@ -12,7 +12,7 @@ class CronRecap extends Command
      *
      * @var string
      */
-    protected $signature = 'cronRekap:command';
+    protected $signature = 'cron:rekap';
 
     /**
      * The console command description.
@@ -38,6 +38,6 @@ class CronRecap extends Command
      */
     public function handle()
     {
-        $this->info('cron');
+        $this->info('cronnnnn');
     }
 }

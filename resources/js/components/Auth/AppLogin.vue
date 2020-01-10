@@ -86,9 +86,6 @@ export default {
                     const res1 = await this.$user.login(request)
                     if(res1.data.authenticate == true) {
                         await this.$user.storeSession(res1.data)
-                        console.log('1');
-                        
-                        console.log(res1);
                         
                         this.$router.replace("/");                
                     } else {

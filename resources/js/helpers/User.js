@@ -13,9 +13,6 @@ class User {
     storeSession(data) {
         return new Promise((resolve, reject) => {
             const user = JSON.stringify(data.user)
-            console.log('2');
-            
-            console.log(data);
             
             const token = data.access_token
             AppStorage.store(user, token)

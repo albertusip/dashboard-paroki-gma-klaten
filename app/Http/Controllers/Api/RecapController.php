@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Wilayah;
 use App\Models\Umat;
 use App\Models\DataTahunan;
+use Illuminate\Console\Scheduling\Schedule;
 
 use DB;
 
@@ -29,26 +30,6 @@ class RecapController extends Controller
             $this->statusBaptis($idWilayah);
             $this->statusKelahiranKematian($idWilayah);
         }
-    }
-
-    protected function schedule(Schedule $schedule)
-    {
-        // $schedule->call(function () {
-        //     $listWilayah = Wilayah::select('id_wilayah', 'nama_wilayah')->get();
-        //     foreach($listWilayah as $item){
-        //         $idWilayah = $item->id_wilayah;
-
-        //         $this->ekonomiUmat($idWilayah);
-        //         $this->statusPerkawinan($idWilayah);
-        //         $this->statusKesehatan($idWilayah);
-        //         $this->statusBaptis($idWilayah);
-        //         $this->statusKelahiranKematian($idWilayah);
-        //     }
-        // })->cron('0 0 1 1 *');
-
-        $schedule->call(function () {
-            echo('cron');
-        })->everyMinute();
     }
 
     public function ekonomiUmat($idWilayah)

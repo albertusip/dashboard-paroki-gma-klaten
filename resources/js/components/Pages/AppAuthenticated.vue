@@ -8,9 +8,6 @@
                 max-width="40"
                 @click="scrollToTop"
             ></v-img>
-            <!-- <v-toolbar-side-icon
-                @click.stop="drawer = !drawer"
-            ></v-toolbar-side-icon> -->
             <v-spacer></v-spacer>
             <v-toolbar-items>
             <v-btn 
@@ -40,53 +37,9 @@
                 <span class="red--text" >Tutup</span>
             </v-btn>
         </v-snackbar>
-        <!-- <v-navigation-drawer 
-            v-model="drawer"
-            app clipped fixed
-            class="darkgreen darken-2" dark
-        >
-            <v-container fluid>
-                <v-img src="/assets/images/logo-white.png" contain class="my-5"> </v-img>
-            </v-container>
-            <v-list>
-                <v-list-tile
-                    v-for="(item, index) in routes"
-                    router
-                    :to="item.route"
-                    :key="'menu'+index"
-                    >
-                    <v-list-tile-action>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-tile-action>
-
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-            </v-list>
-        </v-navigation-drawer> -->
         <v-content>
             <router-view></router-view>
         </v-content>
-        <v-layout row wrap>
-            <v-flex xs12>
-                <v-fab-transition>
-                    <v-btn 
-                        v-scroll-to="'#img-logo'"
-                        v-show="!hidden"
-                        color="pink"
-                        dark
-                        large
-                        fixed
-                        bottom
-                        right
-                        fab
-                    >
-                        <v-icon>fas fa-angle-up</v-icon>
-                    </v-btn>
-                </v-fab-transition>
-            </v-flex>
-        </v-layout>
     </v-app>
 </template>
 

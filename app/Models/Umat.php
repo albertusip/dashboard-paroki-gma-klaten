@@ -65,20 +65,26 @@ class Umat extends Model
     public function wilayah () {
         return $this->belongsTo(Wilayah::class,'id_wilayah', 'id_wilayah');
     }
+    public function kesehatan () {
+        return $this->belongsTo(StatusKesehatan::class,'id_sts_sehat', 'id_sts_sehat');
+    }
 
     public function getCard() {
+        $umatHidup = $this->whereNotIn('id_sts_sehat', ['99', ''])
+                            ->get()->count();
+        $baptis = $this->whereNotIn('id_wkt_baptis', ['09', '10'])
+                            ->get()->count();
         $krisma = $this->whereIn('status_krisma', ['SDH'])
                             ->get()->count();
-        $baptis = $this->whereNotIn('id_wkt_baptis', ['09','10'])
-                            ->get()->count();
-        $panggilanImam = $this->whereIn('id_sts_kawin', ['09','10'])
+        $panggilanImam = $this->whereIn('id_sts_kawin', ['09', '10'])
                                 ->get()->count();
         
         return [
             'data' => [
-                'krisma' => $krisma,
-                'baptis' => $baptis,
-                'panggilan_imam' => $panggilanImam
+                'umatHidup'      => ['Total Umat Hidup', $umatHidup],
+                'baptis'         => ['Umat Sudah Baptis', $baptis],
+                'krisma'         => ['Umat Sudah Krisma', $krisma],
+                'panggilan_imam' => ['Panggilan Imam', $panggilanImam]
             ]
         ];
     }
@@ -94,7 +100,7 @@ class Umat extends Model
                         ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
                         ->where('no_urut', 1)
-                        ->whereYear('tgl_update', date('Y'))
+                        ->whereYear('tgl_update', '2018')
                         ->orderBy('tgl_update', 'asc')
                         ->groupBy('month', 'id_ekonomi')
                         ->get();
@@ -178,8 +184,8 @@ class Umat extends Model
                                 )
                         ->where('id_wilayah', $id_wilayah)
                         ->where('no_urut', 1)
-                        ->whereYear('tgl_update', date('Y'))
-                        // ->whereYear('tgl_update', '2018')
+                        // ->whereYear('tgl_update', date('Y'))
+                        ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_ekonomi')
                         ->get();
         $dataEkonomi = [];
@@ -217,16 +223,18 @@ class Umat extends Model
 
     public function getCurrentWilayahEkonomiChartDetail($id_wilayah, $id_ekonomi){
         $results = $this->with('ekonomi')
+                        ->with('kesehatan')
                         ->whereHas('ekonomi')
+                        ->whereHas('kesehatan')
                         ->select('id_ekonomi',
                                 DB::raw("nama_anggota_rt nama"), 
                                 DB::raw("tgl_lahir tgl_lahir"), 
-                                DB::raw("id_sts_sehat as status_hidup"),
+                                "id_sts_sehat",
                                 )
                         ->where('id_ekonomi', $id_ekonomi)
                         ->where('id_wilayah', $id_wilayah)
                         ->where('no_urut', 1)
-                        ->whereYear('tgl_update', date('Y'))
+                        ->whereYear('tgl_update', '2018')
                         ->get();
         
         return $results;
@@ -238,7 +246,7 @@ class Umat extends Model
                         ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', date('Y'))
                         ->where('no_urut', 1)
-                        // ->whereYear('tgl_update', '2018')
+                        ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_ekonomi')
                         ->get();
         $dataEkonomi = [];
@@ -425,9 +433,7 @@ class Umat extends Model
     }
 
 
-    public function kesehatan () {
-        return $this->belongsTo(StatusKesehatan::class,'id_sts_sehat', 'id_sts_sehat');
-    }
+    
 
     public function getCurrentYearKesehatanChart($id_wilayah){
         $results = $this->with('kesehatan')

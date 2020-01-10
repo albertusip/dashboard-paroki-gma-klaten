@@ -634,14 +634,14 @@ export default {
                     this.statusPieKesehatanCurrentWilayah = true
 
                     this.seriesPersentasePieKesehatanWilayah = [
-                        resDataPieKesehatan.data.current_wilayah.normal, 
-                        resDataPieKesehatan.data.current_wilayah.cacat_fisik,
-                        resDataPieKesehatan.data.current_wilayah.buta, 
-                        resDataPieKesehatan.data.current_wilayah.bisu_tuli,
-                        resDataPieKesehatan.data.current_wilayah.sulit_mengurus_diri, 
-                        resDataPieKesehatan.data.current_wilayah.kesulitan_mengingat,
-                        resDataPieKesehatan.data.current_wilayah.penyakit_kronis, 
-                        resDataPieKesehatan.data.current_wilayah.pikun,
+                        parseInt(resDataPieKesehatan.data.current_wilayah.normal), 
+                        parseInt(resDataPieKesehatan.data.current_wilayah.cacat_fisik),
+                        parseInt(resDataPieKesehatan.data.current_wilayah.buta), 
+                        parseInt(resDataPieKesehatan.data.current_wilayah.bisu_tuli),
+                        parseInt(resDataPieKesehatan.data.current_wilayah.sulit_mengurus_diri), 
+                        parseInt(resDataPieKesehatan.data.current_wilayah.kesulitan_mengingat),
+                        parseInt(resDataPieKesehatan.data.current_wilayah.penyakit_kronis), 
+                        parseInt(resDataPieKesehatan.data.current_wilayah.pikun),
                     ]
                 } else {
                     this.statusPieKesehatanCurrentWilayah = false
@@ -651,14 +651,14 @@ export default {
                     this.statusPieKesehatanAllWilayah = true
 
                     this.seriesPersentasePieKesehatanKeseluruhanWilayah = [
-                        resDataPieKesehatan.data.all_wilayah.normal, 
-                        resDataPieKesehatan.data.all_wilayah.cacat_fisik,
-                        resDataPieKesehatan.data.all_wilayah.buta, 
-                        resDataPieKesehatan.data.all_wilayah.bisu_tuli,
-                        resDataPieKesehatan.data.all_wilayah.sulit_mengurus_diri, 
-                        resDataPieKesehatan.data.all_wilayah.kesulitan_mengingat,
-                        resDataPieKesehatan.data.all_wilayah.penyakit_kronis, 
-                        resDataPieKesehatan.data.all_wilayah.pikun,
+                        parseInt(resDataPieKesehatan.data.all_wilayah.normal), 
+                        parseInt(resDataPieKesehatan.data.all_wilayah.cacat_fisik),
+                        parseInt(resDataPieKesehatan.data.all_wilayah.buta), 
+                        parseInt(resDataPieKesehatan.data.all_wilayah.bisu_tuli),
+                        parseInt(resDataPieKesehatan.data.all_wilayah.sulit_mengurus_diri), 
+                        parseInt(resDataPieKesehatan.data.all_wilayah.kesulitan_mengingat),
+                        parseInt(resDataPieKesehatan.data.all_wilayah.penyakit_kronis), 
+                        parseInt(resDataPieKesehatan.data.all_wilayah.pikun),
                     ]
                 } else {
                     this.statusPieKesehatanAllWilayah = false

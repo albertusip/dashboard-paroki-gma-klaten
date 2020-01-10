@@ -568,9 +568,9 @@ export default {
                 this.statusPiePerkawinanCurrentWilayah = true
 
                 this.seriesPersentasePiePerkawinanWilayah = [
-                resDataPiePerkawinan.data.current_wilayah.sah_katolik,
-                resDataPiePerkawinan.data.current_wilayah.sah_beda_agama,
-                resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja,
+                parseInt(resDataPiePerkawinan.data.current_wilayah.sah_katolik),
+                parseInt(resDataPiePerkawinan.data.current_wilayah.sah_beda_agama),
+                parseInt(resDataPiePerkawinan.data.current_wilayah.sah_beda_gereja),
                 ]
             } else {
                 this.statusPiePerkawinanCurrentWilayah = false
@@ -580,9 +580,9 @@ export default {
                 this.statusPiePerkawinanAllWilayah = true
 
                 this.seriesPersentasePiePerkawinanKeseluruhanWilayah = [
-                resDataPiePerkawinan.data.all_wilayah.sah_katolik,
-                resDataPiePerkawinan.data.all_wilayah.sah_beda_agama,
-                resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja,
+                parseInt(resDataPiePerkawinan.data.all_wilayah.sah_katolik),
+                parseInt(resDataPiePerkawinan.data.all_wilayah.sah_beda_agama),
+                parseInt(resDataPiePerkawinan.data.all_wilayah.sah_beda_gereja),
                 ]
             } else {
                 this.statusPiePerkawinanAllWilayah = false
