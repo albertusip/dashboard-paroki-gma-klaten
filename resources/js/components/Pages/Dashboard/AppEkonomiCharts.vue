@@ -15,6 +15,7 @@
                 <v-icon class="orange--text custom-font-size-icon" >fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
                 <h2 class=""> {{ this.selectedNameWilayah }} </h2>
+                <h2 class="">Tahun {{ this.currentYear }}</h2>
             </div>
         </v-flex>
 
@@ -33,6 +34,7 @@
                 <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
                 <h2 class=""> Keseluruhan Wilayah</h2>
+                <h2 class="">Tahun {{ this.currentYear }}</h2>
             </div>
         </v-flex>
 
@@ -51,6 +53,7 @@
                 <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data per bulan pada</h2>
                 <h2 class="">{{ this.selectedNameWilayah }} </h2>
+                <h2 class="">Tahun {{ this.currentYear }}</h2>
             </div>
         </v-flex>
 
@@ -259,6 +262,8 @@ export default {
             kriteriaDataUmat:'',
             search: '',
             indexPie: 0,
+            currentTime: new Date(),
+            currentYear: '',
             nameWilayah: [],
             dataSelectedTahunCurrentWilayah: [10,''],
             dataSelectedTahunAllWilayah: [10,''],
@@ -614,6 +619,7 @@ export default {
     },
     methods: {
         initAll() {
+            this.currentYear = this.currentTime.getFullYear()
             this.selectedTahunCurrentWilayah = this.itemsTahunCurrentWilayah[this.itemsTahunCurrentWilayah.length - 1]
             this.selectedTahunAllWilayah = this.itemsTahunAllWilayah[this.itemsTahunAllWilayah.length - 1]
         },

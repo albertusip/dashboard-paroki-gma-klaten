@@ -12,9 +12,10 @@
             <div class="headline my-3">Persentase Baptis</div>
             <div class="title my-3"> {{ this.selectedNameWilayah }}</div>
             <div class="text-xs-center orange--text">
-                <v-icon class="orange--text mt-5">fas fa-exclamation-triangle</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
                 <h2 class=""> {{ this.selectedNameWilayah }}</h2>
+                <h2 class="">Tahun {{ this.currentYear }}</h2>
             </div>
         </v-flex>
 
@@ -30,9 +31,10 @@
             <div class="headline my-3">Persentase Baptis Wilayah</div>
             <div class="title my-3">Keseluruhan Wilayah</div>
             <div class="text-xs-center orange--text">
-                <v-icon class="orange--text mt-5">fas fa-exclamation-triangle</v-icon>
+                <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data pada</h2>
                 <h2 class=""> Keseluruhan Wilayah</h2>
+                <h2 class="">Tahun {{ this.currentYear }}</h2>
             </div>
         </v-flex>
 
@@ -51,6 +53,7 @@
                 <v-icon class="orange--text custom-font-size-icon">fas fa-exclamation-triangle</v-icon>
                 <h2 class="">Tidak ada data per bulan pada</h2>
                 <h2 class="">{{ this.selectedNameWilayah }} </h2>
+                <h2 class="">Tahun {{ this.currentYear }}</h2>
             </div>
         </v-flex>
 
@@ -198,6 +201,8 @@ export default {
                 '10 Tahun'],
             selectedTahunCurrentWilayah: '10 Tahun',
             selectedTahunAllWilayah: '10 Tahun',
+            currentTime: new Date(),
+            currentYear: '',
             dataSelectedTahunCurrentWilayah: [10,''],
             dataSelectedTahunAllWilayah: [10,''],
             statusGraphByMonth: true,
@@ -533,6 +538,7 @@ export default {
     methods: {
         async initAll() {
             try {
+                this.currentYear = this.currentTime.getFullYear()
                 this.selectedTahunCurrentWilayah = this.itemsTahunCurrentWilayah[this.itemsTahunCurrentWilayah.length - 1]
                 this.selectedTahunAllWilayah = this.itemsTahunAllWilayah[this.itemsTahunAllWilayah.length - 1]
             } catch (error) {

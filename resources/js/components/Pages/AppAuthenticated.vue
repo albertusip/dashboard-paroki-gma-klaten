@@ -137,7 +137,7 @@ export default {
         },
     },
     mounted() {
-        // this.initUpdatedDate();
+        this.initUpdatedDate();
     },
 }
 </script>

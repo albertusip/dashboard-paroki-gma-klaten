@@ -100,7 +100,7 @@ class Umat extends Model
                         ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
                         ->where('no_urut', 1)
-                        ->whereYear('tgl_update', '2018')
+                        ->whereYear('tgl_update', date('Y'))
                         ->orderBy('tgl_update', 'asc')
                         ->groupBy('month', 'id_ekonomi')
                         ->get();
@@ -184,8 +184,7 @@ class Umat extends Model
                                 )
                         ->where('id_wilayah', $id_wilayah)
                         ->where('no_urut', 1)
-                        // ->whereYear('tgl_update', date('Y'))
-                        ->whereYear('tgl_update', '2018')
+                        ->whereYear('tgl_update', date('Y'))
                         ->groupBy('year', 'id_ekonomi')
                         ->get();
         $dataEkonomi = [];
@@ -234,7 +233,7 @@ class Umat extends Model
                         ->where('id_ekonomi', $id_ekonomi)
                         ->where('id_wilayah', $id_wilayah)
                         ->where('no_urut', 1)
-                        ->whereYear('tgl_update', '2018')
+                        ->whereYear('tgl_update', date('Y'))
                         ->get();
         
         return $results;
@@ -246,7 +245,6 @@ class Umat extends Model
                         ->select('id_ekonomi', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', date('Y'))
                         ->where('no_urut', 1)
-                        ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_ekonomi')
                         ->get();
         $dataEkonomi = [];
@@ -292,7 +290,6 @@ class Umat extends Model
                         ->whereHas('statusPerkawinan')
                         ->select('id_sts_kawin', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
-                        // ->whereYear('tgl_update', '2018')
                         ->whereYear('tgl_update', date('Y'))
                         ->orderBy('tgl_update', 'asc')
                         ->groupBy('month', 'id_sts_kawin')
@@ -349,7 +346,6 @@ class Umat extends Model
                         ->select('id_sts_kawin', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
                         ->whereYear('tgl_update', date('Y'))
-                        // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_sts_kawin')
                         ->get();
         $dataPerkawinan = [];
@@ -392,7 +388,6 @@ class Umat extends Model
                         ->whereHas('statusPerkawinan')
                         ->select('id_sts_kawin', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', date('Y'))
-                        // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_sts_kawin')
                         ->get();
         
@@ -432,15 +427,11 @@ class Umat extends Model
         return $response;
     }
 
-
-    
-
     public function getCurrentYearKesehatanChart($id_wilayah){
         $results = $this->with('kesehatan')
                         ->whereHas('kesehatan')
                         ->select('id_sts_sehat', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
-                        // ->whereYear('tgl_update', '2018')
                         ->whereYear('tgl_update', date('Y'))
                         ->orderBy('tgl_update', 'asc')
                         ->groupBy('month', 'id_sts_sehat')
@@ -495,7 +486,6 @@ class Umat extends Model
                         ->select('id_sts_sehat', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
                         ->whereYear('tgl_update', date('Y'))
-                        // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_sts_sehat')
                         ->get();
         $dataKesehatan = [];
@@ -544,7 +534,6 @@ class Umat extends Model
                         ->whereHas('kesehatan')
                         ->select('id_sts_sehat', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', date('Y'))
-                        // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_sts_sehat')
                         ->get();
         $dataKesehatan = [];
@@ -597,7 +586,6 @@ class Umat extends Model
                         ->whereHas('baptis')
                         ->select('id_wkt_baptis', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
-                        // ->whereYear('tgl_update', '2018')
                         ->whereYear('tgl_update', date('Y'))
                         ->orderBy('tgl_update', 'asc')
                         ->groupBy('month', 'id_wkt_baptis')
@@ -669,7 +657,6 @@ class Umat extends Model
                         ->select('id_wkt_baptis', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->where('id_wilayah', $id_wilayah)
                         ->whereYear('tgl_update', date('Y'))
-                        // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_wkt_baptis')
                         ->get();
         $dataBaptis = [];
@@ -736,7 +723,6 @@ class Umat extends Model
                         ->whereHas('baptis')
                         ->select('id_wkt_baptis', DB::raw("DATE_FORMAT(tgl_update, '%Y') year"), DB::raw('count(*) as total'))
                         ->whereYear('tgl_update', date('Y'))
-                        // ->whereYear('tgl_update', '2018')
                         ->groupBy('year', 'id_wkt_baptis')
                         ->get();
         $dataBaptis = [];
@@ -799,7 +785,6 @@ class Umat extends Model
         $resultsKelahiran = $this->with('wilayah')
                                 ->whereHas('wilayah')
                                 ->select(DB::raw("DATE_FORMAT(tgl_lahir, '%M') monthBase"),DB::raw("DATE_FORMAT(tgl_lahir, '%M') month"), DB::raw('count(*) as total'))
-                                // ->whereYear('tgl_lahir', '2018')
                                 ->whereYear('tgl_lahir', date('Y'))
                                 ->orderBy('tgl_lahir', 'asc')
                                 ->groupBy('month', 'monthBase')
@@ -808,7 +793,6 @@ class Umat extends Model
         $resultsKematian = $this->with('kesehatan')
                                 ->whereHas('kesehatan')
                                 ->select('id_sts_sehat', DB::raw("DATE_FORMAT(tgl_update, '%M') month"), DB::raw('count(*) as total'))
-                                // ->whereYear('tgl_update', '2018')
                                 ->whereYear('tgl_update', date('Y'))
                                 ->orderBy('tgl_update', 'asc')
                                 ->groupBy('month', 'id_sts_sehat')

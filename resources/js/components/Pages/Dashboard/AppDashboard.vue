@@ -201,18 +201,30 @@ export default {
     methods: {
         async initCard() {
             try {
-                
                 let resCard = await this.fetchCard();
                 let toArray = Object.values(resCard.data.data);
-                toArray.map((item,index) => {
-                    let temp = {
-                        name: item[0],
-                        value: item[1]
-                    }
+
+                if(this.dataCard.length > 3){
                     
-                    this.dataCard.push(temp);
-                })
-                
+                    toArray.map((item,index) => {
+                        let temp = {
+                            name: item[0],
+                            value: item[1]
+                        }
+                        
+                        this.dataCard.push(temp);
+                    })
+                    this.dataCard.splice(0,4);
+                } else {
+                    toArray.map((item,index) => {
+                        let temp = {
+                            name: item[0],
+                            value: item[1]
+                        }
+                        
+                        this.dataCard.push(temp);
+                    })
+                }
 
             } catch (error) {
                 console.log(error);
@@ -221,6 +233,8 @@ export default {
         async initWilayah() {
             try {
                 let self = this
+
+
                 let dataWilayah = await this.fetchWilayah();
                 this.wilayah = dataWilayah.data.items;
 
